@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>बाल कथाहरू र कविताहरू - Kids Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --header-bg: #ffffff;
+            --box-bg: #ffffff;
+            --nav-bg: #2c3e50;
+            --nav-text: #ffffff;
+        }
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --header-bg: #1e1e1e;
+            --box-bg: #1e1e1e;
+            --nav-bg: #1a1a1a;
+            --nav-text: #ffffff;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body { margin: 0; padding: 0 0 70px 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
+        
+        .top-header { text-align: center; padding: 15px; }
+        
+        .main-container { max-width: 800px; width: 100%; margin: 0 auto; padding: 0 15px; flex: 1; }
+        
+        .story-card { background: var(--box-bg); border: 2px solid #3498db; border-radius: 15px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .story-title { font-size: 20px; font-weight: bold; color: #2980b9; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        
+        .story-content { font-size: 16px; line-height: 1.8; color: var(--text-color); margin-bottom: 15px; white-space: pre-line; }
+        
+        .listen-btn { background: #27ae60; color: white; border: none; padding: 6px 14px; font-size: 14px; font-weight: bold; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+        .listen-btn:hover { background: #219653; }
+
+        /* मोबाइल एप जस्तो तलको Bottom Nav Bar */
+        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background-color: var(--nav-bg); color: var(--nav-text); display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 1000; }
+        .bottom-nav a { color: var(--nav-text); text-decoration: none; font-size: 13px; font-weight: bold; text-align: center; }
+        .bottom-nav a.active { color: #3498db; }
+    </style>
+</head>
+<body>
+
+    <div class="top-header">
+        <h2>बाल कथाहरू र कविताहरू (Stories & Rhymes)</h2>
+    </div>
+
+    <div class="main-container">
+        
+        <!-- कथा १ -->
+        <div class="story-card">
+            <div class="story-title">
+                <span>🐰 बाच्छा र कछुवा (The Hare and Tortoise)</span>
+                <button class="listen-btn" onclick="speakStory('story1')">🔊 कथा सुन्नुहोस्</button>
+            </div>
+            <div class="story-content" id="story1">
+                एक दिन एउटा घमण्डी जङ्गली बाच्छा (खरायो) र एउटा ढिलो हिँड्ने कछुवाबीच दौड प्रतियोगिता भयो। खरायोले सोझै छिटो कुँद्न थाल्यो र बीच बाटोमा अल्छी मानेर सुत्यو। तर कछुवा बिस्तारै तर निरन्तर अगाडि बढिरह्यो। जब खरायो बिउँझियो, तबसम्म कछुवा जित्ने ठाउँमा पुगिसकेको थियो। 
+                शिक्षा: निरन्तर र बिना घमण्ड गरेको मेहनत सधैं सफल हुन्छ।
+            </div>
+        </div>
+
+        <!-- कथा २ -->
+        <div class="story-card">
+            <div class="story-title">
+                <span>🦊 बाठो फ्याउरो र काग (The Fox and Crow)</span>
+                <button class="listen-btn" onclick="speakStory('story2')">🔊 कथा सुन्नुहोस्</button>
+            </div>
+            <div class="story-content" id="story2">
+                एक पटक एउटा कागले मुखमा रोटीको टुक्रा लिएर रुखको हाँगामा बस्यो। त्यहाँ एउटा फ्याउरो आयो र कागको मीठो स्वरको प्रशंसा गर्न लाग्यो। फ्याउरोले गीत गाउन अनुरोध गर्दा काग खुसी भएर "काँ... काँ..." गर्न मुख खोल्दा मुखको रोटी तल खस्यो र फ्याउरोले टिपेर भाग्यो।
+                शिक्षा: झुटा तारिफ वा चाप्लुसी गर्ने मान्छेको पछि लाग्नु हुँदैन।
+            </div>
+        </div>
+
+        <!-- कविता १ -->
+        <div class="story-card">
+            <div class="story-title">
+                <span>🌟 चम्को तारा (Twinkle Twinkle)</span>
+                <button class="listen-btn" onclick="speakStory('poem1')">🔊 कविता सुन्नुहोस्</button>
+            </div>
+            <div class="story-content" id="poem1">
+                नीलो आकाशमा चम्किन्छ तारा,
+                सबैभन्दा प्यारो लाग्छ यो मेरा।
+                रात पर्दा आँगनमा उज्यालो छर्दै,
+                निदाउन भन्छ मलाई मायाले हेर्दै।
+            </div>
+        </div>
+
+    </div>
+
+    <!-- मोबाइल एप जस्तो तलको नेभिगेसन बार -->
+    <nav class="bottom-nav">
+        <a href="slate.html">🎨<br>डिजिटल स्लेट</a>
+        <a href="alphabet.html">🔤<br>वर्णमाला</a>
+        <a href="math.html">🔢<br>गन्ती खेल</a>
+        <a href="stories.html" class="active">📖<br>कथाहरू</a>
+    </nav>
+
+    <script>
+        // कथा वा कविताको टेक्स्टलाई आवाजमा बदल्ने फंक्सन
+        function speakStory(elementId) {
+            const textElement = document.getElementById(elementId);
+            if (textElement && 'speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // अघिल्लो बोलेको रोक्ने
+                const utterance = new SpeechSynthesisUtterance(textElement.innerText);
+                utterance.lang = 'ne-NP';
+                utterance.rate = 0.85; // स्पष्ट सुनिने गति
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('तपाईंको ब्राउजरले अडियो सपोर्ट गरेन।');
+            }
+        }
+    </script>
+</body>
+</html>
