@@ -3,120 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>वर्णमाला सिकाइ - Kids Hub</title>
+    <title>Kids Hub - बालबालिकाको रमाइलो संसार</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f4f6f9;
-            --text-color: #333;
-            --header-bg: #ffffff;
+            --bg-color: #f0f4f8;
+            --text-color: #2c3e50;
             --box-bg: #ffffff;
-            --nav-bg: #2c3e50;
-            --nav-text: #ffffff;
-        }
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --header-bg: #1e1e1e;
-            --box-bg: #1e1e1e;
-            --nav-bg: #1a1a1a;
-            --nav-text: #ffffff;
         }
         *, *::before, *::after { box-sizing: border-box; }
-        body { margin: 0; padding: 0 0 70px 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; align-items: center; justify-content: center; }
         
-        /* माथिल्लो हेडर र ट्याब स्विच */
-        .top-header { text-align: center; padding: 15px; }
-        .tab-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .tab-btn { padding: 8px 20px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; background: #ddd; color: #333; transition: 0.2s; }
-        .tab-btn.active { background: #3498db; color: #fff; }
-
-        /* फ्ल्यासकार्ड ग्रिड */
-        .main-container { max-width: 900px; width: 100%; margin: 0 auto; padding: 0 15px; flex: 1; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; }
+        .container { max-width: 600px; width: 100%; padding: 20px; text-align: center; }
         
-        .card { background: var(--box-bg); border: 2px solid #3498db; border-radius: 12px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: transform 0.2s, background 0.2s; }
-        .card:hover { transform: scale(1.05); background: #ebf5fb; }
-        .card span.letter { font-size: 32px; font-weight: bold; color: #2980b9; }
-        .card span.sub { font-size: 12px; color: #666; margin-top: 2px; }
+        h1 { font-family: 'Poppins', sans-serif; font-size: 28px; color: #2980b9; margin-bottom: 10px; }
+        p.subtitle { font-size: 16px; color: #555; margin-bottom: 30px; }
 
-        /* मोबाइल एप जस्तो तलको Bottom Nav Bar */
-        .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background-color: var(--nav-bg); color: var(--nav-text); display: flex; justify-content: space-around; padding: 10px 0; box-shadow: 0 -2px 5px rgba(0,0,0,0.1); z-index: 1000; }
-        .bottom-nav a { color: var(--nav-text); text-decoration: none; font-size: 13px; font-weight: 600; text-align: center; }
-        .bottom-nav a.active { color: #3498db; }
+        /* मेनू कार्डहरूको ग्रिड */
+        .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        
+        .menu-card { background: var(--box-bg); border: 3px solid #3498db; border-radius: 20px; padding: 25px 15px; text-decoration: none; color: var(--text-color); box-shadow: 0 6px 15px rgba(0,0,0,0.08); transition: transform 0.2s, background 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+        .menu-card:hover { transform: translateY(-5px); background: #ebf5fb; }
+        
+        .icon { font-size: 40px; }
+        .title { font-size: 18px; font-weight: bold; color: #2c3e50; }
+
+        footer { margin-top: 40px; font-size: 13px; color: #7f8c8d; }
     </style>
 </head>
 <body>
 
-    <div class="top-header">
-        <h2>वर्णमाला तथा शब्द सिकाइ (Alphabet Learning)</h2>
-        <div class="tab-buttons">
-            <button class="tab-btn active" id="nepBtn" onclick="switchLang('ne')">नेपाली (क-ज्ञ)</button>
-            <button class="tab-btn" id="engBtn" onclick="switchLang('en')">English (A-Z)</button>
+    <div class="container">
+        <h1>🌟 Kids Hub 🌟</h1>
+        <p class="subtitle">रमाइलोसँग सिकौं, खेल्दै अगाडि बढौं!</p>
+
+        <div class="menu-grid">
+            <a href="slate.html" class="menu-card">
+                <span class="icon">🎨</span>
+                <span class="title">डिजिटल स्लेट</span>
+            </a>
+            <a href="alphabet.html" class="menu-card">
+                <span class="icon">🔤</span>
+                <span class="title">वर्णमाला सिकाइ</span>
+            </a>
+            <a href="math.html" class="menu-card">
+                <span class="icon">🔢</span>
+                <span class="title">गन्ती र गणित</span>
+            </a>
+            <a href="stories.html" class="menu-card">
+                <span class="icon">📖</span>
+                <span class="title">बाल कथाहरू</span>
+            </a>
         </div>
+
+        <footer>
+            <p>&copy; 2026 Kamal G.C. | kids.kamalgc.com.np</p>
+        </footer>
     </div>
 
-    <div class="main-container">
-        <div class="grid-container" id="cardGrid">
-            <!-- JavaScript मार्फत कार्डहरू यहाँ देखिनेछन् -->
-        </div>
-    </div>
-
-    <!-- मोबाइल एप जस्तो तलको नेभिगेसन बार -->
-    <nav class="bottom-nav">
-        <a href="slate.html">🎨<br>डिजिटल स्लेट</a>
-        <a href="alphabet.html" class="active">🔤<br>वर्णमाला</a>
-        <a href="math.html">🔢<br>गन्ती खेल</a>
-        <a href="stories.html">📖<br>कथाहरू</a>
-    </nav>
-
-    <script>
-        // नेपाली र अंग्रेजी अक्षरहरूको डेटा
-        const nepaliLetters = ['क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'क्ष', 'त्र', 'ज्ञ'];
-        const englishLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-
-        let currentMode = 'ne';
-
-        function renderCards() {
-            const grid = document.getElementById('cardGrid');
-            grid.innerHTML = '';
-            const data = currentMode === 'ne' ? nepaliLetters : englishLetters;
-
-            data.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <span class="letter">${item}</span>
-                    <span class="sub">${currentMode === 'ne' ? 'अक्षर' : 'Letter'}</span>
-                `;
-                // कार्डमा क्लिक गर्दा आवाज निकाल्ने फंक्सन
-                card.onclick = () => speakText(item);
-                grid.appendChild(card);
-            });
-        }
-
-        function switchLang(mode) {
-            currentMode = mode;
-            document.getElementById('nepBtn').classList.toggle('active', mode === 'ne');
-            document.getElementById('engBtn').classList.toggle('active', mode === 'en');
-            renderCards();
-        }
-
-        // मोबाइल वा ब्राउजरको आवाज निकाल्ने फिचर (Text-to-Speech)
-        function speakText(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // अघिल्लो बोल्दै गरेको रोकियोस्
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = currentMode === 'ne' ? 'ne-NP' : 'en-US';
-                utterance.rate = 0.8; // अलि बिस्तारै स्पष्ट बोलियोस् भनेर
-                window.speechSynthesis.speak(utterance);
-            }
-        }
-
-        // पहिलो पटक पेज खुल्दा नेपाली अक्षरहरू देखाउने
-        renderCards();
-    </script>
 </body>
 </html>
