@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ne"><head><meta charset="UTF-8"><title>वर्णमाला</title>
+<style>
+    body{text-align:center; background:#f0f4f8; font-family:sans-serif;}
+    .grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; padding:20px;}
+    .card{background:white; padding:20px; border-radius:10px; cursor:pointer; font-size:24px; box-shadow:0 2px 5px #ccc;}
+</style></head>
+<body>
+    <h2>🔤 नेपाली वर्णमाला</h2>
+    <div class="grid" id="grid"></div>
+    <a href="index.html">🏠 होमपेज</a>
+    <script>
+        const letters = ['क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ'];
+        const grid = document.getElementById('grid');
+        letters.forEach(l => {
+            let div = document.createElement('div');
+            div.className = 'card'; div.innerText = l;
+            div.onclick = () => window.speechSynthesis.speak(new SpeechSynthesisUtterance(l));
+            grid.appendChild(div);
+        });
+    </script>
+</body></html>
