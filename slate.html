@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>डिजिटल स्लेट - बालबालिकाको रमाइलो</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --text-color: #333;
+            --header-bg: #ffffff;
+            --box-bg: #ffffff;
+            --nav-bg: #2c3e50;
+            --nav-text: #ffffff;
+        }
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --header-bg: #1e1e1e;
+            --box-bg: #1e1e1e;
+            --nav-bg: #1a1a1a;
+            --nav-text: #ffffff;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
+        
+        /* Navbar स्टाइल */
+        .navbar { background-color: var(--nav-bg); color: var(--nav-text); padding: 10px 15px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .navbar a { color: var(--nav-text); text-decoration: none; padding: 8px 12px; border-radius: 5px; font-size: 14px; font-weight: 600; transition: background 0.2s; }
+        .navbar a:hover, .navbar a.active { background-color: #3498db; }
+
+        /* मुख्य कन्टेनर */
+        .main-container { max-width: 800px; width: 100%; margin: 20px auto; padding: 0 15px; text-align: center; flex: 1; }
+        h2 { margin-bottom: 15px; font-size: 22px; }
+
+        /* ड्रइङ स्लेट स्टाइल */
+        .slate-box { background: var(--box-bg); padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: inline-block; width: 100%; max-width: 600px; }
+        canvas { background: #111; border: 4px solid #3498db; border-radius: 8px; cursor: crosshair; touch-action: none; width: 100%; height: 400px; display: block; }
+
+        /* कन्ट्रोल बटनहरू */
+        .controls { margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .color-picker { width: 40px; height: 40px; border: none; border-radius: 50%; cursor: pointer; background: none; }
+        .btn { padding: 8px 16px; border: none; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; color: #fff; }
+        .btn-clear { background-color: #e74c3c; }
+        .btn-clear:hover { background-color: #c0392b; }
+        
+        footer { text-align: center; padding: 15px; font-size: 13px; background: var(--nav-bg); color: var(--nav-text); margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <!-- नेभिगेसन बार -->
+    <nav class="navbar">
+        <a href="slate.html" class="active">🎨 डिजिटल स्लेट</a>
+        <a href="alphabet.html">abc वर्णमाला</a>
+        <a href="math.html">🔢 गन्ती खेल</a>
+        <a href="stories.html">📖 कथाहरू</a>
+    </nav>
+
+    <div class="main-container">
+        <h2>बालबालिकाको डिजिटल स्लेट (Magic Slate)</h2>
+        <div class="slate-box">
+            <canvas id="slateCanvas"></canvas>
+            
+            <div class="controls">
+                <label for="colorPicker" style="font-size: 14px; font-weight: bold;">रङ छान्नुहोस्:</label>
+                <input type="color" id="colorPicker" class="color-picker" value="#ffffff">
+                <button class="btn btn-clear" onclick="clearSlate()">सफा गर्नुहोस् (Clear)</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Kamal G.C. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('slateCanvas');
+        const ctx = canvas.getContext('2d');
+        const colorPicker = document.getElementById('colorPicker');
+
+        // Canvas को साइज सेट गर्ने
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = 400;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.lineWidth = 5;
+        }
+        window.addEventListener('load', resizeCanvas);
+        window.addEventListener('resize', resizeCanvas);
+
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        function getPosition(e) {
+            const rect = canvas.getBoundingClientRect();
+            let clientX = e.clientX;
+            let clientY = e.clientY;
+            
+            if (e.touches && e.touches.length > 0) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            }
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getPosition(e);
+            lastX = pos.x;
+            lastY = pos.y;
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            const pos = getPosition(e);
+
+            ctx.strokeStyle = colorPicker.value;
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+
+            lastX = pos.x;
+            lastY = pos.y;
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        // Mouse Events
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseleave', stopDrawing);
+
+        // Touch Events (मोबाइलको लागि)
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
+
+        // स्फा गर्ने बटनको फंक्सन
+        function clearSlate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>
