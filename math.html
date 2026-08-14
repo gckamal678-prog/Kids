@@ -1,8 +1,114 @@
 <!DOCTYPE html>
-<html lang="ne"><head><meta charset="UTF-8"><title>गणित खेल</title></head>
-<body style="text-align:center; background:#f0f4f8;">
-    <h2>🔢 जोड घटाउ खेल</h2>
-    <h3 id="q">२ + २ कति हुन्छ?</h3>
-    <button onclick="alert('सहि!')">४</button> <button onclick="alert('गलत!')">५</button><br><br>
-    <a href="index.html">🏠 होमपेज</a>
-</body></html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>गणित र पजल खेल</title>
+    <style>
+        body { text-align: center; background: #f0f4f8; font-family: sans-serif; padding: 20px; }
+        .box { background: white; max-width: 400px; margin: 20px auto; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { color: #2980b9; }
+        .question { font-size: 28px; font-weight: bold; margin: 20px 0; color: #333; }
+        .btn-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
+        .opt-btn { padding: 15px; font-size: 20px; font-weight: bold; background: #3498db; color: white; border: none; border-radius: 10px; cursor: pointer; }
+        .opt-btn:hover { background: #2980b9; }
+        .score { font-size: 18px; color: #e67e22; font-weight: bold; }
+        .msg { font-size: 18px; font-weight: bold; margin-top: 15px; height: 25px; }
+        .home-link { display: inline-block; margin-top: 20px; text-decoration: none; color: #fff; background: #27ae60; padding: 10px 20px; border-radius: 8px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>🔢 गणित तथा पजल खेल (+, -, *, /)</h2>
+        <div class="score">स्कोर: <span id="scoreVal">0</span></div>
+        
+        <div class="question" id="qText">लोड हुँदैछ...</div>
+        
+        <div class="btn-grid" id="optionsBox">
+            <!-- अप्सनहरू यहाँ JS बाट आउँछन् -->
+        </div>
+
+        <div class="msg" id="msgText"></div>
+    </div>
+
+    <a href="index.html" class="home-link">🏠 होमपेजमा फर्कनुहोस्</a>
+
+    <script>
+        let score = 0;
+        let correctAnswer = 0;
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ne-NP';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function generateMathProblem() {
+            document.getElementById('msgTextinnerText = ""');
+            const ops = ['+', '-', '*'];
+            const op = ops[Math.floor(Math.random() * ops.length)];
+            
+            let num1, num2;
+            if (op === '+') {
+                num1 = Math.floor(Math.random() * 50) + 1;
+                num2 = Math.floor(Math.random() * 50) + 1;
+                correctAnswer = num1 + num2;
+            } else if (op === '-') {
+                num1 = Math.floor(Math.random() * 50) + 10;
+                num2 = Math.floor(Math.random() * num1); // ऋणात्मक नआओोस भनेर
+                correctAnswer = num1 - num2;
+            } else {
+                num1 = Math.floor(Math.random() * 10) + 1;
+                num2 = Math.floor(Math.random() * 10) + 1;
+                correctAnswer = num1 * num2;
+            }
+
+            const qString = `${num1} ${op} ${num2} कति हुन्छ?`;
+            document.getElementById('qText').innerText = qString;
+            speak(qString);
+
+            // अप्सनहरू बनाउने
+            let options = [correctAnswer];
+            while (options.length < 4) {
+                let wrong = correctAnswer + Math.floor(Math.random() * 10) - 5;
+                if (wrong >= 0 && !options.includes(wrong)) {
+                    options.push(wrong);
+                }
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optBox = document.getElementById('optionsBox');
+            optBox.innerHTML = '';
+            options.forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAns(opt);
+                optBox.appendChild(btn);
+            });
+        }
+
+        function checkAns(selected) {
+            let msg = document.getElementById('msgText');
+            if (selected === correctAnswer) {
+                score += 5;
+                document.getElementById('scoreVal').innerText = score;
+                msg.style.color = '#27ae60';
+                msg.innerText = '✨ अति उत्तम! सही उत्तर।';
+                speak('सहि उत्तर!');
+            } else {
+                msg.style.color = '#c0392b';
+                msg.innerText = `❌ मिलेन! सही उत्तर ${correctAnswer} हो।`;
+                speak('गलत उत्तर!');
+            }
+            setTimeout(generateMathProblem, 2000); // २ सेकेन्डमा अर्को प्रश्न आउने
+        }
+
+        generateMathProblem();
+    </script>
+</body>
+</html>
