@@ -1,22 +1,124 @@
 <!DOCTYPE html>
-<html lang="ne"><head><meta charset="UTF-8"><title>वर्णमाला</title>
-<style>
-    body{text-align:center; background:#f0f4f8; font-family:sans-serif;}
-    .grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; padding:20px;}
-    .card{background:white; padding:20px; border-radius:10px; cursor:pointer; font-size:24px; box-shadow:0 2px 5px #ccc;}
-</style></head>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>चित्र र शब्दसहितको वर्णमाला</title>
+    <style>
+        body { text-align: center; background: #f0f4f8; font-family: sans-serif; margin: 0; padding: 10px; }
+        h2 { color: #2980b9; margin: 15px 0; }
+        
+        /* क्याटगोरी ट्याबहरू */
+        .tab-container { margin-bottom: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+        .tab-btn { padding: 10px 15px; font-size: 15px; font-weight: bold; background: #3498db; color: white; border: none; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .tab-btn:hover, .tab-btn.active { background: #2980b9; transform: scale(1.05); }
+
+        /* कार्ड ग्रिड */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; max-width: 700px; margin: 0 auto; padding: 10px; }
+        
+        /* कार्ड डिजाइन */
+        .card { background: white; padding: 15px 10px; border-radius: 12px; cursor: pointer; box-shadow: 0 3px 6px rgba(0,0,0,0.1); transition: 0.2s; border: 2px solid #e1e8ed; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .card:hover { background: #ebf5fb; border-color: #3498db; transform: scale(1.05); }
+        
+        .main-letter { font-size: 32px; font-weight: bold; color: #2c3e50; margin-bottom: 5px; }
+        .sub-text { font-size: 13px; color: #7f8c8d; font-weight: bold; }
+        
+        .home-link { display: inline-block; margin-top: 25px; text-decoration: none; color: white; background: #27ae60; padding: 10px 20px; border-radius: 8px; font-weight: bold; }
+    </style>
+</head>
 <body>
-    <h2>🔤 नेपाली वर्णमाला</h2>
+
+    <h2>🔤 चित्र र शब्दसहितको वर्णमाला सिकाइ</h2>
+
+    <!-- ट्याब बटनहरू -->
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="loadCategory('swor')">स्वरवर्ण (अ-अः)</button>
+        <button class="tab-btn" onclick="loadCategory('byanjan')">व्यञ्जनवर्ण (क-ज्ञ)</button>
+        <button class="tab-btn" onclick="loadCategory('caps')">English (A-Z)</button>
+        <button class="tab-btn" onclick="loadCategory('small')">English (a-z)</button>
+    </div>
+
+    <!-- कार्ड देखिने ठाउँ -->
     <div class="grid" id="grid"></div>
-    <a href="index.html">🏠 होमपेज</a>
+
+    <br>
+    <div>
+        <a href="index.html" class="home-link">🏠 होमपेजमा फर्कनुहोस्</a>
+    </div>
+
     <script>
-        const letters = ['क', 'ख', 'ग', 'घ', 'च', 'छ', 'ज', 'झ'];
-        const grid = document.getElementById('grid');
-        letters.forEach(l => {
-            let div = document.createElement('div');
-            div.className = 'card'; div.innerText = l;
-            div.onclick = () => window.speechSynthesis.speak(new SpeechSynthesisUtterance(l));
-            grid.appendChild(div);
-        });
+        // अक्षर र तिनका उदाहरण/शब्दहरू
+        const data = {
+            swor: [
+                {l: 'अ', w: 'अमला'}, {l: 'आ', w: 'आमा'}, {l: 'इ', 'w': 'इँटा'}, {l: 'ई', w: 'ईश्वर'}, 
+                {l: 'उ', w: 'उदार'}, {l: 'ऊ', w: 'ऊन'}, {l: 'ऋ', w: 'ऋषि'}, {l: 'ए', w: 'एकता'}, 
+                {l: 'ऐ', w: 'ऐना'}, {l: 'ओ', w: 'ओστ (ओστो)'}, {l: 'औ', w: 'औखती'}, {l: 'अं', w: 'अंगुर'}, {l: 'अः', w: 'खाली'}
+            ],
+            byanjan: [
+                {l: 'क', w: 'कलम'}, {l: 'ख', w: 'खरायो'}, {l: 'ग', w: 'गाई'}, {l: 'घ', w: 'घर'}, {l: 'ङ', w: 'ङ ङ'},
+                {l: 'च', w: 'चरा'}, {l: 'छ', w: 'छत'}, {l: 'ज', w: 'जरायो'}, {l: 'झ', w: 'झन्डा'}, {l: 'ञ', w: 'ञ'},
+                {l: 'ट', w: 'टट्टा'}, {l: 'ठ', w: 'ठेला'}, {l: 'ड', w: 'डमरु'}, {l: 'ढ', w: 'ढोलक'}, {l: 'ण', w: 'खाली'},
+                {l: 'त', w: 'तरве (तरकारी)'}, {l: 'थ', w: 'थैلي (थsली)'}, {l: 'द', w: 'दध (दही)'}, {l: 'ध', w: 'धनुष'}, {l: 'न', w: 'नानी'},
+                {l: 'प', w: 'पन्च (पञ्ची)'}, {l: 'फ', w: 'फूल'}, {l: 'ब', w: 'बफ (बुहारी)'}, {l: 'भ', w: 'भालु'}, {l: 'म', w: 'माछा'},
+                {l: 'य', w: 'यन्त्र'}, {l: 'र', w: 'रथ'}, {l: 'ल', w: 'लसुन'}, {l: 'व', w: 'वकिल'}, {l: 'श', w: 'शंख'},
+                {l: 'ष', w: 'षट्कोण'}, {l: 'स', w: 'सुन्तला'}, {l: 'ह', w: 'हात्ती'}, {l: 'क्ष', w: 'क्षेत्रीय'}, {l: 'त्र', w: 'शूल'}, {l: 'ज्ञ', w: 'ज्ञानी'}
+            ],
+            caps: [
+                {l: 'A', w: 'Apple'}, {l: 'B', w: 'Ball'}, {l: 'C', w: 'Cat'}, {l: 'D', w: 'Dog'}, 
+                {l: 'E', w: 'Elephant'}, {l: 'F', w: 'Fish'}, {l: 'G', w: 'Grapes'}, {l: 'H', w: 'Hat'}, 
+                {l: 'I', w: 'Ice-cream'}, {l: 'J', w: 'Jug'}, {l: 'K', w: 'Kite'}, {l: 'L', w: 'Lion'}, 
+                {l: 'M', w: 'Monkey'}, {l: 'N', w: 'Nest'}, {l: 'O', w: 'Owl'}, {l: 'P', w: 'Parrot'}, 
+                {l: 'Q', w: 'Queen'}, {l: 'R', w: 'Rose'}, {l: 'S', w: 'Sun'}, {l: 'T', w: 'Tiger'}, 
+                {l: 'U', w: 'Umbrella'}, {l: 'V', w: 'Van'}, {l: 'W', w: 'Watch'}, {l: 'X', w: 'Xylophone'}, 
+                {l: 'Y', w: 'Yak'}, {l: 'Z', w: 'Zebra'}
+            ],
+            small: [
+                {l: 'a', w: 'apple'}, {l: 'b', w: 'ball'}, {l: 'c', w: 'cat'}, {l: 'd', w: 'dog'}, 
+                {l: 'e', w: 'elephant'}, {l: 'f', w: 'fish'}, {l: 'g', w: 'grapes'}, {l: 'h', w: 'hat'}, 
+                {l: 'i', w: 'ice-cream'}, {l: 'j', w: 'jug'}, {l: 'k', w: 'kite'}, {l: 'l', w: 'lion'}, 
+                {l: 'm', w: 'monkey'}, {l: 'n', w: 'nest'}, {l: 'o', w: 'owl'}, {l: 'p', w: 'parrot'}, 
+                {l: 'q', w: 'queen'}, {l: 'r', w: 'rose'}, {l: 's', w: 'sun'}, {l: 't', w: 'tiger'}, 
+                {l: 'u', w: 'umbrella'}, {l: 'v', w: 'van'}, {l: 'w', w: 'watch'}, {l: 'x', w: 'xylophone'}, 
+                {l: 'y', w: 'yak'}, {l: 'z', w: 'zebra'}
+            ]
+        };
+
+        // बोल्ने फंक्सन (अक्षर र शब्द दुवै स्पष्ट उच्चारण गर्ने)
+        function speak(letter, word) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let textToSpeak = `${letter}, ${word}`;
+                let utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = /[a-zA-Z]/.test(letter) ? 'en-US' : 'ne-NP';
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // कार्डहरू लोड गर्ने फंक्सन
+        function loadCategory(category) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+
+            data[category].forEach(item => {
+                let div = document.createElement('div');
+                div.className = 'card';
+                
+                div.innerHTML = `
+                    <div class="main-letter">${item.l}</div>
+                    <div class="sub-text">${item.w}</div>
+                `;
+
+                // कार्ड थिच्दा "क, कलम" वा "A, Apple" भनेर बोल्छ
+                div.onclick = () => speak(item.l, item.w);
+                grid.appendChild(div);
+            });
+        }
+
+        // सुरुमा स्वरवर्ण देखाउने
+        loadCategory('swor');
     </script>
-</body></html>
+</body>
+</html>
