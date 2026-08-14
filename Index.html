@@ -19,11 +19,7 @@
         .container { max-width: 600px; width: 100%; padding: 20px; text-align: center; }
         
         h1 { font-family: 'Poppins', sans-serif; font-size: 28px; color: #2980b9; margin-bottom: 10px; }
-        p.subtitle { font-size: 16px; color: #555; margin-bottom: 20px; }
-
-        /* स्वागत सुन्ने बटन */
-        .welcome-btn { background: #27ae60; color: white; border: none; padding: 10px 20px; font-size: 15px; font-weight: bold; border-radius: 20px; cursor: pointer; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .welcome-btn:hover { background: #219653; }
+        p.subtitle { font-size: 16px; color: #555; margin-bottom: 30px; }
 
         /* मेनू कार्डहरूको ग्रिड */
         .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
@@ -43,23 +39,20 @@
         <h1>🌟 Kids Hub 🌟</h1>
         <p class="subtitle">रमाइलोसँग सिकौं, खेल्दै अगाडि बढौं!</p>
 
-        <!-- स्वागत अडियो बजाउने बटन (ब्रिजरको नियम अनुसार टच गरेपछि मात्र आवाज बज्न मिल्छ) -->
-        <button class="welcome-btn" onclick="playWelcome()">🔊 स्वागत सुन्नुहोस्</button>
-
         <div class="menu-grid">
-            <a href="slate.html" class="menu-card" onclick="playClickSound()">
+            <a href="slate.html" class="menu-card">
                 <span class="icon">🎨</span>
                 <span class="title">डिजिटल स्लेट</span>
             </a>
-            <a href="alphabet.html" class="menu-card" onclick="playClickSound()">
+            <a href="alphabet.html" class="menu-card">
                 <span class="icon">🔤</span>
                 <span class="title">वर्णमाला सिकाइ</span>
             </a>
-            <a href="math.html" class="menu-card" onclick="playClickSound()">
+            <a href="math.html" class="menu-card">
                 <span class="icon">🔢</span>
                 <span class="title">गन्ती र गणित</span>
             </a>
-            <a href="stories.html" class="menu-card" onclick="playClickSound()">
+            <a href="stories.html" class="menu-card">
                 <span class="icon">📖</span>
                 <span class="title">बाल कथाहरू</span>
             </a>
@@ -69,57 +62,6 @@
             <p>&copy; 2026 Kamal G.C. | kids.kamalgc.com.np</p>
         </footer>
     </div>
-
-    <script>
-        // क्लिक गर्दा रमाइलो पप साउन्ड (Web Audio API मार्फत विदाउट फाइल बजाउने)
-        function playClickSound() {
-            try {
-                let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                let oscillator = audioCtx.createOscillator();
-                let gainNode = audioCtx.createGain();
-                
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
-                oscillator.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.08);
-                
-                gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-                
-                oscillator.start();
-                oscillator.stop(audioCtx.currentTime + 0.08);
-            } catch(e) {
-                // साउन्ड सपोर्ट नगरेमा चुपचाप बस्छ
-            }
-        }
-
-        // एप खुल्दा वा स्वागत बटन थिच्दा बोल्ने फंक्सन
-        function playWelcome() {
-            playClickSound();
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                let text = "Kids Hub मा स्वागत छ! आज हामी के खेल्छौं र सिक्छौं?";
-                let utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ne-NP';
-                utterance.rate = 0.95;
-                window.speechSynthesis.speak(utterance);
-            }
-        }
-
-        // पेज लोड भएको १ सेकेन्डपछि आफैं स्वागत गर्ने प्रयास गर्ने
-        window.onload = function() {
-            setTimeout(() => {
-                if ('speechSynthesis' in window) {
-                    let text = "Kids Hub मा स्वागत छ!";
-                    let utterance = new SpeechSynthesisUtterance(text);
-                    utterance.lang = 'ne-NP';
-                    window.speechSynthesis.speak(utterance);
-                }
-            }, 1000);
-        };
-    </script>
 
 </body>
 </html>
