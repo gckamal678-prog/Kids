@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>व्यञ्जन वर्ण - पाठशाला</title>
+    <meta name="theme-color" content="#ff9933">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+        h2 { color: #d35400; margin: 0; font-size: 20px; }
+        .home-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        /* ग्रिड लेआउट - व्यञ्जन वर्णहरू देखाउन (४ वटा स्तम्भ) */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        /* अक्षरको बक्स */
+        .letter-card {
+            background-color: #ffffff;
+            color: #2c3e50;
+            border: 3px solid #3498db;
+            border-radius: 12px;
+            padding: 15px 0;
+            font-size: 30px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.1s;
+        }
+        .letter-card:active {
+            background-color: #ebf5fb;
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 होम</a>
+        <h2>व्यञ्जन वर्ण (क - ज्ञ)</h2>
+    </div>
+
+    <div class="grid-container" id="consonantsGrid">
+        <!-- JavaScript बाट अक्षरहरू यहाँ लोड हुन्छन् -->
+    </div>
+
+    <script>
+        const consonants = [
+            'क', 'ख', 'ग', 'घ', 'ङ',
+            'च', 'छ', 'ज', 'झ', 'ञ',
+            'ट', 'ठ', 'ड', 'ढ', 'ण',
+            'त', 'थ', 'द', 'ध', 'न',
+            'प', 'फ', 'ब', 'भ', 'म',
+            'य', 'र', 'ल', 'व',  'श', 
+            'ष', 'स', 'ह','क्ष', 'त्र', 
+                     'ज्ञ'
+        ];
+        
+        const grid = document.getElementById('consonantsGrid');
+
+        consonants.forEach(letter => {
+            const div = document.createElement('div');
+            div.className = 'letter-card';
+            div.innerText = letter;
+            
+            div.addEventListener('click', () => {
+                console.log(letter + ' थिचियो');
+            });
+
+            grid.appendChild(div);
+        });
+    </script>
+
+</body>
+</html>
