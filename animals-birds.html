@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>जनावर र पन्छीहरू - पाठशाला</title>
+    <meta name="theme-color" content="#ff9933">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+        }
+        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        .home-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .section-title {
+            color: #d35400;
+            background-color: #fef5e7;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            margin: 25px auto 15px auto;
+            max-width: 600px;
+            border: 2px solid #e67e22;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .card {
+            background-color: #ffffff;
+            color: #2c3e50;
+            border: 3px solid #27ae60;
+            border-radius: 15px;
+            padding: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.1s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .card:active {
+            background-color: #e8f8f5;
+            transform: scale(0.95);
+        }
+        .card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+        .text-content {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+    <script>
+        function speakNepali(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'ne-NP';
+            speech.rate = 0.85;
+            speech.pitch = 1.1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 होम</a>
+        <h2>जनावर र पन्छीहरू</h2>
+    </div>
+
+    <!-- पाल्तु तथा जङ्गली जनावर सेक्सन -->
+    <div class="section-title">🐅 जनावरहरू (Animals)</div>
+    <div class="grid-container" id="animalsGrid"></div>
+
+    <!-- पन्छीहरू सेक्सन -->
+    <div class="section-title">🦅 पन्छीहरू (Birds)</div>
+    <div class="grid-container" id="birdsGrid"></div>
+
+    <script>
+        // जनावरहरूको सूची
+        const animalsData = [
+            { name: 'बाघ', img: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg' },
+            { name: 'सिंह', img: 'https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg' },
+            { name: 'हात्ती', img: 'https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg' },
+            { name: 'गाई', img: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Cow_female_black_white.jpg' },
+            { name: 'भैंसी', img: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Water_buffalo_in_Vietnam.jpg' },
+            { name: 'घोडा', img: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Pony_in_Duhallow_County_Cork.jpg' },
+            { name: 'कुकुर', img: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Basset_Hound_profil.jpg' },
+            { name: 'बिरालो', img: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Felis_catus-cat_on_snow.jpg' },
+            { name: 'बाख्रा', img: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Hausziege_web.jpg' },
+            { name: 'बाँदर', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Vervet_Monkey_%28Chlorocebus_pygerythrus%29_side.jpg' }
+        ];
+
+        // पन्छीहरूको सूची
+    const birdsData = [
+            { name: 'सुगा', img: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Ara_macao_side.jpg' },
+            { name: 'ढुकुर', img: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Streptopelia_decaocto_on_a_branch.jpg' },
+            { name: 'मजुर', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Peacock_Plumage.jpg' },
+            { name: 'उद्धत', img: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Athene_noctua_standing_on_a_stone.jpg' },
+            { name: 'परेवा', img: 'https://upload.wikimedia.org/wikipedia/commons/3/39/Domestic_pigeon_blue_bar.jpg' },
+            { name: 'हाँस', img: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Anas_platyrhynchos_male_female_quadrat.jpg' },
+            { name: 'कुखुरा', img: 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Chicken_rooster_close_up.jpg' },
+            { name: 'चरा', img: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Passer_domesticus_-USA_%28male%29_4.jpg' }
+        ];
+
+        // जनावर लोड गर्ने
+        const animalsGrid = document.getElementById('animalsGrid');
+        animalsData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.name}" loading="lazy">
+                <div class="text-content">${item.name}</div>
+            `;
+            card.addEventListener('click', () => speakNepali(item.name));
+            animalsGrid.appendChild(card);
+        });
+
+        // पन्छी लोड गर्ने
+        const birdsGrid = document.getElementById('birdsGrid');
+        birdsData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.name}" loading="lazy">
+                <div class="text-content">${item.name}</div>
+            `;
+            card.addEventListener('click', () => speakNepali(item.name));
+            birdsGrid.appendChild(card);
+        });
+    </script>
+
+</body>
+</html>
