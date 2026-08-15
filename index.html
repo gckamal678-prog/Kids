@@ -3,38 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>पाठशाला - बालबालिकाको सिकाइ एप</title>
-    <meta name="theme-color" content="#ff9933">
+    <title>बाल पाठशाला - नेपाल</title>
+    <meta name="theme-color" content="#dc143c">
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #fffaf0;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
-        h1 {
-            color: #d35400;
-            font-size: 24px;
-            margin-bottom: 25px;
+        .national-box {
+            background: linear-gradient(135deg, #dc143c, #003893);
+            color: white;
+            border-radius: 15px;
+            padding: 20px 15px;
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 3px solid #ffcc00;
         }
-        .menu-grid {
+        .national-box h1 {
+            margin: 5px 0 15px 0;
+            font-size: 22px;
+            color: #ffcc00;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .symbols-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .symbol-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .symbol-card:active {
+            transform: scale(0.95);
+        }
+        .symbol-card img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+        .symbol-card span {
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .color-preview {
+            width: 50px;
+            height: 50px;
+            background-color: #dc143c;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-bottom: 5px;
+        }
+        .section-title {
+            color: #d35400;
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+            font-weight: bold;
+        }
+        .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            max-width: 500px;
+            gap: 12px;
+            max-width: 600px;
             margin: auto;
         }
         .menu-card {
             background-color: #ffffff;
-            border: 3px solid #ff9933;
-            border-radius: 15px;
-            padding: 20px 10px;
-            text-decoration: none;
             color: #2c3e50;
-            font-size: 18px;
-            font-weight: bold;
+            border: 3px solid #e67e22;
+            border-radius: 15px;
+            padding: 15px 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -42,51 +98,113 @@
             transition: 0.1s;
         }
         .menu-card:active {
-            background-color: #ffe5cc;
+            background-color: #fef5e7;
             transform: scale(0.95);
         }
-        .icon {
-            font-size: 36px;
-            margin-bottom: 8px;
+        .menu-card span {
+            font-size: 28px;
+            margin-bottom: 5px;
         }
     </style>
-
-    <!-- साझा अडियो (Text-to-Speech) फंक्सन -->
     <script>
         function speakNepali(text) {
             window.speechSynthesis.cancel();
             let speech = new SpeechSynthesisUtterance(text);
             speech.lang = 'ne-NP';
-            speech.rate = 0.95;
-            speech.pitch = 1.2;
+            speech.rate = 0.85;
+            speech.pitch = 1.1;
             window.speechSynthesis.speak(speech);
         }
     </script>
 </head>
 <body>
 
-    <h1>📚 पाठशाला (सिकाइ चौतारी)</h1>
+    <!-- नेपालको राष्ट्रिय पहिचान र प्रतीकहरू -->
+    <div class="national-box">
+        <h1>🇳🇵 हाम्रो प्यारो नेपाल 🇳🇵</h1>
+        <div class="symbols-grid">
+            <div class="symbol-card" onclick="speakNepali('नेपालको राष्ट्रिय झण्डा')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Flag_of_Nepal.svg" alt="Flag">
+                <span>राष्ट्रिय झण्डा</span>
+            </div>
+            <div class="symbol-card" onclick="speakNepali('नेपालको नक्सा')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Nepal_location_map.svg" alt="Map">
+                <span>राष्ट्रिय नक्सा</span>
+            </div>
+            <div class="symbol-card" onclick="speakNepali('नेपालको निशान छाप, एम्ब्लेम अफ नेपाल')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Emblem_of_Nepal.svg" alt="Emblem">
+                <span>निशान छाप</span>
+            </div>
+            <div class="symbol-card" onclick="speakNepali('राष्ट्रिय रङ, सिम्रिक रङ')">
+                <div class="color-preview"></div>
+                <span>सिम्रिक रङ</span>
+            </div>
+            <div class="symbol-card" onclick="speakNepali('राष्ट्रिय फूल, लालीगुराँस')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Rhododendron_arboreum_var._campanulatum.jpg" alt="Flower">
+                <span>लालीगुराँस</span>
+            </div>
+            <div class="symbol-card" onclick="speakNepali('राष्ट्रिय पन्छी, डाँफे')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Lophophorus_impejanus_-Vogelpark_Avifauna%2C_Alphen_aan_den_Rijn%2C_Netherlands_-male-8.jpg" alt="Bird">
+                <span>डाँफे (पन्छी)</span>
+            </div>
+            <div class="symbol-card" onclick="speakNepali('राष्ट्रिय जनावर, गाई')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Cow_female_black_white.jpg" alt="Animal">
+                <span>गाई (जनावर)</span>
+            </div>
+            <div class="symbol-card" onclick="speakNepali('सगरमाथा, सर्वोच्च शिखर')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Everest_North_Face_toward_Base_Camp_Tibet_Luca_Galuzzi_2006.jpg" alt="Mountain">
+                <span>सगरमाथा</span>
+            </div>
+        </div>
+    </div>
 
-    <div class="menu-grid">
-        <a href="vowels.html" class="menu-card" onclick="speakNepali('स्वर वर्ण')">
-            <span class="icon">✍️</span>
-            स्वर वर्ण (अ-अः)
+    <!-- बालबालिका सिकाइ केन्द्र (सबै १५ वटा फाइलहरू) -->
+    <div class="section-title">✨ बालबालिका सिकाइ केन्द्र ✨</div>
+    <div class="grid-container">
+        <a href="alphabet.html" class="menu-card">
+            <span>🔤</span>Alphabet (Text)
         </a>
-        <a href="consonants.html" class="menu-card" onclick="speakNepali('व्यञ्जन वर्ण')">
-            <span class="icon">📖</span>
-            व्यञ्जन वर्ण (क-ज्ञ)
+        <a href="image.html" class="menu-card">
+            <span>🖼️</span>English Alphabet (Image)
         </a>
-        <a href="barahakhari.html" class="menu-card" onclick="speakNepali('बाह्रखरी')">
-            <span class="icon">📝</span>
-            बाह्रखरी
+        <a href="vowels.html" class="menu-card">
+            <span>अ</span>स्वर वर्ण (Text)
         </a>
-        <a href="numbers.html" class="menu-card" onclick="speakNepali('अंकहरू')">
-            <span class="icon">🔢</span>
-            अंकहरू (१-१००)
+        <a href="imegevowels.html" class="menu-card">
+            <span>🎨</span>स्वर वर्ण (Image)
         </a>
-        <a href="patterns.html" class="menu-card" onclick="speakNepali('गणित पाहाडा')">
-            <span class="icon">➕</span>
-            गणित पाहाडा
+        <a href="consonants.html" class="menu-card">
+            <span>क</span>व्यञ्जन वर्ण (Text)
+        </a>
+        <a href="imageconsonants.html" class="menu-card">
+            <span>🧩</span>व्यञ्जन वर्ण (Image)
+        </a>
+        <a href="barahakhari.html" class="menu-card">
+            <span>📝</span>बाह्रखरी
+        </a>
+        <a href="colors.html" class="menu-card">
+            <span>🎨</span>रङहरूको नाम
+        </a>
+        <a href="fruits-vegetables.html" class="menu-card">
+            <span>🍎</span>फलफूल र तरकारी
+        </a>
+        <a href="days-months.html" class="menu-card">
+            <span>📅</span>वार र महिनाहरू
+        </a>
+        <a href="animals-birds.html" class="menu-card">
+            <span>🐅</span>जनावर र पन्छी
+        </a>
+        <a href="body-parts.html" class="menu-card">
+            <span>👀</span>शरीरका अंगहरू
+        </a>
+        <a href="vehicles.html" class="menu-card">
+            <span>🚗</span>सवारी साधनहरू
+        </a>
+        <a href="numbers.html" class="menu-card">
+            <span>🔢</span>Numbers / अंकहरू
+        </a>
+        <a href="patterns.html" class="menu-card">
+            <span>✨</span>Patterns & Shapes
         </a>
     </div>
 
