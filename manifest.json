@@ -1,10 +1,10 @@
 {
-  "name": "पाठशाला",
+  "name": "बाल पाठशाला",
   "short_name": "पाठशाला",
-  "start_url": "/",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ff9933",
+  "background_color": "#E0F7FA",
+  "theme_color": "#4A90E2",
   "icons": [
     {
       "src": "192.png",
