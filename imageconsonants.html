@@ -3,69 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>व्यञ्जन वर्ण (चित्र सहित) - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <title>व्यञ्जन वर्ण - पाठशाला</title>
+    <meta name="theme-color" content="#FF9800">
+    <!-- Child-friendly Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
+            font-family: 'Mukta', 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #FFF3E0 0%, #FFE0B2 100%);
             margin: 0;
             padding: 15px;
             text-align: center;
+            min-height: 100vh;
         }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
             margin: 0 auto 15px auto;
+            background: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        h2 { 
+            color: #E65100; 
+            margin: 0; 
+            font-size: 20px; 
+            font-weight: 800;
+        }
         .home-btn {
-            background-color: #e67e22;
+            background-color: #FF9800;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 3px 0 #E65100;
+            transition: all 0.1s ease;
         }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
             max-width: 600px;
             margin: auto;
         }
+
+        /* 3D Soft Card Style */
         .card {
-            background-color: #ffffff;
-            color: #2c3e50;
-            border: 3px solid #2980b9;
-            border-radius: 15px;
-            padding: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+            color: #E65100;
+            border: 3px solid #FFB74D;
+            border-radius: 18px;
+            padding: 15px 10px;
+            box-shadow: 0 6px 0 #F57C00, 0 8px 10px rgba(0,0,0,0.08);
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
+            transition: all 0.1s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
         .card:active {
-            background-color: #ebf5fb;
-            transform: scale(0.95);
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #F57C00, 0 3px 6px rgba(0,0,0,0.1);
+            background-color: #FFF3E0;
         }
-        .card img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 8px;
+
+        /* Large Emoji Style */
+        .emoji-box {
+            font-size: 52px;
+            line-height: 1.1;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
-        .text-content {
-            font-size: 20px;
-            font-weight: bold;
-            color: #d35400;
+
+        .letter-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #BF360C;
+            line-height: 1.2;
+        }
+
+        .word-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #E65100;
         }
     </style>
     <script>
@@ -89,43 +128,44 @@
     <div class="grid-container" id="consonantsGrid"></div>
 
     <script>
+        // Nepali Consonants Data with Emojis
         const consonantsData = [
-            { letter: 'क', word: 'कमल', img: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/Nelumbo_nucifera_-_flower_b.jpg' },
-            { letter: 'ख', word: 'खरायो', img: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/European_hare_%28Lepus_europaeus%29_in_the_snow_%28cropped%29.jpg' },
-            { letter: 'ग', word: 'गाई', img: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Cow_female_black_white.jpg' },
-            { letter: 'घ', word: 'घर', img: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Simple_house_icon.svg' },
-            { letter: 'ङ', word: 'ङ', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
-            { letter: 'च', word: 'चरा', img: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Ara_macao_side.jpg' },
-            { letter: 'छ', word: 'छाता', img: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Open_umbrella_on_white_background.jpg' },
-            { letter: 'ज', word: 'जहाज', img: 'https://upload.wikimedia.org/wikipedia/commons/e/ed/Airbus_A350-900_F-WZNJ_MSN002_%2814890637651%29_%28cropped%29.jpg' },
-            { letter: 'झ', word: 'झण्डा', img: 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Flag_of_Nepal.svg' },
-            { letter: 'ञ', word: 'ञ', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
-            { letter: 'ट', word: 'टमाटर', img: 'https://upload.wikimedia.org/wikipedia/commons/8/88/Tomato_je.jpg' },
-            { letter: 'ठ', word: 'ठेला', img: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Handcart_in_India.jpg' },
-            { letter: 'ड', word: 'डमरु', img: 'https://upload.wikimedia.org/wikipedia/commons/e/ec/Damru.jpg' },
-            { letter: 'ढ', word: 'ढोका', img: 'https://upload.wikimedia.org/wikipedia/commons/6/67/Wooden_door.jpg' },
-            { letter: 'ण', word: 'ण', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
-            { letter: 'त', word: 'ताला', img: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Padlock_open_closed.jpg' },
-            { letter: 'थ', word: 'थैली', img: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Shopping_bag_icon.svg' },
-            { letter: 'द', word: 'दियो', img: 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Diya_lamp_lighting.jpg' },
-            { letter: 'ध', word: 'धनुष', img: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Bow_and_arrow.svg' },
-            { letter: 'न', word: 'नदी', img: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Grand_Canyon_National_Park.jpg' },
-            { letter: 'प', word: 'पङ्खा', img: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Ceiling_fan.jpg' },
-            { letter: 'फ', word: 'फलफूल', img: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg' },
-            { letter: 'ब', word: 'बाघ', img: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Tiger.50.jpg' },
-            { letter: 'भ', word: 'भालु', img: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Ursus_arctos_kurochkini.jpg' },
-            { letter: 'म', word: 'माछा', img: 'https://upload.wikimedia.org/wikipedia/commons/3/32/Goldfish3.jpg' },
-            { letter: 'य', word: 'यन्त्र', img: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Xylophone1.jpg' },
-            { letter: 'र', word: 'रथ', img: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Chariot_at_Hampi.jpg' },
-            { letter: 'ल', word: 'लसुन', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Garlic_%28white_background%29.jpg' },
-            { letter: 'व', word: 'वकिल', img: 'https://upload.wikimedia.org/wikipedia/commons/5/54/Queen_Elizabeth_II_in_March_2015.jpg' },
-            { letter: 'श', word: 'शंख', img: 'https://upload.wikimedia.org/wikipedia/commons/3/31/Shankha_%28Conch_shell%29.jpg' },
-            { letter: 'ष', word: 'षट्कोण', img: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Regular_hexagon.svg' },
-            { letter: 'स', word: 'सुन्तला', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg' },
-            { letter: 'ह', word: 'हार', img: 'https://upload.wikimedia.org/wikipedia/commons/9/9f/Gold_necklace.jpg' },
-            { letter: 'क्ष', word: 'क्षत्री', img: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Pony_in_Duhallow_County_Cork.jpg' },
-            { letter: 'त्र', word: 'त्रिशूल', img: 'https://upload.wikimedia.org/wikipedia/commons/6/68/Trishula.svg' },
-            { letter: 'ज्ञ', word: 'ज्ञानी', img: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Rishi_illustration.jpg' }
+            { letter: 'क', word: 'कमल', emoji: '🪷' },
+            { letter: 'ख', word: 'खरायो', emoji: '🐇' },
+            { letter: 'ग', word: 'गाई', emoji: '🐄' },
+            { letter: 'घ', word: 'घर', emoji: '🏠' },
+            { letter: 'ङ', word: 'ङ', emoji: '🔤' },
+            { letter: 'च', word: 'चरा', emoji: '🐦' },
+            { letter: 'छ', word: 'छाता', emoji: '☂️' },
+            { letter: 'ज', word: 'जहाज', emoji: '✈️' },
+            { letter: 'झ', word: 'झण्डा', emoji: '🇳🇵' },
+            { letter: 'ञ', word: 'ञ', emoji: '🔤' },
+            { letter: 'ट', word: 'टमाटर', emoji: '🍅' },
+            { letter: 'ठ', word: 'ठेला', emoji: '🛒' },
+            { letter: 'ड', word: 'डमरु', emoji: '🥁' },
+            { letter: 'ढ', word: 'ढोका', emoji: '🚪' },
+            { letter: 'ण', word: 'ण', emoji: '🔤' },
+            { letter: 'त', word: 'ताला', emoji: '🔒' },
+            { letter: 'थ', word: 'थैली', emoji: '🛍️' },
+            { letter: 'द', word: 'दियो', emoji: '🪔' },
+            { letter: 'ध', word: 'धनुष', emoji: '🏹' },
+            { letter: 'न', word: 'नदी', emoji: '🏞️' },
+            { letter: 'प', word: 'पङ्खा', emoji: '🌀' },
+            { letter: 'फ', word: 'फलफूल', emoji: '🍎' },
+            { letter: 'ब', word: 'बाघ', emoji: '🐅' },
+            { letter: 'भ', word: 'भालु', emoji: '🐻' },
+            { letter: 'म', word: 'माछा', emoji: '🐟' },
+            { letter: 'य', word: 'यन्त्र', emoji: '⚙️' },
+            { letter: 'र', word: 'रथ', emoji: '🛺' },
+            { letter: 'ल', word: 'लसुन', emoji: '🧄' },
+            { letter: 'व', word: 'वकिल', emoji: '⚖️' },
+            { letter: 'श', word: 'शंख', emoji: '🐚' },
+            { letter: 'ष', word: 'षट्कोण', emoji: '🔷' },
+            { letter: 'स', word: 'सुन्तला', emoji: '🍊' },
+            { letter: 'ह', word: 'हार', emoji: '📿' },
+            { letter: 'क्ष', word: 'क्षत्री', emoji: '⚔️' },
+            { letter: 'त्र', word: 'त्रिशूल', emoji: '🔱' },
+            { letter: 'ज्ञ', word: 'ज्ञानी', emoji: '🧘' }
         ];
 
         const consonantsGrid = document.getElementById('consonantsGrid');
@@ -134,10 +174,17 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <img src="${item.img}" alt="${item.word}" loading="lazy">
-                <div class="text-content">${item.letter} - ${item.word}</div>
+                <div class="emoji-box">${item.emoji}</div>
+                <div class="letter-title">${item.letter}</div>
+                <div class="word-title">${item.word}</div>
             `;
-            card.addEventListener('click', () => speakNepali(`${item.letter}, ${item.word}`));
+            card.addEventListener('click', () => {
+                if(item.letter === item.word) {
+                    speakNepali(item.letter);
+                } else {
+                    speakNepali(`${item.letter} बाट ${item.word}`);
+                }
+            });
             consonantsGrid.appendChild(card);
         });
     </script>
