@@ -10,21 +10,21 @@
             font-family: 'Arial', sans-serif;
             background-color: #fffaf0;
             margin: 0;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
         }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 400px;
-            margin: 0 auto 15px auto;
+            max-width: 600px;
+            margin: 0 auto 10px auto;
         }
         h2 { color: #d35400; margin: 0; font-size: 18px; }
         .home-btn {
             background-color: #e67e22;
             color: white;
-            padding: 8px 15px;
+            padding: 6px 12px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
@@ -34,14 +34,14 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .tab-btn {
             background-color: #bdc3c7;
             color: #2c3e50;
             border: none;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 8px 16px;
+            font-size: 14px;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
@@ -50,30 +50,40 @@
             background-color: #2980b9;
             color: white;
         }
-        /* ठाडो स्तम्भ (Vertical List Layout) */
-        .vertical-container {
+        /* १० वटा स्तम्भ (Columns) भएको ग्रिड */
+        .grid-container {
             display: none;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 400px;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 4px;
+            max-width: 600px;
             margin: auto;
         }
-        .vertical-container.active {
-            display: flex;
+        .grid-container.active {
+            display: grid;
         }
         .number-card {
             background-color: #ffffff;
             color: #2c3e50;
-            border: 2px solid #2980b9;
-            border-radius: 10px;
-            padding: 12px;
-            font-size: 24px;
+            border: 1px solid #2980b9;
+            border-radius: 6px;
+            padding: 8px 0;
+            font-size: 16px;
             font-weight: bold;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.08);
             cursor: pointer;
+            user-select: none;
         }
         .number-card:active { background-color: #ebf5fb; }
     </style>
+    <script>
+        function speakNepali(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'ne-NP';
+            speech.rate = 0.95;
+            speech.pitch = 1.2;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
 </head>
 <body>
     <div class="header">
@@ -86,8 +96,8 @@
         <button class="tab-btn" onclick="switchTab('english', event)">English (1-100)</button>
     </div>
 
-    <div class="vertical-container active" id="nepaliList"></div>
-    <div class="vertical-container" id="englishList"></div>
+    <div class="grid-container active" id="nepaliGrid"></div>
+    <div class="grid-container" id="englishGrid"></div>
 
     <script>
         const nepaliDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
@@ -95,31 +105,39 @@
             return n.toString().split('').map(digit => nepaliDigits[digit]).join('');
         }
 
-        const nepList = document.getElementById('nepaliList');
-        const engList = document.getElementById('englishList');
+        const nepGrid = document.getElementById('nepaliGrid');
+        const engGrid = document.getElementById('englishGrid');
 
-        for (let i = 1; i <= 100; i++) {
-            const nepCard = document.createElement('div');
-            nepCard.className = 'number-card';
-            nepCard.innerText = toNepaliNumber(i) + '  ←  ' + i; // वा केवल अंक मात्र राख्न सक्नुहुन्छ
-            nepCard.innerText = toNepaliNumber(i);
-            nepList.appendChild(nepCard);
+        // १० स्तम्भ र १० पङ्क्ति मिलाउन म्याट्रिक्स क्रममा राख्ने (Vertical column-wise filling)
+        for (let r = 1; r <= 10; r++) {
+            for (let c = 0; c < 10; c++) {
+                let num = c * 10 + r;
+                
+                // नेपाली कार्ड
+                let nepCard = document.createElement('div');
+                nepCard.className = 'number-card';
+                let nepVal = toNepaliNumber(num);
+                nepCard.innerText = nepVal;
+                nepCard.addEventListener('click', () => speakNepali(nepVal));
+                nepGrid.appendChild(nepCard);
 
-            const engCard = document.createElement('div');
-            engCard.className = 'number-card';
-            engCard.innerText = i;
-            engList.appendChild(engCard);
+                // अंग्रेजी कार्ड
+                let engCard = document.createElement('div');
+                engCard.className = 'number-card';
+                engCard.innerText = num;
+                engCard.addEventListener('click', () => speakNepali(num.toString()));
+                engGrid.appendChild(engCard);
+            }
         }
 
         function switchTab(type, event) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.vertical-container').forEach(list => list.classList.remove('active'));
-
+            document.querySelectorAll('.grid-container').forEach(grid => grid.classList.remove('active'));
             event.target.classList.add('active');
             if (type === 'nepali') {
-                document.getElementById('nepaliList').classList.add('active');
+                document.getElementById('nepaliGrid').classList.add('active');
             } else {
-                document.getElementById('englishList').classList.add('active');
+                document.getElementById('englishGrid').classList.add('active');
             }
         }
     </script>
