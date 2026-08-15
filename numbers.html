@@ -17,7 +17,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 600px;
+            max-width: 400px;
             margin: 0 auto 15px auto;
         }
         h2 { color: #d35400; margin: 0; font-size: 18px; }
@@ -30,8 +30,6 @@
             font-weight: bold;
             font-size: 14px;
         }
-
-        /* ट्याब बटनहरूको स्टाइल (नेपाली र अंग्रेजी अंक छुट्याउन) */
         .tab-container {
             display: flex;
             justify-content: center;
@@ -47,104 +45,83 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            transition: 0.2s;
         }
         .tab-btn.active {
             background-color: #2980b9;
             color: white;
         }
-
-        /* ग्रिड लेआउट - अंकहरू देखाउन (५ वटा स्तम्भ) */
-        .grid-container {
+        /* ठाडो स्तम्भ (Vertical List Layout) */
+        .vertical-container {
             display: none;
-            grid-template-columns: repeat(5, 1fr);
+            flex-direction: column;
             gap: 10px;
-            max-width: 600px;
+            max-width: 400px;
             margin: auto;
         }
-        .grid-container.active {
-            display: grid;
+        .vertical-container.active {
+            display: flex;
         }
-
-        /* अंकको बक्स */
         .number-card {
             background-color: #ffffff;
             color: #2c3e50;
             border: 2px solid #2980b9;
             border-radius: 10px;
-            padding: 12px 0;
+            padding: 12px;
             font-size: 24px;
             font-weight: bold;
             box-shadow: 0 3px 5px rgba(0,0,0,0.08);
             cursor: pointer;
-            user-select: none;
-            transition: 0.1s;
         }
-        .number-card:active {
-            background-color: #ebf5fb;
-            transform: scale(0.95);
-        }
+        .number-card:active { background-color: #ebf5fb; }
     </style>
 </head>
 <body>
-
     <div class="header">
         <a href="index.html" class="home-btn">🏠 होम</a>
         <h2>गन्ती (१ - १००)</h2>
     </div>
 
-    <!-- ट्याब स्विच गर्ने बटनहरू -->
     <div class="tab-container">
         <button class="tab-btn active" onclick="switchTab('nepali', event)">नेपाली (१-१००)</button>
         <button class="tab-btn" onclick="switchTab('english', event)">English (1-100)</button>
     </div>
 
-    <!-- नेपाली अंकको ग्रिड -->
-    <div class="grid-container active" id="nepaliGrid"></div>
-
-    <!-- अंग्रेजी अंकको ग्रिड -->
-    <div class="grid-container" id="englishGrid"></div>
+    <div class="vertical-container active" id="nepaliList"></div>
+    <div class="vertical-container" id="englishList"></div>
 
     <script>
         const nepaliDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-
         function toNepaliNumber(n) {
             return n.toString().split('').map(digit => nepaliDigits[digit]).join('');
         }
 
-        const nepGrid = document.getElementById('nepaliGrid');
-        const engGrid = document.getElementById('englishGrid');
+        const nepList = document.getElementById('nepaliList');
+        const engList = document.getElementById('englishList');
 
-        // १ देखि १०० सम्म लूप चलाएर भरिने
         for (let i = 1; i <= 100; i++) {
-            // नेपाली कार्ड
             const nepCard = document.createElement('div');
             nepCard.className = 'number-card';
+            nepCard.innerText = toNepaliNumber(i) + '  ←  ' + i; // वा केवल अंक मात्र राख्न सक्नुहुन्छ
             nepCard.innerText = toNepaliNumber(i);
-            nepCard.addEventListener('click', () => console.log(toNepaliNumber(i) + ' थिचियो'));
-            nepGrid.appendChild(nepCard);
+            nepList.appendChild(nepCard);
 
-            // अंग्रेजी कार्ड
             const engCard = document.createElement('div');
             engCard.className = 'number-card';
             engCard.innerText = i;
-            engCard.addEventListener('click', () => console.log(i + ' थिचियो'));
-            engGrid.appendChild(engCard);
+            engList.appendChild(engCard);
         }
 
-        // ट्याब स्विच गर्ने फंक्सन
         function switchTab(type, event) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.grid-container').forEach(grid => grid.classList.remove('active'));
+            document.querySelectorAll('.vertical-container').forEach(list => list.classList.remove('active'));
 
             event.target.classList.add('active');
             if (type === 'nepali') {
-                document.getElementById('nepaliGrid').classList.add('active');
+                document.getElementById('nepaliList').classList.add('active');
             } else {
-                document.getElementById('englishGrid').classList.add('active');
+                document.getElementById('englishList').classList.add('active');
             }
         }
     </script>
-
 </body>
 </html>
