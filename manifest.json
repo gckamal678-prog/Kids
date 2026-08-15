@@ -7,12 +7,12 @@
   "theme_color": "#2980b9",
   "icons": [
     {
-      "src": "pathsala.png",
+      "src": "192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "pathsala.png",
+      "src": "512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
