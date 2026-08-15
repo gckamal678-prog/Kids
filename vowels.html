@@ -59,6 +59,16 @@
             transform: scale(0.95);
         }
     </style>
+    <script>
+        function speakText(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'ne-NP';
+            speech.rate = 0.85;
+            speech.pitch = 1.1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
 </head>
 <body>
 
@@ -80,9 +90,9 @@
             div.className = 'letter-card';
             div.innerText = letter;
             
-            // भविष्यमा अडियो प्ले गर्ने वा अन्य फिचर थप्न मिल्ने ठाउँ
+            // अक्षरमा क्लिक गर्दा आवाज आउने फंक्सन
             div.addEventListener('click', () => {
-                console.log(letter + ' थिचियो');
+                speakText(letter);
             });
 
             grid.appendChild(div);
