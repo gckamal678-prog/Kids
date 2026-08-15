@@ -2,146 +2,62 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>बाह्रखरी - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
-            margin: 0;
-            padding: 15px;
-            text-align: center;
+        body { font-family: 'Arial', sans-serif; background-color: #fffaf0; padding: 15px; }
+        .row-box { background: white; border: 2px solid #27ae60; padding: 15px; margin-bottom: 15px; border-radius: 10px; }
+        h3 { color: #d35400; margin: 0 0 10px 0; }
+        /* १२ वटा अक्षरका लागि ६-६ को ग्रिड (दुई पङ्क्ति) */
+        .sub-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+        .item { 
+            background: #f4f6f7; border: 1px solid #ccc; padding: 12px 0; 
+            text-align: center; font-size: 22px; font-weight: bold; 
+            cursor: pointer; border-radius: 6px;
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 700px;
-            margin: 0 auto 20px auto;
-        }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
-        .home-btn {
-            background-color: #e67e22;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .container { max-width: 700px; margin: auto; }
-        .row-box {
-            background-color: #ffffff;
-            border: 2px solid #27ae60;
-            border-radius: 10px;
-            margin-bottom: 12px;
-            padding: 10px;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.08);
-        }
-        .base-letter {
-            font-size: 20px;
-            font-weight: bold;
-            color: #27ae60;
-            margin-bottom: 8px;
-            text-align: left;
-            padding-left: 5px;
-        }
-        .sub-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 6px;
-        }
-        .barakhari-item {
-            background-color: #f4f6f7;
-            border: 1px solid #d5dbdb;
-            border-radius: 6px;
-            padding: 10px 0;
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
-            cursor: pointer;
-            user-select: none;
-        }
-        .barakhari-item:active { background-color: #d4efdf; }
+        .item:active { background: #d4efdf; }
     </style>
-    <!-- आवाज आउने (Text-to-Speech) फंक्सन -->
-    <script>
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.95;
-            speech.pitch = 1.2;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
 </head>
 <body>
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>बाह्रखरी (क - ज्ञ)</h2>
-    </div>
-    <div class="container" id="barahakhariContainer"></div>
 
-    <script>
-        const baseConsonants = [
-            'क', 'ख', 'ग', 'घ', 'ङ',
-            'च', 'छ', 'ज', 'झ', 'ञ',
-            'ट', 'ठ', 'ड', 'ढ', 'ण',
-            'त', 'थ', 'द', 'ध', 'न',
-            'प', 'फ', 'ब', 'भ', 'म',
-            'य', 'र', 'ल', 'व',
-            'श', 'ष', 'स', 'ह',
-            'क्ष', 'त्र', 'ज्ञ'
+<div id="container"></div>
+
+<script>
+    // 'क' देखि 'ज्ञ' सम्मका व्यंजन वर्णहरू
+    const consonants = ['क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'क्ष', 'त्र', 'ज्ञ'];
+    
+    const container = document.getElementById('container');
+
+    consonants.forEach(con => {
+        const rowBox = document.createElement('div');
+        rowBox.className = 'row-box';
+        rowBox.innerHTML = `<h3>${con} परिवार:</h3><div class="sub-grid" id="grid-${con}"></div>`;
+        container.appendChild(rowBox);
+
+        const grid = document.getElementById(`grid-${con}`);
+        
+        // १२ वटा बाह्रखरीका रूपहरू (कृ हटाइएको)
+        // 'कि' का लागि विशेष व्यवस्था गरिएको छ
+        const forms = [
+            con, con + 'ा', 'ि' + con, con + 'ी', con + 'ु', con + 'ू', 
+            con + 'े', con + 'ै', con + 'ो', con + 'ौ', con + 'ं', con + 'ः'
         ];
-
-        const container = document.getElementById('barahakhariContainer');
-
-        baseConsonants.forEach(con => {
-            const rowBox = document.createElement('div');
-            rowBox.className = 'row-box';
-
-            const baseTitle = document.createElement('div');
-            baseTitle.className = 'base-letter';
-            baseTitle.innerText = con + ' परिवार:';
-            rowBox.appendChild(baseTitle);
-
-            const subGrid = document.createElement('div');
-            subGrid.className = 'sub-grid';
-
-            // बाह्रखरीका १३ वटा रूपहरू (क, का, कि, की, कु, कू, के, कै, को, कौ, कं, कः)
-            const forms = [
-                con, 
-                con + 'ा', 
-                con + 'ि'
-                con + 'ी', 
-                con + 'ु', 
-                con + 'ू', 
-                con + 'े', 
-                con + 'ै', 
-                con + 'ो', 
-                con + 'ौ', 
-                con + 'ं', 
-                con + 'ः'
-            ];
-
-            forms.forEach(item => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'barakhari-item';
-                itemDiv.innerText = item;
-                
-                // थिच्दा उच्चारण हुने बनाइएको
-                itemDiv.addEventListener('click', () => {
-                    speakNepali(item);
-                });
-
-                subGrid.appendChild(itemDiv);
-            });
-
-            rowBox.appendChild(subGrid);
-            container.appendChild(rowBox);
+        
+        forms.forEach(form => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerText = form; // यहाँ 'ि'+con ले 'कि' सहि देखाउँछ
+            
+            // क्लिक गर्दा आवाज आउने
+            div.onclick = () => {
+                let utterance = new SpeechSynthesisUtterance(form);
+                utterance.lang = 'ne-NP';
+                window.speechSynthesis.speak(utterance);
+            };
+            grid.appendChild(div);
         });
-    </script>
+    });
+</script>
+
 </body>
 </html>
