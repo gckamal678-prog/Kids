@@ -3,55 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>पाठशाला - बालबालिकाको सिकाइ एप</title>
+    <title>बाह्रखरी - पाठशाला</title>
     <meta name="theme-color" content="#ff9933">
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #fffaf0;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
-        h1 {
-            color: #d35400;
-            font-size: 24px;
-            margin-bottom: 25px;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
         }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            max-width: 500px;
-            margin: auto;
-        }
-        .menu-card {
-            background-color: #ffffff;
-            border: 3px solid #ff9933;
-            border-radius: 15px;
-            padding: 20px 10px;
+        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        .home-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
             text-decoration: none;
-            color: #2c3e50;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .container { max-width: 700px; margin: auto; }
+        .row-box {
+            background-color: #ffffff;
+            border: 2px solid #27ae60;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            padding: 10px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.08);
+        }
+        .base-letter {
+            font-size: 20px;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 8px;
+            text-align: left;
+            padding-left: 5px;
+        }
+        .sub-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+        }
+        .barakhari-item {
+            background-color: #f4f6f7;
+            border: 1px solid #d5dbdb;
+            border-radius: 6px;
+            padding: 10px 0;
             font-size: 18px;
             font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: 0.1s;
+            color: #2c3e50;
+            cursor: pointer;
+            user-select: none;
         }
-        .menu-card:active {
-            background-color: #ffe5cc;
-            transform: scale(0.95);
-        }
-        .icon {
-            font-size: 36px;
-            margin-bottom: 8px;
-        }
+        .barakhari-item:active { background-color: #d4efdf; }
     </style>
-
-    <!-- साझा अडियो (Text-to-Speech) फंक्सन -->
     <script>
         function speakNepali(text) {
             window.speechSynthesis.cancel();
@@ -64,31 +77,66 @@
     </script>
 </head>
 <body>
-
-    <h1>📚 पाठशाला (सिकाइ चौतारी)</h1>
-
-    <div class="menu-grid">
-        <a href="vowels.html" class="menu-card" onclick="speakNepali('स्वर वर्ण')">
-            <span class="icon">✍️</span>
-            स्वर वर्ण (अ-अः)
-        </a>
-        <a href="consonants.html" class="menu-card" onclick="speakNepali('व्यञ्जन वर्ण')">
-            <span class="icon">📖</span>
-            व्यञ्जन वर्ण (क-ज्ञ)
-        </a>
-        <a href="barahakhari.html" class="menu-card" onclick="speakNepali('बाह्रखरी')">
-            <span class="icon">📝</span>
-            बाह्रखरी
-        </a>
-        <a href="numbers.html" class="menu-card" onclick="speakNepali('अंकहरू')">
-            <span class="icon">🔢</span>
-            अंकहरू (१-१००)
-        </a>
-        <a href="patterns.html" class="menu-card" onclick="speakNepali('गणित पाहाडा')">
-            <span class="icon">➕</span>
-            गणित पाहाडा
-        </a>
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 होम</a>
+        <h2>बाह्रखरी (क - ज्ञ)</h2>
     </div>
+    <div class="container" id="barahakhariContainer"></div>
 
+    <script>
+        const baseConsonants = [
+            'क', 'ख', 'ग', 'घ', 'ङ',
+            'च', 'छ', 'ज', 'झ', 'ञ',
+            'ट', 'ठ', 'ड', 'ढ', 'ण',
+            'त', 'थ', 'द', 'ध', 'न',
+            'प', 'फ', 'ब', 'भ', 'म',
+            'य', 'र', 'ल', 'व',
+            'श', 'ष', 'स', 'ह',
+            'क्ष', 'त्र', 'ज्ञ'
+        ];
+
+        const container = document.getElementById('barahakhariContainer');
+
+        baseConsonants.forEach(con => {
+            const rowBox = document.createElement('div');
+            rowBox.className = 'row-box';
+
+            const baseTitle = document.createElement('div');
+            baseTitle.className = 'base-letter';
+            baseTitle.innerText = con + ' परिवार:';
+            rowBox.appendChild(baseTitle);
+
+            const subGrid = document.createElement('div');
+            subGrid.className = 'sub-grid';
+
+            // यहाँ 'कि' (ि + क) लाई सहि ढंगले राखिएको छ
+            const matras = [
+                con, 
+                con + 'ा', 
+                'ि' + con, 
+                con + 'ी', 
+                con + 'ु', 
+                con + 'ू', 
+                con + 'े', 
+                con + 'ै', 
+                con + 'ो', 
+                con + 'ौ', 
+                con + 'ं', 
+                con + 'ः'
+            ];
+
+            matras.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'barakhari-item';
+                itemDiv.innerText = item;
+                // क्लिक गर्दा आवाज आउने
+                itemDiv.addEventListener('click', () => speakNepali(item));
+                subGrid.appendChild(itemDiv);
+            });
+
+            rowBox.appendChild(subGrid);
+            container.appendChild(rowBox);
+        });
+    </script>
 </body>
 </html>
