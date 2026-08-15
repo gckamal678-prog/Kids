@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>बाल क्विज - परीक्षा खेल</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #F0F4F8;
+            padding: 20px;
+            text-align: center;
+        }
+        .quiz-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .score-board {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 15px;
+        }
+        .question-text {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .opt-btn {
+            background: #E3F2FD;
+            border: 2px solid #2196F3;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .opt-btn:hover { background: #BBDEFB; }
+        .back-btn {
+            margin-top: 20px;
+            display: inline-block;
+            text-decoration: none;
+            color: #666;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-card">
+    <div class="score-board">अङ्क (Score): <span id="score">0</span></div>
+    <div class="question-text" id="question">प्रश्न आउँदैछ...</div>
+    <div class="options-grid" id="options"></div>
+    <br>
+    <a href="./index.html" class="back-btn">⬅️ गृहपृष्ठमा फर्कनुहोस्</a>
+</div>
+
+<script>
+    // Unlimited Quiz Dataset
+    const pool = [
+        { q: "'क' बाट के हुन्छ?", opt: ["कमल", "खरगोश", "गमला", "घर"], ans: 0 },
+        { q: "नेपालको राष्ट्रिय जनावर कुन हो?", opt: ["बाघ", "गाई", "हात्ती", "कुकुर"], ans: 1 },
+        { q: "२ + ३ कति हुन्छ?", opt: ["४", "५", "६", "७"], ans: 1 },
+        { q: "नेपालको झण्डामा कतिवटा रङ हुन्छन्?", opt: ["२", "३", "४", "१"], ans: 1 },
+        { q: "स्याउ (Apple) को रङ कस्तो हुन्छ?", opt: ["नीलो", "रातो", "हेलो", "कालो"], ans: 1 },
+        { q: "'ख' बाट के हुन्छ?", opt: ["खरयो", "कुकुर", "गाई", "चरा"], ans: 0 },
+        { q: "५ - २ कति हुन्छ?", opt: ["२", "३", "४", "१"], ans: 1 }
+    ];
+
+    let score = 0;
+
+    function loadQuestion() {
+        // Randomly pick a question for unlimited play
+        const randomQ = pool[Math.floor(Math.random() * pool.length)];
+        document.getElementById("question").innerText = randomQ.q;
+        
+        const optionsDiv = document.getElementById("options");
+        optionsDiv.innerHTML = "";
+        
+        randomQ.opt.forEach((option, index) => {
+            const btn = document.createElement("button");
+            btn.className = "opt-btn";
+            btn.innerText = option;
+            btn.onclick = () => checkAnswer(index, randomQ.ans);
+            optionsDiv.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(selected, correct) {
+        if (selected === correct) {
+            score++;
+            alert("स्याबास! सही उत्तर 🎉");
+        } else {
+            alert("ओहो! गलत भयो, प्रयास जारी राख्नुहोस् 💪");
+        }
+        document.getElementById("score").innerText = score;
+        loadQuestion(); // अर्को अनलिमिटेड प्रश्न लोड गर्ने
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
