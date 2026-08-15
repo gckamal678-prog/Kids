@@ -54,7 +54,6 @@
             background: #FFFFFF;
             border-radius: 16px;
             padding: 10px;
-            /* Dynamic 3D Shadow and Press Lift Effect */
             box-shadow: 0 10px 0px #B8E994, 0 15px 25px rgba(0,0,0,0.2);
             border: 3px solid #78E08F;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -126,16 +125,12 @@
             margin-bottom: 4px;
         }
 
-        /* ग्रिड संरचना मिलाइएको (3 Columns) */
-        
-        /* २x३ लेआउट: २ रो x ३ कोलम */
+        /* Grid Layouts */
         .grid-2x3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
         }
-
-        /* १x३ लेआउट: १ रो x ३ कोलम */
         .grid-1x3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -168,7 +163,7 @@
 
 <div class="main-container">
 
-    <!-- १. हाम्रो प्यारो नेपाल (3D nepal.png Container) -->
+    <!-- १. हाम्रो प्यारो नेपाल -->
     <div class="national-box">
         <h1>🇳🇵 हाम्रो प्यारो नेपाल 🇳🇵</h1>
         <div class="nepal-3d-card">
@@ -180,7 +175,7 @@
 
     <div class="category-container">
         
-        <!-- २. भाषा र अक्षर (२ रो x ३ कोलम = ६ वटा) -->
+        <!-- २. भाषा र अक्षर (२ रो x ३ कोलम) -->
         <div class="category-block">
             <div class="category-header" style="color: #2E7D32;">📚 भाषा र अक्षर (Alphabets)</div>
             <div class="grid-2x3">
@@ -205,7 +200,7 @@
             </div>
         </div>
 
-        <!-- ३. शब्द ज्ञान (२ रो x ३ कोलम = ६ वटा) -->
+        <!-- ३. शब्द ज्ञान (२ रो x ३ कोलम) -->
         <div class="category-block">
             <div class="category-header" style="color: #E65100;">🍎 शब्द ज्ञान (Vocabulary)</div>
             <div class="grid-2x3">
@@ -230,7 +225,7 @@
             </div>
         </div>
 
-        <!-- ४. गणित र समय (१ रो x ३ कोलम = ३ वटा) -->
+        <!-- ४. गणित र समय (१ रो x ३ कोलम) -->
         <div class="category-block">
             <div class="category-header" style="color: #6A1B9A;">🔢 गणित र समय (Maths & GK)</div>
             <div class="grid-1x3">
@@ -249,6 +244,17 @@
     </div>
 
 </div>
+
+<!-- Service Worker Registration Script -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('Service Worker Registered!'))
+        .catch(err => console.log('SW Registration Error:', err));
+    });
+  }
+</script>
 
 </body>
 </html>
