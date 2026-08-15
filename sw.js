@@ -1,11 +1,13 @@
 const CACHE_NAME = 'patshala-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/192.png',
-  '/512.png'
+  './',
+  './index.html',
+  './nepal.png',
+  './192.png',
+  ./512.png'
 ];
 
+// Service Worker Install
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -15,6 +17,7 @@ self.addEventListener('install', event => {
   );
 });
 
+// Fetching Assets (Offline Work)
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
