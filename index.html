@@ -159,42 +159,81 @@
             color: #4A148C; 
         }
 
-        
-/* Desktop / Laptop मा Full Screen बनाउने CSS */
-@media screen and (min-width: 600px) {
-    body {
-        padding: 20px 40px !important; /* छेउमा अलिकति हल्का मार्जिन */
-    }
-    .main-container {
-        max-width: 100% !important; /* पूरा स्क्रिन भर्ने */
-        width: 100% !important;
-    }
-    .national-box {
-        width: 100% !important;
-        padding: 30px !important;
-    }
-    .nepal-3d-card {
-        width: 100% !important;
-    }
-    .nepal-3d-card img {
-        max-height: 500px !important; /* फोटो ठूलो र स्पष्ट देखिने */
-        width: 100% !important;
-        object-fit: contain;
-    }
-    .grid-2x3 {
-        grid-template-columns: repeat(6, 1fr) !important; /* ६ वटै बटन १ै लाइनमा फैलिने */
-        gap: 15px !important;
-    }
-    .grid-1x3 {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 15px !important;
-    }
-    .menu-card {
-        min-height: 120px !important;
-        font-size: 18px !important;
-    }
-}
+        /* Footer Styling */
+        .app-footer {
+            margin-top: 35px;
+            padding: 20px 15px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            border: 3px solid #E3F2FD;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .footer-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #FF5722;
+            margin-bottom: 10px;
+        }
+        .footer-links {
+            font-size: 14px;
+            color: #2C3E50;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .footer-links a {
+            color: #1E88E5;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .footer-copyright {
+            font-size: 13px;
+            color: #78909C;
+            font-weight: 600;
+        }
 
+        /* Desktop / Laptop मा Full Screen बनाउने CSS */
+        @media screen and (min-width: 600px) {
+            body {
+                padding: 20px 40px !important;
+            }
+            .main-container {
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+            .national-box {
+                width: 100% !important;
+                padding: 30px !important;
+            }
+            .nepal-3d-card {
+                width: 100% !important;
+            }
+            .nepal-3d-card img {
+                max-height: 500px !important;
+                width: 100% !important;
+                object-fit: contain;
+            }
+            .grid-2x3 {
+                grid-template-columns: repeat(6, 1fr) !important;
+                gap: 15px !important;
+            }
+            .grid-1x3 {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 15px !important;
+            }
+            .menu-card {
+                min-height: 120px !important;
+                font-size: 18px !important;
+            }
+            .footer-title {
+                font-size: 18px;
+            }
+            .footer-links {
+                font-size: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -280,6 +319,18 @@
         </div>
 
     </div>
+
+    <!-- ५. Footer Section -->
+    <footer class="app-footer">
+        <div class="footer-title">🇳🇵 बाल पाठशाला - बालबालिकाको उज्ज्वल भविष्यका लागि 🇳🇵</div>
+        <div class="footer-links">
+            🌐 <a href="https://kamalgc.com.np" target="_blank">kamalgc.com.np</a> | 
+            ✉️ <a href="mailto:Support@kamalgc.com.np">Support@kamalgc.com.np</a>
+        </div>
+        <div class="footer-copyright">
+            ©️ 2026 KAMAL G.C. All Rights Reserved.
+        </div>
+    </footer>
 
 </div>
 
