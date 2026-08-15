@@ -30,14 +30,7 @@
             font-weight: bold;
             font-size: 14px;
         }
-        
-        /* बाह्रखरीको मुख्य कन्टेनर */
-        .container {
-            max-width: 700px;
-            margin: auto;
-        }
-
-        /* प्रत्येक अक्षरको पङ्क्ति (Row) */
+        .container { max-width: 700px; margin: auto; }
         .row-box {
             background-color: #ffffff;
             border: 2px solid #27ae60;
@@ -46,7 +39,6 @@
             padding: 10px;
             box-shadow: 0 3px 5px rgba(0,0,0,0.08);
         }
-
         .base-letter {
             font-size: 20px;
             font-weight: bold;
@@ -55,49 +47,31 @@
             text-align: left;
             padding-left: 5px;
         }
-
-        /* बाह्रवटा अक्षरहरूको ग्रिड */
         .sub-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(7, 1fr);
             gap: 6px;
         }
-
         .barakhari-item {
             background-color: #f4f6f7;
             border: 1px solid #d5dbdb;
             border-radius: 6px;
-            padding: 8px 0;
+            padding: 10px 0;
             font-size: 18px;
             font-weight: bold;
             color: #2c3e50;
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
         }
-
-        .barakhari-item:active {
-            background-color: #d4efdf;
-            transform: scale(0.95);
-        }
-
-        @media (max-width: 480px) {
-            .sub-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
+        .barakhari-item:active { background-color: #d4efdf; }
     </style>
 </head>
 <body>
-
     <div class="header">
         <a href="index.html" class="home-btn">🏠 होम</a>
         <h2>बाह्रखरी (क - ज्ञ)</h2>
     </div>
-
-    <div class="container" id="barahakhariContainer">
-        <!-- JavaScript बाट बाह्रखरी यहाँ लोड हुन्छन् -->
-    </div>
+    <div class="container" id="barahakhariContainer"></div>
 
     <script>
         const baseConsonants = [
@@ -110,23 +84,6 @@
             'श', 'ष', 'स', 'ह',
             'क्ष', 'त्र', 'ज्ञ'
         ];
-
-        // मात्राका चिन्हहरू (कार, आ-कार, इ-कार इತ್ಯदि)
-        // [अ, आ, इ, ई, उ, ऊ, ऋ, ए, ऐ, ओ, औ, अं, अः] को आधारमा बाह्रखरी बनाउने जेनेरेटर
-        function generateBarahakhari(consonant) {
-            // केही विशेष संयुक्त अक्षर वा नियम बाहेक साधारण नेपाली बाह्रखरी रूपहरू:
-            // (नोट: यहाँ सरलताको लागि मानक बाह्रखरी म्याट्रिक्स प्रयोग गरिएको छ)
-            const matras = ['', 'ा', 'ि', 'ी', 'ु', 'ू', 'ृ', 'े', 'ै', 'ो', 'ौ', 'ं', 'ः'];
-            
-            // बिशेष बाह्रखरी शुद्धताका लागि (जस्तै क, का, कि, की, कु, कू, कृ, के, कै, को, कौ, कं, कः)
-            // यसलाई अझ सजिलो बनाउन म्याट्रिक्स नै जोड्ने तरिका:
-            return matras.map(matra => {
-                // उ र ऊ का केही बर्णमा मात्रा तल जोडिन्छन् तर अधिकांशमा पछाडि/माथि हुन्छ। 
-                // JS बाट सिधै जोड्दा चल्ने स्वरूप:
-                if(matra === 'ि') return matra + consonant; // इ-कार अगाडि आउँछ
-                return consonant + matra;
-            });
-        }
 
         const container = document.getElementById('barahakhariContainer');
 
@@ -142,47 +99,33 @@
             const subGrid = document.createElement('div');
             subGrid.className = 'sub-grid';
 
-            // बाह्रखरीका रूपहरू निकाल्ने (अ, आ, इ... सँग जोडेर)
-            const forms = getBarahakhariForms(con);
+            // शुद्ध युनिकोड बाह्रखरी रूपहरू
+            const matras = [
+                con, 
+                con + 'ा', 
+                'ि' + con, 
+                con + 'ी', 
+                con + 'ु', 
+                con + 'ू', 
+                con + 'ृ', 
+                con + 'े', 
+                con + 'ै', 
+                con + 'ो', 
+                con + 'ौ', 
+                con + 'ं', 
+                con + 'ः'
+            ];
 
-            forms.forEach(item => {
+            matras.forEach(item => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'barakhari-item';
                 itemDiv.innerText = item;
-                
-                itemDiv.addEventListener('click', () => {
-                    console.log(item + ' थिचियो');
-                });
-
                 subGrid.appendChild(itemDiv);
             });
 
             rowBox.appendChild(subGrid);
             container.appendChild(rowBox);
         });
-
-        // शुद्ध नेपाली बाह्रखरी म्याट्रिक्स रिटर्न गर्ने फंक्सन
-        function getBarahakhariForms(c) {
-            // मानक बाह्रखरी सूची (क देखि कः सम्म)
-            // यहाँ सजिलो र दुरुस्त देखिने गरी म्याप गरिएको छ:
-            let base = c.replace(/्$/, ''); // हलन्त हटाउने यदि भए
-            return [
-                base, 
-                base + 'ा', 
-                'ि' + base, 
-                base + 'ी', 
-                base + 'ु', 
-                base + 'ू', 
-                base + 'ृ', 
-                base + 'े', 
-                base + 'ै', 
-                base + 'ो', 
-                base + 'ौ', 
-                base + 'ं', 
-                base + 'ः'
-            ];
-        }
     </script>
-
 </body>
 </html>
