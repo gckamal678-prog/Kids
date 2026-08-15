@@ -4,86 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>English Alphabet - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <meta name="theme-color" content="#4A90E2">
+    <!-- Child-friendly Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Mukta:wght@700&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
+            font-family: 'Fredoka', 'Mukta', sans-serif;
+            background: linear-gradient(180deg, #E3F2FD 0%, #BBDEFB 100%);
             margin: 0;
             padding: 15px;
             text-align: center;
+            min-height: 100vh;
         }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
             margin: 0 auto 15px auto;
+            background: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        h2 { 
+            color: #1565C0; 
+            margin: 0; 
+            font-size: 20px; 
+            font-weight: 700;
+        }
         .home-btn {
-            background-color: #e67e22;
+            background-color: #1E88E5;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 3px 0 #0D47A1;
+            transition: all 0.1s ease;
         }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Tab Buttons */
         .tab-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 20px;
         }
         .tab-btn {
-            background-color: #bdc3c7;
-            color: #2c3e50;
-            border: none;
+            background-color: #FFFFFF;
+            color: #546E7A;
+            border: 2px solid #90CAF9;
             padding: 10px 20px;
             font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
+            font-weight: 700;
+            border-radius: 14px;
             cursor: pointer;
+            box-shadow: 0 4px 0 #90CAF9;
+            transition: all 0.1s ease;
+            font-family: 'Fredoka', sans-serif;
         }
         .tab-btn.active {
-            background-color: #2980b9;
+            background-color: #1976D2;
             color: white;
+            border-color: #0D47A1;
+            box-shadow: 0 4px 0 #0D47A1;
         }
+        .tab-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Grid Layout */
         .grid-container {
             display: none;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 12px;
             max-width: 600px;
             margin: auto;
         }
         .grid-container.active {
             display: grid;
         }
+
+        /* 3D Letter Card */
         .letter-card {
-            background-color: #ffffff;
-            color: #2c3e50;
-            border: 3px solid #2980b9;
-            border-radius: 15px;
-            padding: 20px 0;
-            font-size: 42px;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+            color: #1565C0;
+            border: 3px solid #64B5F6;
+            border-radius: 18px;
+            padding: 12px 0;
+            font-size: 44px;
+            font-weight: 700;
+            box-shadow: 0 6px 0 #1E88E5, 0 8px 10px rgba(0,0,0,0.1);
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
+            transition: all 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
+        /* Click Bounce Effect */
         .letter-card:active {
-            background-color: #ebf5fb;
-            transform: scale(0.95);
-            border-color: #1f618d;
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #1E88E5, 0 3px 6px rgba(0,0,0,0.1);
+            background-color: #E3F2FD;
         }
     </style>
     <script>
         function speakEnglish(text) {
             window.speechSynthesis.cancel();
             let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'en-US'; // अंग्रेजी उच्चारणका लागि
+            speech.lang = 'en-US';
             speech.rate = 0.9;
             speech.pitch = 1.1;
             window.speechSynthesis.speak(speech);
@@ -112,7 +156,7 @@
         const upperGrid = document.getElementById('upperGrid');
         const lowerGrid = document.getElementById('lowerGrid');
 
-        // क्यापिटल अक्षरहरू लोड गर्ने
+        // Capital Alphabet Load
         upperAlphabet.forEach(letter => {
             const div = document.createElement('div');
             div.className = 'letter-card';
@@ -121,7 +165,7 @@
             upperGrid.appendChild(div);
         });
 
-        // स्मल अक्षरहरू लोड गर्ने
+        // Small Alphabet Load
         lowerAlphabet.forEach(letter => {
             const div = document.createElement('div');
             div.className = 'letter-card';
