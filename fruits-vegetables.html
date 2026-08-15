@@ -4,78 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>फलफूल र तरकारीहरू - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <meta name="theme-color" content="#FF9800">
+    <!-- Child-friendly Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
+            font-family: 'Mukta', 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #FFF3E0 0%, #FFE0B2 100%);
             margin: 0;
             padding: 15px;
             text-align: center;
+            min-height: 100vh;
         }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
             margin: 0 auto 15px auto;
+            background: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        h2 { 
+            color: #E65100; 
+            margin: 0; 
+            font-size: 20px; 
+            font-weight: 800;
+        }
         .home-btn {
-            background-color: #e67e22;
+            background-color: #FF9800;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .section-title {
-            color: #27ae60;
-            background-color: #e8f8f5;
-            padding: 10px;
+            padding: 6px 14px;
             border-radius: 10px;
-            font-size: 20px;
-            margin: 25px auto 15px auto;
-            max-width: 600px;
-            border: 2px solid #27ae60;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 3px 0 #E65100;
+            transition: all 0.1s ease;
         }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Section Titles */
+        .section-title {
+            color: #D84315;
+            background: #FFFFFF;
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-size: 19px;
+            font-weight: 800;
+            margin: 20px auto 15px auto;
+            max-width: 600px;
+            border: 3px solid #FFB74D;
+            box-shadow: 0 4px 0 #F57C00;
+        }
+
+        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
             max-width: 600px;
             margin: auto;
         }
+
+        /* 3D Soft Card Style */
         .card {
-            background-color: #ffffff;
-            color: #2c3e50;
-            border: 3px solid #2980b9;
-            border-radius: 15px;
-            padding: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+            color: #E65100;
+            border: 3px solid #FFB74D;
+            border-radius: 18px;
+            padding: 15px 10px;
+            box-shadow: 0 6px 0 #F57C00, 0 8px 10px rgba(0,0,0,0.08);
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
+            transition: all 0.1s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
         .card:active {
-            background-color: #ebf5fb;
-            transform: scale(0.95);
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #F57C00, 0 3px 6px rgba(0,0,0,0.1);
+            background-color: #FFF3E0;
         }
-        .card img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 8px;
+
+        /* Large Emoji Style */
+        .emoji-box {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
-        .text-content {
-            font-size: 18px;
-            font-weight: bold;
-            color: #d35400;
+
+        .np-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #BF360C;
+            line-height: 1.2;
+        }
+
+        .en-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #E65100;
+            font-family: 'Fredoka', sans-serif;
         }
     </style>
     <script>
@@ -101,40 +145,44 @@
     <div class="grid-container" id="fruitsGrid"></div>
 
     <!-- तरकारी सेक्सन -->
-    <div class="section-title">🥔 तरकारीहरू (Vegetables)</div>
+    <div class="section-title">🥦 तरकारीहरू (Vegetables)</div>
     <div class="grid-container" id="vegetablesGrid"></div>
 
     <script>
-        // फलफूलहरूको शुद्ध सूची
+        // फलफूलहरूको सूची (नेपाली, अङ्ग्रेजी र Emoji)
         const fruitsData = [
-            { name: 'स्याउ', img: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg' },
-            { name: 'केरा', img: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg' },
-            { name: 'आँप', img: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg' },
-            { name: 'सुन्तला', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg' },
-            { name: 'अंगुर', img: 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Grapes_white_background.jpg' },
-            { name: 'अनार', img: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Pomegranate_juicy_imal.jpg' },
-            { name: 'मेवा', img: 'https://upload.wikimedia.org/wikipedia/commons/3/36/Papaya_cross_section_BNC.jpg' },
-            { name: 'भुइँकटहर', img: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Pineapple_and_cross_section.jpg' },
-            { name: 'अम्बा', img: 'https://upload.wikimedia.org/wikipedia/commons/f/a4/Guava_ID.jpg' },
-            { name: 'लिची', img: 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Litchi_chinensis_Luc_Viatour.jpg' },
-            { name: 'तरबुजा', img: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Watermelon_cross_section_BNC.jpg' },
-            { name: 'नासपाती', img: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Pears.jpg' }
+            { np: 'स्याउ', en: 'Apple', emoji: '🍎' },
+            { np: 'केरा', en: 'Banana', emoji: '🍌' },
+            { np: 'आँप', en: 'Mango', emoji: '🥭' },
+            { np: 'सुन्तला', en: 'Orange', emoji: '🍊' },
+            { np: 'अङ्गुर', en: 'Grapes', emoji: '🍇' },
+            { np: 'भुइँकटहर', en: 'Pineapple', emoji: '🍍' },
+            { np: 'तरबुजा', en: 'Watermelon', emoji: '🍉' },
+            { np: 'मेवा', en: 'Papaya', emoji: '🍈' },
+            { np: 'अम्बा', en: 'Guava', emoji: '🍏' },
+            { np: 'अनार', en: 'Pomegranate', emoji: '🫒' },
+            { np: 'नाशपाती', en: 'Pear', emoji: '🍐' },
+            { np: 'आरु', en: 'Peach', emoji: '🍑' },
+            { np: 'स्ट्रबेरी', en: 'Strawberry', emoji: '🍓' },
+            { np: 'लिची', en: 'Litchi', emoji: '🍒' }
         ];
 
-        // तरकारीहरूको शुद्ध सूची
+        // तरकारीहरूको सूची (नेपाली, अङ्ग्रेजी र Emoji)
         const vegetablesData = [
-            { name: 'आलु', img: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Patates.jpg' },
-            { name: 'टमाटर', img: 'https://upload.wikimedia.org/wikipedia/commons/8/88/Tomato_je.jpg' },
-            { name: 'प्याज', img: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Onion_on_white.jpg' },
-            { name: 'लसुन', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Garlic_%28white_background%29.jpg' },
-            { name: 'काउली', img: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Cauliflower_of_Guangzhou.jpg' },
-            { name: 'बन्दाकोबी', img: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Cabbage_white_background.jpg' },
-            { name: 'गाजर', img: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Carrots_of_Guangzhou.jpg' },
-            { name: 'मुला', img: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Daicon_radish.jpg' },
-            { name: 'भन्टा', img: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Solanum_melongena_KvArt.jpg' },
-            { name: 'भिन्डी', img: 'https://upload.wikimedia.org/wikipedia/commons/b/bf/Okra_%28Bhindi%29.jpg' },
-            { name: 'सिमी', img: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Green_beans_%28Phaseolus_vulgaris%29.jpg' },
-            { name: 'पालुङ्गो', img: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Spinach_leaves.jpg' }
+            { np: 'आलु', en: 'Potato', emoji: '🥔' },
+            { np: 'गोलभेडा / टमाटर', en: 'Tomato', emoji: '🍅' },
+            { np: 'प्याज', en: 'Onion', emoji: '🧅' },
+            { np: 'लसुन', en: 'Garlic', emoji: '🧄' },
+            { np: 'गाजर', en: 'Carrot', emoji: '🥕' },
+            { np: 'काँक्रो', en: 'Cucumber', emoji: '🥒' },
+            { np: 'काउली', en: 'Cauliflower', emoji: '🥦' },
+            { np: 'बन्दाकोबी', en: 'Cabbage', emoji: '🥬' },
+            { np: 'भन्टा', en: 'Brinjal', emoji: '🍆' },
+            { np: 'मकै', en: 'Corn', emoji: '🌽' },
+            { np: 'खुर्सानी', en: 'Chilli', emoji: '🌶️' },
+            { np: 'सिमलाबन्द', en: 'Capsicum', emoji: '🫑' },
+            { np: 'पालुङ्गो', en: 'Spinach', emoji: '🥗' },
+            { np: 'मुला', en: 'Radish', emoji: '🫚' }
         ];
 
         // फलफूल लोड गर्ने
@@ -143,10 +191,11 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <img src="${item.img}" alt="${item.name}" loading="lazy">
-                <div class="text-content">${item.name}</div>
+                <div class="emoji-box">${item.emoji}</div>
+                <div class="np-name">${item.np}</div>
+                <div class="en-name">${item.en}</div>
             `;
-            card.addEventListener('click', () => speakNepali(item.name));
+            card.addEventListener('click', () => speakNepali(item.np));
             fruitsGrid.appendChild(card);
         });
 
@@ -156,10 +205,11 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <img src="${item.img}" alt="${item.name}" loading="lazy">
-                <div class="text-content">${item.name}</div>
+                <div class="emoji-box">${item.emoji}</div>
+                <div class="np-name">${item.np}</div>
+                <div class="en-name">${item.en}</div>
             `;
-            card.addEventListener('click', () => speakNepali(item.name));
+            card.addEventListener('click', () => speakNepali(item.np));
             vegetablesGrid.appendChild(card);
         });
     </script>
