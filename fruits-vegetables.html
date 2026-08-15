@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>फलफूल र तरकारीहरू - पाठशाला</title>
+    <meta name="theme-color" content="#ff9933">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+        }
+        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        .home-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .section-title {
+            color: #27ae60;
+            background-color: #e8f8f5;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 20px;
+            margin: 25px auto 15px auto;
+            max-width: 600px;
+            border: 2px solid #27ae60;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .card {
+            background-color: #ffffff;
+            color: #2c3e50;
+            border: 3px solid #2980b9;
+            border-radius: 15px;
+            padding: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.1s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .card:active {
+            background-color: #ebf5fb;
+            transform: scale(0.95);
+        }
+        .card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+        .text-content {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d35400;
+        }
+    </style>
+    <script>
+        function speakNepali(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'ne-NP';
+            speech.rate = 0.85;
+            speech.pitch = 1.1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 होम</a>
+        <h2>फलफूल र तरकारीहरू</h2>
+    </div>
+
+    <!-- फलफूल सेक्सन -->
+    <div class="section-title">🍎 फलफूलहरू (Fruits)</div>
+    <div class="grid-container" id="fruitsGrid"></div>
+
+    <!-- तरकारी सेक्सन -->
+    <div class="section-title">🥔 तरकारीहरू (Vegetables)</div>
+    <div class="grid-container" id="vegetablesGrid"></div>
+
+    <script>
+        // फलफूलहरूको शुद्ध सूची
+        const fruitsData = [
+            { name: 'स्याउ', img: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg' },
+            { name: 'केरा', img: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg' },
+            { name: 'आँप', img: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg' },
+            { name: 'सुन्तला', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg' },
+            { name: 'अंगुर', img: 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Grapes_white_background.jpg' },
+            { name: 'अनार', img: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Pomegranate_juicy_imal.jpg' },
+            { name: 'मेवा', img: 'https://upload.wikimedia.org/wikipedia/commons/3/36/Papaya_cross_section_BNC.jpg' },
+            { name: 'भुइँकटहर', img: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Pineapple_and_cross_section.jpg' },
+            { name: 'अम्बा', img: 'https://upload.wikimedia.org/wikipedia/commons/f/a4/Guava_ID.jpg' },
+            { name: 'लिची', img: 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Litchi_chinensis_Luc_Viatour.jpg' },
+            { name: 'तरबुजा', img: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Watermelon_cross_section_BNC.jpg' },
+            { name: 'नासपाती', img: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Pears.jpg' }
+        ];
+
+        // तरकारीहरूको शुद्ध सूची
+        const vegetablesData = [
+            { name: 'आलु', img: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Patates.jpg' },
+            { name: 'टमाटर', img: 'https://upload.wikimedia.org/wikipedia/commons/8/88/Tomato_je.jpg' },
+            { name: 'प्याज', img: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Onion_on_white.jpg' },
+            { name: 'लसुन', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c7/Garlic_%28white_background%29.jpg' },
+            { name: 'काउली', img: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Cauliflower_of_Guangzhou.jpg' },
+            { name: 'बन्दाकोबी', img: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Cabbage_white_background.jpg' },
+            { name: 'गाजर', img: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Carrots_of_Guangzhou.jpg' },
+            { name: 'मुला', img: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Daicon_radish.jpg' },
+            { name: 'भन्टा', img: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Solanum_melongena_KvArt.jpg' },
+            { name: 'भिन्डी', img: 'https://upload.wikimedia.org/wikipedia/commons/b/bf/Okra_%28Bhindi%29.jpg' },
+            { name: 'सिमी', img: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Green_beans_%28Phaseolus_vulgaris%29.jpg' },
+            { name: 'पालुङ्गो', img: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Spinach_leaves.jpg' }
+        ];
+
+        // फलफूल लोड गर्ने
+        const fruitsGrid = document.getElementById('fruitsGrid');
+        fruitsData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.name}" loading="lazy">
+                <div class="text-content">${item.name}</div>
+            `;
+            card.addEventListener('click', () => speakNepali(item.name));
+            fruitsGrid.appendChild(card);
+        });
+
+        // तरकारी लोड गर्ने
+        const vegetablesGrid = document.getElementById('vegetablesGrid');
+        vegetablesData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.name}" loading="lazy">
+                <div class="text-content">${item.name}</div>
+            `;
+            card.addEventListener('click', () => speakNepali(item.name));
+            vegetablesGrid.appendChild(card);
+        });
+    </script>
+
+</body>
+</html>
