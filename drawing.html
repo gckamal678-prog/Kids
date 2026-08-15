@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>चित्र कोर्ने र रङ भर्ने बोर्ड - बाल पाठशाला</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Mukta', sans-serif;
+        }
+        body {
+            text-align: center;
+            background: linear-gradient(180deg, #E0F7FA 0%, #FFFDE7 100%);
+            padding: 15px;
+        }
+        h2 {
+            color: #FF5722;
+            margin-bottom: 10px;
+        }
+        .canvas-card {
+            background: white;
+            border-radius: 16px;
+            padding: 10px;
+            display: inline-block;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border: 3px solid #78E08F;
+            max-width: 100%;
+        }
+        canvas {
+            background: #FFFFFF;
+            border: 2px dashed #4CAF50;
+            border-radius: 10px;
+            cursor: crosshair;
+            touch-action: none;
+            display: block;
+        }
+
+        /* Toolbar Controls */
+        .toolbar {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        /* Color Palette */
+        .color-palette {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .color-dot {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        /* Tools & Buttons */
+        .tools-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn {
+            padding: 8px 16px;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 0px rgba(0,0,0,0.1);
+        }
+        .save-btn { background: #4CAF50; color: white; }
+        .eraser-btn { background: #FF9800; color: white; }
+        .clear-btn { background: #F44336; color: white; }
+        
+        .brush-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #1E88E5;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🎨 चित्र कोर्ने र रङ भर्ने बोर्ड 🎨</h2>
+    
+    <div class="canvas-card">
+        <canvas id="paintCanvas" width="340" height="380"></canvas>
+    </div>
+
+    <div class="toolbar">
+        <!-- Ready-made Color Palette -->
+        <div class="color-palette">
+            <div class="color-dot" style="background: #F44336;" onclick="setColor('#F44336')"></div>
+            <div class="color-dot" style="background: #2196F3;" onclick="setColor('#2196F3')"></div>
+            <div class="color-dot" style="background: #4CAF50;" onclick="setColor('#4CAF50')"></div>
+            <div class="color-dot" style="background: #FFEB3B;" onclick="setColor('#FFEB3B')"></div>
+            <div class="color-dot" style="background: #9C27B0;" onclick="setColor('#9C27B0')"></div>
+            <div class="color-dot" style="background: #000000;" onclick="setColor('#000000')"></div>
+            <input type="color" id="customColor" style="width:35px; height:35px; border:none; cursor:pointer;" onchange="setColor(this.value)">
+        </div>
+
+        <!-- Brush Size & Tools -->
+        <div class="tools-group">
+            <div class="brush-control">
+                <label for="brushSize">साइज:</label>
+                <input type="range" id="brushSize" min="2" max="30" value="6">
+            </div>
+            
+            <button class="btn eraser-btn" onclick="useEraser()">🧽 रबर (Eraser)</button>
+            <button class="btn clear-btn" onclick="clearCanvas()">🗑️ मेट्नुहोस्</button>
+            <button class="btn save-btn" onclick="saveImage()">📥 फोटो सेभ गर्नुस्</button>
+        </div>
+    </div>
+
+    <a href="./index.html" class="back-link">⬅️ गृहपृष्ठमा फर्कनुहोस्</a>
+
+<script>
+    const canvas = document.getElementById('paintCanvas');
+    const ctx = canvas.getContext('2d');
+    let painting = false;
+    let currentColor = '#F44336';
+    let isEraser = false;
+
+    function startPosition(e) {
+        painting = true;
+        draw(e);
+    }
+
+    function endPosition() {
+        painting = false;
+        ctx.beginPath();
+    }
+
+    function draw(e) {
+        if (!painting) return;
+
+        const brushSize = document.getElementById('brushSize').value;
+        ctx.lineWidth = brushSize;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        if (isEraser) {
+            ctx.strokeStyle = '#FFFFFF'; // रबरले सेतो रङ बनाउँछ
+        } else {
+            ctx.strokeStyle = currentColor;
+        }
+
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+        const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+
+    function setColor(color) {
+        isEraser = false;
+        currentColor = color;
+    }
+
+    function useEraser() {
+        isEraser = true;
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // मोबाइलमा सिधै Download/Save गर्ने फङ्क्सन
+    function saveImage() {
+        // सेतो पृष्ठभूमि पक्का गर्न
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        
+        tempCtx.fillStyle = '#FFFFFF';
+        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+        tempCtx.drawImage(canvas, 0, 0);
+
+        const link = document.createElement('a');
+        link.download = 'bal-pathshala-drawing.png';
+        link.href = tempCanvas.toDataURL('image/png');
+        link.click();
+    }
+
+    // Mouse Events
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', endPosition);
+    canvas.addEventListener('mousemove', draw);
+
+    // Touch Events for Mobile
+    canvas.addEventListener('touchstart', startPosition);
+    canvas.addEventListener('touchend', endPosition);
+    canvas.addEventListener('touchmove', draw);
+</script>
+
+</body>
+</html>
