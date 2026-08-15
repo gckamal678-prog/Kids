@@ -159,28 +159,41 @@
             color: #4A148C; 
         }
 
-        /* --- Desktop / Laptop Mode Layout Adjustments --- */
-        @media (min-width: 768px) {
-            .main-container {
-                max-width: 1000px;
-            }
-            .grid-2x3 {
-                grid-template-columns: repeat(6, 1fr); /* ल्यापटपमा ६ वटै बटन १ रो मा देखिने */
-            }
-            .grid-1x3 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .menu-card {
-                min-height: 100px;
-                font-size: 16px;
-            }
-            .national-box h1 {
-                font-size: 26px;
-            }
-            .nepal-3d-card img {
-                max-height: 350px;
-            }
-        }
+        
+/* Desktop / Laptop मा Full Screen बनाउने CSS */
+@media screen and (min-width: 600px) {
+    body {
+        padding: 20px 40px !important; /* छेउमा अलिकति हल्का मार्जिन */
+    }
+    .main-container {
+        max-width: 100% !important; /* पूरा स्क्रिन भर्ने */
+        width: 100% !important;
+    }
+    .national-box {
+        width: 100% !important;
+        padding: 30px !important;
+    }
+    .nepal-3d-card {
+        width: 100% !important;
+    }
+    .nepal-3d-card img {
+        max-height: 500px !important; /* फोटो ठूलो र स्पष्ट देखिने */
+        width: 100% !important;
+        object-fit: contain;
+    }
+    .grid-2x3 {
+        grid-template-columns: repeat(6, 1fr) !important; /* ६ वटै बटन १ै लाइनमा फैलिने */
+        gap: 15px !important;
+    }
+    .grid-1x3 {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 15px !important;
+    }
+    .menu-card {
+        min-height: 120px !important;
+        font-size: 18px !important;
+    }
+}
 
     </style>
 </head>
