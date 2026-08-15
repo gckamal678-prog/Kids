@@ -31,9 +31,10 @@
         .main-container {
             max-width: 650px;
             margin: 0 auto;
+            transition: max-width 0.3s ease;
         }
 
-        /* --- १. हाम्रो प्यारो नेपाल (Top Box Single Image with 3D Effect) --- */
+        /* --- १. हाम्रो प्यारो नेपाल --- */
         .national-box {
             background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
             border-radius: 20px;
@@ -125,12 +126,13 @@
             margin-bottom: 4px;
         }
 
-        /* Grid Layouts */
+        /* Mobile Layout */
         .grid-2x3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
         }
+
         .grid-1x3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -157,6 +159,29 @@
             color: #4A148C; 
         }
 
+        /* --- Desktop / Laptop Mode Layout Adjustments --- */
+        @media (min-width: 768px) {
+            .main-container {
+                max-width: 1000px;
+            }
+            .grid-2x3 {
+                grid-template-columns: repeat(6, 1fr); /* ल्यापटपमा ६ वटै बटन १ रो मा देखिने */
+            }
+            .grid-1x3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .menu-card {
+                min-height: 100px;
+                font-size: 16px;
+            }
+            .national-box h1 {
+                font-size: 26px;
+            }
+            .nepal-3d-card img {
+                max-height: 350px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -167,7 +192,7 @@
     <div class="national-box">
         <h1>🇳🇵 हाम्रो प्यारो नेपाल 🇳🇵</h1>
         <div class="nepal-3d-card">
-            <img src="nepal.png" alt="हाम्रो प्यारो नेपाल">
+            <img src="./nepal.png" alt="हाम्रो प्यारो नेपाल">
         </div>
     </div>
 
@@ -175,67 +200,67 @@
 
     <div class="category-container">
         
-        <!-- २. भाषा र अक्षर (२ रो x ३ कोलम) -->
+        <!-- २. भाषा र अक्षर -->
         <div class="category-block">
             <div class="category-header" style="color: #2E7D32;">📚 भाषा र अक्षर (Alphabets)</div>
             <div class="grid-2x3">
-                <a href="alphabet.html" class="menu-card bg-lang">
+                <a href="./alphabet.html" class="menu-card bg-lang">
                     <span class="icon">🔤</span>Alphabet
                 </a>
-                <a href="image.html" class="menu-card bg-lang">
+                <a href="./image.html" class="menu-card bg-lang">
                     <span class="icon">🖼️</span>English Image
                 </a>
-                <a href="vowels.html" class="menu-card bg-lang">
+                <a href="./vowels.html" class="menu-card bg-lang">
                     <span class="icon">अ</span>स्वर वर्ण
                 </a>
-                <a href="imegevowels.html" class="menu-card bg-lang">
+                <a href="./imegevowels.html" class="menu-card bg-lang">
                     <span class="icon">🎨</span>स्वर (Image)
                 </a>
-                <a href="consonants.html" class="menu-card bg-lang">
+                <a href="./consonants.html" class="menu-card bg-lang">
                     <span class="icon">क</span>व्यञ्जन वर्ण
                 </a>
-                <a href="imageconsonants.html" class="menu-card bg-lang">
+                <a href="./imageconsonants.html" class="menu-card bg-lang">
                     <span class="icon">🧩</span>व्यञ्जन (Img)
                 </a>
             </div>
         </div>
 
-        <!-- ३. शब्द ज्ञान (२ रो x ३ कोलम) -->
+        <!-- ३. शब्द ज्ञान -->
         <div class="category-block">
             <div class="category-header" style="color: #E65100;">🍎 शब्द ज्ञान (Vocabulary)</div>
             <div class="grid-2x3">
-                <a href="barahakhari.html" class="menu-card bg-vocab">
+                <a href="./barahakhari.html" class="menu-card bg-vocab">
                     <span class="icon">📝</span>बाह्रखरी
                 </a>
-                <a href="colors.html" class="menu-card bg-vocab">
+                <a href="./colors.html" class="menu-card bg-vocab">
                     <span class="icon">🎨</span>रङहरूको नाम
                 </a>
-                <a href="fruits-vegetables.html" class="menu-card bg-vocab">
+                <a href="./fruits-vegetables.html" class="menu-card bg-vocab">
                     <span class="icon">🍎</span>फलफूल/तरकारी
                 </a>
-                <a href="animals-birds.html" class="menu-card bg-vocab">
+                <a href="./animals-birds.html" class="menu-card bg-vocab">
                     <span class="icon">🐅</span>जनावर/पन्छी
                 </a>
-                <a href="body-parts.html" class="menu-card bg-vocab">
+                <a href="./body-parts.html" class="menu-card bg-vocab">
                     <span class="icon">👀</span>शरीरका अंग
                 </a>
-                <a href="vehicles.html" class="menu-card bg-vocab">
+                <a href="./vehicles.html" class="menu-card bg-vocab">
                     <span class="icon">🚗</span>सवारी साधन
                 </a>
             </div>
         </div>
 
-        <!-- ४. गणित र समय (१ रो x ३ कोलम) -->
+        <!-- ४. गणित र समय -->
         <div class="category-block">
             <div class="category-header" style="color: #6A1B9A;">🔢 गणित र समय (Maths & GK)</div>
             <div class="grid-1x3">
-                <a href="days-months.html" class="menu-card bg-math">
+                <a href="./days-months.html" class="menu-card bg-math">
                     <span class="icon">📅</span>वार र महिना
                 </a>
-                <a href="numbers.html" class="menu-card bg-math">
+                <a href="./numbers.html" class="menu-card bg-math">
                     <span class="icon">🔢</span>Numbers / अंक
                 </a>
-                <a href="pahada.html" class="menu-card bg-math">
+                <a href="./pahada.html" class="menu-card bg-math">
                     <span class="icon">✖️</span>गणित पहाडा
                 </a>
             </div>
@@ -245,13 +270,13 @@
 
 </div>
 
-<!-- Service Worker Registration Script -->
+<!-- Service Worker Registration -->
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('Service Worker Registered!'))
-        .catch(err => console.log('SW Registration Error:', err));
+        .then(reg => console.log('SW active'))
+        .catch(err => console.log('SW error:', err));
     });
   }
 </script>
