@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>वार र महिनाहरू - पाठशाला</title>
+    <meta name="theme-color" content="#ff9933">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+        }
+        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        .home-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .section-title {
+            color: #2980b9;
+            background-color: #ebf5fb;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            margin: 25px auto 15px auto;
+            max-width: 600px;
+            border: 2px solid #2980b9;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .card {
+            background-color: #ffffff;
+            color: #2c3e50;
+            border: 3px solid #e67e22;
+            border-radius: 15px;
+            padding: 15px 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.1s;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card:active {
+            background-color: #fef5e7;
+            transform: scale(0.95);
+        }
+    </style>
+    <script>
+        function speakText(text, lang = 'ne-NP') {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = lang;
+            speech.rate = 0.85;
+            speech.pitch = 1.1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 होम</a>
+        <h2>वार र महिनाहरू</h2>
+    </div>
+
+    <!-- नेपाली बार सेक्सन -->
+    <div class="section-title">🇳🇵 नेपाली बारहरू</div>
+    <div class="grid-container" id="nepaliDaysGrid"></div>
+
+    <!-- अंग्रेजी बार सेक्सन -->
+    <div class="section-title">🇬🇧 English Days of the Week</div>
+    <div class="grid-container" id="englishDaysGrid"></div>
+
+    <!-- नेपाली महिना सेक्सन -->
+    <div class="section-title">🇳🇵 नेपाली महिनाहरू (बैशाख - चैत)</div>
+    <div class="grid-container" id="nepaliMonthsGrid"></div>
+
+    <!-- अंग्रेजी महिना सेक्सन -->
+    <div class="section-title">🇬🇧 English Months</div>
+    <div class="grid-container" id="englishMonthsGrid"></div>
+
+    <script>
+        // डेटा सूचीहरू
+        const nepaliDays = ['आईतबार', 'सोमबार', 'मंगलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
+        const englishDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const nepaliMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पुष', 'माघ', 'फागुन', 'चैत'];
+        const englishMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        // जेनेरेट गर्ने फंक्सन
+        function createCards(data, containerId, lang) {
+            const container = document.getElementById(containerId);
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerText = item;
+                card.addEventListener('click', () => speakText(item, lang));
+                container.appendChild(card);
+            });
+        }
+
+        // सबै लोड गर्ने
+        createCards(nepaliDays, 'nepaliDaysGrid', 'ne-NP');
+        createCards(englishDays, 'englishDaysGrid', 'en-US');
+        createCards(nepaliMonths, 'nepaliMonthsGrid', 'ne-NP');
+        createCards(englishMonths, 'englishMonthsGrid', 'en-US');
+    </script>
+
+</body>
+</html>
