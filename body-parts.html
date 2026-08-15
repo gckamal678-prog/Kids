@@ -3,79 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>शरीरका अंगहरू - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <title>शरीरका अङ्गहरू - पाठशाला</title>
+    <meta name="theme-color" content="#9C27B0">
+    <!-- Child-friendly Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
+            font-family: 'Mukta', 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #F3E5F5 0%, #E1BEE7 100%);
             margin: 0;
             padding: 15px;
             text-align: center;
+            min-height: 100vh;
         }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
             margin: 0 auto 15px auto;
+            background: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        h2 { 
+            color: #7B1FA2; 
+            margin: 0; 
+            font-size: 20px; 
+            font-weight: 800;
+        }
         .home-btn {
-            background-color: #e67e22;
+            background-color: #AB47BC;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .section-title {
-            color: #8e44ad;
-            background-color: #f4ecf7;
-            padding: 10px;
+            padding: 6px 14px;
             border-radius: 10px;
-            font-size: 18px;
-            margin: 25px auto 15px auto;
-            max-width: 600px;
-            border: 2px solid #8e44ad;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 3px 0 #6A1B9A;
+            transition: all 0.1s ease;
         }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Section Titles */
+        .section-title {
+            color: #6A1B9A;
+            background: #FFFFFF;
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-size: 19px;
+            font-weight: 800;
+            margin: 20px auto 15px auto;
+            max-width: 600px;
+            border: 3px solid #CE93D8;
+            box-shadow: 0 4px 0 #8E24AA;
+        }
+
+        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
             max-width: 600px;
             margin: auto;
         }
+
+        /* 3D Soft Card Style */
         .card {
-            background-color: #ffffff;
-            color: #2c3e50;
-            border: 3px solid #8e44ad;
-            border-radius: 15px;
-            padding: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+            color: #7B1FA2;
+            border: 3px solid #CE93D8;
+            border-radius: 18px;
+            padding: 15px 10px;
+            box-shadow: 0 6px 0 #8E24AA, 0 8px 10px rgba(0,0,0,0.08);
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
+            transition: all 0.1s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
         .card:active {
-            background-color: #f5eef8;
-            transform: scale(0.95);
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #8E24AA, 0 3px 6px rgba(0,0,0,0.1);
+            background-color: #F3E5F5;
         }
-        .card img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 8px;
+
+        /* Large Emoji Style */
+        .emoji-box {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
-        .text-content {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2c3e50;
+
+        .np-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #4A148C;
+            line-height: 1.2;
+        }
+
+        .en-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #7B1FA2;
+            font-family: 'Fredoka', sans-serif;
         }
     </style>
     <script>
@@ -93,24 +137,31 @@
 
     <div class="header">
         <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>शरीरका अंगहरू (Body Parts)</h2>
+        <h2>शरीरका अङ्गहरू (Body Parts)</h2>
     </div>
 
-    <div class="section-title">👀 शरीरका मुख्य अंगहरू</div>
+    <div class="section-title">👤 शरीरका मुख्य अङ्गहरू</div>
     <div class="grid-container" id="partsGrid"></div>
 
     <script>
+        // शरीरका अङ्गहरूको सूची (नेपाली, अङ्ग्रेजी र Emoji)
         const bodyPartsData = [
-            { name: 'टाउको', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
-            { name: 'आँखा', img: 'https://upload.wikimedia.org/wikipedia/commons/3/37/Human_eye_with_contact_lens.jpg' },
-            { name: 'कान', img: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Human_ear_anatomy.svg' },
-            { name: 'नाक', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
-            { name: 'मुख', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
-            { name: 'दाँत', img: 'https://upload.wikimedia.org/wikipedia/commons/9/9c/Human_teeth_diagram.svg' },
-            { name: 'जिब्रो', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
-            { name: 'हात', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
-            { name: 'औंला', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
-            { name: 'खुट्टा', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' }
+            { np: 'टाउको', en: 'Head', emoji: '🗣️' },
+            { np: 'कपाल', en: 'Hair', emoji: '💇' },
+            { np: 'आँखा', en: 'Eye', emoji: '👁️' },
+            { np: 'कान', en: 'Ear', emoji: '👂' },
+            { np: 'नाक', en: 'Nose', emoji: '👃' },
+            { np: 'मुख', en: 'Mouth', emoji: '👄' },
+            { np: 'दाँत', en: 'Teeth', emoji: '🦷' },
+            { np: 'जिब्रो', en: 'Tongue', emoji: '👅' },
+            { np: 'हात', en: 'Hand', emoji: '✋' },
+            { np: 'औंला', en: 'Fingers', emoji: '🤌' },
+            { np: 'गोडा / खुट्टा', en: 'Leg', emoji: '🦵' },
+            { np: 'पाइला', en: 'Foot', emoji: '🦶' },
+            { np: 'छाती', en: 'Chest', emoji: '🫁' },
+            { np: 'मुटु', en: 'Heart', emoji: '❤️' },
+            { np: 'मस्तिष्क', en: 'Brain', emoji: '🧠' },
+            { np: 'हाड / हड्डी', en: 'Bone', emoji: '🦴' }
         ];
 
         const partsGrid = document.getElementById('partsGrid');
@@ -118,10 +169,11 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <img src="${item.img}" alt="${item.name}" loading="lazy">
-                <div class="text-content">${item.name}</div>
+                <div class="emoji-box">${item.emoji}</div>
+                <div class="np-name">${item.np}</div>
+                <div class="en-name">${item.en}</div>
             `;
-            card.addEventListener('click', () => speakNepali(item.name));
+            card.addEventListener('click', () => speakNepali(item.np));
             partsGrid.appendChild(card);
         });
     </script>
