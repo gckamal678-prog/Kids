@@ -4,68 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>वार र महिनाहरू - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <meta name="theme-color" content="#673AB7">
+    <!-- Child-friendly Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
-            margin: 0;
-            padding: 15px;
-            text-align: center;
+        * {
+            box-sizing: border-box;
         }
+        body {
+            font-family: 'Mukta', 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #EDE7F6 0%, #D1C4E9 100%);
+            margin: 0;
+            padding: 12px;
+            text-align: center;
+            min-height: 100vh;
+        }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
+            margin: 0 auto 12px auto;
+            background: #FFFFFF;
+            padding: 8px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        h2 { 
+            color: #4A148C; 
+            margin: 0; 
+            font-size: 20px; 
+            font-weight: 800;
+        }
+        .home-btn {
+            background-color: #673AB7;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 3px 0 #4A148C;
+            transition: all 0.1s ease;
+        }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Navigation Tabs */
+        .tab-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            max-width: 600px;
             margin: 0 auto 15px auto;
         }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
-        .home-btn {
-            background-color: #e67e22;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
+        .tab-btn {
+            background-color: #FFFFFF;
+            color: #512DA8;
+            border: 2px solid #9FA8DA;
+            padding: 8px 12px;
             font-size: 14px;
+            font-weight: 700;
+            font-family: 'Mukta', sans-serif;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #3F51B5;
+            transition: all 0.1s ease;
+            flex: 1 1 40%;
+            max-width: 48%;
         }
-        .section-title {
-            color: #2980b9;
-            background-color: #ebf5fb;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 18px;
-            margin: 25px auto 15px auto;
-            max-width: 600px;
-            border: 2px solid #2980b9;
+        .tab-btn.active {
+            background-color: #673AB7;
+            color: white;
+            border-color: #512DA8;
+            box-shadow: 0 3px 0 #311B92;
         }
+        .tab-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #311B92;
+        }
+
+        /* Grid Layout */
         .grid-container {
-            display: grid;
+            display: none;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             max-width: 600px;
             margin: auto;
         }
+        .grid-container.active {
+            display: grid;
+        }
+
+        /* 3D Soft Card Style */
         .card {
-            background-color: #ffffff;
-            color: #2c3e50;
-            border: 3px solid #e67e22;
-            border-radius: 15px;
-            padding: 15px 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+            color: #4A148C;
+            border: 3px solid #B39DDB;
+            border-radius: 16px;
+            padding: 16px 10px;
+            box-shadow: 0 5px 0 #7E57C2, 0 6px 8px rgba(0,0,0,0.06);
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
-            font-size: 18px;
-            font-weight: bold;
+            transition: all 0.1s ease;
+            font-size: 20px;
+            font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 70px;
         }
         .card:active {
-            background-color: #fef5e7;
-            transform: scale(0.95);
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #7E57C2;
+            background-color: #EDE7F6;
         }
     </style>
     <script>
@@ -86,30 +144,26 @@
         <h2>वार र महिनाहरू</h2>
     </div>
 
-    <!-- नेपाली बार सेक्सन -->
-    <div class="section-title">🇳🇵 नेपाली बारहरू</div>
-    <div class="grid-container" id="nepaliDaysGrid"></div>
+    <!-- ट्याब बटनहरू -->
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="switchTab('nepaliDays', event)">नेपाली बारहरू</button>
+        <button class="tab-btn" onclick="switchTab('englishDays', event)">English Days</button>
+        <button class="tab-btn" onclick="switchTab('nepaliMonths', event)">नेपाली महिनाहरू</button>
+        <button class="tab-btn" onclick="switchTab('englishMonths', event)">English Months</button>
+    </div>
 
-    <!-- अंग्रेजी बार सेक्सन -->
-    <div class="section-title">🇬🇧 English Days of the Week</div>
+    <!-- ग्रिड सेक्सनहरू -->
+    <div class="grid-container active" id="nepaliDaysGrid"></div>
     <div class="grid-container" id="englishDaysGrid"></div>
-
-    <!-- नेपाली महिना सेक्सन -->
-    <div class="section-title">🇳🇵 नेपाली महिनाहरू (बैशाख - चैत)</div>
     <div class="grid-container" id="nepaliMonthsGrid"></div>
-
-    <!-- अंग्रेजी महिना सेक्सन -->
-    <div class="section-title">🇬🇧 English Months</div>
     <div class="grid-container" id="englishMonthsGrid"></div>
 
     <script>
-        // डेटा सूचीहरू
         const nepaliDays = ['आईतबार', 'सोमबार', 'मंगलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
         const englishDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const nepaliMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पुष', 'माघ', 'फागुन', 'चैत'];
         const englishMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-        // जेनेरेट गर्ने फंक्सन
         function createCards(data, containerId, lang) {
             const container = document.getElementById(containerId);
             data.forEach(item => {
@@ -121,11 +175,20 @@
             });
         }
 
-        // सबै लोड गर्ने
+        // कार्डहरू जेनेरेट गर्ने
         createCards(nepaliDays, 'nepaliDaysGrid', 'ne-NP');
         createCards(englishDays, 'englishDaysGrid', 'en-US');
         createCards(nepaliMonths, 'nepaliMonthsGrid', 'ne-NP');
         createCards(englishMonths, 'englishMonthsGrid', 'en-US');
+
+        // ट्याब फेर्ने फन्क्सन
+        function switchTab(tabId, event) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.grid-container').forEach(grid => grid.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabId + 'Grid').classList.add('active');
+        }
     </script>
 
 </body>
