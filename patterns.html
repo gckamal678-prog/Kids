@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>गणित पहाडा - पाठशाला</title>
-    <meta name="theme-color" content="#009688">
-    <!-- Child-friendly Typography -->
+    <title>गणित पाहाडा - पाठशाला</title>
+    <meta name="theme-color" content="#6C5CE7">
+    <!-- Google Fonts for Playful Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -13,123 +13,150 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Mukta', 'Fredoka', sans-serif;
-            background: linear-gradient(180deg, #E0F2F1 0%, #B2DFDB 100%);
+            font-family: 'Mukta', 'Fredoka', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #F3F0FF 0%, #E8E3FF 100%);
             margin: 0;
             padding: 12px;
             text-align: center;
             min-height: 100vh;
         }
 
-        /* Header Layout */
+        /* Modern Modern Header */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 700px;
-            margin: 0 auto 12px auto;
+            max-width: 750px;
+            margin: 0 auto 16px auto;
             background: #FFFFFF;
-            padding: 8px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 10px 18px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.12);
         }
         h2 { 
-            color: #00695C; 
+            color: #2D3436; 
             margin: 0; 
-            font-size: 20px; 
+            font-size: 22px; 
             font-weight: 800;
+            letter-spacing: 0.5px;
         }
         .home-btn {
-            background-color: #009688;
+            background: linear-gradient(135deg, #6C5CE7, #8E7CFF);
             color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
+            padding: 8px 16px;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            box-shadow: 0 3px 0 #00695C;
+            font-weight: 800;
+            font-size: 15px;
+            box-shadow: 0 4px 0 #4B38B3;
             transition: all 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
         .home-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #4B38B3;
         }
 
-        /* Tab Buttons */
+        /* Modern Tabs Container */
         .tab-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 12px;
+            margin-bottom: 18px;
         }
         .tab-btn {
             background-color: #FFFFFF;
-            color: #00695C;
-            border: 3px solid #4DB6AC;
-            padding: 8px 16px;
+            color: #636E72;
+            border: 2px solid #DFE6E9;
+            padding: 10px 20px;
             font-size: 15px;
-            font-weight: 700;
-            border-radius: 12px;
+            font-weight: 800;
+            border-radius: 14px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #00796B;
-            transition: all 0.1s ease;
-        }
-        .tab-btn.active {
-            background-color: #009688;
-            color: white;
-            border-color: #00796B;
-            box-shadow: 0 4px 0 #004D40;
+            box-shadow: 0 4px 0 #DFE6E9;
+            transition: all 0.15s ease;
+            font-family: inherit;
         }
         .tab-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #004D40;
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #DFE6E9;
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #00B894, #00CEC9);
+            color: white;
+            border-color: #00B894;
+            box-shadow: 0 4px 0 #00876C;
+        }
+        .tab-btn.active:active {
+            box-shadow: 0 1px 0 #00876C;
         }
 
-        /* Table Card Container */
+        /* Vibrant Table Section Wrapper */
         .table-section {
             display: none;
             overflow-x: auto;
-            max-width: 700px;
+            max-width: 750px;
             margin: auto;
             background: #FFFFFF;
-            border: 3px solid #4DB6AC;
             border-radius: 18px;
-            padding: 10px;
-            box-shadow: 0 6px 0 #00796B, 0 8px 10px rgba(0,0,0,0.08);
+            padding: 14px;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.15);
+            border: 3px solid #6C5CE7;
         }
         .table-section.active {
             display: block;
         }
 
+        /* Playful & Clean Table Styling */
         table {
             width: 100%;
-            border-collapse: collapse;
-            font-size: 16px;
+            border-collapse: separate;
+            border-spacing: 3px;
+            font-size: 15px;
+            font-family: 'Fredoka', 'Mukta', monospace;
             font-weight: 700;
-            min-width: 500px;
-        }
-        th, td {
-            border: 2px solid #B2DFDB;
-            padding: 8px 4px;
-            text-align: center;
-            color: #004D40;
-            border-radius: 6px;
         }
         th {
-            background-color: #E0F2F1;
-            color: #00695C;
-            font-size: 17px;
+            background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+            color: #FFFFFF;
+            padding: 10px 6px;
             font-weight: 800;
+            border-radius: 8px;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            font-size: 14px;
         }
         td {
+            background-color: #F8F9FA;
+            border: 1px solid #E9ECEF;
+            border-radius: 8px;
+            padding: 9px 4px;
+            text-align: center;
+            color: #2D3436;
             cursor: pointer;
-            background-color: #FFFFFF;
             transition: all 0.1s ease;
+            user-select: none;
+            font-size: 15px;
+        }
+        /* Touch / Active Effects */
+        td:hover {
+            background-color: #E0E7FF;
+            color: #4C51BF;
         }
         td:active {
-            background-color: #80CBC4;
-            color: #FFFFFF;
-            transform: scale(0.96);
+            background-color: #FF7675 !important;
+            color: #FFFFFF !important;
+            transform: scale(0.94);
+            border-color: #D63031;
+        }
+
+        /* Sticky First Column for better Mobile Scrolling */
+        td:first-child {
+            background-color: #FFF3BF;
+            color: #D9480F;
+            font-weight: 800;
         }
     </style>
     <script>
@@ -137,22 +164,21 @@
             window.speechSynthesis.cancel();
             let speech = new SpeechSynthesisUtterance(text);
             speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
+            speech.rate = 0.95;
+            speech.pitch = 1.2;
             window.speechSynthesis.speak(speech);
         }
     </script>
 </head>
 <body>
-
     <div class="header">
         <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>गणित पहाडा</h2>
+        <h2>गणित पाहाडा</h2>
     </div>
 
     <div class="tab-container">
-        <button class="tab-btn active" onclick="switchSection('part1', event)">१ - १० सम्मका पहाडा</button>
-        <button class="tab-btn" onclick="switchSection('part2', event)">११ - २० सम्मका पहाडा</button>
+        <button class="tab-btn active" onclick="switchSection('part1', event)">१ - १० सम्मका पाहाडा</button>
+        <button class="tab-btn" onclick="switchSection('part2', event)">११ - २० सम्मका पाहाडा</button>
     </div>
 
     <!-- भाग १: १ देखि १० सम्म -->
@@ -166,47 +192,41 @@
     </div>
 
     <script>
-        const nepaliDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-        function toNepaliNumber(n) {
-            return n.toString().split('').map(digit => nepaliDigits[digit]).join('');
-        }
-
         function generateTableData(startNum, tableElementId) {
             const table = document.getElementById(tableElementId);
             
-            // Header Row (नेपाली शीर्षक)
+            // Header row (कॉलम हेडर्स)
             let headerRow = '<tr>';
             for (let c = 0; c < 10; c++) {
                 let n = startNum + c;
-                headerRow += `<th>${toNepaliNumber(n)} को पहाडा</th>`;
+                headerRow += `<th>${n} को पाहाडा</th>`;
             }
             headerRow += '</tr>';
             table.innerHTML = headerRow;
 
-            // 10 Rows Data Generation
+            // Rows (१० वटा पङ्क्तिहरू)
             for (let r = 1; r <= 10; r++) {
                 let row = '<tr>';
                 for (let c = 0; c < 10; c++) {
                     let n = startNum + c;
-                    let result = n * r;
+                    let cellText = "";
                     
-                    let nepN = toNepaliNumber(n);
-                    let nepR = toNepaliNumber(r);
-                    let nepRes = toNepaliNumber(result);
+                    if (c === 0) {
+                        // पहिलो स्तम्भमा पूरा गुणन देखाइने (जस्तै 2*1=2 वा 11*1=11)
+                        cellText = `${n}*${r}=${n * r}`;
+                    } else {
+                        // बाँकी स्तम्भहरूमा गुणनफल मात्र (तपाईँको हस्तलिखित उदाहरण अनुसार)
+                        cellText = `${n * r}`;
+                    }
                     
-                    // Display text in Table
-                    let displayText = `${nepN} × ${nepR} = ${nepRes}`;
-                    // Audio speech text
-                    let speakText = `${nepN} गुणित ${nepR} बराबर ${nepRes}`;
-
-                    row += `<td onclick="speakNepali('${speakText}')">${displayText}</td>`;
+                    row += `<td onclick="speakNepali('${cellText}')">${cellText}</td>`;
                 }
                 row += '</tr>';
                 table.innerHTML += row;
             }
         }
 
-        // Generate Tables
+        // टेबलहरू लोड गर्ने
         generateTableData(1, 'table1');   // १ देखि १० सम्म
         generateTableData(11, 'table2');  // ११ देखि २० सम्म
 
@@ -217,6 +237,5 @@
             document.getElementById(partId).classList.add('active');
         }
     </script>
-
 </body>
 </html>
