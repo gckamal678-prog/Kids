@@ -59,6 +59,16 @@
             transform: scale(0.95);
         }
     </style>
+    <script>
+        function speakText(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'ne-NP';
+            speech.rate = 0.85;
+            speech.pitch = 1.1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
 </head>
 <body>
 
@@ -78,9 +88,9 @@
             'ट', 'ठ', 'ड', 'ढ', 'ण',
             'त', 'थ', 'द', 'ध', 'न',
             'प', 'फ', 'ब', 'भ', 'म',
-            'य', 'र', 'ल', 'व',  'श', 
-            'ष', 'स', 'ह','क्ष', 'त्र', 
-                     'ज्ञ'
+            'य', 'र', 'ल', 'व', 'श', 
+            'ष', 'स', 'ह', 'क्ष', 'त्र', 
+            'ज्ञ'
         ];
         
         const grid = document.getElementById('consonantsGrid');
@@ -90,8 +100,9 @@
             div.className = 'letter-card';
             div.innerText = letter;
             
+            // अक्षरमा क्लिक गर्दा स्पष्ट आवाज आउने फंक्सन
             div.addEventListener('click', () => {
-                console.log(letter + ' थिचियो');
+                speakText(letter);
             });
 
             grid.appendChild(div);
