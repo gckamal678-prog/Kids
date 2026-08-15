@@ -65,6 +65,17 @@
         }
         .barakhari-item:active { background-color: #d4efdf; }
     </style>
+    <!-- आवाज आउने (Text-to-Speech) फंक्सन -->
+    <script>
+        function speakNepali(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'ne-NP';
+            speech.rate = 0.95;
+            speech.pitch = 1.2;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
 </head>
 <body>
     <div class="header">
@@ -99,15 +110,14 @@
             const subGrid = document.createElement('div');
             subGrid.className = 'sub-grid';
 
-            // शुद्ध युनिकोड बाह्रखरी रूपहरू
-            const matras = [
+            // बाह्रखरीका १३ वटा रूपहरू (क, का, कि, की, कु, कू, के, कै, को, कौ, कं, कः)
+            const forms = [
                 con, 
                 con + 'ा', 
-                'ि' + con, 
+                con + 'ि'
                 con + 'ी', 
                 con + 'ु', 
                 con + 'ू', 
-                con + 'ृ', 
                 con + 'े', 
                 con + 'ै', 
                 con + 'ो', 
@@ -116,10 +126,16 @@
                 con + 'ः'
             ];
 
-            matras.forEach(item => {
+            forms.forEach(item => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'barakhari-item';
                 itemDiv.innerText = item;
+                
+                // थिच्दा उच्चारण हुने बनाइएको
+                itemDiv.addEventListener('click', () => {
+                    speakNepali(item);
+                });
+
                 subGrid.appendChild(itemDiv);
             });
 
