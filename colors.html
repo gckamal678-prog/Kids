@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>रङहरू (Colors) - पाठशाला</title>
+    <meta name="theme-color" content="#ff9933">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+        }
+        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        .home-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .color-card {
+            border-radius: 15px;
+            padding: 25px 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.1s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid rgba(255,255,255,0.6);
+        }
+        .color-card:active {
+            transform: scale(0.95);
+        }
+        .color-name {
+            font-size: 24px;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 8px 15px;
+            border-radius: 10px;
+        }
+    </style>
+    <script>
+        function speakNepali(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'ne-NP';
+            speech.rate = 0.85;
+            speech.pitch = 1.1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 होम</a>
+        <h2>रङहरूको नाम (Colors)</h2>
+    </div>
+
+    <div class="grid-container" id="colorsGrid"></div>
+
+    <script>
+        const colorsData = [
+            { name: 'रातो', code: '#e74c3c', textCol: '#c0392b' },
+            { name: 'नीलो', code: '#3498db', textCol: '#2980b9' },
+            { name: 'हरियो', code: '#2ecc71', textCol: '#27ae60' },
+            { name: 'पँहेलो', code: '#f1c40f', textCol: '#d35400' },
+            { name: 'सुन्तला रङ', code: '#e67e22', textCol: '#d35400' },
+            { name: 'गुलाबी', code: '#ff69b4', textCol: '#c71585' },
+            { name: 'बैजनी', code: '#9b59b6', textCol: '#8e44ad' },
+            { name: 'कालो', code: '#2c3e50', textCol: '#000000' },
+            { name: 'सेतो', code: '#ffffff', textCol: '#333333' },
+            { name: 'खैरो', code: '#8b4513', textCol: '#5c2d0c' }
+        ];
+
+        const colorsGrid = document.getElementById('colorsGrid');
+
+        colorsData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'color-card';
+            card.style.backgroundColor = item.code;
+            card.innerHTML = `
+                <div class="color-name" style="color: ${item.textCol};">${item.name}</div>
+            `;
+            card.addEventListener('click', () => speakNepali(item.name + ' रङ'));
+            colorsGrid.appendChild(card);
+        });
+    </script>
+
+</body>
+</html>
