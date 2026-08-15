@@ -3,92 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>English Alphabet with HD Pictures - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <title>English Alphabet - पाठशाला</title>
+    <meta name="theme-color" content="#00BCD4">
+    <!-- Child-friendly Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
+            font-family: 'Fredoka', 'Mukta', sans-serif;
+            background: linear-gradient(180deg, #E0F7FA 0%, #B2EBF2 100%);
             margin: 0;
             padding: 15px;
             text-align: center;
+            min-height: 100vh;
         }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
             margin: 0 auto 15px auto;
+            background: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        h2 { 
+            color: #00838F; 
+            margin: 0; 
+            font-size: 20px; 
+            font-weight: 700;
+        }
         .home-btn {
-            background-color: #e67e22;
+            background-color: #00BCD4;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 3px 0 #00838F;
+            transition: all 0.1s ease;
         }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Tab Buttons */
         .tab-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 20px;
         }
         .tab-btn {
-            background-color: #bdc3c7;
-            color: #2c3e50;
-            border: none;
-            padding: 10px 20px;
+            background-color: #FFFFFF;
+            color: #00838F;
+            border: 3px solid #4DD0E1;
+            padding: 8px 18px;
             font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
+            font-weight: 700;
+            border-radius: 12px;
             cursor: pointer;
+            box-shadow: 0 4px 0 #00ACC1;
+            transition: all 0.1s ease;
         }
         .tab-btn.active {
-            background-color: #2980b9;
+            background-color: #00BCD4;
             color: white;
+            border-color: #00ACC1;
+            box-shadow: 0 4px 0 #00838F;
         }
+        .tab-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #00838F;
+        }
+
+        /* Grid Layout */
         .grid-container {
             display: none;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
             max-width: 600px;
             margin: auto;
         }
         .grid-container.active {
             display: grid;
         }
+
+        /* 3D Soft Card Style */
         .card {
-            background-color: #ffffff;
-            color: #2c3e50;
-            border: 3px solid #2980b9;
-            border-radius: 15px;
-            padding: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+            color: #00838F;
+            border: 3px solid #4DD0E1;
+            border-radius: 18px;
+            padding: 15px 10px;
+            box-shadow: 0 6px 0 #00ACC1, 0 8px 10px rgba(0,0,0,0.08);
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
+            transition: all 0.1s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
         .card:active {
-            background-color: #ebf5fb;
-            transform: scale(0.95);
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #00ACC1, 0 3px 6px rgba(0,0,0,0.1);
+            background-color: #E0F7FA;
         }
-        .card img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 8px;
+
+        /* Large Emoji Style */
+        .emoji-box {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
-        .text-content {
-            font-size: 20px;
-            font-weight: bold;
-            color: #d35400;
+
+        .letter-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #006064;
+            line-height: 1.2;
+        }
+
+        .word-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #00838F;
         }
     </style>
     <script>
@@ -106,7 +155,7 @@
 
     <div class="header">
         <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>ABCD with HD Pictures</h2>
+        <h2>ABCD Alphabet</h2>
     </div>
 
     <div class="tab-container">
@@ -118,61 +167,62 @@
     <div class="grid-container" id="lowerGrid"></div>
 
     <script>
-        // A देखि Z सम्मका HD चित्रहरूको लिङ्क (Wikimedia Commons / Free educational image URLs)
+        // Alphabet Data with Emoji
         const alphabetData = [
-            { letter: 'A', word: 'Apple', img: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg' },
-            { letter: 'B', word: 'Ball', img: 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Soccerball.svg' },
-            { letter: 'C', word: 'Cat', img: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Felis_catus-cat_on_snow.jpg' },
-            { letter: 'D', word: 'Dog', img: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Basset_Hound_profil.jpg' },
-            { letter: 'E', word: 'Elephant', img: 'https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg' },
-            { letter: 'F', word: 'Fish', img: 'https://upload.wikimedia.org/wikipedia/commons/3/32/Goldfish3.jpg' },
-            { letter: 'G', word: 'Grapes', img: 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Grapes_white_background.jpg' },
-            { letter: 'H', word: 'Horse', img: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Pony_in_Duhallow_County_Cork.jpg' },
-            { letter: 'I', word: 'Ice cream', img: 'https://upload.wikimedia.org/wikipedia/commons/d/da/Ice_cream_cone_chocolate_vanilla.jpg' },
-            { letter: 'J', word: 'Jug', img: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Clay_Jug.jpg' },
-            { letter: 'K', word: 'Kite', img: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Kite_flying_in_Thailand.jpg' },
-            { letter: 'L', word: 'Lion', img: 'https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg' },
-            { letter: 'M', word: 'Monkey', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Vervet_Monkey_%28Chlorocebus_pygerythrus%29_side.jpg' },
-            { letter: 'N', word: 'Nest', img: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Bird_nest_with_eggs_by_Piotr_Kuczynski.jpg' },
-            { letter: 'O', word: 'Owl', img: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Athene_noctua_standing_on_a_stone.jpg' },
-            { letter: 'P', word: 'Parrot', img: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Ara_macao_side.jpg' },
-            { letter: 'Q', word: 'Queen', img: 'https://upload.wikimedia.org/wikipedia/commons/5/54/Queen_Elizabeth_II_in_March_2015.jpg' },
-            { letter: 'R', word: 'Rose', img: 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Rosa_rubiginosa_1.jpg' },
-            { letter: 'S', word: 'Sun', img: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/The_Sun_by_the_Atmospheric_Imaging_Assembly_of_NASA%27s_Solar_Discovery_Observatory_-_20100819.jpg' },
-            { letter: 'T', word: 'Tree', img: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg' },
-            { letter: 'U', word: 'Umbrella', img: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Open_umbrella_on_white_background.jpg' },
-            { letter: 'V', word: 'Van', img: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Ford_Transit_delivery_van_%2827981504106%29.jpg' },
-            { letter: 'W', word: 'Watch', img: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Wristwatch_with_leather_strap.jpg' },
-            { letter: 'X', word: 'Xylophone', img: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Xylophone1.jpg' },
-            { letter: 'Y', word: 'Yak', img: 'https://upload.wikimedia.org/wikipedia/commons/6/62/Domestic_yak_Bos_mutus_at_Yamdrok_Lake.jpg' },
-            { letter: 'Z', word: 'Zebra', img: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Zebra_Botswana_Chobe.jpg' }
+            { letter: 'A', word: 'Apple', emoji: '🍎' },
+            { letter: 'B', word: 'Ball', emoji: '⚽' },
+            { letter: 'C', word: 'Cat', emoji: '🐱' },
+            { letter: 'D', word: 'Dog', emoji: '🐶' },
+            { letter: 'E', word: 'Elephant', emoji: '🐘' },
+            { letter: 'F', word: 'Fish', emoji: '🐟' },
+            { letter: 'G', word: 'Grapes', emoji: '🍇' },
+            { letter: 'H', word: 'Horse', emoji: '🐎' },
+            { letter: 'I', word: 'Ice cream', emoji: '🍦' },
+            { letter: 'J', word: 'Jug', emoji: '🏺' },
+            { letter: 'K', word: 'Kite', emoji: '🪁' },
+            { letter: 'L', word: 'Lion', emoji: '🦁' },
+            { letter: 'M', word: 'Monkey', emoji: '🐒' },
+            { letter: 'N', word: 'Nest', emoji: '🪺' },
+            { letter: 'O', word: 'Owl', emoji: '🦉' },
+            { letter: 'P', word: 'Parrot', emoji: '🦜' },
+            { letter: 'Q', word: 'Queen', emoji: '👑' },
+            { letter: 'R', word: 'Rose', emoji: '🌹' },
+            { letter: 'S', word: 'Sun', emoji: '☀️' },
+            { letter: 'T', word: 'Tree', emoji: '🌳' },
+            { letter: 'U', word: 'Umbrella', emoji: '☂️' },
+            { letter: 'V', word: 'Van', emoji: '🚐' },
+            { letter: 'W', word: 'Watch', emoji: '⌚' },
+            { letter: 'X', word: 'Xylophone', emoji: '🎼' },
+            { letter: 'Y', word: 'Yak', emoji: '🐂' },
+            { letter: 'Z', word: 'Zebra', emoji: '🦓' }
         ];
 
         const upperGrid = document.getElementById('upperGrid');
         const lowerGrid = document.getElementById('lowerGrid');
 
         alphabetData.forEach(item => {
-            // क्यापिटल कार्ड
+            // Capital Card
             const upperCard = document.createElement('div');
             upperCard.className = 'card';
             upperCard.innerHTML = `
-                <img src="${item.img}" alt="${item.word}" loading="lazy">
-                <div class="text-content">${item.letter} - ${item.word}</div>
+                <div class="emoji-box">${item.emoji}</div>
+                <div class="letter-title">${item.letter}</div>
+                <div class="word-title">${item.word}</div>
             `;
-            upperCard.addEventListener('click', () => speakText(`${item.letter}, ${item.word}`));
+            upperCard.addEventListener('click', () => speakText(`${item.letter}, for ${item.word}`));
             upperGrid.appendChild(upperCard);
 
-            // स्मल कार्ड
+            // Small Card
             const lowerCard = document.createElement('div');
             lowerCard.className = 'card';
             lowerCard.innerHTML = `
-                <img src="${item.img}" alt="${item.word}" loading="lazy">
-                <div class="text-content">${item.letter.toLowerCase()} - ${item.word}</div>
+                <div class="emoji-box">${item.emoji}</div>
+                <div class="letter-title">${item.letter.toLowerCase()}</div>
+                <div class="word-title">${item.word}</div>
             `;
-            lowerCard.addEventListener('click', () => speakText(`${item.letter.toLowerCase()}, ${item.word}`));
+            lowerCard.addEventListener('click', () => speakText(`${item.letter.toLowerCase()}, for ${item.word}`));
             lowerGrid.appendChild(lowerCard);
         });
-
 
         function switchTab(type, event) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
