@@ -4,59 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>व्यञ्जन वर्ण - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <meta name="theme-color" content="#2E7D32">
+    <!-- Friendly Typography Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
+            font-family: 'Mukta', sans-serif;
+            background: linear-gradient(180deg, #E8F5E9 0%, #C8E6C9 100%);
             margin: 0;
             padding: 15px;
             text-align: center;
+            min-height: 100vh;
         }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
             margin: 0 auto 20px auto;
+            background: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h2 { color: #d35400; margin: 0; font-size: 20px; }
+        h2 { 
+            color: #1B5E20; 
+            margin: 0; 
+            font-size: 20px;
+            font-weight: 800;
+        }
         .home-btn {
-            background-color: #e67e22;
+            background-color: #4CAF50;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 3px 0 #1B5E20;
+            transition: all 0.1s ease;
+        }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
         }
         
         /* ग्रिड लेआउट - व्यञ्जन वर्णहरू देखाउन (४ वटा स्तम्भ) */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            gap: 10px;
             max-width: 600px;
             margin: auto;
         }
 
-        /* अक्षरको बक्स */
+        /* Child-friendly 3D Letter Card */
         .letter-card {
-            background-color: #ffffff;
-            color: #2c3e50;
-            border: 3px solid #3498db;
-            border-radius: 12px;
-            padding: 15px 0;
-            font-size: 30px;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+            color: #2E7D32;
+            border: 3px solid #81C784;
+            border-radius: 16px;
+            padding: 10px 0;
+            font-size: 34px;
+            font-weight: 800;
+            box-shadow: 0 5px 0 #388E3C, 0 6px 8px rgba(0,0,0,0.1);
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
+            transition: all 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
+        /* थिच्दा (Click गर्दा) Bounce/Press इफेक्ट */
         .letter-card:active {
-            background-color: #ebf5fb;
-            transform: scale(0.95);
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #388E3C, 0 3px 5px rgba(0,0,0,0.1);
+            background-color: #F1F8E9;
         }
     </style>
     <script>
@@ -100,7 +130,7 @@
             div.className = 'letter-card';
             div.innerText = letter;
             
-            // अक्षरमा क्लिक गर्दा स्पष्ट आवाज आउने फंक्सन
+            // अक्षरमा क्लिक गर्दा आवाज आउने
             div.addEventListener('click', () => {
                 speakText(letter);
             });
