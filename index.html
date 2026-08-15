@@ -2,36 +2,66 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
+    <!-- जुम लक गर्नको लागि यो मेटा ट्याग अति आवश्यक छ -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>पाठशाला</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#ff9933">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
             margin: 0;
-            padding: 20px;
-            /* जुम हुँदा वा मोबाइलमाचलाउँदा टेक्स्ट वा स्क्रिन यताउता नहलोस् भन्नका लागि */
-            touch-action: manipulation;
+            padding: 10px;
+            text-align: center;
         }
-        h1 {
-            color: #333;
+        h1 { color: #d35400; margin-bottom: 20px; }
+        
+        /* ग्रिड लेआउट - बटनहरू मिलाउन */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        /* बटनको स्टाइल */
+        .card {
+            background-color: #ff9933;
+            color: white;
+            padding: 20px 10px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 5px #d35400;
+            transition: transform 0.2s;
+        }
+        .card:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px #d35400;
         }
     </style>
 </head>
 <body>
 
-    <h1>स्वागत छ - पाठशाला</h1>
-    <p>यहाँ बालबालिकाका लागि वर्णमाला र अंकहरू हुनेछन्।</p>
+    <h1>पाठशाला Kids</h1>
+    <p>आफ्नो मनपर्ने विषय छान्नुहोस्:</p>
+
+    <div class="container">
+        <a href="vowels.html" class="card">स्वर वर्ण (अ-अः)</a>
+        <a href="consonants.html" class="card">व्यञ्जन वर्ण (क-ज्ञ)</a>
+        <a href="barahakhari.html" class="card">बाह्रखरी</a>
+        <a href="numbers.html" class="card">अंक (1-100)</a>
+        <a href="patterns.html" class="card">गणित अभ्यास</a>
+    </div>
 
     <script>
         // Service Worker रजिस्टर गर्ने कोड
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('Service Worker Registered', reg))
                     .catch(err => console.log('Service Worker Failed', err));
             });
         }
