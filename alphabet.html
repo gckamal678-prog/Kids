@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>English Alphabet - पाठशाला</title>
+    <meta name="theme-color" content="#ff9933">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+        }
+        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        .home-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab-btn {
+            background-color: #bdc3c7;
+            color: #2c3e50;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .tab-btn.active {
+            background-color: #2980b9;
+            color: white;
+        }
+        .grid-container {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .grid-container.active {
+            display: grid;
+        }
+        .letter-card {
+            background-color: #ffffff;
+            color: #2c3e50;
+            border: 3px solid #2980b9;
+            border-radius: 15px;
+            padding: 20px 0;
+            font-size: 42px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.1s;
+        }
+        .letter-card:active {
+            background-color: #ebf5fb;
+            transform: scale(0.95);
+            border-color: #1f618d;
+        }
+    </style>
+    <script>
+        function speakEnglish(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'en-US'; // अंग्रेजी उच्चारणका लागि
+            speech.rate = 0.9;
+            speech.pitch = 1.1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 होम</a>
+        <h2>English Alphabet (A-Z)</h2>
+    </div>
+
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="switchTab('upper', event)">Capital (A-Z)</button>
+        <button class="tab-btn" onclick="switchTab('lower', event)">Small (a-z)</button>
+    </div>
+
+    <div class="grid-container active" id="upperGrid"></div>
+    <div class="grid-container" id="lowerGrid"></div>
+
+    <script>
+        const upperAlphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        const lowerAlphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+        const upperGrid = document.getElementById('upperGrid');
+        const lowerGrid = document.getElementById('lowerGrid');
+
+        // क्यापिटल अक्षरहरू लोड गर्ने
+        upperAlphabet.forEach(letter => {
+            const div = document.createElement('div');
+            div.className = 'letter-card';
+            div.innerText = letter;
+            div.addEventListener('click', () => speakEnglish(letter));
+            upperGrid.appendChild(div);
+        });
+
+        // स्मल अक्षरहरू लोड गर्ने
+        lowerAlphabet.forEach(letter => {
+            const div = document.createElement('div');
+            div.className = 'letter-card';
+            div.innerText = letter;
+            div.addEventListener('click', () => speakEnglish(letter));
+            lowerGrid.appendChild(div);
+        });
+
+        function switchTab(type, event) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.grid-container').forEach(grid => grid.classList.remove('active'));
+            event.target.classList.add('active');
+            if (type === 'upper') {
+                document.getElementById('upperGrid').classList.add('active');
+            } else {
+                document.getElementById('lowerGrid').classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
