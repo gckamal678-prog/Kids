@@ -4,78 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>सवारी साधनहरू - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <meta name="theme-color" content="#0288D1">
+    <!-- Child-friendly Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
+            font-family: 'Mukta', 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #E1F5FE 0%, #B3E5FC 100%);
             margin: 0;
             padding: 15px;
             text-align: center;
+            min-height: 100vh;
         }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
             margin: 0 auto 15px auto;
+            background: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        h2 { 
+            color: #0277BD; 
+            margin: 0; 
+            font-size: 20px; 
+            font-weight: 800;
+        }
         .home-btn {
-            background-color: #e67e22;
+            background-color: #0288D1;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .section-title {
-            color: #2980b9;
-            background-color: #ebf5fb;
-            padding: 10px;
+            padding: 6px 14px;
             border-radius: 10px;
-            font-size: 18px;
-            margin: 25px auto 15px auto;
-            max-width: 600px;
-            border: 2px solid #2980b9;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 3px 0 #01579B;
+            transition: all 0.1s ease;
         }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
             max-width: 600px;
             margin: auto;
         }
+
+        /* 3D Soft Card Style */
         .card {
-            background-color: #ffffff;
-            color: #2c3e50;
-            border: 3px solid #2980b9;
-            border-radius: 15px;
-            padding: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+            color: #0277BD;
+            border: 3px solid #81D4FA;
+            border-radius: 18px;
+            padding: 15px 10px;
+            box-shadow: 0 6px 0 #0288D1, 0 8px 10px rgba(0,0,0,0.08);
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
+            transition: all 0.1s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
         .card:active {
-            background-color: #ebf5fb;
-            transform: scale(0.95);
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #0288D1, 0 3px 6px rgba(0,0,0,0.1);
+            background-color: #E1F5FE;
         }
-        .card img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 8px;
+
+        /* Large Emoji Style */
+        .emoji-box {
+            font-size: 52px;
+            line-height: 1.1;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
-        .text-content {
-            font-size: 18px;
-            font-weight: bold;
-            color: #d35400;
+
+        .name-nepali {
+            font-size: 22px;
+            font-weight: 800;
+            color: #01579B;
+            line-height: 1.2;
+        }
+
+        .name-english {
+            font-size: 15px;
+            font-weight: 700;
+            color: #0288D1;
         }
     </style>
     <script>
@@ -96,30 +125,34 @@
         <h2>सवारी साधनहरू (Vehicles)</h2>
     </div>
 
-    <div class="section-title">🚗 मुख्य सवारी साधनहरू</div>
     <div class="grid-container" id="vehiclesGrid"></div>
 
     <script>
+        // सवारी साधनहरूको डाटा (Emoji र English Name सहित)
         const vehiclesData = [
-            { name: 'साइक्कल', img: 'https://upload.wikimedia.org/wikipedia/commons/4/41/Left_side_of_Flying_Pigeon_bicycle.jpg' },
-            { name: 'मोटरसाइकल', img: 'https://upload.wikimedia.org/wikipedia/commons/f/fc/Yamaha_YZF-R1_2009.jpg' },
-            { name: 'कार', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c9/2015_Tesla_Model_S_70D_Front.jpg' },
-            { name: 'बस', img: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Bus_London_k_mb.jpg' },
-            { name: 'ट्रक', img: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Volvo_FH16_%282012%29.jpg' },
-            { name: 'ट्याक्टर', img: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/Tractor_in_Paddy_field.jpg' },
-            { name: 'हवाइजहाज', img: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Boeing_777-3ER_Emirates_A6-ECU_JFK.jpg' },
-            { name: 'हेलिकप्टर', img: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Eurocopter_EC135.jpg' },
-            { name: 'रेलगाडी', img: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Train_on_the_Wuhan-Guangzhou_High-Speed_Railway.jpg' },
-            { name: 'डुङ्गा', img: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Wooden_boat_on_Dal_lake.jpg' }
+            { name: 'साइकल', eng: 'Bicycle', emoji: '🚲' },
+            { name: 'मोटरसाइकल', eng: 'Motorcycle', emoji: '🏍️' },
+            { name: 'कार', eng: 'Car', emoji: '🚗' },
+            { name: 'बस', eng: 'Bus', emoji: '🚌' },
+            { name: 'ट्रक', eng: 'Truck', emoji: '🚚' },
+            { name: 'ट्याक्टर', eng: 'Tractor', emoji: '🚜' },
+            { name: 'हवाइजहाज', eng: 'Aeroplane', emoji: '✈️' },
+            { name: 'हेलिकप्टर', eng: 'Helicopter', emoji: '🚁' },
+            { name: 'रेलगाडी', eng: 'Train', emoji: '🚆' },
+            { name: 'डुङ्गा', eng: 'Boat', emoji: '🛶' },
+            { name: 'पानीजहाज', eng: 'Ship', emoji: '🚢' },
+            { name: 'अटो', eng: 'Auto Rickshaw', emoji: '🛺' }
         ];
 
         const vehiclesGrid = document.getElementById('vehiclesGrid');
+
         vehiclesData.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <img src="${item.img}" alt="${item.name}" loading="lazy">
-                <div class="text-content">${item.name}</div>
+                <div class="emoji-box">${item.emoji}</div>
+                <div class="name-nepali">${item.name}</div>
+                <div class="name-english">(${item.eng})</div>
             `;
             card.addEventListener('click', () => speakNepali(item.name));
             vehiclesGrid.appendChild(card);
