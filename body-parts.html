@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>शरीरका अंगहरू - पाठशाला</title>
+    <meta name="theme-color" content="#ff9933">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+        }
+        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        .home-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .section-title {
+            color: #8e44ad;
+            background-color: #f4ecf7;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            margin: 25px auto 15px auto;
+            max-width: 600px;
+            border: 2px solid #8e44ad;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .card {
+            background-color: #ffffff;
+            color: #2c3e50;
+            border: 3px solid #8e44ad;
+            border-radius: 15px;
+            padding: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.1s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .card:active {
+            background-color: #f5eef8;
+            transform: scale(0.95);
+        }
+        .card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+        .text-content {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+    <script>
+        function speakNepali(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'ne-NP';
+            speech.rate = 0.85;
+            speech.pitch = 1.1;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 होम</a>
+        <h2>शरीरका अंगहरू (Body Parts)</h2>
+    </div>
+
+    <div class="section-title">👀 शरीरका मुख्य अंगहरू</div>
+    <div class="grid-container" id="partsGrid"></div>
+
+    <script>
+        const bodyPartsData = [
+            { name: 'टाउको', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
+            { name: 'आँखा', img: 'https://upload.wikimedia.org/wikipedia/commons/3/37/Human_eye_with_contact_lens.jpg' },
+            { name: 'कान', img: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Human_ear_anatomy.svg' },
+            { name: 'नाक', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
+            { name: 'मुख', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
+            { name: 'दाँत', img: 'https://upload.wikimedia.org/wikipedia/commons/9/9c/Human_teeth_diagram.svg' },
+            { name: 'जिब्रो', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
+            { name: 'हात', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
+            { name: 'औंला', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' },
+            { name: 'खुट्टा', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' }
+        ];
+
+        const partsGrid = document.getElementById('partsGrid');
+        bodyPartsData.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${item.img}" alt="${item.name}" loading="lazy">
+                <div class="text-content">${item.name}</div>
+            `;
+            card.addEventListener('click', () => speakNepali(item.name));
+            partsGrid.appendChild(card);
+        });
+    </script>
+
+</body>
+</html>
