@@ -1,71 +1,40 @@
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <!-- PWA Manifest र Icon कन्फिगरेसन -->
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2980b9">
-<link rel="apple-touch-icon" href="pathsala.png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kids Hub - बालबालिकाको रमाइलो संसार</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>पाठशाला</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ff9933">
     <style>
-        :root {
-            --bg-color: #f0f4f8;
-            --text-color: #2c3e50;
-            --box-bg: #ffffff;
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            /* जुम हुँदा वा मोबाइलमाचलाउँदा टेक्स्ट वा स्क्रिन यताउता नहलोस् भन्नका लागि */
+            touch-action: manipulation;
         }
-        *, *::before, *::after { box-sizing: border-box; }
-        body { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; align-items: center; justify-content: center; }
-        
-        .container { max-width: 600px; width: 100%; padding: 20px; text-align: center; }
-        
-        h1 { font-family: 'Poppins', sans-serif; font-size: 28px; color: #2980b9; margin-bottom: 10px; }
-        p.subtitle { font-size: 16px; color: #555; margin-bottom: 30px; }
-
-        /* मेनू कार्डहरूको ग्रिड */
-        .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        
-        .menu-card { background: var(--box-bg); border: 3px solid #3498db; border-radius: 20px; padding: 25px 15px; text-decoration: none; color: var(--text-color); box-shadow: 0 6px 15px rgba(0,0,0,0.08); transition: transform 0.2s, background 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
-        .menu-card:hover { transform: translateY(-5px); background: #ebf5fb; }
-        
-        .icon { font-size: 40px; }
-        .title { font-size: 18px; font-weight: bold; color: #2c3e50; }
-
-        footer { margin-top: 40px; font-size: 13px; color: #7f8c8d; }
+        h1 {
+            color: #333;
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🌟 Kids Hub 🌟</h1>
-        <p class="subtitle">रमाइलोसँग सिकौं, खेल्दै अगाडि बढौं!</p>
+    <h1>स्वागत छ - पाठशाला</h1>
+    <p>यहाँ बालबालिकाका लागि वर्णमाला र अंकहरू हुनेछन्।</p>
 
-        <div class="menu-grid">
-            <a href="slate.html" class="menu-card">
-                <span class="icon">🎨</span>
-                <span class="title">डिजिटल स्लेट</span>
-            </a>
-            <a href="alphabet.html" class="menu-card">
-                <span class="icon">🔤</span>
-                <span class="title">वर्णमाला सिकाइ</span>
-            </a>
-            <a href="math.html" class="menu-card">
-                <span class="icon">🔢</span>
-                <span class="title">गन्ती र गणित</span>
-            </a>
-            <a href="stories.html" class="menu-card">
-                <span class="icon">📖</span>
-                <span class="title">बाल कथाहरू</span>
-            </a>
-        </div>
-
-        <footer>
-            <p>&copy; 2026 Kamal G.C. | kids.kamalgc.com.np</p>
-        </footer>
-    </div>
-
+    <script>
+        // Service Worker रजिस्टर गर्ने कोड
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Service Worker Registered', reg))
+                    .catch(err => console.log('Service Worker Failed', err));
+            });
+        }
+    </script>
 </body>
 </html>
