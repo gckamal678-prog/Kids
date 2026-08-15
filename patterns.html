@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>पाहाडा (1-20) - पाठशाला</title>
+    <meta name="theme-color" content="#ff9933">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 700px;
+            margin: 0 auto 15px auto;
+        }
+        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        .home-btn {
+            background-color: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* खण्ड छुट्याउने ट्याब बटनहरू */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab-btn {
+            background-color: #bdc3c7;
+            color: #2c3e50;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .tab-btn.active {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        /* पाहाडाको ग्रिड कन्टेनर */
+        .tables-container {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            max-width: 700px;
+            margin: auto;
+        }
+        .tables-container.active {
+            display: grid;
+        }
+
+        /* एउटा पाहाडाको बक्स */
+        .table-box {
+            background-color: #ffffff;
+            border: 2px solid #27ae60;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.08);
+            text-align: left;
+        }
+        .table-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #27ae60;
+            text-align: center;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed #27ae60;
+            padding-bottom: 4px;
+        }
+        .table-row {
+            font-size: 14px;
+            color: #2c3e50;
+            padding: 2px 0;
+            text-align: center;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="home-btn">🏠 होम</a>
+        <h2>पाहाडा (१ देखि २० सम्म)</h2>
+    </div>
+
+    <!-- ट्याब बटनहरू -->
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="switchSection('part1', event)">१ - १० सम्मका पाहाडा</button>
+        <button class="tab-btn" onclick="switchSection('part2', event)">११ - २० सम्मका पाहाडा</button>
+    </div>
+
+    <!-- १ देखि १० सम्मको खण्ड -->
+    <div class="tables-container active" id="part1"></div>
+
+    <!-- ११ देखि २० सम्मको खण्ड -->
+    <div class="tables-container" id="part2"></div>
+
+    <script>
+        const part1Grid = document.getElementById('part1');
+        const part2Grid = document.getElementById('part2');
+
+        // पाहाडा जेनेरेट गर्ने फंक्सन
+        function createTableBox(num) {
+            const box = document.createElement('div');
+            box.className = 'table-box';
+
+            const title = document.createElement('div');
+            title.className = 'table-title';
+            title.innerText = num + ' को पाहाडा';
+            box.appendChild(title);
+
+            for (let i = 1; i <= 10; i++) {
+                const row = document.createElement('div');
+                row.className = 'table-row';
+                row.innerText = `${num} × ${i} = ${num * i}`;
+                box.appendChild(row);
+            }
+            return box;
+        }
+
+        // १ देखि १० सम्म भर्ने
+        for (let i = 1; i <= 10; i++) {
+            part1Grid.appendChild(createTableBox(i));
+        }
+
+        // ११ देखि २० सम्म भर्ने
+        for (let i = 11; i <= 20; i++) {
+            part2Grid.appendChild(createTableBox(i));
+        }
+
+        // खण्ड स्विच गर्ने फंक्सन
+        function switchSection(partId, event) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tables-container').forEach(container => container.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(partId).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
