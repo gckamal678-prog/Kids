@@ -79,6 +79,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            min-height: 120px;
         }
         .card:active {
             transform: translateY(4px);
@@ -92,19 +93,21 @@
             line-height: 1.1;
             margin-bottom: 6px;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            min-height: 58px;
         }
 
         .letter-title {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 800;
             color: #1B5E20;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .word-title {
             font-size: 16px;
             font-weight: 700;
             color: #2E7D32;
+            min-height: 22px;
         }
     </style>
     <script>
@@ -128,7 +131,7 @@
     <div class="grid-container" id="vowelsGrid"></div>
 
     <script>
-        // नेपाली स्वर वर्ण Data (अ देखि अः सम्म)
+        // सच्याइएको स्वर वर्ण Data
         const vowelsData = [
             { letter: 'अ', word: 'अनार', emoji: '🫒' },
             { letter: 'आ', word: 'आमा', emoji: '👩' },
@@ -139,10 +142,10 @@
             { letter: 'ऋ', word: 'ऋषि', emoji: '🧘' },
             { letter: 'ए', word: 'एकता', emoji: '🤝' },
             { letter: 'ऐ', word: 'ऐना', emoji: '🪞' },
-            { letter: 'ओ', word: 'ओखर', emoji: '🧅' },
-            { letter: 'औ', word: 'औषधि', emoji: '💊' },
+            { letter: 'ओ', word: 'ओखती', emoji: '💊' },
+            { letter: 'औ', word: 'औषधि', emoji: '🩺' },
             { letter: 'अं', word: 'अङ्गुर', emoji: '🍇' },
-            { letter: 'अः', word: 'खाली', emoji: '✨' }
+            { letter: 'अः', word: '', emoji: '' } // अः मा शब्द र इमोजी हटाइएको छ
         ];
 
         const vowelsGrid = document.getElementById('vowelsGrid');
@@ -150,13 +153,19 @@
         vowelsData.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
+            
+            // Emoji र Word भए मात्र देखाउने
+            const emojiHtml = item.emoji ? `<div class="emoji-box">${item.emoji}</div>` : `<div class="emoji-box"></div>`;
+            const wordHtml = item.word ? `<div class="word-title">${item.word}</div>` : `<div class="word-title"></div>`;
+            
             card.innerHTML = `
-                <div class="emoji-box">${item.emoji}</div>
+                ${emojiHtml}
                 <div class="letter-title">${item.letter}</div>
-                <div class="word-title">${item.word}</div>
+                ${wordHtml}
             `;
+
             card.addEventListener('click', () => {
-                if(item.word === 'खाली') {
+                if(!item.word) {
                     speakNepali(item.letter);
                 } else {
                     speakNepali(`${item.letter} बाट ${item.word}`);
