@@ -2,69 +2,93 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
-    <!-- जुम लक गर्नको लागि यो मेटा ट्याग अति आवश्यक छ -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>पाठशाला</title>
-    <link rel="manifest" href="manifest.json">
+    <title>पाठशाला - बालबालिकाको सिकाइ एप</title>
     <meta name="theme-color" content="#ff9933">
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #fffaf0;
             margin: 0;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
         }
-        h1 { color: #d35400; margin-bottom: 20px; }
-        
-        /* ग्रिड लेआउट - बटनहरू मिलाउन */
-        .container {
+        h1 {
+            color: #d35400;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+        .menu-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             max-width: 500px;
             margin: auto;
         }
-
-        /* बटनको स्टाइल */
-        .card {
-            background-color: #ff9933;
-            color: white;
-            padding: 20px 10px;
+        .menu-card {
+            background-color: #ffffff;
+            border: 3px solid #ff9933;
             border-radius: 15px;
+            padding: 20px 10px;
             text-decoration: none;
-            font-weight: bold;
+            color: #2c3e50;
             font-size: 18px;
-            box-shadow: 0 5px #d35400;
-            transition: transform 0.2s;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: 0.1s;
         }
-        .card:active {
+        .menu-card:active {
+            background-color: #ffe5cc;
             transform: scale(0.95);
-            box-shadow: 0 2px #d35400;
+        }
+        .icon {
+            font-size: 36px;
+            margin-bottom: 8px;
         }
     </style>
+
+    <!-- साझा अडियो (Text-to-Speech) फंक्सन -->
+    <script>
+        function speakNepali(text) {
+            window.speechSynthesis.cancel();
+            let speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'ne-NP';
+            speech.rate = 0.95;
+            speech.pitch = 1.2;
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
 </head>
 <body>
 
-    <h1>पाठशाला Kids</h1>
-    <p>आफ्नो मनपर्ने विषय छान्नुहोस्:</p>
+    <h1>📚 पाठशाला (सिकाइ चौतारी)</h1>
 
-    <div class="container">
-        <a href="vowels.html" class="card">स्वर वर्ण (अ-अः)</a>
-        <a href="consonants.html" class="card">व्यञ्जन वर्ण (क-ज्ञ)</a>
-        <a href="barahakhari.html" class="card">बाह्रखरी</a>
-        <a href="numbers.html" class="card">अंक (1-100)</a>
-        <a href="patterns.html" class="card">गणित अभ्यास</a>
+    <div class="menu-grid">
+        <a href="vowels.html" class="menu-card" onclick="speakNepali('स्वर वर्ण')">
+            <span class="icon">✍️</span>
+            स्वर वर्ण (अ-अः)
+        </a>
+        <a href="consonants.html" class="menu-card" onclick="speakNepali('व्यञ्जन वर्ण')">
+            <span class="icon">📖</span>
+            व्यञ्जन वर्ण (क-ज्ञ)
+        </a>
+        <a href="barahakhari.html" class="menu-card" onclick="speakNepali('बाह्रखरी')">
+            <span class="icon">📝</span>
+            बाह्रखरी
+        </a>
+        <a href="numbers.html" class="menu-card" onclick="speakNepali('अंकहरू')">
+            <span class="icon">🔢</span>
+            अंकहरू (१-१००)
+        </a>
+        <a href="patterns.html" class="menu-card" onclick="speakNepali('गणित पाहाडा')">
+            <span class="icon">➕</span>
+            गणित पाहाडा
+        </a>
     </div>
 
-    <script>
-        // Service Worker रजिस्टर गर्ने कोड
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .catch(err => console.log('Service Worker Failed', err));
-            });
-        }
-    </script>
 </body>
 </html>
