@@ -3,69 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>स्वर वर्ण (चित्र सहित) - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <title>स्वर वर्ण - पाठशाला</title>
+    <meta name="theme-color" content="#4CAF50">
+    <!-- Child-friendly Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
+            font-family: 'Mukta', 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #E8F5E9 0%, #C8E6C9 100%);
             margin: 0;
             padding: 15px;
             text-align: center;
+            min-height: 100vh;
         }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
             margin: 0 auto 15px auto;
+            background: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        h2 { 
+            color: #2E7D32; 
+            margin: 0; 
+            font-size: 20px; 
+            font-weight: 800;
+        }
         .home-btn {
-            background-color: #e67e22;
+            background-color: #4CAF50;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 3px 0 #2E7D32;
+            transition: all 0.1s ease;
         }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 12px;
             max-width: 600px;
             margin: auto;
         }
+
+        /* 3D Soft Card Style */
         .card {
-            background-color: #ffffff;
-            color: #2c3e50;
-            border: 3px solid #27ae60;
-            border-radius: 15px;
-            padding: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #FFFFFF;
+            color: #2E7D32;
+            border: 3px solid #A5D6A7;
+            border-radius: 18px;
+            padding: 15px 10px;
+            box-shadow: 0 6px 0 #43A047, 0 8px 10px rgba(0,0,0,0.08);
             cursor: pointer;
             user-select: none;
-            transition: 0.1s;
+            transition: all 0.1s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
         .card:active {
-            background-color: #e8f8f5;
-            transform: scale(0.95);
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #43A047, 0 3px 6px rgba(0,0,0,0.1);
+            background-color: #E8F5E9;
         }
-        .card img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 8px;
+
+        /* Large Emoji Style */
+        .emoji-box {
+            font-size: 52px;
+            line-height: 1.1;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
-        .text-content {
-            font-size: 20px;
-            font-weight: bold;
-            color: #c0392b;
+
+        .letter-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1B5E20;
+            line-height: 1.2;
+        }
+
+        .word-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2E7D32;
         }
     </style>
     <script>
@@ -89,21 +128,21 @@
     <div class="grid-container" id="vowelsGrid"></div>
 
     <script>
-        // नेपाली स्वर वर्ण, शब्द र तस्बिरहरूको डेटा
+        // नेपाली स्वर वर्ण Data (अ देखि अः सम्म)
         const vowelsData = [
-            { letter: 'अ', word: 'अनार', img: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Pomegranate_juicy_imal.jpg' },
-            { letter: 'आ', word: 'आँप', img: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg' },
-            { letter: 'इ', word: 'इँटा', img: 'https://upload.wikimedia.org/wikipedia/commons/7/77/Bricks_stack.jpg' },
-            { letter: 'ई', word: 'ईश्वर', img: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Om_symbol.svg' },
-            { letter: 'उ', word: 'उखु', img: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Sugarcane_field_in_Taiwan.jpg' },
-            { letter: 'ऊ', word: 'ऊन', img: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Wool_ball_and_knitting_needles.jpg' },
-            { letter: 'ऋ', word: 'ऋषि', img: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Rishi_illustration.jpg' },
-            { letter: 'ए', word: 'एकता', img: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Unity_hands.svg' },
-            { letter: 'ऐ', word: 'ऐना', img: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Mirror_icon.svg' },
-            { letter: 'ओ', word: 'ओखर', img: 'https://upload.wikimedia.org/wikipedia/commons/c/c8/Walnut_-_whole_and_piece.jpg' },
-            { letter: 'औ', word: 'औषधि', img: 'https://upload.wikimedia.org/wikipedia/commons/2/21/Pills_and_blister_packs.jpg' },
-            { letter: 'अं', word: 'अंगुर', img: 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Grapes_white_background.jpg' },
-            { letter: 'अः', word: 'खाली', img: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Blank_icon.svg' }
+            { letter: 'अ', word: 'अनार', emoji: '🫒' },
+            { letter: 'आ', word: 'आमा', emoji: '👩' },
+            { letter: 'इ', word: 'इँटा', emoji: '🧱' },
+            { letter: 'ई', word: 'ईश्वर', emoji: '🕉️' },
+            { letter: 'उ', word: 'उखु', emoji: '🎋' },
+            { letter: 'ऊ', word: 'ऊन', emoji: '🧶' },
+            { letter: 'ऋ', word: 'ऋषि', emoji: '🧘' },
+            { letter: 'ए', word: 'एकता', emoji: '🤝' },
+            { letter: 'ऐ', word: 'ऐना', emoji: '🪞' },
+            { letter: 'ओ', word: 'ओखर', emoji: '🧅' },
+            { letter: 'औ', word: 'औषधि', emoji: '💊' },
+            { letter: 'अं', word: 'अङ्गुर', emoji: '🍇' },
+            { letter: 'अः', word: 'खाली', emoji: '✨' }
         ];
 
         const vowelsGrid = document.getElementById('vowelsGrid');
@@ -112,11 +151,17 @@
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
-                <img src="${item.img}" alt="${item.word}" loading="lazy">
-                <div class="text-content">${item.letter} - ${item.word}</div>
+                <div class="emoji-box">${item.emoji}</div>
+                <div class="letter-title">${item.letter}</div>
+                <div class="word-title">${item.word}</div>
             `;
-            // कार्ड थिच्दा उच्चारण गर्ने
-            card.addEventListener('click', () => speakNepali(`${item.letter}, ${item.word}`));
+            card.addEventListener('click', () => {
+                if(item.word === 'खाली') {
+                    speakNepali(item.letter);
+                } else {
+                    speakNepali(`${item.letter} बाट ${item.word}`);
+                }
+            });
             vowelsGrid.appendChild(card);
         });
     </script>
