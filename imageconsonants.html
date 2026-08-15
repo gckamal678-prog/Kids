@@ -79,6 +79,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            min-height: 130px;
         }
         .card:active {
             transform: translateY(4px);
@@ -92,19 +93,29 @@
             line-height: 1.1;
             margin-bottom: 6px;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            min-height: 58px;
         }
 
         .letter-title {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
             color: #BF360C;
             line-height: 1.2;
+        }
+
+        /* शब्द नभएका अक्षरहरू (ङ, ञ, ण) लाई ठूलो देखाउन */
+        .letter-only {
+            font-size: 48px;
+            font-weight: 800;
+            color: #BF360C;
+            line-height: 1;
         }
 
         .word-title {
             font-size: 16px;
             font-weight: 700;
             color: #E65100;
+            min-height: 22px;
         }
     </style>
     <script>
@@ -128,23 +139,23 @@
     <div class="grid-container" id="consonantsGrid"></div>
 
     <script>
-        // Nepali Consonants Data with Emojis
+        // सच्याइएको व्यञ्जन वर्ण Data
         const consonantsData = [
             { letter: 'क', word: 'कमल', emoji: '🪷' },
             { letter: 'ख', word: 'खरायो', emoji: '🐇' },
             { letter: 'ग', word: 'गाई', emoji: '🐄' },
             { letter: 'घ', word: 'घर', emoji: '🏠' },
-            { letter: 'ङ', word: 'ङ', emoji: '🔤' },
+            { letter: 'ङ', word: '', emoji: '' }, // शब्द र इमोजी हटाइयो
             { letter: 'च', word: 'चरा', emoji: '🐦' },
             { letter: 'छ', word: 'छाता', emoji: '☂️' },
             { letter: 'ज', word: 'जहाज', emoji: '✈️' },
             { letter: 'झ', word: 'झण्डा', emoji: '🇳🇵' },
-            { letter: 'ञ', word: 'ञ', emoji: '🔤' },
+            { letter: 'ञ', word: '', emoji: '' }, // शब्द र इमोजी हटाइयो
             { letter: 'ट', word: 'टमाटर', emoji: '🍅' },
             { letter: 'ठ', word: 'ठेला', emoji: '🛒' },
             { letter: 'ड', word: 'डमरु', emoji: '🥁' },
             { letter: 'ढ', word: 'ढोका', emoji: '🚪' },
-            { letter: 'ण', word: 'ण', emoji: '🔤' },
+            { letter: 'ण', word: '', emoji: '' }, // शब्द र इमोजी हटाइयो
             { letter: 'त', word: 'ताला', emoji: '🔒' },
             { letter: 'थ', word: 'थैली', emoji: '🛍️' },
             { letter: 'द', word: 'दियो', emoji: '🪔' },
@@ -173,13 +184,22 @@
         consonantsData.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `
-                <div class="emoji-box">${item.emoji}</div>
-                <div class="letter-title">${item.letter}</div>
-                <div class="word-title">${item.word}</div>
-            `;
+            
+            // यदि शब्द छ भने साधारण UI, छैन (ङ, ञ, ण) भने अक्षर ठूलो देखाउने
+            if (item.word) {
+                card.innerHTML = `
+                    <div class="emoji-box">${item.emoji}</div>
+                    <div class="letter-title">${item.letter}</div>
+                    <div class="word-title">${item.word}</div>
+                `;
+            } else {
+                card.innerHTML = `
+                    <div class="letter-only">${item.letter}</div>
+                `;
+            }
+
             card.addEventListener('click', () => {
-                if(item.letter === item.word) {
+                if(!item.word) {
                     speakNepali(item.letter);
                 } else {
                     speakNepali(`${item.letter} बाट ${item.word}`);
