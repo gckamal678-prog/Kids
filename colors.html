@@ -3,33 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>रङहरू (Colors) - पाठशाला</title>
-    <meta name="theme-color" content="#ff9933">
+    <title>रङहरूको नाम - पाठशाला</title>
+    <meta name="theme-color" content="#FF5722">
+    <!-- Child-Friendly Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fffaf0;
+            font-family: 'Mukta', 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #FFF3E0 0%, #FFE0B2 100%);
             margin: 0;
             padding: 15px;
             text-align: center;
+            min-height: 100vh;
         }
+
+        /* Header Layout */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 600px;
-            margin: 0 auto 15px auto;
+            margin: 0 auto 20px auto;
+            background: #FFFFFF;
+            padding: 10px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        h2 { color: #d35400; margin: 0; font-size: 18px; }
+        h2 { 
+            color: #E65100; 
+            margin: 0; 
+            font-size: 20px;
+            font-weight: 800;
+        }
         .home-btn {
-            background-color: #e67e22;
+            background-color: #FF5722;
             color: white;
-            padding: 8px 15px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 10px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 3px 0 #BF360C;
+            transition: all 0.1s ease;
         }
+        .home-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        /* Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -37,28 +63,48 @@
             max-width: 600px;
             margin: auto;
         }
+
+        /* 3D Color Card */
         .color-card {
-            border-radius: 15px;
-            padding: 25px 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            cursor: pointer;
-            user-select: none;
-            transition: 0.1s;
+            border-radius: 20px;
+            padding: 20px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 3px solid rgba(255,255,255,0.6);
+            box-shadow: 0 6px 0 rgba(0,0,0,0.15), 0 8px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.1s ease;
+            border: 4px solid #FFFFFF;
         }
+        
         .color-card:active {
-            transform: scale(0.95);
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.15);
         }
-        .color-name {
-            font-size: 24px;
-            font-weight: bold;
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 8px 15px;
-            border-radius: 10px;
+
+        /* Circle Preview inside Card */
+        .color-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+        }
+
+        .np-name {
+            font-size: 20px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .en-name {
+            font-size: 15px;
+            font-weight: 700;
+            opacity: 0.9;
+            font-family: 'Fredoka', sans-serif;
         }
     </style>
     <script>
@@ -82,17 +128,22 @@
     <div class="grid-container" id="colorsGrid"></div>
 
     <script>
+        // थपिएका मुख्य रङहरू (नेपाली, अङ्ग्रेजी र Hex Code)
         const colorsData = [
-            { name: 'रातो', code: '#e74c3c', textCol: '#c0392b' },
-            { name: 'नीलो', code: '#3498db', textCol: '#2980b9' },
-            { name: 'हरियो', code: '#2ecc71', textCol: '#27ae60' },
-            { name: 'पँहेलो', code: '#f1c40f', textCol: '#d35400' },
-            { name: 'सुन्तला रङ', code: '#e67e22', textCol: '#d35400' },
-            { name: 'गुलाबी', code: '#ff69b4', textCol: '#c71585' },
-            { name: 'बैजनी', code: '#9b59b6', textCol: '#8e44ad' },
-            { name: 'कालो', code: '#2c3e50', textCol: '#000000' },
-            { name: 'सेतो', code: '#ffffff', textCol: '#333333' },
-            { name: 'खैरो', code: '#8b4513', textCol: '#5c2d0c' }
+            { np: 'रातो', en: 'Red', code: '#FF3B30', text: '#FFFFFF' },
+            { np: 'नीलो', en: 'Blue', code: '#007AFF', text: '#FFFFFF' },
+            { np: 'हरियो', en: 'Green', code: '#34C759', text: '#FFFFFF' },
+            { np: 'पहेँलो', en: 'Yellow', code: '#FFCC00', text: '#333333' },
+            { np: 'सुन्तला', en: 'Orange', code: '#FF9500', text: '#FFFFFF' },
+            { np: 'गुलाबी', en: 'Pink', code: '#FF2D55', text: '#FFFFFF' },
+            { np: 'बैजनी', en: 'Purple', code: '#AF52DE', text: '#FFFFFF' },
+            { np: 'खैरो', en: 'Brown', code: '#A2845E', text: '#FFFFFF' },
+            { np: 'कालो', en: 'Black', code: '#1C1C1E', text: '#FFFFFF' },
+            { np: 'सेतो', en: 'White', code: '#FFFFFF', text: '#333333', border: '#E5E5EA' },
+            { np: 'आकाशी नीलो', en: 'Sky Blue', code: '#5AC8FA', text: '#FFFFFF' },
+            { np: 'सिम्रिक', en: 'Crimson', code: '#DC143C', text: '#FFFFFF' },
+            { np: 'सुनौलो', en: 'Gold', code: '#FFD700', text: '#333333' },
+            { np: 'चाँदी', en: 'Silver', code: '#E5E5EA', text: '#333333' }
         ];
 
         const colorsGrid = document.getElementById('colorsGrid');
@@ -101,10 +152,16 @@
             const card = document.createElement('div');
             card.className = 'color-card';
             card.style.backgroundColor = item.code;
+            card.style.color = item.text;
+            if (item.border) card.style.borderColor = item.border;
+
             card.innerHTML = `
-                <div class="color-name" style="color: ${item.textCol};">${item.name}</div>
+                <div class="color-circle" style="background-color: ${item.code};"></div>
+                <div class="np-name">${item.np}</div>
+                <div class="en-name">${item.en}</div>
             `;
-            card.addEventListener('click', () => speakNepali(item.name + ' रङ'));
+            
+            card.addEventListener('click', () => speakNepali(item.np + ' रङ'));
             colorsGrid.appendChild(card);
         });
     </script>
