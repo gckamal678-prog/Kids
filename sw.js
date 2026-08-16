@@ -17,7 +17,7 @@ const assets = [
   '/fruits-vegetables.html',
   '/image.html',
   '/imageconsonants.html',
-  '/imegevowels.html',
+  '/imagevowels.html',
   '/nepal.png',
   '/numbers.html',
   '/pahada.html',
