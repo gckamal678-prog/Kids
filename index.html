@@ -26,8 +26,8 @@
     <meta name="twitter:image" content="https://kids.kamalgc.com.np/192.png">
 
     <!-- PWA Application Icons & Manifest Setup -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="192.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/192.png">
     <meta name="mobile-web-app-capable" content="yes">
 
     <!-- Google Fonts -->
@@ -319,7 +319,7 @@
                 <a href="./alphabet.html" class="menu-card bg-lang"><span class="icon">🔤</span>Alphabet</a>
                 <a href="./image.html" class="menu-card bg-lang"><span class="icon">🖼️</span>English Image</a>
                 <a href="./vowels.html" class="menu-card bg-lang"><span class="icon">अ</span>स्वर वर्ण</a>
-                <a href="./imegevowels.html" class="menu-card bg-lang"><span class="icon">🎨</span>स्वर (Image)</a>
+                <a href="./imagevowels.html" class="menu-card bg-lang"><span class="icon">🎨</span>स्वर (Image)</a>
                 <a href="./consonants.html" class="menu-card bg-lang"><span class="icon">क</span>व्यञ्जन वर्ण</a>
                 <a href="./imageconsonants.html" class="menu-card bg-lang"><span class="icon">🧩</span>व्यञ्जन (Img)</a>
             </div>
@@ -539,7 +539,7 @@
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
+      navigator.serviceWorker.register('/sw.js')
         .then(reg => console.log('SW active'))
         .catch(err => console.log('SW error:', err));
     });
