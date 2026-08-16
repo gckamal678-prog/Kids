@@ -143,8 +143,12 @@
     <script>
         function speakText(text) {
             window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'en-US';
+            
+            // वाक्यमा 'Z,' वा 'z,' छ भने त्यसलाई 'Zed,' (जेट) बनाउने
+            let updatedText = text.replace(/^Z,/i, 'Zed,');
+
+            let speech = new SpeechSynthesisUtterance(updatedText);
+            speech.lang = 'en-GB'; // ब्रिटिस अङ्ग्रेजी प्रयोग गर्दा 'जेट' उच्चारण आउँछ
             speech.rate = 0.85;
             speech.pitch = 1.1;
             window.speechSynthesis.speak(speech);
