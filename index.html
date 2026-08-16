@@ -55,7 +55,8 @@
         }
         body.dark-mode .category-block, 
         body.dark-mode .app-footer, 
-        body.dark-mode .nepal-3d-card {
+        body.dark-mode .nepal-3d-card,
+        body.dark-mode .target-widget {
             background: #1E1E1E !important;
             border-color: #333333 !important;
             color: #FFFFFF !important;
@@ -95,6 +96,35 @@
         .action-btn:active {
             transform: translateY(2px);
             box-shadow: none;
+        }
+
+        /* Daily Target Widget on Home Page */
+        .target-widget {
+            background: #FFFFFF;
+            border: 3px solid #FFD54F;
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .target-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #E65100;
+            margin-bottom: 8px;
+        }
+        .progress-bar-bg {
+            background: #FFE0B2;
+            border-radius: 10px;
+            height: 14px;
+            overflow: hidden;
+            width: 100%;
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #FF9800, #4CAF50);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
         }
 
         /* --- १. हाम्रो प्यारो नेपाल --- */
@@ -256,8 +286,15 @@
     <!-- Header Tools: Dark Mode & Parental Lock -->
     <div class="top-action-bar">
         <button class="action-btn" onclick="toggleDarkMode()">🌙 डार्क मोड</button>
-        <!-- यहाँ showParentDashboard जोडियो -->
         <button class="action-btn" onclick="openParentalLock(showParentDashboard)">🔒 अभिभावक मोड</button>
+    </div>
+
+    <!-- 📌 दैनिक लक्ष्य विजेट -->
+    <div class="target-widget">
+        <div class="target-title" id="target-title-text">📌 आजको दैनिक लक्ष्य: ० / १० क्विज मिलाउने</div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="target-progress-fill"></div>
+        </div>
     </div>
 
     <!-- १. हाम्रो प्यारो नेपाल -->
@@ -337,17 +374,56 @@
 </div>
 
 <!-- Parent Dashboard Modal -->
-<div id="parent-dashboard" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; color:#FFF; padding:20px; text-align:center;">
-    <div style="max-width: 450px; margin: 60px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-        <h2 style="color: #FF7043; margin-bottom: 15px;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
-        <p style="margin-bottom: 20px; font-size:14px; color:#ECEFF1;">यहाँबाट तपाईंले एपका सेटिङहरू नियन्त्रण गर्न सक्नुहुन्छ:</p>
+<div id="parent-dashboard" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; color:#FFF; padding:20px; text-align:center; overflow-y:auto;">
+    <div style="max-width: 450px; margin: 30px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align:left;">
+        <h2 style="color: #FF7043; margin-bottom: 15px; text-align:center;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
+        <p style="margin-bottom: 15px; font-size:13px; color:#ECEFF1; text-align:center;">यहाँबाट एपका सेटिङहरू, समय सीमा र बच्चाको सिकाइ प्रगति नियन्त्रण गर्नुहोस्:</p>
         
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-            <button onclick="alert('यो फिचर छिट्टै थपिनेछ!')" class="action-btn" style="width:100%; padding:10px; font-size:15px;">📊 बच्चाको प्रगति हेर्नुहोस्</button>
-            <button onclick="clearCacheData()" class="action-btn" style="width:100%; padding:10px; font-size:15px; border-color: #FF5252; color:#FF5252;">🧹 एप डेटा रिसेट गर्नुहोस्</button>
-            <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:15px; background:#78909C; color:white; border:none;">✖️ बन्द गर्नुहोस्</button>
+        <!-- 📊 बच्चाको प्रगति ट्र्याकर -->
+        <div id="progress-report" style="display:none; background:#1A252F; padding:15px; border-radius:12px; margin-bottom:15px;">
+            <h4 style="color:#2ECC71; margin-bottom:8px; text-align:center;">📊 बच्चाको सिकाइ रिपोर्ट</h4>
+            <p style="font-size:14px; margin:5px 0; color:#FFF;">🎯 मिलाएका सही उत्तर: <b id="total-score-val" style="color:#F1C40F;">0</b></p>
+            <p style="font-size:14px; margin:5px 0; color:#FFF;">🎮 कुल प्रयास गरेका प्रश्न: <b id="total-played-val" style="color:#3498DB;">0</b></p>
+        </div>
+
+        <!-- ⏱️ स्क्रिन टाइम र 📌 लक्ष्य सेटिङ -->
+        <div style="background:#1A252F; padding:15px; border-radius:12px; margin-bottom:15px;">
+            <h4 style="color:#F39C12; margin-bottom:10px; text-align:center;">⚙️ समय र लक्ष्य सेटिङ</h4>
+            
+            <label style="font-size:13px; color:#DDD;">⏱️ दैनिक प्रयोग समय (मिनेट):</label>
+            <select id="screen-time-select" style="width:100%; padding:8px; margin:6px 0 12px 0; border-radius:8px;">
+                <option value="0">असीमित (Limit Off)</option>
+                <option value="15">१५ मिनेट</option>
+                <option value="30">३० मिनेट</option>
+                <option value="45">४५ मिनेट</option>
+                <option value="60">६० मिनेट (१ घण्टा)</option>
+            </select>
+
+            <label style="font-size:13px; color:#DDD;">📌 दैनिक क्विज लक्ष्य (सही उत्तर):</label>
+            <select id="target-select" style="width:100%; padding:8px; margin:6px 0 12px 0; border-radius:8px;">
+                <option value="5">५ वटा</option>
+                <option value="10">१० वटा</option>
+                <option value="15">१५ वटा</option>
+                <option value="20">२० वटा</option>
+            </select>
+
+            <button onclick="saveParentSettings()" style="width:100%; padding:8px; background:#F39C12; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">💾 सेटिङ सेभ गर्नुहोस्</button>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button onclick="showChildProgress()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#2ECC71; color:white; border:none;">📊 बच्चाको प्रगति हेर्नुहोस्</button>
+            <button onclick="clearCacheData()" class="action-btn" style="width:100%; padding:10px; font-size:14px; border-color: #FF5252; color:#FF5252;">🧹 एप डेटा रिसेट गर्नुहोस्</button>
+            <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#78909C; color:white; border:none;">✖️ बन्द गर्नुहोस्</button>
         </div>
     </div>
+</div>
+
+<!-- ⏱️ Time Limit Screen Lock Overly -->
+<div id="screen-lock-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#111; z-index:99999; color:white; text-align:center; padding-top:120px;">
+    <h1 style="font-size:50px;">⏳</h1>
+    <h2 style="color:#FF5252; margin-top:10px;">आजको समय सकियो!</h2>
+    <p style="font-size:16px; margin:15px 20px; color:#BBB;">अभिभावकले तोक्नुभएको दैनिक प्रयोग समय पूरा भएको छ। अब भोलि पुन: प्रयोग गर्न सकिनेछ।</p>
+    <button onclick="openParentalLock(unlockScreenManually)" style="padding:10px 20px; background:#4CAF50; color:white; border:none; border-radius:10px; font-size:15px; font-weight:bold; cursor:pointer; margin-top:10px;">🔐 अभिभावक अनलक</button>
 </div>
 
 <script>
@@ -367,8 +443,11 @@
     document.getElementById('audio-status').innerHTML = "🎵 राष्ट्रिय गान बज्न सकियो (पुनः बजाउन थिच्नुहोस्)";
   };
 
-  // Dashboard Functions
+  // Dashboard & Progress Functions
   function showParentDashboard() {
+      // सेटिङहरू लोड गर्ने
+      document.getElementById('screen-time-select').value = localStorage.getItem('app_screen_limit') || "0";
+      document.getElementById('target-select').value = localStorage.getItem('app_daily_target') || "10";
       document.getElementById('parent-dashboard').style.display = 'block';
   }
 
@@ -376,8 +455,31 @@
       document.getElementById('parent-dashboard').style.display = 'none';
   }
 
+  function showChildProgress() {
+      const totalScore = localStorage.getItem('quiz_total_score') || 0;
+      const totalPlayed = localStorage.getItem('quiz_played_count') || 0;
+      
+      document.getElementById('total-score-val').innerText = totalScore;
+      document.getElementById('total-played-val').innerText = totalPlayed;
+      
+      const reportBox = document.getElementById('progress-report');
+      reportBox.style.display = reportBox.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function saveParentSettings() {
+      const timeLimit = document.getElementById('screen-time-select').value;
+      const targetVal = document.getElementById('target-select').value;
+
+      localStorage.setItem('app_screen_limit', timeLimit);
+      localStorage.setItem('app_daily_target', targetVal);
+
+      alert("सेटिङहरू सेभ भयो!");
+      updateTargetDisplay();
+  }
+
   function clearCacheData() {
       if(confirm("के तपाईं पक्का एपको डेटा रिसेट गर्न चाहनुहुन्छ?")) {
+          localStorage.clear();
           caches.keys().then((keys) => {
               keys.forEach((key) => caches.delete(key));
               alert("डेटा रिसेट भयो! कृपया पेज रिफ्रेस गर्नुहोस्।");
@@ -385,6 +487,50 @@
           });
       }
   }
+
+  // 📌 दैनिक लक्ष्य डिस्प्ले अपडेट गर्ने
+  function updateTargetDisplay() {
+      const target = parseInt(localStorage.getItem('app_daily_target') || 10);
+      const score = parseInt(localStorage.getItem('quiz_total_score') || 0);
+      
+      const titleText = document.getElementById('target-title-text');
+      const progressFill = document.getElementById('target-progress-fill');
+      
+      let percentage = Math.min(100, Math.round((score / target) * 100));
+      titleText.innerText = `📌 आजको दैनिक लक्ष्य: ${score} / ${target} क्विज मिलाउने (${percentage}%)`;
+      progressFill.style.width = `${percentage}%`;
+  }
+
+  // ⏱️ Screen Time Monitoring System
+  function initScreenTimer() {
+      const limitMinutes = parseInt(localStorage.getItem('app_screen_limit') || 0);
+      if (limitMinutes <= 0) return;
+
+      const todayKey = 'used_time_' + new Date().toISOString().slice(0, 10);
+      let usedSeconds = parseInt(localStorage.getItem(todayKey) || 0);
+
+      const interval = setInterval(() => {
+          usedSeconds++;
+          localStorage.setItem(todayKey, usedSeconds);
+
+          if (usedSeconds >= limitMinutes * 60) {
+              document.getElementById('screen-lock-overlay').style.display = 'block';
+              clearInterval(interval);
+          }
+      }, 1000);
+  }
+
+  function unlockScreenManually() {
+      document.getElementById('screen-lock-overlay').style.display = 'none';
+      localStorage.setItem('app_screen_limit', 0); // Temporary unlock by disabling limit
+      alert("समय सीमा अनलक गरियो!");
+  }
+
+  // Page Load Initialization
+  window.addEventListener('load', () => {
+      updateTargetDisplay();
+      initScreenTimer();
+  });
 </script>
 
 <!-- External Script for Dark Mode & Parental Lock -->
