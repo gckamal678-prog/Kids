@@ -485,6 +485,41 @@
     });
   }
 </script>
+<!-- Parent Dashboard Modal -->
+<div id="parent-dashboard" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; color:#FFF; padding:20px; overflow-y:auto; text-align:center;">
+    <div style="max-width: 500px; margin: 50px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043;">
+        <h2 style="color: #FF7043; margin-bottom: 15px;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
+        <p style="margin-bottom: 20px;">यहाँबाट तपाईंले एपका केही सेटिङहरू नियन्त्रण गर्न सक्नुहुन्छ:</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button onclick="alert('यो फिचर छिट्टै आउँदैछ!')" class="action-btn" style="width:100%;">📊 बच्चाको प्रगति हेर्नुहोस्</button>
+            <button onclick="clearCacheData()" class="action-btn" style="width:100%; border-color: #FF5252;">🧹 एप डेटा रिसेट गर्नुहोस्</button>
+            <button onclick="closeDashboard()" class="action-btn" style="width:100%; background:#78909C; color:white;">✖️ बन्द गर्नुहोस्</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ड्यासबोर्ड खोल्ने फङ्क्सन
+    function showParentDashboard() {
+        document.getElementById('parent-dashboard').style.display = 'block';
+    }
+
+    // ड्यासबोर्ड बन्द गर्ने फङ्क्सन
+    function closeDashboard() {
+        document.getElementById('parent-dashboard').style.display = 'none';
+    }
+
+    // क्यास सफा गर्ने (रिसेट)
+    function clearCacheData() {
+        if(confirm("के तपाईं पक्का एपको डेटा रिसेट गर्न चाहनुहुन्छ?")) {
+            caches.keys().then((keys) => {
+                keys.forEach((key) => caches.delete(key));
+                alert("डेटा रिसेट भयो! कृपया पेज रिफ्रेस गर्नुहोस्।");
+            });
+        }
+    }
+</script>
 
 </body>
 </html>
