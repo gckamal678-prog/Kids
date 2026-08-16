@@ -74,7 +74,7 @@
             transition: max-width 0.3s ease;
         }
 
-        /* Top Action Bar (Dark Mode & Child Lock Controls) */
+        /* Top Action Bar */
         .top-action-bar {
             display: flex;
             justify-content: space-between;
@@ -113,7 +113,6 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
-        /* 3D Photo Container with Clickable Cursor */
         .nepal-3d-card {
             background: #FFFFFF;
             border-radius: 16px;
@@ -148,7 +147,6 @@
             display: inline-block;
         }
 
-        /* Title */
         .main-title {
             color: #FF5722;
             font-size: 24px;
@@ -181,7 +179,6 @@
             gap: 8px;
         }
 
-        /* 3D Interactive Menu Cards */
         .menu-card {
             border-radius: 14px;
             padding: 12px 6px;
@@ -204,52 +201,27 @@
             margin-bottom: 4px;
         }
 
-        /* Mobile Layout */
         .grid-2x3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
         }
-
         .grid-1x3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
         }
-        
         .grid-1x2 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
 
-        /* 3D Color Themes */
-        .bg-lang { 
-            background-color: #E8F5E9; 
-            border: 2px solid #A5D6A7; 
-            box-shadow: 0 4px 0px #81C784; 
-            color: #1B5E20; 
-        }
-        .bg-vocab { 
-            background-color: #FFF3E0; 
-            border: 2px solid #FFCC80; 
-            box-shadow: 0 4px 0px #FFB74D; 
-            color: #E65100; 
-        }
-        .bg-math { 
-            background-color: #F3E5F5; 
-            border: 2px solid #CE93D8; 
-            box-shadow: 0 4px 0px #BA68C8; 
-            color: #4A148C; 
-        }
-        .bg-activity {
-            background-color: #E0F7FA;
-            border: 2px solid #80DEEA;
-            box-shadow: 0 4px 0px #26C6DA;
-            color: #006064;
-        }
+        .bg-lang { background-color: #E8F5E9; border: 2px solid #A5D6A7; box-shadow: 0 4px 0px #81C784; color: #1B5E20; }
+        .bg-vocab { background-color: #FFF3E0; border: 2px solid #FFCC80; box-shadow: 0 4px 0px #FFB74D; color: #E65100; }
+        .bg-math { background-color: #F3E5F5; border: 2px solid #CE93D8; box-shadow: 0 4px 0px #BA68C8; color: #4A148C; }
+        .bg-activity { background-color: #E0F7FA; border: 2px solid #80DEEA; box-shadow: 0 4px 0px #26C6DA; color: #006064; }
 
-        /* Footer Styling */
         .app-footer {
             margin-top: 35px;
             padding: 20px 15px;
@@ -259,74 +231,21 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
             text-align: center;
         }
-        .footer-title {
-            font-size: 16px;
-            font-weight: 800;
-            color: #FF5722;
-            margin-bottom: 10px;
-        }
-        .footer-links {
-            font-size: 14px;
-            color: #2C3E50;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        .footer-links a {
-            color: #1E88E5;
-            text-decoration: none;
-        }
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        .footer-copyright {
-            font-size: 13px;
-            color: #78909C;
-            font-weight: 600;
-        }
+        .footer-title { font-size: 16px; font-weight: 800; color: #FF5722; margin-bottom: 10px; }
+        .footer-links { font-size: 14px; color: #2C3E50; margin-bottom: 8px; font-weight: 600; }
+        .footer-links a { color: #1E88E5; text-decoration: none; }
+        .footer-copyright { font-size: 13px; color: #78909C; font-weight: 600; }
 
-        /* Desktop / Laptop Layout */
         @media screen and (min-width: 600px) {
-            body {
-                padding: 20px 40px !important;
-            }
-            .main-container {
-                max-width: 100% !important;
-                width: 100% !important;
-            }
-            .national-box {
-                width: 100% !important;
-                padding: 30px !important;
-            }
-            .nepal-3d-card {
-                width: 100% !important;
-            }
-            .nepal-3d-card img {
-                max-height: 500px !important;
-                width: 100% !important;
-                object-fit: contain;
-            }
-            .grid-2x3 {
-                grid-template-columns: repeat(6, 1fr) !important;
-                gap: 15px !important;
-            }
-            .grid-1x3 {
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 15px !important;
-            }
-            .grid-1x2 {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 15px !important;
-            }
-            .menu-card {
-                min-height: 120px !important;
-                font-size: 18px !important;
-            }
-            .footer-title {
-                font-size: 18px;
-            }
-            .footer-links {
-                font-size: 15px;
-            }
+            body { padding: 20px 40px !important; }
+            .main-container { max-width: 100% !important; width: 100% !important; }
+            .national-box { width: 100% !important; padding: 30px !important; }
+            .nepal-3d-card { width: 100% !important; }
+            .nepal-3d-card img { max-height: 500px !important; width: 100% !important; object-fit: contain; }
+            .grid-2x3 { grid-template-columns: repeat(6, 1fr) !important; gap: 15px !important; }
+            .grid-1x3 { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
+            .grid-1x2 { grid-template-columns: repeat(2, 1fr) !important; gap: 15px !important; }
+            .menu-card { min-height: 120px !important; font-size: 18px !important; }
         }
     </style>
 </head>
@@ -334,13 +253,14 @@
 
 <div class="main-container">
 
-    <!-- Header Tools: Dark Mode & Child Lock Button -->
+    <!-- Header Tools: Dark Mode & Parental Lock -->
     <div class="top-action-bar">
         <button class="action-btn" onclick="toggleDarkMode()">🌙 डार्क मोड</button>
-        <button class="action-btn" onclick="openParentalLock(() => alert('अभिभावक मोड खुला भयो!'))">🔒 अभिभावक मोड</button>
+        <!-- यहाँ showParentDashboard जोडियो -->
+        <button class="action-btn" onclick="openParentalLock(showParentDashboard)">🔒 अभिभावक मोड</button>
     </div>
 
-    <!-- १. हाम्रो प्यारो नेपाल (Audio Audio Player Linked) -->
+    <!-- १. हाम्रो प्यारो नेपाल -->
     <div class="national-box">
         <h1>🇳🇵 हाम्रो प्यारो नेपाल 🇳🇵</h1>
         <div class="nepal-3d-card" onclick="toggleAnthem()">
@@ -349,7 +269,6 @@
         <div class="audio-hint" id="audio-status">🎵 राष्ट्रिय गान बजाउन/रोक्न फोटोमा थिच्नुहोस्</div>
     </div>
 
-    <!-- Hidden Audio Tag for Anthem -->
     <audio id="national-anthem" src="./anthem.mp3" preload="auto"></audio>
 
     <div class="main-title">✨ बालबालिका सिकाइ केन्द्र ✨</div>
@@ -360,24 +279,12 @@
         <div class="category-block">
             <div class="category-header" style="color: #2E7D32;">📚 भाषा र अक्षर (Alphabets)</div>
             <div class="grid-2x3">
-                <a href="./alphabet.html" class="menu-card bg-lang">
-                    <span class="icon">🔤</span>Alphabet
-                </a>
-                <a href="./image.html" class="menu-card bg-lang">
-                    <span class="icon">🖼️</span>English Image
-                </a>
-                <a href="./vowels.html" class="menu-card bg-lang">
-                    <span class="icon">अ</span>स्वर वर्ण
-                </a>
-                <a href="./imegevowels.html" class="menu-card bg-lang">
-                    <span class="icon">🎨</span>स्वर (Image)
-                </a>
-                <a href="./consonants.html" class="menu-card bg-lang">
-                    <span class="icon">क</span>व्यञ्जन वर्ण
-                </a>
-                <a href="./imageconsonants.html" class="menu-card bg-lang">
-                    <span class="icon">🧩</span>व्यञ्जन (Img)
-                </a>
+                <a href="./alphabet.html" class="menu-card bg-lang"><span class="icon">🔤</span>Alphabet</a>
+                <a href="./image.html" class="menu-card bg-lang"><span class="icon">🖼️</span>English Image</a>
+                <a href="./vowels.html" class="menu-card bg-lang"><span class="icon">अ</span>स्वर वर्ण</a>
+                <a href="./imegevowels.html" class="menu-card bg-lang"><span class="icon">🎨</span>स्वर (Image)</a>
+                <a href="./consonants.html" class="menu-card bg-lang"><span class="icon">क</span>व्यञ्जन वर्ण</a>
+                <a href="./imageconsonants.html" class="menu-card bg-lang"><span class="icon">🧩</span>व्यञ्जन (Img)</a>
             </div>
         </div>
 
@@ -385,24 +292,12 @@
         <div class="category-block">
             <div class="category-header" style="color: #E65100;">🍎 शब्द ज्ञान (Vocabulary)</div>
             <div class="grid-2x3">
-                <a href="./barahakhari.html" class="menu-card bg-vocab">
-                    <span class="icon">📝</span>बाह्रखरी
-                </a>
-                <a href="./colors.html" class="menu-card bg-vocab">
-                    <span class="icon">🎨</span>रङहरूको नाम
-                </a>
-                <a href="./fruits-vegetables.html" class="menu-card bg-vocab">
-                    <span class="icon">🍎</span>फलफूल/तरकारी
-                </a>
-                <a href="./animals-birds.html" class="menu-card bg-vocab">
-                    <span class="icon">🐅</span>जनावर/पन्छी
-                </a>
-                <a href="./body-parts.html" class="menu-card bg-vocab">
-                    <span class="icon">👀</span>शरीरका अंग
-                </a>
-                <a href="./vehicles.html" class="menu-card bg-vocab">
-                    <span class="icon">🚗</span>सवारी साधन
-                </a>
+                <a href="./barahakhari.html" class="menu-card bg-vocab"><span class="icon">📝</span>बाह्रखरी</a>
+                <a href="./colors.html" class="menu-card bg-vocab"><span class="icon">🎨</span>रङहरूको नाम</a>
+                <a href="./fruits-vegetables.html" class="menu-card bg-vocab"><span class="icon">🍎</span>फलफूल/तरकारी</a>
+                <a href="./animals-birds.html" class="menu-card bg-vocab"><span class="icon">🐅</span>जनावर/पन्छी</a>
+                <a href="./body-parts.html" class="menu-card bg-vocab"><span class="icon">👀</span>शरीरका अंग</a>
+                <a href="./vehicles.html" class="menu-card bg-vocab"><span class="icon">🚗</span>सवारी साधन</a>
             </div>
         </div>
 
@@ -410,28 +305,18 @@
         <div class="category-block">
             <div class="category-header" style="color: #6A1B9A;">🔢 गणित र समय (Maths & GK)</div>
             <div class="grid-1x3">
-                <a href="./days-months.html" class="menu-card bg-math">
-                    <span class="icon">📅</span>वार र महिना
-                </a>
-                <a href="./numbers.html" class="menu-card bg-math">
-                    <span class="icon">🔢</span>Numbers / अंक
-                </a>
-                <a href="./pahada.html" class="menu-card bg-math">
-                    <span class="icon">✖️</span>गणित पहाडा
-                </a>
+                <a href="./days-months.html" class="menu-card bg-math"><span class="icon">📅</span>वार र महिना</a>
+                <a href="./numbers.html" class="menu-card bg-math"><span class="icon">🔢</span>Numbers / अंक</a>
+                <a href="./pahada.html" class="menu-card bg-math"><span class="icon">✖️</span>गणित पहाडा</a>
             </div>
         </div>
 
-        <!-- ५. मनोरञ्जन र अभ्यास (Activities) -->
+        <!-- ५. मनोरञ्जन र अभ्यास -->
         <div class="category-block">
             <div class="category-header" style="color: #00838F;">🎨 मनोरञ्जन र अभ्यास (Activities)</div>
             <div class="grid-1x2">
-                <a href="./quiz.html" class="menu-card bg-activity">
-                    <span class="icon">🧠</span>बाल क्विज (Quiz)
-                </a>
-                <a href="./drawing.html" class="menu-card bg-activity">
-                    <span class="icon">✏️</span>चित्र कोर्ने बोर्ड
-                </a>
+                <a href="./quiz.html" class="menu-card bg-activity"><span class="icon">🧠</span>बाल क्विज (Quiz)</a>
+                <a href="./drawing.html" class="menu-card bg-activity"><span class="icon">✏️</span>चित्र कोर्ने बोर्ड</a>
             </div>
         </div>
 
@@ -451,12 +336,24 @@
 
 </div>
 
-<!-- Audio Control Logic Script -->
+<!-- Parent Dashboard Modal -->
+<div id="parent-dashboard" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; color:#FFF; padding:20px; text-align:center;">
+    <div style="max-width: 450px; margin: 60px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+        <h2 style="color: #FF7043; margin-bottom: 15px;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
+        <p style="margin-bottom: 20px; font-size:14px; color:#ECEFF1;">यहाँबाट तपाईंले एपका सेटिङहरू नियन्त्रण गर्न सक्नुहुन्छ:</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <button onclick="alert('यो फिचर छिट्टै थपिनेछ!')" class="action-btn" style="width:100%; padding:10px; font-size:15px;">📊 बच्चाको प्रगति हेर्नुहोस्</button>
+            <button onclick="clearCacheData()" class="action-btn" style="width:100%; padding:10px; font-size:15px; border-color: #FF5252; color:#FF5252;">🧹 एप डेटा रिसेट गर्नुहोस्</button>
+            <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:15px; background:#78909C; color:white; border:none;">✖️ बन्द गर्नुहोस्</button>
+        </div>
+    </div>
+</div>
+
 <script>
   function toggleAnthem() {
     const anthem = document.getElementById('national-anthem');
     const statusText = document.getElementById('audio-status');
-    
     if (anthem.paused) {
       anthem.play();
       statusText.innerHTML = "🔊 राष्ट्रिय गान बज्दैछ... (रोक्न थिच्नुहोस्)";
@@ -466,16 +363,33 @@
     }
   }
 
-  // गीत सकिएपछि स्टेटस स्वतः रिसेट हुने
   document.getElementById('national-anthem').onended = function() {
     document.getElementById('audio-status').innerHTML = "🎵 राष्ट्रिय गान बज्न सकियो (पुनः बजाउन थिच्नुहोस्)";
   };
+
+  // Dashboard Functions
+  function showParentDashboard() {
+      document.getElementById('parent-dashboard').style.display = 'block';
+  }
+
+  function closeDashboard() {
+      document.getElementById('parent-dashboard').style.display = 'none';
+  }
+
+  function clearCacheData() {
+      if(confirm("के तपाईं पक्का एपको डेटा रिसेट गर्न चाहनुहुन्छ?")) {
+          caches.keys().then((keys) => {
+              keys.forEach((key) => caches.delete(key));
+              alert("डेटा रिसेट भयो! कृपया पेज रिफ्रेस गर्नुहोस्।");
+              location.reload();
+          });
+      }
+  }
 </script>
 
 <!-- External Script for Dark Mode & Parental Lock -->
 <script src="./dark-mode.js"></script>
 
-<!-- Service Worker Registration -->
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -484,41 +398,6 @@
         .catch(err => console.log('SW error:', err));
     });
   }
-</script>
-<!-- Parent Dashboard Modal -->
-<div id="parent-dashboard" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; color:#FFF; padding:20px; overflow-y:auto; text-align:center;">
-    <div style="max-width: 500px; margin: 50px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043;">
-        <h2 style="color: #FF7043; margin-bottom: 15px;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
-        <p style="margin-bottom: 20px;">यहाँबाट तपाईंले एपका केही सेटिङहरू नियन्त्रण गर्न सक्नुहुन्छ:</p>
-        
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-            <button onclick="alert('यो फिचर छिट्टै आउँदैछ!')" class="action-btn" style="width:100%;">📊 बच्चाको प्रगति हेर्नुहोस्</button>
-            <button onclick="clearCacheData()" class="action-btn" style="width:100%; border-color: #FF5252;">🧹 एप डेटा रिसेट गर्नुहोस्</button>
-            <button onclick="closeDashboard()" class="action-btn" style="width:100%; background:#78909C; color:white;">✖️ बन्द गर्नुहोस्</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    // ड्यासबोर्ड खोल्ने फङ्क्सन
-    function showParentDashboard() {
-        document.getElementById('parent-dashboard').style.display = 'block';
-    }
-
-    // ड्यासबोर्ड बन्द गर्ने फङ्क्सन
-    function closeDashboard() {
-        document.getElementById('parent-dashboard').style.display = 'none';
-    }
-
-    // क्यास सफा गर्ने (रिसेट)
-    function clearCacheData() {
-        if(confirm("के तपाईं पक्का एपको डेटा रिसेट गर्न चाहनुहुन्छ?")) {
-            caches.keys().then((keys) => {
-                keys.forEach((key) => caches.delete(key));
-                alert("डेटा रिसेट भयो! कृपया पेज रिफ्रेस गर्नुहोस्।");
-            });
-        }
-    }
 </script>
 
 </body>
