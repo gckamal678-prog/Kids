@@ -52,12 +52,22 @@
             color: #666;
             font-weight: bold;
         }
+        .sound-btn {
+            background: #FFF3E0;
+            border: 1px solid #FF9800;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 
 <div class="quiz-card">
     <div class="score-board">अङ्क (Score): <span id="score">0</span></div>
+    <button class="sound-btn" onclick="repeatQuestion()">🔊 प्रश्न पुनः सुन्नुहोस्</button>
     <div class="question-text" id="question">प्रश्न आउँदैछ...</div>
     <div class="options-grid" id="options"></div>
     <br>
@@ -77,10 +87,27 @@
     ];
 
     let score = 0;
+    let currentQuestionText = "";
+
+    // 🔊 नेपालीमा बोल्ने Text-to-Speech फङ्क्सन
+    function speakText(text, callback) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel(); // अघिल्लो आवाज रोक्ने
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ne-NP';
+            utterance.rate = 0.85; // बालबालिकाले बुझ्ने गरी ठिक्कको गति
+
+            if (callback) {
+                utterance.onend = callback;
+            }
+
+            window.speechSynthesis.speak(utterance);
+        }
+    }
 
     function loadQuestion() {
-        // Randomly pick a question for unlimited play
         const randomQ = pool[Math.floor(Math.random() * pool.length)];
+        currentQuestionText = randomQ.q;
         document.getElementById("question").innerText = randomQ.q;
         
         const optionsDiv = document.getElementById("options");
@@ -93,19 +120,35 @@
             btn.onclick = () => checkAnswer(index, randomQ.ans);
             optionsDiv.appendChild(btn);
         });
+
+        // 🔊 प्रश्न आउनासाथ बोलेर सुनाउने
+        speakText(randomQ.q);
+    }
+
+    // 🔊 प्रश्न दोहोर्‍याएर सुन्नका लागि
+    function repeatQuestion() {
+        if (currentQuestionText) {
+            speakText(currentQuestionText);
+        }
     }
 
     function checkAnswer(selected, correct) {
         if (selected === correct) {
             score++;
-            alert("स्याबास! सही उत्तर 🎉");
+            document.getElementById("score").innerText = score;
+            // 🔊 सही हुँदा बोल्ने र बोली सकिएपछि नयाँ प्रश्न लोड हुने
+            speakText("स्याबास! सही उत्तर", () => {
+                loadQuestion();
+            });
         } else {
-            alert("ओहो! गलत भयो, प्रयास जारी राख्नुहोस् 💪");
+            // 🔊 गलत हुँदा बोल्ने र बोली सकिएपछि नयाँ प्रश्न लोड हुने
+            speakText("ओहो! गलत भयो, प्रयास जारी राख्नुहोस्", () => {
+                loadQuestion();
+            });
         }
-        document.getElementById("score").innerText = score;
-        loadQuestion(); // अर्को अनलिमिटेड प्रश्न लोड गर्ने
     }
 
+    // पहिलो पटक लोड गर्दा
     loadQuestion();
 </script>
 
