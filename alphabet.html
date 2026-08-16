@@ -126,8 +126,15 @@
     <script>
         function speakEnglish(text) {
             window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'en-US';
+            
+            // Z वा z छ भने उच्चारण 'Zed' (जेट) गराउने
+            let textToSpeak = text;
+            if (text.toUpperCase() === 'Z') {
+                textToSpeak = 'Zed';
+            }
+
+            let speech = new SpeechSynthesisUtterance(textToSpeak);
+            speech.lang = 'en-GB'; // ब्रिटिस अङ्ग्रेजी सेट गर्दा 'जेट' प्रष्ट आउँछ
             speech.rate = 0.9;
             speech.pitch = 1.1;
             window.speechSynthesis.speak(speech);
