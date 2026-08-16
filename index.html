@@ -4,447 +4,206 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>बाल पाठशाला - नेपाल</title>
-    <meta name="theme-color" content="#4A90E2">
-    
-    <!-- १. SEO Meta Tags (गुगल सर्चमा सजिलै भेटिनका लागि) -->
-    <meta name="description" content="बाल पाठशाला: बालबालिकाका लागि कखरा, नेपाली वर्णमाला, अङ्ग्रेजी अक्षर, गणित पहाडा र शब्द ज्ञान सिक्ने सजिलो माध्यम।">
-    <meta name="keywords" content="kids learning nepal, nepali barnamala, nepali pahada, bal pathshala, kamal gc, बालबालिका सिकाइ">
-    <meta name="author" content="KAMAL G.C.">
-    <meta name="robots" content="index, follow">
-
-    <!-- २. Open Graph Tags (Social Media Link Preview) -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kids.kamalgc.com.np/">
-    <meta property="og:title" content="🇳🇵 बाल पाठशाला - बालबालिका सिकाइ केन्द्र">
-    <meta property="og:description" content="बालबालिकाका लागि अक्षर, कखरा, अंक र शब्द ज्ञान सिक्ने उत्कृष्ट डिजिटल थलो।">
-    <meta property="og:image" content="https://kids.kamalgc.com.np/192.png">
-
-    <!-- ३. Twitter Card Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="🇳🇵 बाल पाठशाला - बालबालिका सिकाइ केन्द्र">
-    <meta name="twitter:description" content="बालबालिकाका लागि अक्षर, कखरा, अंक र शब्द ज्ञान सिक्ने सजिलो माध्यम।">
-    <meta name="twitter:image" content="https://kids.kamalgc.com.np/192.png">
-
-    <!-- PWA Application Icons & Manifest Setup -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="192.png">
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
-    
+    <meta name="theme-color" content="#dc143c">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
         body {
-            font-family: 'Mukta', 'Fredoka', sans-serif;
-            background: linear-gradient(180deg, #E0F7FA 0%, #FFFDE7 100%);
+            font-family: 'Arial', sans-serif;
+            background-color: #fffaf0;
+            margin: 0;
             padding: 15px;
             text-align: center;
-            color: #2C3E50;
-            transition: background 0.3s ease, color 0.3s ease;
         }
-
-        /* Dark Mode Global Styles */
-        body.dark-mode {
-            background: #121212 !important;
-            color: #E0E0E0 !important;
-        }
-        body.dark-mode .category-block, 
-        body.dark-mode .app-footer, 
-        body.dark-mode .nepal-3d-card {
-            background: #1E1E1E !important;
-            border-color: #333333 !important;
-            color: #FFFFFF !important;
-        }
-        body.dark-mode .category-header {
-            color: #FFB74D !important;
-        }
-        body.dark-mode .main-title {
-            color: #FF7043 !important;
-            text-shadow: none;
-        }
-
-        .main-container {
-            max-width: 650px;
-            margin: 0 auto;
-            transition: max-width 0.3s ease;
-        }
-
-        /* Top Action Bar (Dark Mode & Child Lock Controls) */
-        .top-action-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .action-btn {
-            background: #FFFFFF;
-            border: 2px solid #4A90E2;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 3px 0px #4A90E2;
-            color: #2C3E50;
-        }
-        .action-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-
-        /* --- १. हाम्रो प्यारो नेपाल --- */
         .national-box {
-            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
-            border-radius: 20px;
-            padding: 18px 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            border: 4px solid #FFE600;
+            background: linear-gradient(135deg, #dc143c, #003893);
+            color: white;
+            border-radius: 15px;
+            padding: 20px 15px;
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 3px solid #ffcc00;
         }
         .national-box h1 {
-            margin-bottom: 12px;
+            margin: 5px 0 15px 0;
             font-size: 22px;
-            color: #FFE600;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #ffcc00;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
-        
-        /* 3D Photo Container */
-        .nepal-3d-card {
-            background: #FFFFFF;
-            border-radius: 16px;
-            padding: 10px;
-            box-shadow: 0 10px 0px #B8E994, 0 15px 25px rgba(0,0,0,0.2);
-            border: 3px solid #78E08F;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: inline-block;
-            width: 100%;
+        .symbols-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
         }
-        .nepal-3d-card img {
-            width: 100%;
-            height: auto;
-            max-height: 280px;
-            object-fit: contain;
+        .symbol-card {
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 10px;
-            display: block;
-        }
-
-        /* Title */
-        .main-title {
-            color: #FF5722;
-            font-size: 24px;
-            margin: 15px 0 20px 0;
-            font-weight: 800;
-            text-shadow: 1px 1px 0px #FFF;
-        }
-
-        /* --- Category Container --- */
-        .category-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .category-block {
-            background: #FFFFFF;
-            border-radius: 18px;
-            padding: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
-            border: 3px solid #E3F2FD;
-        }
-        .category-header {
-            font-size: 18px;
-            font-weight: 800;
-            text-align: left;
-            margin-bottom: 12px;
-            padding-left: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* 3D Interactive Menu Cards */
-        .menu-card {
-            border-radius: 14px;
-            padding: 12px 6px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
+            padding: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: all 0.1s ease;
-            min-height: 85px;
+            border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.1s;
         }
-        .menu-card:active {
-            transform: translateY(3px);
-            box-shadow: none !important;
+        .symbol-card:active {
+            transform: scale(0.95);
         }
-        .menu-card span.icon {
-            font-size: 28px;
-            margin-bottom: 4px;
+        .symbol-card img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 5px;
         }
-
-        /* Mobile Layout */
-        .grid-2x3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+        .symbol-card span {
+            font-size: 11px;
+            font-weight: bold;
         }
-
-        .grid-1x3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+        .color-preview {
+            width: 50px;
+            height: 50px;
+            background-color: #dc143c;
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-bottom: 5px;
         }
-        
-        .grid-1x2 {
+        .section-title {
+            color: #d35400;
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+            font-weight: bold;
+        }
+        .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
+            max-width: 600px;
+5            margin: auto;
         }
-
-        /* 3D Color Themes */
-        .bg-lang { 
-            background-color: #E8F5E9; 
-            border: 2px solid #A5D6A7; 
-            box-shadow: 0 4px 0px #81C784; 
-            color: #1B5E20; 
-        }
-        .bg-vocab { 
-            background-color: #FFF3E0; 
-            border: 2px solid #FFCC80; 
-            box-shadow: 0 4px 0px #FFB74D; 
-            color: #E65100; 
-        }
-        .bg-math { 
-            background-color: #F3E5F5; 
-            border: 2px solid #CE93D8; 
-            box-shadow: 0 4px 0px #BA68C8; 
-            color: #4A148C; 
-        }
-        .bg-activity {
-            background-color: #E0F7FA;
-            border: 2px solid #80DEEA;
-            box-shadow: 0 4px 0px #26C6DA;
-            color: #006064;
-        }
-
-        /* Footer Styling */
-        .app-footer {
-            margin-top: 35px;
-            padding: 20px 15px;
-            background: #FFFFFF;
-            border-radius: 16px;
-            border: 3px solid #E3F2FD;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-        .footer-title {
-            font-size: 16px;
-            font-weight: 800;
-            color: #FF5722;
-            margin-bottom: 10px;
-        }
-        .footer-links {
-            font-size: 14px;
-            color: #2C3E50;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        .footer-links a {
-            color: #1E88E5;
+        .menu-card {
+            background-color: #ffffff;
+            color: #2c3e50;
+            border: 3px solid #e67e22;
+            border-radius: 15px;
+            padding: 15px 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: 0.1s;
         }
-        .footer-links a:hover {
-            text-decoration: underline;
+        .menu-card:active {
+            background-color: #fef5e7;
+            transform: scale(0.95);
         }
-        .footer-copyright {
-            font-size: 13px;
-            color: #78909C;
-            font-weight: 600;
-        }
-
-        /* Desktop / Laptop मा Full Screen बनाउने CSS */
-        @media screen and (min-width: 600px) {
-            body {
-                padding: 20px 40px !important;
-            }
-            .main-container {
-                max-width: 100% !important;
-                width: 100% !important;
-            }
-            .national-box {
-                width: 100% !important;
-                padding: 30px !important;
-            }
-            .nepal-3d-card {
-                width: 100% !important;
-            }
-            .nepal-3d-card img {
-                max-height: 500px !important;
-                width: 100% !important;
-                object-fit: contain;
-            }
-            .grid-2x3 {
-                grid-template-columns: repeat(6, 1fr) !important;
-                gap: 15px !important;
-            }
-            .grid-1x3 {
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 15px !important;
-            }
-            .grid-1x2 {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 15px !important;
-            }
-            .menu-card {
-                min-height: 120px !important;
-                font-size: 18px !important;
-            }
-            .footer-title {
-                font-size: 18px;
-            }
-            .footer-links {
-                font-size: 15px;
-            }
+        .menu-card span {
+            font-size: 28px;
+            margin-bottom: 5px;
         }
     </style>
+    <script>
+        // अडियो फाइल प्ले गर्ने फंक्सन
+        let currentAudio = null;
+
+        function playAnthem() {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            currentAudio = new Audio('anthem.mp3');
+            currentAudio.play().catch(error => {
+                console.log("अडियो प्ले गर्न समस्या भयो: ", error);
+            });
+        }
+    </script>
 </head>
 <body>
 
-<div class="main-container">
-
-    <!-- Header Tools: Dark Mode & Child Lock Button -->
-    <div class="top-action-bar">
-        <button class="action-btn" onclick="toggleDarkMode()">🌙 डार्क मोड</button>
-        <button class="action-btn" onclick="openParentalLock(() => alert('अभिभावक मोड खुला भयो!'))">🔒 अभिभावक मोड</button>
-    </div>
-
-    <!-- १. हाम्रो प्यारो नेपाल -->
+    <!-- नेपालको राष्ट्रिय पहिचान र प्रतीकहरू (जसमा क्लिक गर्दा anthem.mp3 बज्नेछ) -->
     <div class="national-box">
         <h1>🇳🇵 हाम्रो प्यारो नेपाल 🇳🇵</h1>
-        <div class="nepal-3d-card">
-            <img src="./nepal.png" alt="हाम्रो प्यारो नेपाल">
+        <div class="symbols-grid">
+            <div class="symbol-card" onclick="playAnthem()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Flag_of_Nepal.svg" alt="Flag">
+                <span>National Falg</span>
+            </div>
+            <div class="symbol-card" onclick="playAnthem()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Nepal_location_map.svg" alt="Map">
+                <span>National Map</span>
+            </div>
+            <div class="symbol-card" onclick="playAnthem()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Emblem_of_Nepal.svg" alt="Emblem">
+                <span>National Logo</span>
+            </div>
+            <div class="symbol-card" onclick="playAnthem()">
+                <div class="color-preview"></div>
+                <span>National Color Crimson</span>
+            </div>
+            <div class="symbol-card" onclick="playAnthem()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Cow_female_black_white.jpg" alt="Animal">
+                <span>National Animal Cow</span>
+            </div>
+            <div class="symbol-card" onclick="playAnthem()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Rhododendron_arboreum_var._campanulatum.jpg" alt="Flower">
+                <span>National Flower Rhododendron</span>
+            </div>
         </div>
     </div>
 
-    <div class="main-title">✨ बालबालिका सिकाइ केन्द्र ✨</div>
-
-    <div class="category-container">
-        
-        <!-- २. भाषा र अक्षर -->
-        <div class="category-block">
-            <div class="category-header" style="color: #2E7D32;">📚 भाषा र अक्षर (Alphabets)</div>
-            <div class="grid-2x3">
-                <a href="./alphabet.html" class="menu-card bg-lang">
-                    <span class="icon">🔤</span>Alphabet
-                </a>
-                <a href="./image.html" class="menu-card bg-lang">
-                    <span class="icon">🖼️</span>English Image
-                </a>
-                <a href="./vowels.html" class="menu-card bg-lang">
-                    <span class="icon">अ</span>स्वर वर्ण
-                </a>
-                <a href="./imegevowels.html" class="menu-card bg-lang">
-                    <span class="icon">🎨</span>स्वर (Image)
-                </a>
-                <a href="./consonants.html" class="menu-card bg-lang">
-                    <span class="icon">क</span>व्यञ्जन वर्ण
-                </a>
-                <a href="./imageconsonants.html" class="menu-card bg-lang">
-                    <span class="icon">🧩</span>व्यञ्जन (Img)
-                </a>
-            </div>
-        </div>
-
-        <!-- ३. शब्द ज्ञान -->
-        <div class="category-block">
-            <div class="category-header" style="color: #E65100;">🍎 शब्द ज्ञान (Vocabulary)</div>
-            <div class="grid-2x3">
-                <a href="./barahakhari.html" class="menu-card bg-vocab">
-                    <span class="icon">📝</span>बाह्रखरी
-                </a>
-                <a href="./colors.html" class="menu-card bg-vocab">
-                    <span class="icon">🎨</span>रङहरूको नाम
-                </a>
-                <a href="./fruits-vegetables.html" class="menu-card bg-vocab">
-                    <span class="icon">🍎</span>फलफूल/तरकारी
-                </a>
-                <a href="./animals-birds.html" class="menu-card bg-vocab">
-                    <span class="icon">🐅</span>जनावर/पन्छी
-                </a>
-                <a href="./body-parts.html" class="menu-card bg-vocab">
-                    <span class="icon">👀</span>शरीरका अंग
-                </a>
-                <a href="./vehicles.html" class="menu-card bg-vocab">
-                    <span class="icon">🚗</span>सवारी साधन
-                </a>
-            </div>
-        </div>
-
-        <!-- ४. गणित र समय -->
-        <div class="category-block">
-            <div class="category-header" style="color: #6A1B9A;">🔢 गणित र समय (Maths & GK)</div>
-            <div class="grid-1x3">
-                <a href="./days-months.html" class="menu-card bg-math">
-                    <span class="icon">📅</span>वार र महिना
-                </a>
-                <a href="./numbers.html" class="menu-card bg-math">
-                    <span class="icon">🔢</span>Numbers / अंक
-                </a>
-                <a href="./pahada.html" class="menu-card bg-math">
-                    <span class="icon">✖️</span>गणित पहाडा
-                </a>
-            </div>
-        </div>
-
-        <!-- ५. मनोरञ्जन र अभ्यास (Activities) -->
-        <div class="category-block">
-            <div class="category-header" style="color: #00838F;">🎨 मनोरञ्जन र अभ्यास (Activities)</div>
-            <div class="grid-1x2">
-                <a href="./quiz.html" class="menu-card bg-activity">
-                    <span class="icon">🧠</span>बाल क्विज (Quiz)
-                </a>
-                <a href="./drawing.html" class="menu-card bg-activity">
-                    <span class="icon">✏️</span>चित्र कोर्ने बोर्ड
-                </a>
-            </div>
-        </div>
-
+    <!-- बालबालिका सिकाइ केन्द्र (सबै १५ वटा फाइलहरू) -->
+    <div class="section-title">✨ बालबालिका सिकाइ केन्द्र ✨</div>
+    <div class="grid-container">
+        <a href="alphabet.html" class="menu-card">
+            <span>🔤</span>Alphabet (Text)
+        </a>
+        <a href="image.html" class="menu-card">
+            <span>🖼️</span>English Alphabet (Image)
+        </a>
+        <a href="vowels.html" class="menu-card">
+            <span>अ</span>स्वर वर्ण (Text)
+        </a>
+        <a href="imegevowels.html" class="menu-card">
+            <span>🎨</span>स्वर वर्ण (Image)
+        </a>
+        <a href="consonants.html" class="menu-card">
+            <span>क</span>व्यञ्जन वर्ण (Text)
+        </a>
+        <a href="imageconsonants.html" class="menu-card">
+            <span>🧩</span>व्यञ्जन वर्ण (Image)
+        </a>
+        <a href="barahakhari.html" class="menu-card">
+            <span>📝</span>बाह्रखरी
+        </a>
+        <a href="colors.html" class="menu-card">
+            <span>🎨</span>रङहरूको नाम
+        </a>
+        <a href="fruits-vegetables.html" class="menu-card">
+            <span>🍎</span>फलफूल र तरकारी
+        </a>
+        <a href="days-months.html" class="menu-card">
+            <span>📅</span>वार र महिनाहरू
+        </a>
+        <a href="animals-birds.html" class="menu-card">
+            <span>🐅</span>जनावर र पन्छी
+        </a>
+        <a href="body-parts.html" class="menu-card">
+            <span>👀</span>शरीरका अंगहरू
+        </a>
+        <a href="vehicles.html" class="menu-card">
+            <span>🚗</span>सवारी साधनहरू
+        </a>
+        <a href="numbers.html" class="menu-card">
+            <span>🔢</span>Numbers / अंकहरू
+        </a>
+        <a href="patterns.html" class="menu-card">
+            <span>✨</span>Patterns & Shapes
+        </a>
     </div>
-
-    <!-- ६. Footer Section -->
-    <footer class="app-footer">
-        <div class="footer-title">🇳🇵 बाल पाठशाला - बालबालिकाको उज्ज्वल भविष्यका लागि 🇳🇵</div>
-        <div class="footer-links">
-            🌐 <a href="https://kamalgc.com.np" target="_blank">kamalgc.com.np</a> | 
-            ✉️ <a href="mailto:Support@kamalgc.com.np">Support@kamalgc.com.np</a>
-        </div>
-        <div class="footer-copyright">
-            ©️ 2026 KAMAL G.C. All Rights Reserved.
-        </div>
-    </footer>
-
-</div>
-
-<!-- External Script for Dark Mode & Parental Lock -->
-<script src="./dark-mode.js"></script>
-
-<!-- Service Worker Registration -->
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('SW active'))
-        .catch(err => console.log('SW error:', err));
-    });
-  }
-</script>
 
 </body>
 </html>
