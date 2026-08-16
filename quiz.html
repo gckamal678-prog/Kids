@@ -2,33 +2,66 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>बाल क्विज - परीक्षा खेल</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Mukta', sans-serif; }
         body {
-            font-family: sans-serif;
-            background: #F0F4F8;
-            padding: 20px;
+            background: linear-gradient(180deg, #E0F7FA 0%, #FFFDE7 100%);
+            padding: 15px;
             text-align: center;
         }
         .quiz-card {
             background: white;
-            padding: 25px;
-            border-radius: 16px;
+            padding: 20px;
+            border-radius: 20px;
             max-width: 500px;
             margin: auto;
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border: 4px solid #FF9800;
+            position: relative;
+        }
+        .top-info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
         }
         .score-board {
             font-size: 18px;
             font-weight: bold;
             color: #2E7D32;
-            margin-bottom: 15px;
+        }
+        .badges-area {
+            font-size: 18px;
+        }
+        .timer-box {
+            background: #FFE0B2;
+            color: #E65100;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #FB8C00;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .quiz-img {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            margin: 10px auto;
+            display: none;
+            border-radius: 12px;
+            border: 2px solid #E0E0E0;
         }
         .question-text {
-            font-size: 22px;
-            margin-bottom: 20px;
+            font-size: 20px;
+            margin-bottom: 15px;
             color: #333;
+            font-weight: bold;
+            min-height: 50px;
         }
         .options-grid {
             display: grid;
@@ -37,28 +70,37 @@
         }
         .opt-btn {
             background: #E3F2FD;
-            border: 2px solid #2196F3;
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 10px;
+            border: 3px solid #2196F3;
+            padding: 12px 8px;
+            font-size: 18px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: bold;
+            color: #0D47A1;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 0px #1976D2;
         }
-        .opt-btn:hover { background: #BBDEFB; }
+        .opt-btn:active { transform: translateY(2px); box-shadow: none; }
+        .opt-btn.correct { background: #4CAF50 !important; color: white !important; border-color: #2E7D32 !important; box-shadow: 0 4px 0px #1B5E20 !important; }
+        .opt-btn.wrong { background: #F44336 !important; color: white !important; border-color: #C62828 !important; box-shadow: 0 4px 0px #B71C1C !important; }
+
         .back-btn {
-            margin-top: 20px;
+            margin-top: 15px;
             display: inline-block;
             text-decoration: none;
-            color: #666;
+            color: #1E88E5;
             font-weight: bold;
+            font-size: 16px;
         }
         .sound-btn {
             background: #FFF3E0;
-            border: 1px solid #FF9800;
-            padding: 5px 12px;
+            border: 2px solid #FF9800;
+            padding: 6px 14px;
             border-radius: 15px;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
+            font-weight: bold;
+            color: #E65100;
             margin-bottom: 10px;
         }
     </style>
@@ -66,8 +108,17 @@
 <body>
 
 <div class="quiz-card">
-    <div class="score-board">अङ्क (Score): <span id="score">0</span></div>
+    <div class="top-info-bar">
+        <div class="score-board">🏆 अङ्क: <span id="score">0</span></div>
+        <div class="badges-area" id="badges-area">⭐</div>
+    </div>
+
+    <div class="timer-box">⏳ समय: <span id="timer">15</span> सेकेन्ड</div>
+    <br>
     <button class="sound-btn" onclick="repeatQuestion()">🔊 प्रश्न पुनः सुन्नुहोस्</button>
+    
+    <img id="quiz-image" class="quiz-img" src="" alt="Quiz Image">
+
     <div class="question-text" id="question">प्रश्न आउँदैछ...</div>
     <div class="options-grid" id="options"></div>
     <br>
@@ -75,40 +126,130 @@
 </div>
 
 <script>
-    // Unlimited Quiz Dataset
+    // 🎨 Fun Themes, Sounds, Colors & Shapes question dataset
     const pool = [
+        { q: "'म्याउँ म्याउँ' आवाज कुन जनावरले निकाल्छ?", opt: ["कुकुर", "विरालो", "गाई", "बाख्रा"], ans: 1 },
+        { q: "'कुखुरी काँ' कसले बास्छ?", opt: ["भाले कुखुरा", "सुगा", "ढुकुर", "काग"], ans: 0 },
+        { q: "डोरेमोन (Doraemon) लाई सबैभन्दा मन पर्ने खानेकुरा के हो?", opt: ["मोमो", "डोरायाकी", "पिज्जा", "स्याउ"], ans: 1 },
+        { q: "समोसाको आकार (Shape) कस्तो हुन्छ?", opt: ["गोलो (Circle)", "त्रिकोण (Triangle)", "चौकोन (Square)", "अण्डाकार"], ans: 1 },
+        { q: "नेपालको झण्डामा कुन-कुन रङ हुन्छन्?", opt: ["रातो, नीलो र सेतो", "पहेंलो र हरियो", "कालो र सेतो", "गुलाबी र नीलो"], ans: 0 },
+        { q: "'भौ भौ' गरेर घरको रक्षा कसले गर्छ?", opt: ["विरालो", "कुकुर", "स्याल", "बाघ"], ans: 1 },
+        { q: "सूर्य (Sun) को रङ कस्तो हुन्छ?", opt: ["पहेंलो/पहेंलो-रातो", "नीलो", "कालो", "गुलाबी"], ans: 0 },
         { q: "'क' बाट के हुन्छ?", opt: ["कमल", "खरगोश", "गमला", "घर"], ans: 0 },
         { q: "नेपालको राष्ट्रिय जनावर कुन हो?", opt: ["बाघ", "गाई", "हात्ती", "कुकुर"], ans: 1 },
-        { q: "२ + ३ कति हुन्छ?", opt: ["४", "५", "६", "७"], ans: 1 },
-        { q: "नेपालको झण्डामा कतिवटा रङ हुन्छन्?", opt: ["२", "३", "४", "१"], ans: 1 },
-        { q: "स्याउ (Apple) को रङ कस्तो हुन्छ?", opt: ["नीलो", "रातो", "हेलो", "कालो"], ans: 1 },
-        { q: "'ख' बाट के हुन्छ?", opt: ["खरयो", "कुकुर", "गाई", "चरा"], ans: 0 },
-        { q: "५ - २ कति हुन्छ?", opt: ["२", "३", "४", "१"], ans: 1 }
+        { q: "२ + ३ कति हुन्छ?", opt: ["४", "५", "६", "७"], ans: 1 }
     ];
 
     let score = 0;
     let currentQuestionText = "";
+    let isAnswering = false;
+    let timerInterval;
+    let timeLeft = 15;
 
-    // 🔊 नेपालीमा बोल्ने Text-to-Speech फङ्क्सन
+    // Audio Web API Sound Effects (Ding! & Oops! Sound)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'correct') {
+            osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+            osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.3);
+        } else {
+            osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
+            osc.frequency.setValueAtTime(164.81, audioCtx.currentTime + 0.15); // E3
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.4);
+        }
+    }
+
+    window.onload = function() {
+        score = parseInt(localStorage.getItem('quiz_total_score') || 0);
+        document.getElementById("score").innerText = score;
+        updateBadges();
+        loadQuestion();
+    };
+
+    function updateBadges() {
+        const badgeArea = document.getElementById("badges-area");
+        let starsCount = Math.floor(score / 5);
+        let badgeHTML = "";
+        for (let i = 0; i < Math.min(starsCount, 5); i++) {
+            badgeHTML += "⭐ ";
+        }
+        if (starsCount >= 6) {
+            badgeHTML += "🏆 क्राउन";
+        }
+        badgeArea.innerHTML = badgeHTML || "⭐";
+    }
+
+    function startTimer() {
+        clearInterval(timerInterval);
+        timeLeft = 15;
+        document.getElementById("timer").innerText = timeLeft;
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            document.getElementById("timer").innerText = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timeOutHandler();
+            }
+        }, 1000);
+    }
+
+    function timeOutHandler() {
+        if (isAnswering) return;
+        isAnswering = true;
+        playSound('wrong');
+        speakText("समय सकियो! अर्को प्रश्न खेल्नुहोस्", () => {
+            loadQuestion();
+        });
+    }
+
     function speakText(text, callback) {
         if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel(); // अघिल्लो आवाज रोक्ने
+            window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'ne-NP';
-            utterance.rate = 0.85; // बालबालिकाले बुझ्ने गरी ठिक्कको गति
+            utterance.rate = 0.85;
 
             if (callback) {
                 utterance.onend = callback;
             }
 
             window.speechSynthesis.speak(utterance);
+        } else {
+            if (callback) callback();
         }
     }
 
     function loadQuestion() {
+        isAnswering = false;
         const randomQ = pool[Math.floor(Math.random() * pool.length)];
         currentQuestionText = randomQ.q;
         document.getElementById("question").innerText = randomQ.q;
+
+        const imgElement = document.getElementById("quiz-image");
+        if (randomQ.img) {
+            imgElement.src = randomQ.img;
+            imgElement.style.display = "block";
+        } else {
+            imgElement.style.display = "none";
+        }
         
         const optionsDiv = document.getElementById("options");
         optionsDiv.innerHTML = "";
@@ -117,39 +258,52 @@
             const btn = document.createElement("button");
             btn.className = "opt-btn";
             btn.innerText = option;
-            btn.onclick = () => checkAnswer(index, randomQ.ans);
+            btn.onclick = (e) => checkAnswer(index, randomQ.ans, e.target);
             optionsDiv.appendChild(btn);
         });
 
-        // 🔊 प्रश्न आउनासाथ बोलेर सुनाउने
+        startTimer();
         speakText(randomQ.q);
     }
 
-    // 🔊 प्रश्न दोहोर्‍याएर सुन्नका लागि
     function repeatQuestion() {
         if (currentQuestionText) {
             speakText(currentQuestionText);
         }
     }
 
-    function checkAnswer(selected, correct) {
+    function checkAnswer(selected, correct, btnElement) {
+        if (isAnswering) return;
+        isAnswering = true;
+        clearInterval(timerInterval);
+
+        let playedCount = parseInt(localStorage.getItem('quiz_played_count') || 0);
+        localStorage.setItem('quiz_played_count', playedCount + 1);
+
         if (selected === correct) {
+            btnElement.classList.add('correct');
+            playSound('correct');
+            
             score++;
+            localStorage.setItem('quiz_total_score', score);
             document.getElementById("score").innerText = score;
-            // 🔊 सही हुँदा बोल्ने र बोली सकिएपछि नयाँ प्रश्न लोड हुने
-            speakText("स्याबास! सही उत्तर", () => {
+            updateBadges();
+
+            speakText("स्याबास! सही उत्तर दिनुभयो", () => {
                 loadQuestion();
             });
         } else {
-            // 🔊 गलत हुँदा बोल्ने र बोली सकिएपछि नयाँ प्रश्न लोड हुने
-            speakText("ओहो! गलत भयो, प्रयास जारी राख्नुहोस्", () => {
+            btnElement.classList.add('wrong');
+            playSound('wrong');
+            
+            const buttons = document.querySelectorAll('.opt-btn');
+            if (buttons[correct]) buttons[correct].classList.add('correct');
+
+            speakText("ओहो! गलत भयो हजुर, प्रयास जारी राख्नुहोस् है", () => {
                 loadQuestion();
             });
         }
     }
-
-    // पहिलो पटक लोड गर्दा
-    loadQuestion();
 </script>
 
 </body>
