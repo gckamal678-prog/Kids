@@ -1,47 +1,47 @@
-const CACHE_NAME = 'patshala-v6';
+const CACHE_NAME = 'bal-pathshala-v2';
 
-// १. क्यास गर्नुपर्ने फाइलहरूको सुची
-const ASSETS_TO_CACHE = [
+// क्यास गर्नुपर्ने फाइलहरूको सूची
+const assets = [
   './',
   './index.html',
-  './manifest.json',
-  './dark-mode.js',
-  './nepal.png',
-  './192.png',
-  './512.png',
-  './anthem.mp3',
   './alphabet.html',
   './animals-birds.html',
+  './anthem.mp3',
   './barahakhari.html',
   './body-parts.html',
   './colors.html',
   './consonants.html',
+  './dark-mode.js',
   './days-months.html',
   './drawing.html',
   './fruits-vegetables.html',
   './image.html',
   './imageconsonants.html',
   './imegevowels.html',
+  './manifest.json',
+  './nepal.png',
   './numbers.html',
   './pahada.html',
   './quiz.html',
   './vehicles.html',
-  './vowels.html'
+  './vowels.html',
+  './192.png',
+  './512.png'
 ];
 
-// २. Install Event: सबै फाइलहरू डाउनलोड गरेर Cache मा राख्ने
-self.addEventListener('install', (event) => {
-  self.skipWaiting();
-  event.waitUntil(
+// Install Event: फाइलहरू क्यास गर्ने
+self.addEventListener('install', (e) => {
+  e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      return cache.addAll(assets);
     })
   );
+  self.skipWaiting();
 });
 
-// ३. Activate Event: पुरानो क्यास (Old Versions) मात्र मेट्ने, नयाँ जोगाउने
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
+// Activate Event: पुरानो क्यास हटाउने
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
@@ -50,22 +50,18 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    }).then(() => self.clients.claim())
+    })
   );
+  return self.clients.claim();
 });
 
-// ४. Fetch Event: अफलाइन हुँदा Cache बाट फाइल दिने
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      // यदि Cache मा भेटियो भने त्यही दिने, नभए इन्टरनेटबाट ल्याउने
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request);
-    }).catch(() => {
-      // इन्टरनेट र क्यास दुवै नहुँदा index.html खोल्ने
-      return caches.match('./index.html');
+// Fetch Event: नेटवर्क वा क्यासबाट फाइल लोड गर्ने
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    caches.match(e.request).then((response) => {
+      return response || fetch(e.request).catch(() => {
+        return caches.match('./index.html');
+      });
     })
   );
 });
