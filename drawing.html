@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>चित्र कोर्ने र रङ भर्ने बोर्ड - बाल पाठशाला</title>
+    <title>अक्षर अभ्यास र चित्र कोर्ने बोर्ड - बाल पाठशाला</title>
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -19,8 +19,33 @@
         }
         h2 {
             color: #FF5722;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
+        
+        /* Tracing Alphabet Selector */
+        .template-selector {
+            margin-bottom: 12px;
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .template-btn {
+            background: #FFFFFF;
+            border: 2px solid #2196F3;
+            color: #2196F3;
+            font-weight: bold;
+            font-size: 15px;
+            padding: 4px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .template-btn.active {
+            background: #2196F3;
+            color: white;
+        }
+
         .canvas-card {
             background: white;
             border-radius: 16px;
@@ -105,10 +130,22 @@
 </head>
 <body>
 
-    <h2>🎨 चित्र कोर्ने र रङ भर्ने बोर्ड 🎨</h2>
+    <h2>🎨 अक्षर अभ्यास र चित्र कोर्ने बोर्ड 🎨</h2>
     
+    <!-- १. रेखा कोर्ने अक्षर/अंक रोज्ने बटनहरू -->
+    <div class="template-selector">
+        <button class="template-btn active" onclick="setTracingText('')">खाली पाटी</button>
+        <button class="template-btn" onclick="setTracingText('क')">क</button>
+        <button class="template-btn" onclick="setTracingText('ख')">ख</button>
+        <button class="template-btn" onclick="setTracingText('ग')">ग</button>
+        <button class="template-btn" onclick="setTracingText('१')">१</button>
+        <button class="template-btn" onclick="setTracingText('२')">२</button>
+        <button class="template-btn" onclick="setTracingText('A')">A</button>
+        <button class="template-btn" onclick="setTracingText('B')">B</button>
+    </div>
+
     <div class="canvas-card">
-        <canvas id="paintCanvas" width="340" height="380"></canvas>
+        <canvas id="paintCanvas" width="340" height="360"></canvas>
     </div>
 
     <div class="toolbar">
@@ -127,7 +164,7 @@
         <div class="tools-group">
             <div class="brush-control">
                 <label for="brushSize">साइज:</label>
-                <input type="range" id="brushSize" min="2" max="30" value="6">
+                <input type="range" id="brushSize" min="2" max="30" value="8">
             </div>
             
             <button class="btn eraser-btn" onclick="useEraser()">🧽 रबर (Eraser)</button>
@@ -144,6 +181,43 @@
     let painting = false;
     let currentColor = '#F44336';
     let isEraser = false;
+    let currentTracingText = '';
+
+    // Tracing Text (धमिलो अक्षर) बनाउने फङ्क्सन
+    function drawBackgroundText() {
+        if (!currentTracingText) return;
+
+        ctx.save();
+        ctx.font = 'bold 210px "Mukta", sans-serif';
+        ctx.fillStyle = '#E0E0E0'; // धमिलो सेतो/छायाँ रङ
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // Canvas को बीचमा अक्षर छाप्ने
+        ctx.fillText(currentTracingText, canvas.width / 2, canvas.height / 2 + 15);
+        
+        // धमिलो रेखा देखाउन डटेड बाहिरी घेरा (Dashed Stroke)
+        ctx.strokeStyle = '#BDBDBD';
+        ctx.lineWidth = 3;
+        ctx.setLineDash([6, 6]);
+        ctx.strokeText(currentTracingText, canvas.width / 2, canvas.height / 2 + 15);
+        
+        ctx.restore();
+    }
+
+    function setTracingText(text) {
+        currentTracingText = text;
+        
+        // Active बटनको स्टाइल फेर्ने
+        document.querySelectorAll('.template-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.innerText === text || (text === '' && btn.innerText === 'खाली पाटी')) {
+                btn.classList.add('active');
+            }
+        });
+
+        clearCanvas();
+    }
 
     function startPosition(e) {
         painting = true;
@@ -164,7 +238,7 @@
         ctx.lineJoin = 'round';
 
         if (isEraser) {
-            ctx.strokeStyle = '#FFFFFF'; // रबरले सेतो रङ बनाउँछ
+            ctx.strokeStyle = '#FFFFFF';
         } else {
             ctx.strokeStyle = currentColor;
         }
@@ -190,11 +264,10 @@
 
     function clearCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawBackgroundText(); // सफा गरेपछि पनि अभ्यास गर्ने अक्षर देखाउने
     }
 
-    // मोबाइलमा सिधै Download/Save गर्ने फङ्क्सन
     function saveImage() {
-        // सेतो पृष्ठभूमि पक्का गर्न
         const tempCanvas = document.createElement('canvas');
         tempCanvas.width = canvas.width;
         tempCanvas.height = canvas.height;
@@ -219,6 +292,9 @@
     canvas.addEventListener('touchstart', startPosition);
     canvas.addEventListener('touchend', endPosition);
     canvas.addEventListener('touchmove', draw);
+
+    // पहिलो पटक खोल्दा
+    clearCanvas();
 </script>
 
 </body>
