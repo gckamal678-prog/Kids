@@ -120,27 +120,9 @@
             background-color: #E8EAF6;
         }
     </style>
-    <script>
-        // नेपाली उच्चारण (१, २, ३...)
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
 
-        // अङ्ग्रेजी उच्चारण (One, Two, Three...)
-        function speakEnglish(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'en-US';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -171,19 +153,19 @@
             for (let c = 0; c < 10; c++) {
                 let num = c * 10 + r;
                 
-                // नेपाली कार्ड
+                // नेपाली कार्ड (playAIVoice प्रयोग गरिएको)
                 let nepCard = document.createElement('div');
                 nepCard.className = 'number-card';
                 let nepVal = toNepaliNumber(num);
                 nepCard.innerText = nepVal;
-                nepCard.addEventListener('click', () => speakNepali(nepVal));
+                nepCard.addEventListener('click', () => playAIVoice(nepVal));
                 nepGrid.appendChild(nepCard);
 
-                // अङ्ग्रेजी कार्ड (en-US भ्वाइस प्रयोग गरिएको)
+                // अङ्ग्रेजी कार्ड (playAIVoice प्रयोग गरिएको)
                 let engCard = document.createElement('div');
                 engCard.className = 'number-card';
                 engCard.innerText = num;
-                engCard.addEventListener('click', () => speakEnglish(num.toString()));
+                engCard.addEventListener('click', () => playAIVoice(num.toString()));
                 engGrid.appendChild(engCard);
             }
         }
