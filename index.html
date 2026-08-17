@@ -33,6 +33,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
     
+    <!-- ElevenLabs / AI Voice Script जोडिएको -->
+    <script src="script.js"></script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -141,6 +144,7 @@
             font-size: 22px;
             color: #FFE600;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            cursor: pointer;
         }
         
         .nepal-3d-card {
@@ -183,6 +187,7 @@
             margin: 15px 0 20px 0;
             font-weight: 800;
             text-shadow: 1px 1px 0px #FFF;
+            cursor: pointer;
         }
 
         /* --- Category Container --- */
@@ -207,6 +212,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
         }
 
         .menu-card {
@@ -291,7 +297,7 @@
 
     <!-- 📌 दैनिक लक्ष्य विजेट -->
     <div class="target-widget">
-        <div class="target-title" id="target-title-text">📌 आजको दैनिक लक्ष्य: ० / १० क्विज मिलाउने</div>
+        <div class="target-title" id="target-title-text" onclick="playAIVoice('आजको दैनिक लक्ष्य')">📌 आजको दैनिक लक्ष्य: ० / १० क्विज मिलाउने</div>
         <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="target-progress-fill"></div>
         </div>
@@ -299,7 +305,7 @@
 
     <!-- १. हाम्रो प्यारो नेपाल -->
     <div class="national-box">
-        <h1>🇳🇵 हाम्रो प्यारो नेपाल 🇳🇵</h1>
+        <h1 onclick="playAIVoice('हाम्रो प्यारो नेपाल')">🇳🇵 हाम्रो प्यारो नेपाल 🇳🇵</h1>
         <div class="nepal-3d-card" onclick="toggleAnthem()">
             <img src="./nepal.png" alt="हाम्रो प्यारो नेपाल">
         </div>
@@ -308,52 +314,52 @@
 
     <audio id="national-anthem" src="./anthem.mp3" preload="auto"></audio>
 
-    <div class="main-title">✨ बालबालिका सिकाइ केन्द्र ✨</div>
+    <div class="main-title" onclick="playAIVoice('बालबालिका सिकाइ केन्द्र')">✨ बालबालिका सिकाइ केन्द्र ✨</div>
 
     <div class="category-container">
         
         <!-- २. भाषा र अक्षर -->
         <div class="category-block">
-            <div class="category-header" style="color: #2E7D32;">📚 भाषा र अक्षर (Alphabets)</div>
+            <div class="category-header" style="color: #2E7D32;" onclick="playAIVoice('भाषा र अक्षर')">📚 भाषा र अक्षर (Alphabets)</div>
             <div class="grid-2x3">
-                <a href="./alphabet.html" class="menu-card bg-lang"><span class="icon">🔤</span>Alphabet</a>
-                <a href="./image.html" class="menu-card bg-lang"><span class="icon">🖼️</span>English Image</a>
-                <a href="./vowels.html" class="menu-card bg-lang"><span class="icon">अ</span>स्वर वर्ण</a>
-                <a href="./imagevowels.html" class="menu-card bg-lang"><span class="icon">🎨</span>स्वर (Image)</a>
-                <a href="./consonants.html" class="menu-card bg-lang"><span class="icon">क</span>व्यञ्जन वर्ण</a>
-                <a href="./imageconsonants.html" class="menu-card bg-lang"><span class="icon">🧩</span>व्यञ्जन (Img)</a>
+                <a href="./alphabet.html" class="menu-card bg-lang" onclick="playAIVoice('अल्फाबेट');"><span class="icon">🔤</span>Alphabet</a>
+                <a href="./image.html" class="menu-card bg-lang" onclick="playAIVoice('इङ्ग्रेजी इमेज');"><span class="icon">🖼️</span>English Image</a>
+                <a href="./vowels.html" class="menu-card bg-lang" onclick="playAIVoice('स्वर वर्ण');"><span class="icon">अ</span>स्वर वर्ण</a>
+                <a href="./imagevowels.html" class="menu-card bg-lang" onclick="playAIVoice('स्वर इमेज');"><span class="icon">🎨</span>स्वर (Image)</a>
+                <a href="./consonants.html" class="menu-card bg-lang" onclick="playAIVoice('व्यञ्जन वर्ण');"><span class="icon">क</span>व्यञ्जन वर्ण</a>
+                <a href="./imageconsonants.html" class="menu-card bg-lang" onclick="playAIVoice('व्यञ्जन इमेज');"><span class="icon">🧩</span>व्यञ्जन (Img)</a>
             </div>
         </div>
 
         <!-- ३. शब्द ज्ञान -->
         <div class="category-block">
-            <div class="category-header" style="color: #E65100;">🍎 शब्द ज्ञान (Vocabulary)</div>
+            <div class="category-header" style="color: #E65100;" onclick="playAIVoice('शब्द ज्ञान')">🍎 शब्द ज्ञान (Vocabulary)</div>
             <div class="grid-2x3">
-                <a href="./barahakhari.html" class="menu-card bg-vocab"><span class="icon">📝</span>बाह्रखरी</a>
-                <a href="./colors.html" class="menu-card bg-vocab"><span class="icon">🎨</span>रङहरूको नाम</a>
-                <a href="./fruits-vegetables.html" class="menu-card bg-vocab"><span class="icon">🍎</span>फलफूल/तरकारी</a>
-                <a href="./animals-birds.html" class="menu-card bg-vocab"><span class="icon">🐅</span>जनावर/पन्छी</a>
-                <a href="./body-parts.html" class="menu-card bg-vocab"><span class="icon">👀</span>शरीरका अंग</a>
-                <a href="./vehicles.html" class="menu-card bg-vocab"><span class="icon">🚗</span>सवारी साधन</a>
+                <a href="./barahakhari.html" class="menu-card bg-vocab" onclick="playAIVoice('बाह्रखरी');"><span class="icon">📝</span>बाह्रखरी</a>
+                <a href="./colors.html" class="menu-card bg-vocab" onclick="playAIVoice('रङहरूको नाम');"><span class="icon">🎨</span>रङहरूको नाम</a>
+                <a href="./fruits-vegetables.html" class="menu-card bg-vocab" onclick="playAIVoice('फलफूल र तरकारी');"><span class="icon">🍎</span>फलफूल/तरकारी</a>
+                <a href="./animals-birds.html" class="menu-card bg-vocab" onclick="playAIVoice('जनावर र पन्छी');"><span class="icon">🐅</span>जनावर/पन्छी</a>
+                <a href="./body-parts.html" class="menu-card bg-vocab" onclick="playAIVoice('शरीरका अंगहरू');"><span class="icon">👀</span>शरीरका अंग</a>
+                <a href="./vehicles.html" class="menu-card bg-vocab" onclick="playAIVoice('सवारी साधनहरू');"><span class="icon">🚗</span>सवारी साधन</a>
             </div>
         </div>
 
         <!-- ४. गणित र समय -->
         <div class="category-block">
-            <div class="category-header" style="color: #6A1B9A;">🔢 गणित र समय (Maths & GK)</div>
+            <div class="category-header" style="color: #6A1B9A;" onclick="playAIVoice('गणित र समय')">🔢 गणित र समय (Maths & GK)</div>
             <div class="grid-1x3">
-                <a href="./days-months.html" class="menu-card bg-math"><span class="icon">📅</span>वार र महिना</a>
-                <a href="./numbers.html" class="menu-card bg-math"><span class="icon">🔢</span>Numbers / अंक</a>
-                <a href="./pahada.html" class="menu-card bg-math"><span class="icon">✖️</span>गणित पहाडा</a>
+                <a href="./days-months.html" class="menu-card bg-math" onclick="playAIVoice('वार र महिना');"><span class="icon">📅</span>वार र महिना</a>
+                <a href="./numbers.html" class="menu-card bg-math" onclick="playAIVoice('नम्बर्स र अंक');"><span class="icon">🔢</span>Numbers / अंक</a>
+                <a href="./pahada.html" class="menu-card bg-math" onclick="playAIVoice('गणित पहाडा');"><span class="icon">✖️</span>गणित पहाडा</a>
             </div>
         </div>
 
         <!-- ५. मनोरञ्जन र अभ्यास -->
         <div class="category-block">
-            <div class="category-header" style="color: #00838F;">🎨 मनोरञ्जन र अभ्यास (Activities)</div>
+            <div class="category-header" style="color: #00838F;" onclick="playAIVoice('मनोरञ्जन र अभ्यास')">🎨 मनोरञ्जन र अभ्यास (Activities)</div>
             <div class="grid-1x2">
-                <a href="./quiz.html" class="menu-card bg-activity"><span class="icon">🧠</span>बाल क्विज (Quiz)</a>
-                <a href="./drawing.html" class="menu-card bg-activity"><span class="icon">✏️</span>चित्र कोर्ने बोर्ड</a>
+                <a href="./quiz.html" class="menu-card bg-activity" onclick="playAIVoice('बाल क्विज खेल');"><span class="icon">🧠</span>बाल क्विज (Quiz)</a>
+                <a href="./drawing.html" class="menu-card bg-activity" onclick="playAIVoice('चित्र कोर्ने बोर्ड');"><span class="icon">✏️</span>चित्र कोर्ने बोर्ड</a>
             </div>
         </div>
 
@@ -432,6 +438,7 @@
     const statusText = document.getElementById('audio-status');
     if (anthem.paused) {
       anthem.play();
+      playAIVoice("राष्ट्रिय गान बज्दैछ");
       statusText.innerHTML = "🔊 राष्ट्रिय गान बज्दैछ... (रोक्न थिच्नुहोस्)";
     } else {
       anthem.pause();
@@ -445,7 +452,6 @@
 
   // Dashboard & Progress Functions
   function showParentDashboard() {
-      // सेटिङहरू लोड गर्ने
       document.getElementById('screen-time-select').value = localStorage.getItem('app_screen_limit') || "0";
       document.getElementById('target-select').value = localStorage.getItem('app_daily_target') || "10";
       document.getElementById('parent-dashboard').style.display = 'block';
@@ -522,7 +528,7 @@
 
   function unlockScreenManually() {
       document.getElementById('screen-lock-overlay').style.display = 'none';
-      localStorage.setItem('app_screen_limit', 0); // Temporary unlock by disabling limit
+      localStorage.setItem('app_screen_limit', 0);
       alert("समय सीमा अनलक गरियो!");
   }
 
