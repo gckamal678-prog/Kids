@@ -122,16 +122,9 @@
             font-family: 'Fredoka', sans-serif;
         }
     </style>
-    <script>
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -182,11 +175,11 @@
             { np: 'खुर्सानी', en: 'Chilli', emoji: '🌶️' },
             { np: 'सिमलाबन्द', en: 'Capsicum', emoji: '🫑' },
             { np: 'पालुङ्गो', en: 'Spinach', emoji: '🥗' },
-            { np: 'अदुवा', eng: 'Ginger', emoji: '🫚' },
-            { np: 'धनियाँ', eng: 'Coriander', emoji: '🌿' },
+            { np: 'अदुवा', en: 'Ginger', emoji: '🫚' },
+            { np: 'धनियाँ', en: 'Coriander', emoji: '🌿' }
         ];
 
-        // फलफूल लोड गर्ने
+        // फलफूल लोड गर्ने (playAIVoice प्रयोग गरिएको)
         const fruitsGrid = document.getElementById('fruitsGrid');
         fruitsData.forEach(item => {
             const card = document.createElement('div');
@@ -196,11 +189,11 @@
                 <div class="np-name">${item.np}</div>
                 <div class="en-name">${item.en}</div>
             `;
-            card.addEventListener('click', () => speakNepali(item.np));
+            card.addEventListener('click', () => playAIVoice(item.np));
             fruitsGrid.appendChild(card);
         });
 
-        // तरकारी लोड गर्ने
+        // तरकारी लोड गर्ने (playAIVoice प्रयोग गरिएको)
         const vegetablesGrid = document.getElementById('vegetablesGrid');
         vegetablesData.forEach(item => {
             const card = document.createElement('div');
@@ -210,7 +203,7 @@
                 <div class="np-name">${item.np}</div>
                 <div class="en-name">${item.en}</div>
             `;
-            card.addEventListener('click', () => speakNepali(item.np));
+            card.addEventListener('click', () => playAIVoice(item.np));
             vegetablesGrid.appendChild(card);
         });
     </script>
