@@ -159,16 +159,9 @@
             font-weight: 800;
         }
     </style>
-    <script>
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.95;
-            speech.pitch = 1.2;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="header">
@@ -212,14 +205,13 @@
                     let cellText = "";
                     
                     if (c === 0) {
-                        // पहिलो स्तम्भमा पूरा गुणन देखाइने (जस्तै 2*1=2 वा 11*1=11)
                         cellText = `${n}*${r}=${n * r}`;
                     } else {
-                        // बाँकी स्तम्भहरूमा गुणनफल मात्र (तपाईँको हस्तलिखित उदाहरण अनुसार)
                         cellText = `${n * r}`;
                     }
                     
-                    row += `<td onclick="speakNepali('${cellText}')">${cellText}</td>`;
+                    // playAIVoice प्रयोग गरिएको
+                    row += `<td onclick="playAIVoice('${cellText}')">${cellText}</td>`;
                 }
                 row += '</tr>';
                 table.innerHTML += row;
