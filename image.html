@@ -140,20 +140,9 @@
             color: #00838F;
         }
     </style>
-    <script>
-        function speakText(text) {
-            window.speechSynthesis.cancel();
-            
-            // वाक्यमा 'Z,' वा 'z,' छ भने त्यसलाई 'Zed,' (जेट) बनाउने
-            let updatedText = text.replace(/^Z,/i, 'Zed,');
 
-            let speech = new SpeechSynthesisUtterance(updatedText);
-            speech.lang = 'en-GB'; // ब्रिटिस अङ्ग्रेजी प्रयोग गर्दा 'जेट' उच्चारण आउँछ
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -205,7 +194,7 @@
         const lowerGrid = document.getElementById('lowerGrid');
 
         alphabetData.forEach(item => {
-            // Capital Card
+            // Capital Card (playAIVoice प्रयोग गरिएको)
             const upperCard = document.createElement('div');
             upperCard.className = 'card';
             upperCard.innerHTML = `
@@ -213,10 +202,10 @@
                 <div class="letter-title">${item.letter}</div>
                 <div class="word-title">${item.word}</div>
             `;
-            upperCard.addEventListener('click', () => speakText(`${item.letter}, for ${item.word}`));
+            upperCard.addEventListener('click', () => playAIVoice(`${item.letter} for ${item.word}`));
             upperGrid.appendChild(upperCard);
 
-            // Small Card
+            // Small Card (playAIVoice प्रयोग गरिएको)
             const lowerCard = document.createElement('div');
             lowerCard.className = 'card';
             lowerCard.innerHTML = `
@@ -224,7 +213,7 @@
                 <div class="letter-title">${item.letter.toLowerCase()}</div>
                 <div class="word-title">${item.word}</div>
             `;
-            lowerCard.addEventListener('click', () => speakText(`${item.letter.toLowerCase()}, for ${item.word}`));
+            lowerCard.addEventListener('click', () => playAIVoice(`${item.letter.toLowerCase()} for ${item.word}`));
             lowerGrid.appendChild(lowerCard);
         });
 
