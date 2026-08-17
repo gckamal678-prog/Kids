@@ -89,16 +89,9 @@
             background-color: #FFF8E1;
         }
     </style>
-    <script>
-        function speakText(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -120,9 +113,9 @@
             div.className = 'letter-card';
             div.innerText = letter;
             
-            // अक्षरमा क्लिक गर्दा आवाज आउने
+            // playAIVoice प्रयोग गरिएको
             div.addEventListener('click', () => {
-                speakText(letter);
+                playAIVoice(letter);
             });
 
             grid.appendChild(div);
