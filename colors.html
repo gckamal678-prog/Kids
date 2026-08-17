@@ -107,16 +107,9 @@
             font-family: 'Fredoka', sans-serif;
         }
     </style>
-    <script>
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -161,7 +154,8 @@
                 <div class="en-name">${item.en}</div>
             `;
             
-            card.addEventListener('click', () => speakNepali(item.np + ' रङ'));
+            // पुरानो स्पिच हटाएर playAIVoice प्रयोग गरिएको
+            card.addEventListener('click', () => playAIVoice(item.np + ' रङ'));
             colorsGrid.appendChild(card);
         });
     </script>
