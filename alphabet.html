@@ -123,23 +123,6 @@
             background-color: #E3F2FD;
         }
     </style>
-    <script>
-        function speakEnglish(text) {
-            window.speechSynthesis.cancel();
-            
-            // Z वा z छ भने उच्चारण 'Zed' (जेट) गराउने
-            let textToSpeak = text;
-            if (text.toUpperCase() === 'Z') {
-                textToSpeak = 'Zed';
-            }
-
-            let speech = new SpeechSynthesisUtterance(textToSpeak);
-            speech.lang = 'en-GB'; // ब्रिटिस अङ्ग्रेजी सेट गर्दा 'जेट' प्रष्ट आउँछ
-            speech.rate = 0.9;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
 </head>
 <body>
 
@@ -163,21 +146,19 @@
         const upperGrid = document.getElementById('upperGrid');
         const lowerGrid = document.getElementById('lowerGrid');
 
-        // Capital Alphabet Load
+        // Capital Alphabet Load (आवाज हटाएर खाली राखिएको)
         upperAlphabet.forEach(letter => {
             const div = document.createElement('div');
             div.className = 'letter-card';
             div.innerText = letter;
-            div.addEventListener('click', () => speakEnglish(letter));
             upperGrid.appendChild(div);
         });
 
-        // Small Alphabet Load
+        // Small Alphabet Load (आवाज हटाएर खाली राखिएको)
         lowerAlphabet.forEach(letter => {
             const div = document.createElement('div');
             div.className = 'letter-card';
             div.innerText = letter;
-            div.addEventListener('click', () => speakEnglish(letter));
             lowerGrid.appendChild(div);
         });
 
