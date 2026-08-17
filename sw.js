@@ -1,44 +1,16 @@
-const CACHE_NAME = 'bal-pathshala-v5';
+const CACHE_NAME = 'bal-pathshala-v6';
 
-// क्यास गर्नुपर्ने फाइलहरू (एउटा पनि स्पेलिङ गलत हुनुहुँदैन)
-const assets = [
-  '/',
-  '/index.html',
-  '/alphabet.html',
-  '/animals-birds.html',
-  '/anthem.mp3',
-  '/barahakhari.html',
-  '/body-parts.html',
-  '/colors.html',
-  '/consonants.html',
-  '/dark-mode.js',
-  '/days-months.html',
-  '/drawing.html',
-  '/fruits-vegetables.html',
-  '/image.html',
-  '/imageconsonants.html',
-  '/imagevowels.html',
-  '/nepal.png',
-  '/numbers.html',
-  '/pahada.html',
-  '/quiz.html',
-  '/vehicles.html',
-  '/vowels.html',
-  '/192.png',
-  '/512.png'
-];
-
-// Install Event
+// Install Event (अहिले सबै फाइल एकैचोटि तानेर ब्लक गर्दैन, सुरक्षित रूपमा इन्स्टल हुन्छ)
 self.addEventListener('install', (e) => {
   self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(assets);
+      console.log('Service Worker Installed');
     })
   );
 });
 
-// Activate Event
+// Activate Event (पुरानो क्यास स्वतः सफा गर्ने)
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
@@ -53,17 +25,23 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Fetch Event (Offline Support Fix)
+// Fetch Event (जुन पेज वा फाइल खोल्छ, त्यसलाई अटोमेटिक क्यास गर्दै जाने)
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
 
   e.respondWith(
-    caches.match(e.request, { ignoreSearch: true }).then((response) => {
-      if (response) {
-        return response;
-      }
-      return fetch(e.request).catch(() => {
-        return caches.match('/index.html');
+    caches.match(e.request).then((cachedResponse) => {
+      // यदि क्यासमा छ भने त्यही देखाउने, नभए इन्टरनेटबाट तानेर ल्याउने र क्याسमा सेभ गर्ने
+      return cachedResponse || fetch(e.request).then((networkResponse) => {
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(e.request, networkResponse.clone());
+          return networkResponse;
+        });
+      }).catch(() => {
+        // यदि अफलाइन छ र मुख्य पेज हो भने index.html देखाइदिने
+        if (e.request.mode === 'navigate') {
+          return caches.match('/index.html');
+        }
       });
     })
   );
