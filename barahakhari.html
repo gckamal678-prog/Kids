@@ -5,162 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>नेपाली बाह्रखरी - पाठशाला</title>
     <meta name="theme-color" content="#673AB7">
-    <!-- Child-friendly Typography -->
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Mukta', 'Fredoka', sans-serif;
-            background-color: #F4F6F9;
-            margin: 0;
-            padding: 12px;
-            text-align: center;
-            min-height: 100vh;
-        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Mukta', 'Fredoka', sans-serif; background-color: #F4F6F9; margin: 0; padding: 12px; text-align: center; min-height: 100vh; }
 
-        /* Header Layout */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 700px;
-            margin: 0 auto 15px auto;
-            background: #FFFFFF;
-            padding: 10px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-        }
-        h2 { 
-            color: #2C3E50; 
-            margin: 0; 
-            font-size: 22px; 
-            font-weight: 800;
-        }
-        .home-btn {
-            background-color: #673AB7;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 3px 0 #4A148C;
-            transition: all 0.1s ease;
-        }
-        .home-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
+        .header { display: flex; justify-content: space-between; align-items: center; max-width: 700px; margin: 0 auto 15px auto; background: #FFFFFF; padding: 10px 15px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); }
+        h2 { color: #2C3E50; margin: 0; font-size: 22px; font-weight: 800; }
+        .home-btn { background-color: #673AB7; color: white; padding: 6px 14px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px; box-shadow: 0 3px 0 #4A148C; transition: all 0.1s ease; }
+        .home-btn:active { transform: translateY(2px); box-shadow: none; }
 
-        /* Container */
-        .barahkhari-container {
-            max-width: 700px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+        .barahkhari-container { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .family-box { background: #FFFFFF; border-radius: 18px; padding: 12px; box-shadow: 0 5px 12px rgba(0,0,0,0.05); border: 3px solid; text-align: left; }
+        .family-title { font-size: 20px; font-weight: 800; margin: 0 0 10px 5px; color: #4A148C; }
+        .barahkhari-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        @media (min-width: 480px) { .barahkhari-grid { grid-template-columns: repeat(6, 1fr); } }
 
-        /* Family Group Box */
-        .family-box {
-            background: #FFFFFF;
-            border-radius: 18px;
-            padding: 12px;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
-            border: 3px solid;
-            text-align: left;
-        }
+        .card { background-color: #FFFFFF; border-radius: 12px; padding: 10px 5px; cursor: pointer; user-select: none; transition: all 0.1s ease; font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center; min-height: 52px; border-style: solid; border-width: 2px 2px 4px 2px; }
+        .card:active { transform: translateY(3px); }
 
-        /* Family Title */
-        .family-title {
-            font-size: 20px;
-            font-weight: 800;
-            margin: 0 0 10px 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Grid for 12 Sound Cards */
-        .barahkhari-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-        @media (min-width: 480px) {
-            .barahkhari-grid {
-                grid-template-columns: repeat(6, 1fr);
-            }
-        }
-
-        /* Sound Card Base Style */
-        .card {
-            background-color: #FFFFFF;
-            border-radius: 12px;
-            padding: 10px 5px;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s ease;
-            font-size: 22px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 52px;
-            border-style: solid;
-            border-width: 2px 2px 4px 2px;
-        }
-        .card:active {
-            transform: translateY(3px);
-        }
-
-        /* --- अक्षर परिवार कलर थिम (COLOR FAMILIES) --- */
-        
-        /* 1. Purple Family (क, च, ट, त, प) */
-        .theme-purple { border-color: #7E57C2; }
-        .theme-purple .family-title { color: #4A148C; }
+        /* Themes */
         .theme-purple .card { color: #4A148C; border-color: #B39DDB #B39DDB #7E57C2 #B39DDB; background: #F3E5F5; }
-        .theme-purple .card:active { background: #E1BEE7; border-bottom-width: 2px; }
-
-        /* 2. Teal/Green Family (ख, छ, ठ, थ, फ) */
-        .theme-teal { border-color: #26A69A; }
-        .theme-teal .family-title { color: #004D40; }
         .theme-teal .card { color: #004D40; border-color: #80CBC4 #80CBC4 #26A69A #80CBC4; background: #E0F2F1; }
-        .theme-teal .card:active { background: #B2DFDB; border-bottom-width: 2px; }
-
-        /* 3. Pink Family (ग, ज, ड, द, ब) */
-        .theme-pink { border-color: #EC407A; }
-        .theme-pink .family-title { color: #880E4F; }
         .theme-pink .card { color: #880E4F; border-color: #F48FB1 #F48FB1 #EC407A #F48FB1; background: #FCE4EC; }
-        .theme-pink .card:active { background: #F8BBD0; border-bottom-width: 2px; }
-
-        /* 4. Orange Family (घ, झ, ढ, ध, भ) */
-        .theme-orange { border-color: #FF7043; }
-        .theme-orange .family-title { color: #BF360C; }
         .theme-orange .card { color: #BF360C; border-color: #FFAB91 #FFAB91 #FF7043 #FFAB91; background: #FBE9E7; }
-        .theme-orange .card:active { background: #FFCCBC; border-bottom-width: 2px; }
-
-        /* 5. Blue Family (म, य, र, ल, व) */
-        .theme-blue { border-color: #42A5F5; }
-        .theme-blue .family-title { color: #0D47A1; }
         .theme-blue .card { color: #0D47A1; border-color: #90CAF9 #90CAF9 #42A5F5 #90CAF9; background: #E3F2FD; }
-        .theme-blue .card:active { background: #BBDEFB; border-bottom-width: 2px; }
-
-        /* 6. Amber/Yellow Family (श, ष, स, ह) */
-        .theme-amber { border-color: #FFA726; }
-        .theme-amber .family-title { color: #E65100; }
         .theme-amber .card { color: #E65100; border-color: #FFCC80 #FFCC80 #FFA726 #FFCC80; background: #FFF3E0; }
-        .theme-amber .card:active { background: #FFE0B2; border-bottom-width: 2px; }
-
-        /* 7. Indigo/Cyan Family (क्ष, त्र, ज्ञ) */
-        .theme-cyan { border-color: #26C6DA; }
-        .theme-cyan .family-title { color: #006064; }
         .theme-cyan .card { color: #006064; border-color: #80DEEA #80DEEA #26C6DA #80DEEA; background: #E0F7FA; }
-        .theme-cyan .card:active { background: #B2EBF2; border-bottom-width: 2px; }
     </style>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -172,76 +48,40 @@
     <div class="barahkhari-container" id="barahkhariContainer"></div>
 
     <script>
-        // बाह्रखरीको स्वर चिन्हहरू
         const matras = ['', 'ा', 'ि', 'ी', 'ु', 'ू', 'े', 'ै', 'ो', 'ौ', 'ं', 'ः'];
-
-        // ३६ वटै व्यञ्जन वर्ण र तिनीहरूको कलर थिम
         const consonantsData = [
-            { base: 'क', theme: 'theme-purple' },
-            { base: 'ख', theme: 'theme-teal' },
-            { base: 'ग', theme: 'theme-pink' },
-            { base: 'घ', theme: 'theme-orange' },
-            { base: 'च', theme: 'theme-purple' },
-            { base: 'छ', theme: 'theme-teal' },
-            { base: 'ज', theme: 'theme-pink' },
-            { base: 'झ', theme: 'theme-orange' },
-            { base: 'ट', theme: 'theme-purple' },
-            { base: 'ठ', theme: 'theme-teal' },
-            { base: 'ड', theme: 'theme-pink' },
-            { base: 'ढ', theme: 'theme-orange' },
-            { base: 'त', theme: 'theme-purple' },
-            { base: 'थ', theme: 'theme-teal' },
-            { base: 'द', theme: 'theme-pink' },
-            { base: 'ध', theme: 'theme-orange' },
-            { base: 'न', theme: 'theme-blue' },
-            { base: 'प', theme: 'theme-purple' },
-            { base: 'फ', theme: 'theme-teal' },
-            { base: 'ब', theme: 'theme-pink' },
-            { base: 'भ', theme: 'theme-orange' },
-            { base: 'म', theme: 'theme-blue' },
-            { base: 'य', theme: 'theme-blue' },
-            { base: 'र', theme: 'theme-blue' },
-            { base: 'ल', theme: 'theme-blue' },
-            { base: 'व', theme: 'theme-blue' },
-            { base: 'श', theme: 'theme-amber' },
-            { base: 'ष', theme: 'theme-amber' },
-            { base: 'स', theme: 'theme-amber' },
-            { base: 'ह', theme: 'theme-amber' },
-            { base: 'क्ष', theme: 'theme-cyan' },
-            { base: 'त्र', theme: 'theme-cyan' },
-            { base: 'ज्ञ', theme: 'theme-cyan' }
+            { base: 'क', theme: 'theme-purple' }, { base: 'ख', theme: 'theme-teal' }, { base: 'ग', theme: 'theme-pink' },
+            { base: 'घ', theme: 'theme-orange' }, { base: 'च', theme: 'theme-purple' }, { base: 'छ', theme: 'theme-teal' },
+            { base: 'ज', theme: 'theme-pink' }, { base: 'झ', theme: 'theme-orange' }, { base: 'ट', theme: 'theme-purple' },
+            { base: 'ठ', theme: 'theme-teal' }, { base: 'ड', theme: 'theme-pink' }, { base: 'ढ', theme: 'theme-orange' },
+            { base: 'त', theme: 'theme-purple' }, { base: 'थ', theme: 'theme-teal' }, { base: 'द', theme: 'theme-pink' },
+            { base: 'ध', theme: 'theme-orange' }, { base: 'न', theme: 'theme-blue' }, { base: 'प', theme: 'theme-purple' },
+            { base: 'फ', theme: 'theme-teal' }, { base: 'ब', theme: 'theme-pink' }, { base: 'भ', theme: 'theme-orange' },
+            { base: 'म', theme: 'theme-blue' }, { base: 'य', theme: 'theme-blue' }, { base: 'र', theme: 'theme-blue' },
+            { base: 'ल', theme: 'theme-blue' }, { base: 'व', theme: 'theme-blue' }, { base: 'श', theme: 'theme-amber' },
+            { base: 'ष', theme: 'theme-amber' }, { base: 'स', theme: 'theme-amber' }, { base: 'ह', theme: 'theme-amber' },
+            { base: 'क्ष', theme: 'theme-cyan' }, { base: 'त्र', theme: 'theme-cyan' }, { base: 'ज्ञ', theme: 'theme-cyan' }
         ];
 
         const container = document.getElementById('barahkhariContainer');
 
         consonantsData.forEach(item => {
-            const letter = item.base;
-            
-            // Family Container
             const familyBox = document.createElement('div');
             familyBox.className = `family-box ${item.theme}`;
+            familyBox.innerHTML = `<div class="family-title">'${item.base}' परिवार</div>`;
 
-            // Family Header (उदा: 'क' परिवार)
-            const familyTitle = document.createElement('div');
-            familyTitle.className = 'family-title';
-            familyTitle.innerText = `'${letter}' परिवार`;
-            familyBox.appendChild(familyTitle);
-
-            // Grid Container for 12 variations
             const grid = document.createElement('div');
             grid.className = 'barahkhari-grid';
 
-            // Generate 12 Variations for each letter
             matras.forEach(matra => {
-                let char = letter + matra;
+                let char = (item.base === 'र' && matra === 'ु') ? 'रु' : (item.base === 'र' && matra === 'ू') ? 'रू' : item.base + matra;
                 
-                // केही विशेष अक्षर मिलाउने
-                if (letter === 'र' && matra === 'ु') char = 'रु';
-                if (letter === 'र' && matra === 'ू') char = 'रू';
-
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerText = char;
+                
+                // ElevenLabs को playAIVoice प्रयोग गरिएको
+                card.addEventListener('click', () => playAIVoice(char));
                 grid.appendChild(card);
             });
 
@@ -249,6 +89,5 @@
             container.appendChild(familyBox);
         });
     </script>
-
 </body>
 </html>
