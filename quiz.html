@@ -104,6 +104,9 @@
             margin-bottom: 10px;
         }
     </style>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -215,26 +218,10 @@
         if (isAnswering) return;
         isAnswering = true;
         playSound('wrong');
-        speakText("समय सकियो! अर्को प्रश्न खेल्नुहोस्", () => {
+        // playAIVoice प्रयोग गरिएको
+        playAIVoice("समय सकियो! अर्को प्रश्न खेल्नुहोस्", () => {
             loadQuestion();
         });
-    }
-
-    function speakText(text, callback) {
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'ne-NP';
-            utterance.rate = 0.85;
-
-            if (callback) {
-                utterance.onend = callback;
-            }
-
-            window.speechSynthesis.speak(utterance);
-        } else {
-            if (callback) callback();
-        }
     }
 
     function loadQuestion() {
@@ -263,12 +250,14 @@
         });
 
         startTimer();
-        speakText(randomQ.q);
+        // playAIVoice प्रयोग गरिएको
+        playAIVoice(randomQ.q);
     }
 
     function repeatQuestion() {
         if (currentQuestionText) {
-            speakText(currentQuestionText);
+            // playAIVoice प्रयोग गरिएको
+            playAIVoice(currentQuestionText);
         }
     }
 
@@ -289,7 +278,8 @@
             document.getElementById("score").innerText = score;
             updateBadges();
 
-            speakText("स्याबास! सही उत्तर दिनुभयो", () => {
+            // playAIVoice प्रयोग गरिएको
+            playAIVoice("स्याबास! सही उत्तर दिनुभयो", () => {
                 loadQuestion();
             });
         } else {
@@ -299,7 +289,8 @@
             const buttons = document.querySelectorAll('.opt-btn');
             if (buttons[correct]) buttons[correct].classList.add('correct');
 
-            speakText("ओहो! गलत भयो हजुर, प्रयास जारी राख्नुहोस् है", () => {
+            // playAIVoice प्रयोग गरिएको
+            playAIVoice("ओहो! गलत भयो हजुर, प्रयास जारी राख्नुहोस् है", () => {
                 loadQuestion();
             });
         }
