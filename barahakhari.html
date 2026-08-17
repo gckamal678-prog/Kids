@@ -161,16 +161,6 @@
         .theme-cyan .card { color: #006064; border-color: #80DEEA #80DEEA #26C6DA #80DEEA; background: #E0F7FA; }
         .theme-cyan .card:active { background: #B2EBF2; border-bottom-width: 2px; }
     </style>
-    <script>
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
 </head>
 <body>
 
@@ -218,8 +208,8 @@
             { base: 'स', theme: 'theme-amber' },
             { base: 'ह', theme: 'theme-amber' },
             { base: 'क्ष', theme: 'theme-cyan' },
-            { letter: 'त्र', base: 'त्र', theme: 'theme-cyan' },
-            { letter: 'ज्ञ', base: 'ज्ञ', theme: 'theme-cyan' }
+            { base: 'त्र', theme: 'theme-cyan' },
+            { base: 'ज्ञ', theme: 'theme-cyan' }
         ];
 
         const container = document.getElementById('barahkhariContainer');
@@ -252,7 +242,6 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerText = char;
-                card.addEventListener('click', () => speakNepali(char));
                 grid.appendChild(card);
             });
 
