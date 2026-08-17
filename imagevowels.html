@@ -110,16 +110,9 @@
             min-height: 22px;
         }
     </style>
-    <script>
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -131,7 +124,7 @@
     <div class="grid-container" id="vowelsGrid"></div>
 
     <script>
-        // सच्याइएको स्वर वर्ण Data
+        // स्वर वर्ण Data
         const vowelsData = [
             { letter: 'अ', word: 'अनार', emoji: '🫒' },
             { letter: 'आ', word: 'आमा', emoji: '👩' },
@@ -145,7 +138,7 @@
             { letter: 'ओ', word: 'ओखती', emoji: '💊' },
             { letter: 'औ', word: 'औषधि', emoji: '🩺' },
             { letter: 'अं', word: 'अङ्गुर', emoji: '🍇' },
-            { letter: 'अः', word: '', emoji: '' } // अः मा शब्द र इमोजी हटाइएको छ
+            { letter: 'अः', word: '', emoji: '' }
         ];
 
         const vowelsGrid = document.getElementById('vowelsGrid');
@@ -154,7 +147,6 @@
             const card = document.createElement('div');
             card.className = 'card';
             
-            // Emoji र Word भए मात्र देखाउने
             const emojiHtml = item.emoji ? `<div class="emoji-box">${item.emoji}</div>` : `<div class="emoji-box"></div>`;
             const wordHtml = item.word ? `<div class="word-title">${item.word}</div>` : `<div class="word-title"></div>`;
             
@@ -164,11 +156,12 @@
                 ${wordHtml}
             `;
 
+            // playAIVoice प्रयोग गरिएको
             card.addEventListener('click', () => {
                 if(!item.word) {
-                    speakNepali(item.letter);
+                    playAIVoice(item.letter);
                 } else {
-                    speakNepali(`${item.letter} बाट ${item.word}`);
+                    playAIVoice(`${item.letter} बाट ${item.word}`);
                 }
             });
             vowelsGrid.appendChild(card);
