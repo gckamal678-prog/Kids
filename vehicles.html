@@ -107,16 +107,9 @@
             color: #0288D1;
         }
     </style>
-    <script>
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -128,7 +121,7 @@
     <div class="grid-container" id="vehiclesGrid"></div>
 
     <script>
-        // सवारी साधनहरूको डाटा (Emoji र English Name सहित)
+        // सवारी साधनहरूको डाटा
         const vehiclesData = [
             { name: 'साइकल', eng: 'Bicycle', emoji: '🚲' },
             { name: 'मोटरसाइकल', eng: 'Motorcycle', emoji: '🏍️' },
@@ -154,7 +147,8 @@
                 <div class="name-nepali">${item.name}</div>
                 <div class="name-english">(${item.eng})</div>
             `;
-            card.addEventListener('click', () => speakNepali(item.name));
+            // playAIVoice प्रयोग गरिएको
+            card.addEventListener('click', () => playAIVoice(item.name));
             vehiclesGrid.appendChild(card);
         });
     </script>
