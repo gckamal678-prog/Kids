@@ -122,16 +122,9 @@
             font-family: 'Fredoka', sans-serif;
         }
     </style>
-    <script>
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -179,7 +172,7 @@
             { np: 'पेन्गुइन', en: 'Penguin', emoji: '🐧' }
         ];
 
-        // जनावर लोड गर्ने
+        // जनावर लोड गर्ने (playAIVoice प्रयोग गरिएको)
         const animalsGrid = document.getElementById('animalsGrid');
         animalsData.forEach(item => {
             const card = document.createElement('div');
@@ -189,11 +182,11 @@
                 <div class="np-name">${item.np}</div>
                 <div class="en-name">${item.en}</div>
             `;
-            card.addEventListener('click', () => speakNepali(item.np));
+            card.addEventListener('click', () => playAIVoice(item.np));
             animalsGrid.appendChild(card);
         });
 
-        // पन्छी लोड गर्ने
+        // पन्छी लोड गर्ने (playAIVoice प्रयोग गरिएको)
         const birdsGrid = document.getElementById('birdsGrid');
         birdsData.forEach(item => {
             const card = document.createElement('div');
@@ -203,7 +196,7 @@
                 <div class="np-name">${item.np}</div>
                 <div class="en-name">${item.en}</div>
             `;
-            card.addEventListener('click', () => speakNepali(item.np));
+            card.addEventListener('click', () => playAIVoice(item.np));
             birdsGrid.appendChild(card);
         });
     </script>
