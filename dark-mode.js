@@ -26,3 +26,10 @@ function openParentalLock(callback) {
         alert("गलत उत्तर! पुनः प्रयास गर्नुहोस्।");
     }
 }
+
+// ElevenLabs AI Voice Function
+function playAIVoice(text) {
+    // यहाँ तपाईंको ElevenLabs API वा अडियो प्ले गर्ने कोड रहनेछ
+    // पुरानो ब्राउजरको Web Speech API पूर्ण रूपमा हटाइएको छ।
+    console.log("Playing AI Voice for:", text);
+}
