@@ -118,16 +118,9 @@
             min-height: 22px;
         }
     </style>
-    <script>
-        function speakNepali(text) {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'ne-NP';
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+
+    <!-- ElevenLabs को लागि script.js जोडिएको -->
+    <script src="script.js"></script>
 </head>
 <body>
 
@@ -145,17 +138,17 @@
             { letter: 'ख', word: 'खरायो', emoji: '🐇' },
             { letter: 'ग', word: 'गाई', emoji: '🐄' },
             { letter: 'घ', word: 'घर', emoji: '🏠' },
-            { letter: 'ङ', word: '', emoji: '' }, // शब्द र इमोजी हटाइयो
+            { letter: 'ङ', word: '', emoji: '' },
             { letter: 'च', word: 'चरा', emoji: '🐦' },
             { letter: 'छ', word: 'छाता', emoji: '☂️' },
             { letter: 'ज', word: 'जहाज', emoji: '✈️' },
             { letter: 'झ', word: 'झण्डा', emoji: '🇳🇵' },
-            { letter: 'ञ', word: '', emoji: '' }, // शब्द र इमोजी हटाइयो
+            { letter: 'ञ', word: '', emoji: '' },
             { letter: 'ट', word: 'टमाटर', emoji: '🍅' },
             { letter: 'ठ', word: 'ठेला', emoji: '🛒' },
             { letter: 'ड', word: 'डमरु', emoji: '🥁' },
             { letter: 'ढ', word: 'ढोका', emoji: '🚪' },
-            { letter: 'ण', word: '', emoji: '' }, // शब्द र इमोजी हटाइयो
+            { letter: 'ण', word: '', emoji: '' },
             { letter: 'त', word: 'ताला', emoji: '🔒' },
             { letter: 'थ', word: 'थैली', emoji: '🛍️' },
             { letter: 'द', word: 'दियो', emoji: '🪔' },
@@ -185,7 +178,6 @@
             const card = document.createElement('div');
             card.className = 'card';
             
-            // यदि शब्द छ भने साधारण UI, छैन (ङ, ञ, ण) भने अक्षर ठूलो देखाउने
             if (item.word) {
                 card.innerHTML = `
                     <div class="emoji-box">${item.emoji}</div>
@@ -198,11 +190,12 @@
                 `;
             }
 
+            // playAIVoice प्रयोग गरिएको
             card.addEventListener('click', () => {
                 if(!item.word) {
-                    speakNepali(item.letter);
+                    playAIVoice(item.letter);
                 } else {
-                    speakNepali(`${item.letter} बाट ${item.word}`);
+                    playAIVoice(`${item.letter} बाट ${item.word}`);
                 }
             });
             consonantsGrid.appendChild(card);
