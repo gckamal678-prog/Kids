@@ -141,34 +141,32 @@
     <script>
         let currentAudio = null;
 
-        // नयाँ र सुरक्षित आवाज बजाउने फङ्सन (Base64 सपोर्ट सहित)
+        // नयाँ र सुरक्षित आवाज बजाउने फङ्सन (Cache Bypass र Base64 सहित)
         async function playAIVoice(textToSpeak) {
             try {
                 if (currentAudio) {
                     currentAudio.pause();
                 }
 
-                const response = await fetch('/api/tts', {
+                const response = await fetch('/api/tts?t=' + Date.now(), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ text: textToSpeak })
                 });
 
                 if (!response.ok) {
-                    const errData = await response.json();
-                    throw new Error(errData.error || 'सर्भरबाट रेस्पोन्स आएन');
+                    const errData = await response.json().catch(() => ({ error: 'Unknown Error' }));
+                    throw new Error(errData.error || 'सर्भरमा समस्या छ');
                 }
 
                 const data = await response.json();
-                
                 const audioUrl = `data:audio/mpeg;base64,${data.audioData}`;
                 currentAudio = new Audio(audioUrl);
                 
                 await currentAudio.play(); 
-                console.log("अडियो सफलपूर्वक बज्यो!");
             } catch (error) {
                 console.error("त्रुटि:", error);
-                alert("❌ आवाज बजाउन सकिएन: " + error.message); 
+                alert("❌ समस्या: " + error.message); 
             }
         }
 
