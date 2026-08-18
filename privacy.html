@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>गोपनीयता नीति र प्रतिक्रिया - बाल पाठशाला</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Mukta', sans-serif;
+            background: #E8F5E9;
+            margin: 0;
+            padding: 20px;
+            color: #2C3E50;
+            text-align: right;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        h1, h2 { color: #2E7D32; }
+        p, li { font-size: 15px; line-height: 1.6; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #1B5E20; }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #A5D6A7;
+            border-radius: 8px;
+            font-family: 'Mukta', sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:active { background: #388E3C; }
+        .back-link { display: inline-block; margin-bottom: 15px; color: #1976D2; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-link">← होम पेजमा फर्कनुहोस्</a>
+    
+    <h1>🔒 गोपनीयता नीति (Privacy Policy)</h1>
+    <p><b>बाल पाठशाला</b> मा तपाईंलाई स्वागत छ। हामी बालबालिकाको गोपनीयता र सुरक्षालाई उच्च प्राथमिकता दिन्छौं।</p>
+    <ul>
+      <li>हामी प्रयोगकर्ताहरूको व्यक्तिगत विवरण संकलन गर्दैनौं।</li>
+      <li>एपभित्र प्रयोग हुने डेटा (जस्तै क्विज स्कोर र सेटिङ) केवल तपाईंको आफ्नै मोबाइल वा ब्राउजरको LocalStorage मा मात्र सेभ हुन्छ।</li>
+      <li>हामी तेस्रो पक्ष (Third-party) लाई कुनै पनि प्रयोगकर्ताको डेटा बिक्री वा सेयर गर्दैनौं।</li>
+    </ul>
+
+    <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
+
+    <h2>💬 प्रतिक्रिया तथा सुझाव (Feedback)</h2>
+    <p>तपाईंलाई यो एप कस्तो लाग्यो? थप सुधारका लागि आफ्ना सल्लाह तथा सुझावहरू यहाँ पठाउन सक्नुहुन्छ:</p>
+
+    <form onsubmit="handleFeedback(event)">
+        <div class="form-group">
+            <label>तपाईंको नाम:</label>
+            <input type="text" id="fb-name" required placeholder="तपाईंको नाम लेख्नुहोस्">
+        </div>
+        <div class="form-group">
+            <label>सुझाव वा प्रतिक्रिया:</label>
+            <textarea id="fb-msg" rows="4" required placeholder="तपाईंका सल्लाहहरू यहां लेख्नुहोस्..."></textarea>
+        </div>
+        <button type="submit">पठाउनुहोस्</button>
+    </form>
+    
+    <p id="success-msg" style="color: green; font-weight: bold; margin-top: 10px; display: none; text-align: center;">धन्यवाद! तपाईंको प्रतिक्रिया सफलतापूर्वक प्राप्त भयो।</p>
+</div>
+
+<script>
+    function handleFeedback(e) {
+        e.preventDefault();
+        const name = document.getElementById('fb-name').value;
+        const msg = document.getElementById('fb-msg').value;
+        
+        // यहाँ तपाईं इमेल वा टेलिग्राम वा सिधै LocalStorage मा सेभ गर्न सक्नुहुन्छ
+        document.getElementById('success-msg').style.display = 'block';
+        e.target.reset();
+        
+        setTimeout(() => {
+            document.getElementById('success-msg').style.display = 'none';
+        }, 4000);
+    }
+</script>
+
+</body>
+</html>
