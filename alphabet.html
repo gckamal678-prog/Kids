@@ -91,7 +91,7 @@
             display: none;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            max-width: 600px;
+5            max-width: 600px;
             margin: auto;
         }
         .grid-container.active {
@@ -140,25 +140,58 @@
     <div class="grid-container" id="lowerGrid"></div>
 
     <script>
+        let currentAudio = null;
+
+        // सुरक्षित आवाज बजाउने फङ्सन (Cache Bypass र Base64 सहित)
+        async function playAIVoice(textToSpeak) {
+            try {
+                if (currentAudio) {
+                    currentAudio.pause();
+                }
+
+                const response = await fetch('/api/tts?t=' + Date.now(), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: textToSpeak })
+                });
+
+                if (!response.ok) {
+                    const errData = await response.json().catch(() => ({ error: 'Unknown Error' }));
+                    throw new Error(errData.error || 'सर्भरमा समस्या छ');
+                }
+
+                const data = await response.json();
+                const audioUrl = `data:audio/mpeg;base64,${data.audioData}`;
+                currentAudio = new Audio(audioUrl);
+                
+                await currentAudio.play(); 
+            } catch (error) {
+                console.error("त्रुटि:", error);
+                alert("❌ समस्या: " + error.message); 
+            }
+        }
+
         const upperAlphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
         const lowerAlphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
         const upperGrid = document.getElementById('upperGrid');
         const lowerGrid = document.getElementById('lowerGrid');
 
-        // Capital Alphabet Load (आवाज हटाएर खाली राखिएको)
+        // Capital Alphabet Load (आवाजसहित)
         upperAlphabet.forEach(letter => {
             const div = document.createElement('div');
             div.className = 'letter-card';
             div.innerText = letter;
+            div.addEventListener('click', () => playAIVoice(letter));
             upperGrid.appendChild(div);
         });
 
-        // Small Alphabet Load (आवाज हटाएर खाली राखिएको)
+        // Small Alphabet Load (आवाजसहित)
         lowerAlphabet.forEach(letter => {
             const div = document.createElement('div');
             div.className = 'letter-card';
             div.innerText = letter;
+            div.addEventListener('click', () => playAIVoice(letter));
             lowerGrid.appendChild(div);
         });
 
