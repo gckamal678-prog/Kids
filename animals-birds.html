@@ -122,9 +122,6 @@
             font-family: 'Fredoka', sans-serif;
         }
     </style>
-
-    <!-- ElevenLabs को लागि script.js जोडिएको -->
-    <script src="script.js"></script>
 </head>
 <body>
 
@@ -142,6 +139,39 @@
     <div class="grid-container" id="birdsGrid"></div>
 
     <script>
+        let currentAudio = null;
+
+        // नयाँ र सुरक्षित आवाज बजाउने फङ्सन (Base64 सपोर्ट सहित)
+        async function playAIVoice(textToSpeak) {
+            try {
+                if (currentAudio) {
+                    currentAudio.pause();
+                }
+
+                const response = await fetch('/api/tts', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: textToSpeak })
+                });
+
+                if (!response.ok) {
+                    const errData = await response.json();
+                    throw new Error(errData.error || 'सर्भरबाट रेस्पोन्स आएन');
+                }
+
+                const data = await response.json();
+                
+                const audioUrl = `data:audio/mpeg;base64,${data.audioData}`;
+                currentAudio = new Audio(audioUrl);
+                
+                await currentAudio.play(); 
+                console.log("अडियो सफलपूर्वक बज्यो!");
+            } catch (error) {
+                console.error("त्रुटि:", error);
+                alert("❌ आवाज बजाउन सकिएन: " + error.message); 
+            }
+        }
+
         // जनावरहरूको सूची (Emoji सहित)
         const animalsData = [
             { np: 'बाघ', en: 'Tiger', emoji: '🐅' },
@@ -172,7 +202,7 @@
             { np: 'पेन्गुइन', en: 'Penguin', emoji: '🐧' }
         ];
 
-        // जनावर लोड गर्ने (playAIVoice प्रयोग गरिएको)
+        // जनावर लोड गर्ने
         const animalsGrid = document.getElementById('animalsGrid');
         animalsData.forEach(item => {
             const card = document.createElement('div');
@@ -186,7 +216,7 @@
             animalsGrid.appendChild(card);
         });
 
-        // पन्छी लोड गर्ने (playAIVoice प्रयोग गरिएको)
+        // पन्छी लोड गर्ने
         const birdsGrid = document.getElementById('birdsGrid');
         birdsData.forEach(item => {
             const card = document.createElement('div');
