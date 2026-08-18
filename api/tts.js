@@ -1,14 +1,13 @@
 // api/tts.js
 export default async function handler(req, res) {
+  // CORS र Method चेक गर्ने
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const { text } = req.body;
-  const VOICE_ID = '21m00Tcm4TlvDq8ikWAM'; // तपाईँको मनपर्ने Voice ID
-  
-  // Vercel ले यहाँ तपाईँको लुकेको API Key तान्छ
-  const apiKey = process.env.ELEVEN_API_KEY; 
+  const VOICE_ID = 'dVTC43Yewy5fAIcmsISI'; // तपाईँको मनपर्ने Voice ID
+  const apiKey = process.env.ELEVEN_API_KEY; // Vercel को ड्यासबोर्डमा राखेको Key
 
   try {
     const response = await fetch(`https://elevenlabs.io{VOICE_ID}`, {
@@ -25,13 +24,17 @@ export default async function handler(req, res) {
     });
 
     if (!response.ok) {
-      throw new Error('ElevenLabs API मा समस्या आयो');
+      const errorText = await response.text();
+      throw new Error(`ElevenLabs Error: ${errorText}`);
     }
 
-    // अडियो डेटालाई सिधै फ्रन्टएन्डमा पठाइदिने
+    // अडियोलाई ArrayBuffer मा लिने र Base64 मा बदल्ने (यसले डाटा सुरक्षित राख्छ)
     const arrayBuffer = await response.arrayBuffer();
-    res.setHeader('Content-Type', 'audio/mpeg');
-    return res.send(Buffer.from(arrayBuffer));
+    const buffer = Buffer.from(arrayBuffer);
+    const base64Audio = buffer.toString('base64');
+
+    // फ्रन्टएन्डमा Base64 डाटा पठाउने
+    return res.status(200).json({ audioData: base64Audio });
 
   } catch (error) {
     return res.status(500).json({ error: error.message });
