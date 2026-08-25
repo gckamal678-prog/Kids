@@ -2,13 +2,14 @@
 <html lang="ne">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>स्कुल गृहकार्य - बाल पाठशाला</title>
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Mukta', sans-serif;
-            background: #E0F7FA;
+            background: linear-gradient(180deg, #E0F7FA 0%, #FFFDE7 100%);
             padding: 20px;
             text-align: center;
             color: #2C3E50;
@@ -19,145 +20,215 @@
             background: #FFFFFF;
             padding: 20px;
             border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border: 3px solid #80DEEA;
         }
-        h2 { color: #E65100; margin-bottom: 15px; }
-        .school-select-box {
-            background: #FFF3E0;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 2px dashed #FFB74D;
-        }
-        select, input, button {
-            padding: 10px;
-            font-size: 15px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            margin: 5px;
-            font-family: 'Mukta', sans-serif;
-        }
-        button {
-            background: #4CAF50;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-        }
-        button:hover { background: #45a049; }
-        .homework-card {
+        h2 { color: #E65100; margin-bottom: 10px; font-size: 22px; }
+        .subtitle { font-size: 14px; color: #546E7A; margin-bottom: 20px; font-weight: 600; }
+        
+        /* Homework Display Card */
+        .homework-box {
             background: #F1F8E9;
-            border: 2px solid #AED581;
-            padding: 15px;
-            border-radius: 12px;
-            margin-top: 15px;
+            border: 3px solid #AED581;
+            padding: 18px;
+            border-radius: 16px;
+            margin-bottom: 20px;
             text-align: left;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .back-btn {
-            background: #78909C;
-            margin-top: 20px;
-            display: inline-block;
-            text-decoration: none;
+        .homework-box h3 { color: #2E7D32; margin-bottom: 8px; font-size: 18px; }
+        .hw-content { font-size: 16px; line-height: 1.6; color: #37474F; white-space: pre-wrap; }
+        
+        /* Teacher Section Toggle Box */
+        .teacher-section {
+            background: #FFF3E0;
+            border: 2px dashed #FFB74D;
+            padding: 15px;
+            border-radius: 14px;
+            margin-top: 25px;
+            text-align: center;
+        }
+        .btn {
+            background: #FF7043;
             color: white;
-            padding: 8px 15px;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Mukta', sans-serif;
+            box-shadow: 0 4px 0px #D84315;
+        }
+        .btn:active { transform: translateY(2px); box-shadow: none; }
+        
+        /* Teacher Upload Form Modal */
+        #teacher-panel-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 999;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .modal-content {
+            max-width: 450px;
+            margin: 40px auto;
+            background: #2C3E50;
+            padding: 25px;
+            border-radius: 16px;
+            border: 3px solid #FF7043;
+            text-align: left;
+            color: white;
+        }
+        .modal-content h3 { color: #FF7043; margin-bottom: 15px; text-align: center; }
+        label { font-size: 14px; color: #CFD8DC; display: block; margin-top: 10px; }
+        select, textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
             border-radius: 8px;
+            border: 1px solid #90A4AE;
+            font-family: 'Mukta', sans-serif;
+            font-size: 15px;
+        }
+        textarea { height: 120px; resize: vertical; }
+        .modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+        .save-btn { background: #4CAF50; flex: 1; padding: 10px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
+        .close-btn { background: #E53935; flex: 1; padding: 10px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background: #78909C;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>🎒 विद्यार्थी गृहकार्य पोर्टल</h2>
+    <h2>🎒 आजको विद्यालय गृहकार्य</h2>
+    <div class="subtitle" id="school-title-banner">श्री बाल आदर्श माध्यमिक विद्यालय</div>
 
-    <!-- स्कुल छान्ने वा कोड राख्ने खण्ड -->
-    <div class="school-select-box">
-        <label><b>तपाईंको विद्यालय (School) छान्नुहोस्:</b></label><br>
-        <select id="userSchoolSelect" onchange="changeSchool()">
-            <option value="">-- स्कुल छान्नुहोस् --</option>
-            <option value="School_A">स्कुल 'A' (School A)</option>
-            <option value="School_B">स्कुल 'B' (School B)</option>
-            <option value="School_C">स्कुल 'C' (School C)</option>
-        </select>
-    </div>
-
-    <!-- होमवर्क देखिने भाग -->
-    <div id="homeworkDisplayArea">
-        <p style="color: #7f8c8d;">कृपया माथिबाट आफ्नो विद्यालय छान्नुहोस् ताकि आजको गृहकार्य देखियोस्।</p>
+    <!-- विद्यार्थीले होमवर्क हेर्ने ठाउँ -->
+    <div class="homework-box">
+        <h3 id="hw-heading">📌 मिति: आजको गृहकार्य</h3>
+        <div class="hw-content" id="display-hw-text">
+            लोड हुँदैछ... कृपया प्रतीक्षा गर्नुहोस्।
+        </div>
     </div>
 
     <!-- शिक्षक प्यानल खोल्ने बटन -->
-    <div style="margin-top: 30px; border-top: 2px solid #eee; padding-top: 15px;">
-        <button onclick="openTeacherLogin()" style="background: #FF7043; font-size: 13px;">🔒 शिक्षक होमवर्क अपलोड प्यानल</button>
+    <div class="teacher-section">
+        <p style="font-size: 13px; color: #D84315; margin-bottom: 8px; font-weight: bold;">👨‍🏫 शिक्षक तथा विद्यालय प्रशासकका लागि:</p>
+        <button class="btn" onclick="checkTeacherPassword()">🔐 होमवर्क अपडेट गर्नुहोस्</button>
     </div>
 
     <br>
-    <a href="./index.html" class="back-btn">⬅️ मुख्य गृहपेजमा फर्कनुहोस्</a>
+    <a href="./index.html" class="back-link">⬅️ मुख्य गृहपेजमा फर्कनुहोस्</a>
+</div>
+
+<!-- शिक्षक लगइन र होमवर्क हाल्ने प्यानल (Modal) -->
+<div id="teacher-panel-modal">
+    <div class="modal-content">
+        <h3>🛠️ शिक्षक गृहकार्य व्यवस्थापन</h3>
+        
+        <label>🏫 कुन स्कुलको लागि होमवर्क राख्ने?</label>
+        <select id="t-school-select">
+            <option value="School_A">स्कुल 'A' (श्री बाल आदर्श मा.वि.)</option>
+            <option value="School_B">स्कुल 'B' (एभरेष्ट इङ्ग्रीिस स्कुल)</option>
+            <option value="School_C">स्कुल 'C' (सनसाइन एकेडेमी)</option>
+        </select>
+
+        <label>📝 गृहकार्यको विवरण (लेख्नुहोस्):</label>
+        <textarea id="t-hw-input" placeholder="आजको गृहकार्य यहाँ टाइप गर्नुहोस्... (जस्तै: नेपाली पाना १० लेख्ने, गणित जोड गर्नुहोस्)"></textarea>
+
+        <div class="modal-btns">
+            <button class="save-btn" onclick="saveNewHomework()">💾 सेभ गर्नुहोस्</button>
+            <button class="close-btn" onclick="closeTeacherModal()">✖️ बन्द</button>
+        </div>
+    </div>
 </div>
 
 <script>
-    // पेज खुल्दा पहिले सेभ भएको स्कुल छ कि छैन चेक गर्ने
+    // 💡 यहाँ निर्धारण गर्नुहोस् कि यो एप कुन स्कुलको विद्यार्थीको लागि हो।
+    // उदाहरणको लागि: यदि यो एप स्कुल 'A' को विद्यार्थीको फोनमा हाल्दै हुनुहुन्छ भने यहाँ 'School_A' राख्नुस्।
+    // भोलि स्कुल 'B' लाई दिँदा 'School_B' बनाइदिन सक्नुहुन्छ।
+    const CURRENT_STUDENT_SCHOOL = "School_A"; 
+
+    // स्कुलको नाम मिलाएर देखाउने नक्सा (Mapping)
+    const schoolNamesMap = {
+        "School_A": "श्री बाल आदर्श माध्यमिक विद्यालय (School A)",
+        "School_B": "एभरेष्ट इङ्ग्रीिस स्कुल (School B)",
+        "School_C": "सनसाइन एकेडेमी (School C)"
+    };
+
     window.onload = function() {
-        let savedSchool = localStorage.getItem('selected_school');
-        if (savedSchool) {
-            document.getElementById('userSchoolSelect').value = savedSchool;
-            loadHomeworkForSchool(savedSchool);
-        }
-    }
+        loadStudentHomework();
+    };
 
-    // स्कुल फेर्दा चल्ने फंक्सन
-    function changeSchool() {
-        let selectedSchool = document.getElementById('userSchoolSelect').value;
-        if (selectedSchool) {
-            localStorage.setItem('selected_school', selectedSchool);
-            loadHomeworkForSchool(selectedSchool);
+    // विद्यार्थीको स्क्रिनमा सम्बन्धित स्कुलको होमवर्क लोड गर्ने
+    function loadStudentHomework() {
+        // ब्यानਰमा स्कुलको सहि नाम राख्ने
+        document.getElementById('school-title-banner').innerText = schoolNamesMap[CURRENT_STUDENT_SCHOOL] || CURRENT_STUDENT_SCHOOL;
+
+        // लोकल स्टोरेजबाट त्यो स्कुलको होमवर्क झिक्ने
+        let savedHomework = localStorage.getItem('homework_' + CURRENT_STUDENT_SCHOOL);
+        let textContainer = document.getElementById('display-hw-text');
+
+        if (savedHomework && savedHomework.trim() !== "") {
+            textContainer.innerText = savedHomework;
         } else {
-            document.getElementById('homeworkDisplayArea').innerHTML = '<p style="color: #7f8c8d;">कृपया माथिबाट आफ्नो विद्यालय छान्नुहोस्।</p>';
+            textContainer.innerHTML = "<span style='color: #78909C;'>आज यस विद्यालयको लागि कुनै नयाँ गृहकार्य राखिएको छैन। शिक्षकले पछि थप्नुहुनेछ।</span>";
         }
     }
 
-    // छान्नुभएको स्कुल अनुसारको होमवर्क लोड गर्ने
-    function loadHomeworkForSchool(schoolName) {
-        let displayArea = document.getElementById('homeworkDisplayArea');
-        
-        // लोकल स्टोरेजबाट त्यो स्कुलको होमवर्क झिकेर ल्याउने
-        let hwData = localStorage.getItem('hw_' + schoolName);
-
-        if (hwData) {
-            displayArea.innerHTML = `
-                <div class="homework-card">
-                    <h3 style="color: #2E7D32; margin-bottom: 5px;">📌 आजको गृहकार्य (${schoolName.replace('_', ' ')})</h3>
-                    <p style="font-size: 16px; white-space: pre-wrap;">${hwData}</p>
-                </div>
-            `;
-        } else {
-            displayArea.innerHTML = `
-                <div class="homework-card" style="background: #FFFDE7; border-color: #FFEE58;">
-                    <p style="color: #F57F17; text-align: center;"><b>${schoolName.replace('_', ' ')}</b> को लागि आज कुनै नयाँ गृहकार्य राखिएको छैन।</p>
-                </div>
-            `;
-        }
-    }
-
-    // शिक्षक लगइन गरेर होमवर्क हाल्ने सिम्पल तरिका
-    function openTeacherLogin() {
-        let pin = prompt("शिक्षक पिन (PIN) राख्नुहोस् (डिफल्ट पिन: 9999):");
+    // शिक्षकले बटन थिच्दा पासवर्ड माग्ने
+    function checkTeacherPassword() {
+        let pin = prompt("कृपया शिक्षक पिन (PIN) प्रविष्ट गर्नुहोस् (डिफल्ट पिन: 9999):");
         if (pin === "9999") {
-            let tSchool = prompt("कुन स्कुलको लागि होमवर्क राख्ने हो? (School_A, School_B, वा School_C लेख्नुहोस्):");
-            if (tSchool === "School_A" || tSchool === "School_B" || tSchool === "School_C") {
-                let hwText = prompt(tSchool + " का लागि आजको गृहकार्यको विवरण लेख्नुहोस्:");
-                if (hwText) {
-                    localStorage.setItem('hw_' + tSchool, hwText);
-                    alert("सफलतापूर्वक गृहकार्य सेभ भयो!");
-                    // यदि अहिले त्यही स्कुल छानिएको छ भने स्क्रिनमा देखाइदिने
-                    if(document.getElementById('userSchoolSelect').value === tSchool) {
-                        loadHomeworkForSchool(tSchool);
-                    }
-                }
-            } else if (tSchool !== null) {
-                alert("गलत स्कुलको नाम! School_A, School_B वा School_C मात्र लेख्नुहोला।");
-            }
+            // सहि भए प्यानल खोल्ने
+            document.getElementById('teacher-panel-modal').style.display = 'block';
+            // हालको स्कुललाई फर्ममा पहिल्यै छान्दिएको राम्रो
+            document.getElementById('t-school-select').value = CURRENT_STUDENT_SCHOOL;
+            // यदि पहिलेको होमवर्क छ भने टेक्स्टएरियामा देखाउने
+            let existingHw = localStorage.getItem('homework_' + CURRENT_STUDENT_SCHOOL) || "";
+            document.getElementById('t-hw-input').value = existingHw;
         } else if (pin !== null) {
-            alert("गलत पिन!");
+            alert("❌ गलत पिन! शिक्षक बाहेक अरूले यसलाई परिवर्तन गर्न मिल्दैन।");
+        }
+    }
+
+    // शिक्षकले प्यानल बन्द गर्ने
+    function closeTeacherModal() {
+        document.getElementById('teacher-panel-modal').style.display = 'none';
+    }
+
+    // नयाँ होमवर्क सेभ गर्ने
+    function saveNewHomework() {
+        let selectedSchool = document.getElementById('t-school-select').value;
+        let hwText = document.getElementById('t-hw-input').value;
+
+        if (!hwText.trim()) {
+            alert("कृपया गृहकार्यको विवरण लेख्नुहोस्!");
+            return;
+        }
+
+        // ब्राउजरको स्टोरेजमा स्कुल अनुसार सेभ गर्ने
+        localStorage.setItem('homework_' + selectedSchool, hwText);
+        
+        alert("✅ गृहकार्य सफलतापूर्वक सेभ भयो!");
+        closeTeacherModal();
+
+        // यदि अहिले हेरिरहेको विद्यार्थी पनि त्यही स्कुलको हो भने तुरुन्तै स्क्रिन रिफ्रेस हुनेछ
+        if (selectedSchool === CURRENT_STUDENT_SCHOOL) {
+            loadStudentHomework();
         }
     }
 </script>
