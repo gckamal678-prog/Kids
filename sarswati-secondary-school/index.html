@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>सरस्वती माध्यमिक विद्यालय - डिजिटल गृहकार्य पोर्टल</title>
+    <title>सरस्वती माध्यमिक विद्यालय - विषयगत गृहकार्य पोर्टल</title>
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,81 +26,62 @@
         h2 { color: #E65100; margin-bottom: 5px; font-size: 22px; }
         .subtitle { font-size: 15px; color: #00796B; margin-bottom: 15px; font-weight: 700; }
         
-        .homework-box {
+        /* विषयगत बक्सहरूको डिजाइन */
+        .subject-box {
             background: #F1F8E9;
-            border: 3px solid #AED581;
-            padding: 18px;
-            border-radius: 16px;
-            margin-bottom: 20px;
+            border: 2px solid #AED581;
+            padding: 15px;
+            border-radius: 14px;
+            margin-bottom: 15px;
             text-align: left;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .hw-header-flex {
+        .subject-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 8px;
         }
-        .homework-box h3 { color: #2E7D32; font-size: 18px; margin: 0; }
+        .subject-box h3 { color: #2E7D32; font-size: 17px; margin: 0; }
         
-        /* अडियो सुन्ने बटन */
         .speak-btn {
             background: #00838F;
             color: white;
             border: none;
-            padding: 5px 12px;
-            font-size: 13px;
-            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 12px;
+            border-radius: 15px;
             cursor: pointer;
             font-family: 'Mukta', sans-serif;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
         }
-        .speak-btn:active { transform: scale(0.95); }
 
-        /* नेपाली र अंग्रेजी दुवै राम्ररी देखिने र लाइन-ब्रेक मिल्ने स्टाइल */
         .hw-content {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.6;
             color: #37474F;
             white-space: pre-wrap;
             word-break: break-word;
-            margin-bottom: 15px;
-        }
-
-        /* फोटो डिस्प्ले एरिया */
-        .hw-image-container {
-            width: 100%;
-            text-align: center;
-            margin-top: 15px;
-            display: none;
-        }
-        .hw-image-container img {
-            max-width: 100%;
-            max-height: 350px;
-            border-radius: 10px;
-            border: 2px solid #81C784;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         .timestamp {
-            font-size: 12px;
+            font-size: 11px;
             color: #78909C;
-            margin-top: 12px;
+            margin-top: 8px;
             text-align: right;
             font-weight: bold;
             border-top: 1px dashed #C8E6C9;
-            padding-top: 8px;
+            padding-top: 5px;
         }
 
-        /* शिक्षक सेक्सन (सुरुमा लुकेको हुन्छ) */
+        /* शिक्षक सेक्सन र कन्ट्रोल */
         .teacher-section {
             display: none;
             background: #FFF3E0;
             border: 2px dashed #FFB74D;
             padding: 15px;
             border-radius: 14px;
-            margin-top: 25px;
+            margin-top: 20px;
             text-align: center;
         }
         .btn {
@@ -115,7 +96,6 @@
             font-family: 'Mukta', sans-serif;
             box-shadow: 0 4px 0px #D84315;
         }
-        .btn:active { transform: translateY(2px); box-shadow: none; }
         
         #teacher-panel-modal {
             display: none;
@@ -127,48 +107,65 @@
             overflow-y: auto;
         }
         .modal-content {
-            max-width: 450px;
-            margin: 40px auto;
+            max-width: 480px;
+            margin: 20px auto;
             background: #2C3E50;
-            padding: 25px;
+            padding: 20px;
             border-radius: 16px;
             border: 3px solid #FF7043;
             text-align: left;
             color: white;
         }
-        .modal-content h3 { color: #FF7043; margin-bottom: 15px; text-align: center; }
-        label { font-size: 14px; color: #CFD8DC; display: block; margin-top: 10px; }
+        .modal-content h3 { color: #FF7043; margin-bottom: 10px; text-align: center; }
+        
+        .input-group {
+            position: relative;
+            margin-top: 10px;
+        }
+        label { font-size: 13px; color: #CFD8DC; display: block; }
         
         textarea {
             width: 100%;
-            height: 130px;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 8px;
+            height: 75px;
+            padding: 8px;
+            margin-top: 3px;
+            border-radius: 6px;
             border: 1px solid #90A4AE;
             font-family: 'Mukta', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             resize: vertical;
         }
-
-        input[type="file"] {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            background: #34495E;
+        
+        /* बोलेर लेख्ने माइक बटनको स्टाइल */
+        .mic-btn {
+            background: #D32F2F;
             color: white;
-            border-radius: 8px;
-            border: 1px solid #90A4AE;
-            font-size: 14px;
+            border: none;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 3px;
+            font-family: 'Mukta', sans-serif;
+            font-weight: bold;
+        }
+        .mic-btn.listening {
+            background: #388E3C;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
 
-        .modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+        .modal-btns { display: flex; gap: 10px; margin-top: 15px; }
         .save-btn { background: #4CAF50; flex: 1; padding: 10px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
         .close-btn { background: #E53935; flex: 1; padding: 10px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
 
         .back-link {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 15px;
             text-decoration: none;
             background: #78909C;
             color: white;
@@ -181,69 +178,86 @@
 <body>
 
 <div class="container">
-    <h2>🎒 डिजिटल गृहकार्य पोर्टल</h2>
+    <h2>🎒 विषयगत गृहकार्य पोर्टल</h2>
     <div class="subtitle">🏫 सरस्वती माध्यमिक विद्यालय</div>
 
-    <!-- विद्यार्थीले होमवर्क हेर्ने र अडियो सुन्ने ठाउँ -->
-    <div class="homework-box">
-        <div class="hw-header-flex">
-            <h3>📌 आजको गृहकार्य</h3>
-            <button class="speak-btn" onclick="readHomeworkAudio()">🔊 सुनेर सुन्ने</button>
+    <!-- गणित (Math) बक्स -->
+    <div class="subject-box">
+        <div class="subject-header">
+            <h3>📐 गणित (Math)</h3>
+            <button class="speak-btn" onclick="readAudio('display-math')">🔊 सुनेर सुन्ने</button>
         </div>
-        
-        <div class="hw-content" id="display-hw-text">
-            लोड हुँदैछ... कृपया प्रतीक्षा गर्नुहोस्।
-        </div>
-
-        <!-- अपलोड गरिएको फोटो देखिने ठाउँ -->
-        <div class="hw-image-container" id="display-img-box">
-            <img id="display-hw-img" src="" alt="गृहकार्यको फोटो">
-        </div>
-
-        <div class="timestamp" id="display-time"></div>
+        <div class="hw-content" id="display-math">लोड हुँदैछ...</div>
+        <div class="timestamp" id="time-math"></div>
     </div>
 
-    <!-- शिक्षक प्यानल खोल्ने बटन (?admin=true हुँदा मात्र देखिन्छ) -->
+    <!-- नेपाली (Nepali) बक्स -->
+    <div class="subject-box">
+        <div class="subject-header">
+            <h3>📖 नेपाली</h3>
+            <button class="speak-btn" onclick="readAudio('display-nepali')">🔊 सुनेर सुन्ने</button>
+        </div>
+        <div class="hw-content" id="display-nepali">लोड हुँदैछ...</div>
+        <div class="timestamp" id="time-nepali"></div>
+    </div>
+
+    <!-- अंग्रेजी (English) बक्स -->
+    <div class="subject-box">
+        <div class="subject-header">
+            <h3>🔤 अंग्रेजी (English)</h3>
+            <button class="speak-btn" onclick="readAudio('display-english')">🔊 सुनेर सुन्ने</button>
+        </div>
+        <div class="hw-content" id="display-english">लोड हुँदैछ...</div>
+        <div class="timestamp" id="time-english"></div>
+    </div>
+
+    <!-- गुप्त एडमिन ट्रिगर -->
     <div class="teacher-section" id="admin-trigger-box">
-        <p style="font-size: 13px; color: #D84315; margin-bottom: 8px; font-weight: bold;">👨‍🏫 शिक्षक तथा प्रशासकका लागि:</p>
-        <button class="btn" onclick="checkTeacherPassword()">🔐 गृहकार्य र फोटो अपडेट गर्नुहोस्</button>
+        <button class="btn" onclick="checkTeacherPassword()">🔐 विषयगत होमवर्क अपडेट गर्नुहोस्</button>
     </div>
 
-    <br>
     <a href="https://kids.kamalgc.com.np" class="back-link">⬅️ मुख्य गृहपेजमा फर्कनुहोस्</a>
 </div>
 
-<!-- शिक्षक लगइन र होमवर्क/फोटो हाल्ने प्यानल -->
+<!-- शिक्षक एडिट प्यानल -->
 <div id="teacher-panel-modal">
     <div class="modal-content">
-        <h3>🛠️ सरस्वती मा.वि. एडमिन प्यानल</h3>
+        <h3>🛠️ विषयगत होमवर्क सम्पादन प्यानल</h3>
         
-        <label>📝 गृहकार्य विवरण (नेपाली र अंग्रेजी):</label>
-        <textarea id="t-hw-input" placeholder="उदाहरण: 
-1. Math: Exercise 5.2 solve all questions.
-2. नेपाली: पाना नं १५ को प्रश्न उत्तर लेख्ने।"></textarea>
+        <!-- गणित इनपुट -->
+        <div class="input-group">
+            <label>📐 गणित होमवर्क:</label>
+            <textarea id="input-math" placeholder="गणितको गृहकार्य लेख्नुहोस्..."></textarea>
+            <button class="mic-btn" onclick="startVoiceInput('input-math', this)">🎤 बोलेर लेख्नुहोस्</button>
+        </div>
 
-        <label>🖼️ गृहकार्यको फोटो (वैकल्पिक):</label>
-        <input type="file" id="t-img-input" accept="image/*">
+        <!-- नेपाली इनपुट -->
+        <div class="input-group">
+            <label>📖 नेपाली होमवर्क:</label>
+            <textarea id="input-nepali" placeholder="नेपालीको गृहकार्य लेख्नुहोस्..."></textarea>
+            <button class="mic-btn" onclick="startVoiceInput('input-nepali', this)">🎤 बोलेर लेख्नुहोस्</button>
+        </div>
+
+        <!-- अंग्रेजी इनपुट -->
+        <div class="input-group">
+            <label>🔤 अंग्रेजी होमवर्क:</label>
+            <textarea id="input-english" placeholder="अंग्रेजीको गृहकार्य लेख्नुहोस्..."></textarea>
+            <button class="mic-btn" onclick="startVoiceInput('input-english', this)">🎤 बोलेर लेख्नुहोस्</button>
+        </div>
 
         <div class="modal-btns">
-            <button class="save-btn" onclick="saveNewHomework()">💾 सेभ गर्नुहोस्</button>
+            <button class="save-btn" onclick="saveAllHomework()">💾 सबै सेभ गर्नुहोस्</button>
             <button class="close-btn" onclick="closeTeacherModal()">✖️ बन्द</button>
         </div>
     </div>
 </div>
 
 <script>
-    const STORAGE_KEY_TEXT = "hw_text_sarswati_secondary_school";
-    const STORAGE_KEY_IMG = "hw_img_sarswati_secondary_school";
-    const STORAGE_KEY_TIME = "time_sarswati_secondary_school";
-
     window.onload = function() {
-        loadStudentHomework();
+        loadAllData();
         checkAdminAccess();
     };
 
-    // URL मा ?admin=true छ कि छैन चेक गर्ने
     function checkAdminAccess() {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('admin') === 'true') {
@@ -251,55 +265,86 @@
         }
     }
 
-    function loadStudentHomework() {
-        let savedText = localStorage.getItem(STORAGE_KEY_TEXT);
-        let savedImg = localStorage.getItem(STORAGE_KEY_IMG);
-        let savedTime = localStorage.getItem(STORAGE_KEY_TIME);
-        
-        let textContainer = document.getElementById('display-hw-text');
-        let imgContainer = document.getElementById('display-img-box');
-        let imgTag = document.getElementById('display-hw-img');
-        let timeContainer = document.getElementById('display-time');
+    function loadAllData() {
+        loadSubject('math');
+        loadSubject('nepali');
+        loadSubject('english');
+    }
 
-        if (savedText && savedText.trim() !== "") {
-            textContainer.innerText = savedText;
-        } else {
-            textContainer.innerHTML = "<span style='color: #78909C;'>आज सरस्वती माध्यमिक विद्यालयको लागि कुनै नयाँ गृहकार्य राखिएको छैन।</span>";
-        }
+    function loadSubject(sub) {
+        let text = localStorage.getItem("hw_sub_" + sub);
+        let time = localStorage.getItem("time_sub_" + sub);
+        let contentBox = document.getElementById("display-" + sub);
+        let timeBox = document.getElementById("time-" + sub);
 
-        if (savedImg && savedImg.trim() !== "") {
-            imgTag.src = savedImg;
-            imgContainer.style.display = 'block';
+        if (text && text.trim() !== "") {
+            contentBox.innerText = text;
+            timeBox.innerText = time ? "अपडेट समय: " + time : "";
         } else {
-            imgContainer.style.display = 'none';
-        }
-
-        if (savedTime) {
-            timeContainer.innerText = "अद्यावधिक गरिएको समय: " + savedTime;
-        } else {
-            timeContainer.innerText = "";
+            contentBox.innerHTML = "<span style='color: #78909C;'>यो विषयको गृहकार्य राखिएको छैन।</span>";
+            timeBox.innerText = "";
         }
     }
 
-    // टेक्स्टलाई अडियोमा बोलेर सुनाउने फिचर (Text-to-Speech)
-    function readHomeworkAudio() {
-        let textToRead = document.getElementById('display-hw-text').innerText;
+    // अडियो स्पिच (सुनेर सुन्ने फिचर)
+    function readAudio(elementId) {
+        let text = document.getElementById(elementId).innerText;
         if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel(); // पहिले बोलिरहेको भए रोक्ने
-            let utterance = new SpeechSynthesisUtterance(textToRead);
-            utterance.lang = 'ne-NP'; // नेपाली भाषा सेट गर्ने (अंग्रेजी पनि स्वतः एडजस्ट हुन्छ)
-            utterance.rate = 0.9; // बोल्ने गति स्पष्ट सुनिने गरी मिलाइएको
+            window.speechSynthesis.cancel();
+            let utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ne-NP';
+            utterance.rate = 0.9;
             window.speechSynthesis.speak(utterance);
         } else {
-            alert("तपाईंको ब्राउजरले अडियो स्पिच सपोर्ट गर्दैन।");
+            alert("तपाईको ब्राउजरले अडियो सपोर्ट गर्दैन।");
         }
+    }
+
+    // शिक्षकले बोलेर टाइप गर्ने फिचर (Voice Input)
+    function startVoiceInput(targetId, btnElement) {
+        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!window.SpeechRecognition) {
+            alert("माफ गर्नुहोला, तपाईंको ब्राउजरले भ्वाइस इनपुट सपोर्ट गर्दैन। कृपया गुगल क्रोम प्रयोग गर्नुहोस्।");
+            return;
+        }
+
+        let recognition = new SpeechRecognition();
+        recognition.lang = 'ne-NP'; // नेपाली भाषा (अग्लो बोल्दा अंग्रेजी पनि बुझ्छ)
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        btnElement.innerText = "Listening... बोल्नुहोस् 🎤";
+        btnElement.classList.add("listening");
+
+        recognition.onresult = function(event) {
+            let speechResult = event.results[0][0].transcript;
+            let textarea = document.getElementById(targetId);
+            textarea.value += (textarea.value ? " " : "") + speechResult;
+            btnElement.innerText = "🎤 बोलेर लेख्नुहोस्";
+            btnElement.classList.remove("listening");
+        };
+
+        recognition.onerror = function() {
+            alert("आवाज बुझ्न सकिएन, कृपया फेरि प्रयास गर्नुहोस्।");
+            btnElement.innerText = "🎤 बोलेर लेख्नुहोस्";
+            btnElement.classList.remove("listening");
+        };
+
+        recognition.onend = function() {
+            btnElement.innerText = "🎤 बोलेर लेख्नुहोस्";
+            btnElement.classList.remove("listening");
+        };
+
+        recognition.start();
     }
 
     function checkTeacherPassword() {
-        let pin = prompt("कृपया शिक्षक पिन (PIN) प्रविष्ट गर्नुहोस् (डिफल्ट पिन: 9999):");
+        let pin = prompt("कृपया शिक्षक पिन (PIN) प्रविष्ट गर्नुहोस् (9999):");
         if (pin === "9999") {
             document.getElementById('teacher-panel-modal').style.display = 'block';
-            document.getElementById('t-hw-input').value = localStorage.getItem(STORAGE_KEY_TEXT) || "";
+            document.getElementById('input-math').value = localStorage.getItem("hw_sub_math") || "";
+            document.getElementById('input-nepali').value = localStorage.getItem("hw_sub_nepali") || "";
+            document.getElementById('input-english').value = localStorage.getItem("hw_sub_english") || "";
         } else if (pin !== null) {
             alert("❌ गलत पिन!");
         }
@@ -309,38 +354,24 @@
         document.getElementById('teacher-panel-modal').style.display = 'none';
     }
 
-    function saveNewHomework() {
-        let hwText = document.getElementById('t-hw-input').value;
-        let imgFile = document.getElementById('t-img-input').files[0];
-
-        if (!hwText.trim() && !imgFile) {
-            alert("कृपया गृहकार्य लेख्नुहोस् वा फोटो छान्नुहोस्!");
-            return;
-        }
-
+    function saveAllHomework() {
         let now = new Date();
         let formattedTime = now.toLocaleDateString('ne-NP') + ' ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 
-        if (imgFile) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                let base64Image = e.target.result;
-                localStorage.setItem(STORAGE_KEY_IMG, base64Image);
-                finalizeSave(hwText, formattedTime);
-            };
-            reader.readAsDataURL(imgFile);
-        } else {
-            finalizeSave(hwText, formattedTime);
-        }
-    }
+        ['math', 'nepali', 'english'].forEach(sub => {
+            let val = document.getElementById("input-" + sub).value;
+            if(val.trim() !== "") {
+                localStorage.setItem("hw_sub_" + sub, val);
+                localStorage.setItem("time_sub_" + sub, formattedTime);
+            } else {
+                localStorage.removeItem("hw_sub_" + sub);
+                localStorage.removeItem("time_sub_" + sub);
+            }
+        });
 
-    function finalizeSave(text, time) {
-        localStorage.setItem(STORAGE_KEY_TEXT, text);
-        localStorage.setItem(STORAGE_KEY_TIME, time);
-
-        alert("✅ गृहकार्य सफलतापूर्वक सेभ भयो!");
+        alert("✅ विषयगत गृहकार्य र अपडेट समय सफलताપूर्ववक सेभ भयो!");
         closeTeacherModal();
-        loadStudentHomework();
+        loadAllData();
     }
 </script>
 
