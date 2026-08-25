@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>स्कुल गृहकार्य - बाल पाठशाला</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Mukta', sans-serif;
+            background: #E0F7FA;
+            padding: 20px;
+            text-align: center;
+            color: #2C3E50;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h2 { color: #E65100; margin-bottom: 15px; }
+        .school-select-box {
+            background: #FFF3E0;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px dashed #FFB74D;
+        }
+        select, input, button {
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin: 5px;
+            font-family: 'Mukta', sans-serif;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover { background: #45a049; }
+        .homework-card {
+            background: #F1F8E9;
+            border: 2px solid #AED581;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            text-align: left;
+        }
+        .back-btn {
+            background: #78909C;
+            margin-top: 20px;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🎒 विद्यार्थी गृहकार्य पोर्टल</h2>
+
+    <!-- स्कुल छान्ने वा कोड राख्ने खण्ड -->
+    <div class="school-select-box">
+        <label><b>तपाईंको विद्यालय (School) छान्नुहोस्:</b></label><br>
+        <select id="userSchoolSelect" onchange="changeSchool()">
+            <option value="">-- स्कुल छान्नुहोस् --</option>
+            <option value="School_A">स्कुल 'A' (School A)</option>
+            <option value="School_B">स्कुल 'B' (School B)</option>
+            <option value="School_C">स्कुल 'C' (School C)</option>
+        </select>
+    </div>
+
+    <!-- होमवर्क देखिने भाग -->
+    <div id="homeworkDisplayArea">
+        <p style="color: #7f8c8d;">कृपया माथिबाट आफ्नो विद्यालय छान्नुहोस् ताकि आजको गृहकार्य देखियोस्।</p>
+    </div>
+
+    <!-- शिक्षक प्यानल खोल्ने बटन -->
+    <div style="margin-top: 30px; border-top: 2px solid #eee; padding-top: 15px;">
+        <button onclick="openTeacherLogin()" style="background: #FF7043; font-size: 13px;">🔒 शिक्षक होमवर्क अपलोड प्यानल</button>
+    </div>
+
+    <br>
+    <a href="./index.html" class="back-btn">⬅️ मुख्य गृहपेजमा फर्कनुहोस्</a>
+</div>
+
+<script>
+    // पेज खुल्दा पहिले सेभ भएको स्कुल छ कि छैन चेक गर्ने
+    window.onload = function() {
+        let savedSchool = localStorage.getItem('selected_school');
+        if (savedSchool) {
+            document.getElementById('userSchoolSelect').value = savedSchool;
+            loadHomeworkForSchool(savedSchool);
+        }
+    }
+
+    // स्कुल फेर्दा चल्ने फंक्सन
+    function changeSchool() {
+        let selectedSchool = document.getElementById('userSchoolSelect').value;
+        if (selectedSchool) {
+            localStorage.setItem('selected_school', selectedSchool);
+            loadHomeworkForSchool(selectedSchool);
+        } else {
+            document.getElementById('homeworkDisplayArea').innerHTML = '<p style="color: #7f8c8d;">कृपया माथिबाट आफ्नो विद्यालय छान्नुहोस्।</p>';
+        }
+    }
+
+    // छान्नुभएको स्कुल अनुसारको होमवर्क लोड गर्ने
+    function loadHomeworkForSchool(schoolName) {
+        let displayArea = document.getElementById('homeworkDisplayArea');
+        
+        // लोकल स्टोरेजबाट त्यो स्कुलको होमवर्क झिकेर ल्याउने
+        let hwData = localStorage.getItem('hw_' + schoolName);
+
+        if (hwData) {
+            displayArea.innerHTML = `
+                <div class="homework-card">
+                    <h3 style="color: #2E7D32; margin-bottom: 5px;">📌 आजको गृहकार्य (${schoolName.replace('_', ' ')})</h3>
+                    <p style="font-size: 16px; white-space: pre-wrap;">${hwData}</p>
+                </div>
+            `;
+        } else {
+            displayArea.innerHTML = `
+                <div class="homework-card" style="background: #FFFDE7; border-color: #FFEE58;">
+                    <p style="color: #F57F17; text-align: center;"><b>${schoolName.replace('_', ' ')}</b> को लागि आज कुनै नयाँ गृहकार्य राखिएको छैन।</p>
+                </div>
+            `;
+        }
+    }
+
+    // शिक्षक लगइन गरेर होमवर्क हाल्ने सिम्पल तरिका
+    function openTeacherLogin() {
+        let pin = prompt("शिक्षक पिन (PIN) राख्नुहोस् (डिफल्ट पिन: 9999):");
+        if (pin === "9999") {
+            let tSchool = prompt("कुन स्कुलको लागि होमवर्क राख्ने हो? (School_A, School_B, वा School_C लेख्नुहोस्):");
+            if (tSchool === "School_A" || tSchool === "School_B" || tSchool === "School_C") {
+                let hwText = prompt(tSchool + " का लागि आजको गृहकार्यको विवरण लेख्नुहोस्:");
+                if (hwText) {
+                    localStorage.setItem('hw_' + tSchool, hwText);
+                    alert("सफलतापूर्वक गृहकार्य सेभ भयो!");
+                    // यदि अहिले त्यही स्कुल छानिएको छ भने स्क्रिनमा देखाइदिने
+                    if(document.getElementById('userSchoolSelect').value === tSchool) {
+                        loadHomeworkForSchool(tSchool);
+                    }
+                }
+            } else if (tSchool !== null) {
+                alert("गलत स्कुलको नाम! School_A, School_B वा School_C मात्र लेख्नुहोला।");
+            }
+        } else if (pin !== null) {
+            alert("गलत पिन!");
+        }
+    }
+</script>
+
+</body>
+</html>
