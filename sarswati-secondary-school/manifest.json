@@ -1,20 +1,20 @@
 {
-  "name": "श्री सरस्वती माध्यमिक विद्यालय - गृहकार्य पोर्टल",
+  "name": "श्री सरस्वती माध्यमिक विद्यालय",
   "short_name": "श्री सरस्वती माध्यमिक विद्यालय",
+  "start_url": "/sarswati-secondary-school",
+  "display": "standalone",
+  "background_color": "#E0F7FA",
+  "theme_color": "#4A90E2",
   "icons": [
     {
-      "src": "https://kids.kamalgc.com.np/sarswati.png",
+      "src": "sarswati.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://kids.kamalgc.com.np/sarswati.png",
+      "src": "sarswati.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "start_url": "/sarswati-secondary-school",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#00796B"
+  ]
 }
