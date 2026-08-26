@@ -25,8 +25,8 @@
     <meta name="twitter:description" content="बालबालिकाका लागि अक्षर, कखरा, अंक र शब्द ज्ञान सिक्ने सजिलो माध्यम।">
     <meta name="twitter:image" content="https://kids.kamalgc.com.np/192.png">
 
-    <!-- PWA Application Icons & Manifest Setup -->
-    <link rel="manifest" href="/manifest.json">
+    <!-- PWA Application Icons & Manifest Setup (v=7 थपिएको) -->
+    <link rel="manifest" href="/manifest.json?v=7">
     <link rel="apple-touch-icon" href="/192.png">
     <meta name="mobile-web-app-capable" content="yes">
 
@@ -356,16 +356,17 @@
             </div>
         </div>
 
-                        <!-- ५. मनोरञ्जन र अभ्यास -->
+        <!-- ५. मनोरञ्जन र अभ्यास -->
         <div class="category-block">
             <div class="category-header" style="color: #00838F;" onclick="playAIVoice('मनोरञ्जन र अभ्यास')">🎨 मनोरञ्जन र अभ्यास (Activities)</div>
             <div class="grid-1x3">
                 <a href="./quiz.html" class="menu-card bg-activity" onclick="playAIVoice('बाल क्विज खेल');"><span class="icon">🧠</span>बाल क्विज (Quiz)</a>
                 <a href="./drawing.html" class="menu-card bg-activity" onclick="playAIVoice('चित्र कोर्ने बोर्ड');"><span class="icon">✏️</span>चित्र कोर्ने बोर्ड</a>
-                <!-- यहाँ लिङ्क परिवर्तन गरिएको छ -->
                 <a href="./sarswati-secondary-school/" class="menu-card bg-activity" onclick="playAIVoice('सरस्वती स्कुल गृहकार्य');"><span class="icon">🎒</span>सरस्वती गृहकार्य</a>
             </div>
         </div>
+
+    </div>
 
     <!-- ६. Footer Section (गोपनीयता नीति लिङ्कसहित) -->
     <footer class="app-footer">
@@ -382,7 +383,7 @@
 
 </div>
 
-<!-- Parent Dashboard Modal (गोपनीयता नीति बटनसहित) -->
+<!-- Parent Dashboard Modal -->
 <div id="parent-dashboard" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; color:#FFF; padding:20px; text-align:center; overflow-y:auto;">
     <div style="max-width: 450px; margin: 30px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align:left;">
         <h2 style="color: #FF7043; margin-bottom: 15px; text-align:center;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
@@ -423,7 +424,10 @@
             <a href="privacy.html" style="text-decoration:none; text-align:center; padding:10px; font-size:14px; background:#34495E; color:white; border-radius:8px; display:block; font-weight:bold;">🔒 गोपनीयता नीति र प्रतिक्रिया</a>
             
             <button onclick="showChildProgress()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#2ECC71; color:white; border:none; border-radius:8px;">📊 बच्चाको प्रगति हेर्नुहोस्</button>
-            <button onclick="clearCacheData()" class="action-btn" style="width:100%; padding:10px; font-size:14px; border:2px solid #FF5252; color:#FF5252; background:transparent; border-radius:8px;">🧹 एप डेटा रिसेट गर्नुहोस्</button>
+            
+            <!-- 🛠️ सुरक्षित गरिएको Developer Mode बटन (साधारण प्रयोगकर्ताबाट लुकाइएको) -->
+            <button onclick="openDeveloperReset()" class="action-btn" style="width:100%; padding:10px; font-size:12px; border:2px dashed #95A5A6; color:#95A5A6; background:transparent; border-radius:8px;">🛠️ Developer Mode (Reset)</button>
+            
             <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#78909C; color:white; border:none; border-radius:8px;">✖️ बन्द गर्नुहोस्</button>
         </div>
     </div>
@@ -440,14 +444,12 @@
 <script>
   let currentAudio = null;
 
-  // नयाँ र सुरक्षित Base64 सपोर्ट गर्ने अडियो बजाउने फंक्सन
   async function playAIVoice(textToSpeak) {
     try {
       if (currentAudio) {
         currentAudio.pause();
       }
 
-      // 🔄 '?t=' + Date.now() थपेपछि ब्राउजरले पुरानो क्यास (Cache) छोडेर नयाँ फाइल तान्छ
       const response = await fetch('/api/tts?t=' + Date.now(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -470,7 +472,6 @@
     }
   }
 
-  // SpeakBtn मा इभेन्ट जोड्ने
   const speakButton = document.getElementById('speakBtn');
   if (speakButton) {
     speakButton.addEventListener('click', () => {
@@ -536,14 +537,20 @@
       updateTargetDisplay();
   }
 
-  function clearCacheData() {
-      if(confirm("के तपाईं पक्का एपको डेटा रिसेट गर्न चाहनुहुन्छ?")) {
-          localStorage.clear();
-          caches.keys().then((keys) => {
-              keys.forEach((key) => caches.delete(key));
-              alert("डेटा रिसेट भयो! कृपया पेज रिफ्रेस गर्नुहोस्।");
-              location.reload();
-          });
+  // केवल डेभलपरले मात्र पासवर्ड हालेर डेटा रिसेट गर्न मिल्ने सुरक्षित फंक्सन
+  function openDeveloperReset() {
+      let devPin = prompt("🛠️ यो केवल विकासकर्ता (Developer) का लागि हो। गुप्त कोड (Secret Key) हाल्नुहोस्:");
+      if (devPin === "kamal_dev@2026") {
+          if(confirm("के तपाईं पक्का एपको डेटा रिसेट गर्न चाहनुहुन्छ?")) {
+              localStorage.clear();
+              caches.keys().then((keys) => {
+                  keys.forEach((key) => caches.delete(key));
+                  alert("डेटा रिसेट भयो! कृपया पेज रिफ्रेस गर्नुहोस्।");
+                  location.reload();
+              });
+          }
+      } else if (devPin !== null) {
+          alert("❌ गलत गुप्त कोड! डेटा रिसेट गर्न मिलेन।");
       }
   }
 
@@ -589,13 +596,14 @@
   });
 </script>
 
-<!-- External Script for Dark Mode -->
-<script src="./dark-mode.js"></script>
+<!-- External Script for Dark Mode (v=7 थपिएको ताकि क्यासको समस्या नआओस्) -->
+<script src="./dark-mode.js?v=2.1"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
+      // sw.js पछाडि पनि भर्सन जोडियो
+      navigator.serviceWorker.register('/sw.js?v=7')
         .then(reg => console.log('SW active'))
         .catch(err => console.log('SW error:', err));
     });
