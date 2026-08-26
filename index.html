@@ -3,24 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>बाल पाठशाला - नेपाल | बालबालिका सिकाइ केन्द्र</title>
+    <title>बाल पाठशाला - नेपाल | 3D भर्चुअल लाइब्रेरी</title>
     <meta name="theme-color" content="#FF7043">
     
     <!-- SEO & Meta Tags -->
-    <meta name="description" content="बाल पाठशाला: बालबालिकाका लागि कखरा, नेपाली वर्णमाला, अङ्ग्रेजी अक्षर, गणित पहाडा र शब्द ज्ञान सिक्ने सजिलो डिजिटल माध्यम।">
-    <meta name="keywords" content="kids learning nepal, nepali barnamala, nepali pahada, bal pathshala, kamal gc, बालबालिका सिकाइ">
+    <meta name="description" content="बाल पाठशाला: बालबालिकाका लागि 3D भर्चुअल किताबमार्फत कखरा, नेपाली वर्णमाला, अङ्ग्रेजी अक्षर, गणित पहाडा र शब्द ज्ञान सिक्ने सजिलो माध्यम।">
+    <meta name="keywords" content="kids learning nepal, nepali barnamala, 3d book learning, bal pathshala, kamal gc">
     <meta name="author" content="KAMAL G.C.">
     <meta name="robots" content="index, follow">
 
-    <!-- Open Graph Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kids.kamalgc.com.np/">
-    <meta property="og:title" content="🇳🇵 बाल पाठशाला - बालबालिका सिकाइ केन्द्र">
-    <meta property="og:description" content="बालबालिकाका लागि अक्षर, कखरा, अंक र शब्द ज्ञान सिक्ने उत्कृष्ट डिजिटल थलो।">
-    <meta property="og:image" content="https://kids.kamalgc.com.np/192.png">
-
     <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json?v=2.2">
+    <link rel="manifest" href="/manifest.json?v=3.0">
     <link rel="apple-touch-icon" href="/192.png">
     <meta name="mobile-web-app-capable" content="yes">
 
@@ -36,7 +29,7 @@
         }
         body {
             font-family: 'Mukta', 'Fredoka', sans-serif;
-            background: linear-gradient(135deg, #E0F7FA 0%, #FFFDE7 50%, #FFF3E0 100%);
+            background: linear-gradient(135deg, #1A237E 0%, #3F51B5 50%, #00BCD4 100%);
             padding: 15px;
             text-align: center;
             color: #2C3E50;
@@ -45,24 +38,18 @@
 
         /* Dark Mode */
         body.dark-mode {
-            background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%) !important;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
             color: #E0E0E0 !important;
         }
-        body.dark-mode .category-block, 
+        body.dark-mode .bookshelf-container, 
         body.dark-mode .app-footer, 
         body.dark-mode .nepal-3d-card,
         body.dark-mode .target-widget,
-        body.dark-mode .action-btn {
+        body.dark-mode .action-btn,
+        body.dark-mode .book-modal-content {
             background: #1E1E1E !important;
             border-color: #333333 !important;
             color: #FFFFFF !important;
-        }
-        body.dark-mode .category-header {
-            color: #FFB74D !important;
-        }
-        body.dark-mode .main-title {
-            color: #FF7043 !important;
-            text-shadow: none;
         }
 
         .main-container {
@@ -96,12 +83,12 @@
 
         /* Daily Target Widget */
         .target-widget {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.95);
             border: 3px solid #FFD54F;
             border-radius: 18px;
             padding: 12px 16px;
             margin-bottom: 20px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
         .target-title {
             font-size: 15px;
@@ -149,10 +136,6 @@
             cursor: pointer;
             display: inline-block;
             width: 100%;
-            transition: transform 0.1s ease;
-        }
-        .nepal-3d-card:active {
-            transform: scale(0.98);
         }
         .nepal-3d-card img {
             width: 100%;
@@ -173,96 +156,176 @@
         }
 
         .main-title {
-            color: #E65100;
+            color: #FFF;
             font-size: 26px;
             margin: 15px 0 20px 0;
             font-weight: 800;
-            text-shadow: 1px 1px 0px #FFF;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             cursor: pointer;
         }
 
-        /* Category Blocks */
-        .category-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        /* --- 📚 3D Bookshelf & Books Design --- */
+        .bookshelf-shelf {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 20px 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 25px;
         }
-        .category-block {
-            background: #FFFFFF;
-            border-radius: 20px;
-            padding: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-            border: 3px solid #E3F2FD;
-        }
-        .category-header {
-            font-size: 18px;
+        .bookshelf-title {
+            font-size: 19px;
             font-weight: 800;
-            text-align: left;
-            margin-bottom: 12px;
-            padding-left: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
+            color: #FFEB3B;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
-        /* Menu Cards (Kid-Friendly 3D Buttons) */
-        .menu-card {
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        /* 3D Book Cover Card Style */
+        .book-3d {
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
             border-radius: 16px;
-            padding: 12px 6px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
+            padding: 15px 10px;
+            min-height: 140px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: all 0.1s ease;
-            min-height: 90px;
+            cursor: pointer;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 0px rgba(0,0,0,0.2), 0 12px 25px rgba(0,0,0,0.15);
+            border-left: 8px solid rgba(0,0,0,0.15); /* Book Binding Edge */
+            user-select: none;
         }
-        .menu-card:active {
-            transform: translateY(4px);
-            box-shadow: none !important;
+        .book-3d:active {
+            transform: translateY(4px) scale(0.97);
+            box-shadow: 0 4px 0px rgba(0,0,0,0.2);
         }
-        .menu-card span.icon {
-            font-size: 30px;
-            margin-bottom: 5px;
+        .book-3d .book-icon {
+            font-size: 38px;
+            margin-bottom: 8px;
             transition: transform 0.2s;
         }
-        .menu-card:hover span.icon {
-            transform: scale(1.15);
+        .book-3d:hover .book-icon {
+            transform: scale(1.15) rotate(-5deg);
+        }
+        .book-3d .book-name {
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+        .book-tag {
+            font-size: 11px;
+            background: rgba(0,0,0,0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-top: 6px;
+            font-weight: 700;
         }
 
-        .grid-3x {
+        /* Unique Book Colors (3D Themes) */
+        .book-nepali { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); border: 3px solid #81C784; border-left: 8px solid #2E7D32; color: #1B5E20; }
+        .book-english { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border: 3px solid #64B5F6; border-left: 8px solid #1565C0; color: #0D47A1; }
+        .book-math { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); border: 3px solid #BA68C8; border-left: 8px solid #6A1B9A; color: #4A148C; }
+        .book-vocab { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border: 3px solid #FFB74D; border-left: 8px solid #E65100; color: #E65100; }
+        .book-activity { background: linear-gradient(135deg, #E0F7FA, #B2EBF2); border: 3px solid #4DD0E1; border-left: 8px solid #00838F; color: #006064; grid-column: span 2; }
+
+        /* --- 📖 Book Open Modal (किताब खोलेपछि देखिने पानाहरू) --- */
+        #book-open-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            animation: fadeIn 0.2s ease;
+        }
+        .book-modal-content {
+            background: #FFFDF9;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 24px;
+            padding: 25px 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 6px solid #8D6E63; /* Wooden / Leather Book Border */
+            position: relative;
+            text-align: center;
+            animation: bookOpenAnim 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes bookOpenAnim {
+            0% { transform: scale(0.5) rotateY(90deg); opacity: 0; }
+            100% { transform: scale(1) rotateY(0deg); opacity: 1; }
+        }
+        .modal-book-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #3E2723;
+            margin-bottom: 15px;
+            border-bottom: 3px dashed #D7CCC8;
+            padding-bottom: 10px;
+        }
+        .pages-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(1, 1fr);
             gap: 12px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding: 5px;
         }
-        .grid-2x {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+        .page-link-btn {
+            background: #FFF3E0;
+            border: 2px solid #FFB74D;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #E65100;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 0px #FFCC80;
+            transition: transform 0.1s;
         }
-
-        /* Theme Colors for Grids */
-        .bg-lang { background-color: #E8F5E9; border: 2px solid #A5D6A7; box-shadow: 0 5px 0px #66BB6A; color: #1B5E20; }
-        .bg-vocab { background-color: #FFF3E0; border: 2px solid #FFCC80; box-shadow: 0 5px 0px #FFA726; color: #E65100; }
-        .bg-math { background-color: #F3E5F5; border: 2px solid #CE93D8; box-shadow: 0 5px 0px #AB47BC; color: #4A148C; }
-        .bg-activity { background-color: #E0F7FA; border: 2px solid #80DEEA; box-shadow: 0 5px 0px #26C6DA; color: #006064; }
-
-        /* Test Speak Button */
-        .speak-test-box {
-            margin: 15px 0;
+        .page-link-btn:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+        .close-book-btn {
+            background: #E53935;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 0px #B71C1C;
         }
 
         /* Footer */
         .app-footer {
             margin-top: 35px;
             padding: 22px 15px;
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 18px;
             border: 3px solid #E3F2FD;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         .footer-title { font-size: 16px; font-weight: 800; color: #FF5722; margin-bottom: 10px; }
@@ -270,11 +333,10 @@
         .footer-links a { color: #1E88E5; text-decoration: none; }
         .footer-copyright { font-size: 13px; color: #78909C; font-weight: 600; }
 
-        /* Responsive Layouts */
         @media screen and (min-width: 600px) {
             body { padding: 30px !important; }
-            .main-container { max-width: 100% !important; }
-            .menu-card { min-height: 120px !important; font-size: 16px !important; }
+            .books-grid { grid-template-columns: repeat(3, 1fr); }
+            .book-activity { grid-column: span 1; }
         }
     </style>
 </head>
@@ -309,59 +371,57 @@
 
     <div class="main-title" onclick="playAIVoice('बालबालिका सिकाइ केन्द्र')">✨ बालबालिका सिकाइ केन्द्र ✨</div>
 
-    <!-- अडियो परीक्षण बटन -->
-    <div class="speak-test-box">
-        <button id="speakBtn" class="action-btn" style="background: #4CAF50; color: white; border: none; padding: 10px 22px; font-size: 15px; box-shadow: 0 4px 0px #388E3C;">🔊 अडियो परीक्षण गर्नुहोस्</button>
+    <!-- 📚 3D Bookshelf (5 Interactive Books) -->
+    <div class="bookshelf-shelf">
+        <div class="bookshelf-title" onclick="playAIVoice('डिजिटल किताबहरू')">📖 डिजिटल किताबहरू (छोडेर खोल्नुहोस्)</div>
+        
+        <div class="books-grid">
+            <!-- Book 1: Nepali -->
+            <div class="book-3d book-nepali" onclick="openBook('nepali')">
+                <span class="book-icon">🇳🇵</span>
+                <div class="book-name">नेपाली किताब</div>
+                <div class="book-tag">स्वर, व्यञ्जन, बाह्रखरी</div>
+            </div>
+
+            <!-- Book 2: English -->
+            <div class="book-3d book-english" onclick="openBook('english')">
+                <span class="book-icon">🇬🇧</span>
+                <div class="book-name">अंग्रेजी किताब</div>
+                <div class="book-tag">Alphabet & English</div>
+            </div>
+
+            <!-- Book 3: Maths -->
+            <div class="book-3d book-math" onclick="openBook('math')">
+                <span class="book-icon">🔢</span>
+                <div class="book-name">Mathematics</div>
+                <div class="book-tag">Numbers & Pahada</div>
+            </div>
+
+            <!-- Book 4: Vocabulary -->
+            <div class="book-3d book-vocab" onclick="openBook('vocab')">
+                <span class="book-icon">🌍</span>
+                <div class="book-name">शब्द ज्ञान</div>
+                <div class="book-tag">रङ, फलफूल, जनावर आदि</div>
+            </div>
+
+            <!-- Book 5: Activities -->
+            <div class="book-3d book-activity" onclick="openBook('activity')">
+                <span class="book-icon">🎨</span>
+                <div class="book-name">मनोरञ्जन र क्रियाकलाप</div>
+                <div class="book-tag">Quiz & Drawing Board</div>
+            </div>
+        </div>
     </div>
 
-    <div class="category-container">
-        
-        <!-- २. भाषा र अक्षर -->
-        <div class="category-block">
-            <div class="category-header" style="color: #2E7D32;" onclick="playAIVoice('भाषा र अक्षर')">📚 भाषा र अक्षर (Alphabets)</div>
-            <div class="grid-3x">
-                <a href="./alphabet.html" class="menu-card bg-lang" onclick="playAIVoice('अल्फाबेट');"><span class="icon">🔤</span>Alphabet</a>
-                <a href="./image.html" class="menu-card bg-lang" onclick="playAIVoice('इङ्ग्रेजी इमेज');"><span class="icon">🖼️</span>English Image</a>
-                <a href="./vowels.html" class="menu-card bg-lang" onclick="playAIVoice('स्वर वर्ण');"><span class="icon">अ</span>स्वर वर्ण</a>
-                <a href="./imagevowels.html" class="menu-card bg-lang" onclick="playAIVoice('स्वर इमेज');"><span class="icon">🎨</span>स्वर (Image)</a>
-                <a href="./consonants.html" class="menu-card bg-lang" onclick="playAIVoice('व्यञ्जन वर्ण');"><span class="icon">क</span>व्यञ्जन वर्ण</a>
-                <a href="./imageconsonants.html" class="menu-card bg-lang" onclick="playAIVoice('व्यञ्जन इमेज');"><span class="icon">🧩</span>व्यञ्जन (Img)</a>
+    <!-- 📖 Book Open Modal (किताब खोलेपछि देखिने भित्री पानाहरू) -->
+    <div id="book-open-modal">
+        <div class="book-modal-content">
+            <div class="modal-book-title" id="modal-title">किताबको नाम</div>
+            <div class="pages-grid" id="modal-pages-list">
+                <!-- Javascript ले dynamically पानाहरू राख्नेछ -->
             </div>
+            <button class="close-book-btn" onclick="closeBook()">✖️ किताब बन्द गर्नुहोस्</button>
         </div>
-
-        <!-- ३. शब्द ज्ञान -->
-        <div class="category-block">
-            <div class="category-header" style="color: #E65100;" onclick="playAIVoice('शब्द ज्ञान')">🍎 शब्द ज्ञान (Vocabulary)</div>
-            <div class="grid-3x">
-                <a href="./barahakhari.html" class="menu-card bg-vocab" onclick="playAIVoice('बाह्रखरी');"><span class="icon">📝</span>बाह्रखरी</a>
-                <a href="./colors.html" class="menu-card bg-vocab" onclick="playAIVoice('रङहरूको नाम');"><span class="icon">🎨</span>रङहरूको नाम</a>
-                <a href="./fruits-vegetables.html" class="menu-card bg-vocab" onclick="playAIVoice('फलफूल र तरकारी');"><span class="icon">🍎</span>फलफूल/तरकारी</a>
-                <a href="./animals-birds.html" class="menu-card bg-vocab" onclick="playAIVoice('जनावर र पन्छी');"><span class="icon">🐅</span>जनावर/पन्छी</a>
-                <a href="./body-parts.html" class="menu-card bg-vocab" onclick="playAIVoice('शरीरका अंगहरू');"><span class="icon">👀</span>शरीरका अंग</a>
-                <a href="./vehicles.html" class="menu-card bg-vocab" onclick="playAIVoice('सवारी साधनहरू');"><span class="icon">🚗</span>सवारी साधन</a>
-            </div>
-        </div>
-
-        <!-- ४. गणित र समय -->
-        <div class="category-block">
-            <div class="category-header" style="color: #6A1B9A;" onclick="playAIVoice('गणित र समय')">🔢 गणित र समय (Maths & GK)</div>
-            <div class="grid-3x">
-                <a href="./days-months.html" class="menu-card bg-math" onclick="playAIVoice('वार र महिना');"><span class="icon">📅</span>वार र महिना</a>
-                <a href="./numbers.html" class="menu-card bg-math" onclick="playAIVoice('नम्बर्स र अंक');"><span class="icon">🔢</span>Numbers / अंक</a>
-                <a href="./pahada.html" class="menu-card bg-math" onclick="playAIVoice('गणित पहाडा');"><span class="icon">✖️</span>गणित पहाडा</a>
-            </div>
-        </div>
-
-        <!-- ५. मनोरञ्जन र अभ्यास -->
-        <div class="category-block">
-            <div class="category-header" style="color: #00838F;" onclick="playAIVoice('मनोरञ्जन र अभ्यास')">🎨 मनोरञ्जन र अभ्यास (Activities)</div>
-            <div class="grid-3x">
-                <a href="./quiz.html" class="menu-card bg-activity" onclick="playAIVoice('बाल क्विज खेल');"><span class="icon">🧠</span>बाल क्विज</a>
-                <a href="./drawing.html" class="menu-card bg-activity" onclick="playAIVoice('चित्र कोर्ने बोर्ड');"><span class="icon">✏️</span>ड्रइङ बोर्ड</a>
-                <a href="./sarswati-secondary-school/" class="menu-card bg-activity" onclick="playAIVoice('सरस्वती स्कुल गृहकार्य');"><span class="icon">🎒</span>गृहकार्य</a>
-            </div>
-        </div>
-
     </div>
 
     <!-- ६. Footer Section -->
@@ -383,28 +443,9 @@
 <div id="parent-dashboard" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; color:#FFF; padding:20px; text-align:center; overflow-y:auto;">
     <div style="max-width: 450px; margin: 30px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align:left;">
         <h2 style="color: #FF7043; margin-bottom: 15px; text-align:center;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
-        <p style="margin-bottom: 15px; font-size:13px; color:#ECEFF1; text-align:center;">यहाँबाट एपका सेटिङहरू, समय सीमा र बच्चाको सिकाइ प्रगति नियन्त्रण गर्नुहोस्:</p>
+        <p style="margin-bottom: 15px; font-size:13px; color:#ECEFF1; text-align:center;">यहाँबाट एपका सेटिङहरू नियन्त्रण गर्नुहोस्:</p>
         
-        <!-- बच्चाको प्रगति ट्र्याकर -->
-        <div id="progress-report" style="display:none; background:#1A252F; padding:15px; border-radius:12px; margin-bottom:15px;">
-            <h4 style="color:#2ECC71; margin-bottom:8px; text-align:center;">📊 बच्चाको सिकाइ रिपोर्ट</h4>
-            <p style="font-size:14px; margin:5px 0; color:#FFF;">🎯 मिलाएका सही उत्तर: <b id="total-score-val" style="color:#F1C40F;">0</b></p>
-            <p style="font-size:14px; margin:5px 0; color:#FFF;">🎮 कुल प्रयास गरेका प्रश्न: <b id="total-played-val" style="color:#3498DB;">0</b></p>
-        </div>
-
-        <!-- समय र लक्ष्य सेटिङ -->
         <div style="background:#1A252F; padding:15px; border-radius:12px; margin-bottom:15px;">
-            <h4 style="color:#F39C12; margin-bottom:10px; text-align:center;">⚙️ समय र लक्ष्य सेटिङ</h4>
-            
-            <label style="font-size:13px; color:#DDD;">⏱️ दैनिक प्रयोग समय (मिनेट):</label>
-            <select id="screen-time-select" style="width:100%; padding:8px; margin:6px 0 12px 0; border-radius:8px;">
-                <option value="0">असीमित (Limit Off)</option>
-                <option value="15">१५ मिनेट</option>
-                <option value="30">३० मिनेट</option>
-                <option value="45">४५ मिनेट</option>
-                <option value="60">६० मिनेट (१ घण्टा)</option>
-            </select>
-
             <label style="font-size:13px; color:#DDD;">📌 दैनिक क्विज लक्ष्य (सही उत्तर):</label>
             <select id="target-select" style="width:100%; padding:8px; margin:6px 0 12px 0; border-radius:8px;">
                 <option value="5">५ वटा</option>
@@ -412,24 +453,10 @@
                 <option value="15">१५ वटा</option>
                 <option value="20">२० वटा</option>
             </select>
-
-            <button onclick="saveParentSettings()" style="width:100%; padding:8px; background:#F39C12; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">💾 सेटिङ सेभ गर्नुहोस्</button>
+            <button onclick="saveParentSettings()" style="width:100%; padding:8px; background:#F39C12; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">💾 सेभ गर्नुहोस्</button>
         </div>
-
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-            <button onclick="showChildProgress()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#2ECC71; color:white; border:none; border-radius:8px;">📊 बच्चाको प्रगति हेर्नुहोस्</button>
-            <button onclick="openDeveloperReset()" class="action-btn" style="width:100%; padding:10px; font-size:12px; border:2px dashed #95A5A6; color:#95A5A6; background:transparent; border-radius:8px;">🛠️ Developer Mode (Reset)</button>
-            <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#78909C; color:white; border:none; border-radius:8px;">✖️ बन्द गर्नुहोस्</button>
-        </div>
+        <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#78909C; color:white; border:none; border-radius:8px;">✖️ बन्द गर्नुहोस्</button>
     </div>
-</div>
-
-<!-- Screen Lock Overlay -->
-<div id="screen-lock-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#111; z-index:99999; color:white; text-align:center; padding-top:120px;">
-    <h1 style="font-size:50px;">⏳</h1>
-    <h2 style="color:#FF5252; margin-top:10px;">आजको समय सकियो!</h2>
-    <p style="font-size:16px; margin:15px 20px; color:#BBB;">अभिभावकले тоक्नुभएको दैनिक प्रयोग समय पूरा भएको छ।</p>
-    <button onclick="openParentalLock(unlockScreenManually)" style="padding:10px 20px; background:#4CAF50; color:white; border:none; border-radius:10px; font-size:15px; font-weight:bold; cursor:pointer; margin-top:10px;">🔐 अभिभावक अनलक</button>
 </div>
 
 <script>
@@ -452,9 +479,77 @@
     }
   }
 
-  document.getElementById('speakBtn').addEventListener('click', () => {
-    playAIVoice("नमस्ते, बाल पाठशालामा स्वागत छ।");
-  });
+  // --- 📖 Book Open / Close Logic ---
+  const bookData = {
+    nepali: {
+      title: "🇳🇵 नेपाली किताब",
+      pages: [
+        { name: "स्वर वर्ण (Vowels)", url: "./vowels.html", icon: "अ" },
+        { name: "व्यञ्जन वर्ण (Consonants)", url: "./consonants.html", icon: "क" },
+        { name: "बाह्रखरी (Barahakhari)", url: "./barahakhari.html", icon: "📝" },
+        { name: "स्वर (Image Vowels)", url: "./imagevowels.html", icon: "🎨" },
+        { name: "व्यञ्जन (Image Consonants)", url: "./imageconsonants.html", icon: "🧩" }
+      ]
+    },
+    english: {
+      title: "🇬🇧 अंग्रेजी किताब (English)",
+      pages: [
+        { name: "English Alphabet", url: "./alphabet.html", icon: "🔤" },
+        { name: "English Words / Images", url: "./english.html", icon: "🖼️" }
+      ]
+    },
+    math: {
+      title: "🔢 Mathematics किताब",
+      pages: [
+        { name: "Numbers & अंक", url: "./numbers.html", icon: "🔢" },
+        { name: "गणित पहाडा (Pahada)", url: "./pahada.html", icon: "✖️" }
+      ]
+    },
+    vocab: {
+      title: "🌍 शब्द ज्ञान तथा सामान्य ज्ञान",
+      pages: [
+        { name: "वार र महिना (Days & Months)", url: "./days-months.html", icon: "📅" },
+        { name: "रङहरूको नाम (Colors)", url: "./colors.html", icon: "🎨" },
+        { name: "फलफूल र तरकारी", url: "./fruits-vegetables.html", icon: "🍎" },
+        { name: "जनावर र पन्छी", url: "./animals-birds.html", icon: "🐅" },
+        { name: "शरीरका अंगहरू (Body Parts)", url: "./body-parts.html", icon: "👀" },
+        { name: "सवारी साधनहरू (Vehicles)", url: "./vehicles.html", icon: "🚗" }
+      ]
+    },
+    activity: {
+      title: "🎨 मनोरञ्जन र अन्य क्रियाकलाप",
+      pages: [
+        { name: "बाल क्विज खेल (Quiz)", url: "./quiz.html", icon: "🧠" },
+        { name: "चित्र कोर्ने बोर्ड (Drawing)", url: "./drawing.html", icon: "✏️" }
+      ]
+    }
+  };
+
+  function openBook(bookKey) {
+    const book = bookData[bookKey];
+    if (!book) return;
+
+    document.getElementById('modal-title').innerText = book.title;
+    playAIVoice(book.title + " खोलियो");
+
+    const pagesContainer = document.getElementById('modal-pages-list');
+    pagesContainer.innerHTML = "";
+
+    book.pages.forEach(page => {
+      const btn = document.createElement('a');
+      btn.href = page.url;
+      btn.className = 'page-link-btn';
+      btn.innerHTML = `<span>${page.icon} &nbsp; ${page.name}</span> ➡️`;
+      btn.onclick = () => playAIVoice(page.name);
+      pagesContainer.appendChild(btn);
+    });
+
+    document.getElementById('book-open-modal').style.display = 'flex';
+  }
+
+  function closeBook() {
+    document.getElementById('book-open-modal').style.display = 'none';
+  }
 
   function toggleAnthem() {
     const anthem = document.getElementById('national-anthem');
@@ -479,35 +574,16 @@
   }
 
   function showParentDashboard() {
-      document.getElementById('screen-time-select').value = localStorage.getItem('app_screen_limit') || "0";
       document.getElementById('target-select').value = localStorage.getItem('app_daily_target') || "10";
       document.getElementById('parent-dashboard').style.display = 'block';
   }
 
   function closeDashboard() { document.getElementById('parent-dashboard').style.display = 'none'; }
 
-  function showChildProgress() {
-      document.getElementById('total-score-val').innerText = localStorage.getItem('quiz_total_score') || 0;
-      document.getElementById('total-played-val').innerText = localStorage.getItem('quiz_played_count') || 0;
-      const reportBox = document.getElementById('progress-report');
-      reportBox.style.display = reportBox.style.display === 'none' ? 'block' : 'none';
-  }
-
   function saveParentSettings() {
-      localStorage.setItem('app_screen_limit', document.getElementById('screen-time-select').value);
       localStorage.setItem('app_daily_target', document.getElementById('target-select').value);
-      alert("सेटिङहरू सेभ भयो!");
+      alert("सेटिङ सेभ भयो!");
       updateTargetDisplay();
-  }
-
-  function openDeveloperReset() {
-      let devPin = prompt("🛠️ गुप्त कोड (Secret Key) हाल्नुहोस्:");
-      if (devPin === "kamal_dev@2026") {
-          if(confirm("डेटा रिसेट गर्ने हो?")) {
-              localStorage.clear();
-              location.reload();
-          }
-      }
   }
 
   function updateTargetDisplay() {
@@ -523,6 +599,6 @@
   });
 </script>
 
-<script src="./dark-mode.js?v=2.2"></script>
+<script src="./dark-mode.js?v=3.0"></script>
 </body>
 </html>
