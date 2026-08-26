@@ -3,30 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>बाल पाठशाला - नेपाल</title>
-    <meta name="theme-color" content="#4A90E2">
+    <title>बाल पाठशाला - नेपाल | बालबालिका सिकाइ केन्द्र</title>
+    <meta name="theme-color" content="#FF7043">
     
-    <!-- १. SEO Meta Tags -->
-    <meta name="description" content="बाल पाठशाला: बालबालिकाका लागि कखरा, नेपाली वर्णमाला, अङ्ग्रेजी अक्षर, गणित पहाडा र शब्द ज्ञान सिक्ने सजिलो माध्यम।">
+    <!-- SEO & Meta Tags -->
+    <meta name="description" content="बाल पाठशाला: बालबालिकाका लागि कखरा, नेपाली वर्णमाला, अङ्ग्रेजी अक्षर, गणित पहाडा र शब्द ज्ञान सिक्ने सजिलो डिजिटल माध्यम।">
     <meta name="keywords" content="kids learning nepal, nepali barnamala, nepali pahada, bal pathshala, kamal gc, बालबालिका सिकाइ">
     <meta name="author" content="KAMAL G.C.">
     <meta name="robots" content="index, follow">
 
-    <!-- २. Open Graph Tags -->
+    <!-- Open Graph Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kids.kamalgc.com.np/">
     <meta property="og:title" content="🇳🇵 बाल पाठशाला - बालबालिका सिकाइ केन्द्र">
     <meta property="og:description" content="बालबालिकाका लागि अक्षर, कखरा, अंक र शब्द ज्ञान सिक्ने उत्कृष्ट डिजिटल थलो।">
     <meta property="og:image" content="https://kids.kamalgc.com.np/192.png">
 
-    <!-- ३. Twitter Card Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="🇳🇵 बाल पाठशाला - बालबालिका सिकाइ केन्द्र">
-    <meta name="twitter:description" content="बालबालिकाका लागि अक्षर, कखरा, अंक र शब्द ज्ञान सिक्ने सजिलो माध्यम।">
-    <meta name="twitter:image" content="https://kids.kamalgc.com.np/192.png">
-
-    <!-- PWA Application Icons & Manifest Setup (v=7 थपिएको) -->
-    <link rel="manifest" href="/manifest.json?v=7">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json?v=2.2">
     <link rel="apple-touch-icon" href="/192.png">
     <meta name="mobile-web-app-capable" content="yes">
 
@@ -38,25 +32,27 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             font-family: 'Mukta', 'Fredoka', sans-serif;
-            background: linear-gradient(180deg, #E0F7FA 0%, #FFFDE7 100%);
+            background: linear-gradient(135deg, #E0F7FA 0%, #FFFDE7 50%, #FFF3E0 100%);
             padding: 15px;
             text-align: center;
             color: #2C3E50;
-            transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
         }
 
-        /* Dark Mode Global Styles */
+        /* Dark Mode */
         body.dark-mode {
-            background: #121212 !important;
+            background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%) !important;
             color: #E0E0E0 !important;
         }
         body.dark-mode .category-block, 
         body.dark-mode .app-footer, 
         body.dark-mode .nepal-3d-card,
-        body.dark-mode .target-widget {
+        body.dark-mode .target-widget,
+        body.dark-mode .action-btn {
             background: #1E1E1E !important;
             border-color: #333333 !important;
             color: #FFFFFF !important;
@@ -70,9 +66,8 @@
         }
 
         .main-container {
-            max-width: 650px;
+            max-width: 680px;
             margin: 0 auto;
-            transition: max-width 0.3s ease;
         }
 
         /* Top Action Bar */
@@ -84,34 +79,36 @@
         }
         .action-btn {
             background: #FFFFFF;
-            border: 2px solid #4A90E2;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
+            border: 2px solid #FF9800;
+            padding: 8px 14px;
+            border-radius: 25px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 3px 0px #4A90E2;
-            color: #2C3E50;
+            box-shadow: 0 4px 0px #FFB74D;
+            color: #E65100;
+            transition: all 0.1s ease;
         }
         .action-btn:active {
-            transform: translateY(2px);
+            transform: translateY(3px);
             box-shadow: none;
         }
 
-        /* Daily Target Widget on Home Page */
+        /* Daily Target Widget */
         .target-widget {
             background: #FFFFFF;
             border: 3px solid #FFD54F;
-            border-radius: 16px;
-            padding: 12px;
+            border-radius: 18px;
+            padding: 12px 16px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
         }
         .target-title {
             font-size: 15px;
             font-weight: 800;
             color: #E65100;
             margin-bottom: 8px;
+            cursor: pointer;
         }
         .progress-bar-bg {
             background: #FFE0B2;
@@ -127,42 +124,39 @@
             transition: width 0.4s ease;
         }
 
-        /* --- १. हाम्रो प्यारो नेपाल --- */
+        /* National Box */
         .national-box {
-            background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
-            border-radius: 20px;
-            padding: 18px 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #FF5252, #FF7043);
+            border-radius: 22px;
+            padding: 16px;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 25px rgba(255, 87, 34, 0.25);
             border: 4px solid #FFE600;
         }
         .national-box h1 {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-size: 22px;
             color: #FFE600;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
             cursor: pointer;
         }
-        
         .nepal-3d-card {
             background: #FFFFFF;
             border-radius: 16px;
-            padding: 10px;
-            box-shadow: 0 10px 0px #B8E994, 0 15px 25px rgba(0,0,0,0.2);
-            border: 3px solid #78E08F;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding: 8px;
+            box-shadow: 0 8px 0px #81C784, 0 12px 20px rgba(0,0,0,0.15);
+            border: 3px solid #4CAF50;
+            cursor: pointer;
             display: inline-block;
             width: 100%;
-            cursor: pointer;
-            user-select: none;
+            transition: transform 0.1s ease;
         }
         .nepal-3d-card:active {
             transform: scale(0.98);
         }
         .nepal-3d-card img {
             width: 100%;
-            height: auto;
-            max-height: 280px;
+            max-height: 250px;
             object-fit: contain;
             border-radius: 10px;
             display: block;
@@ -172,22 +166,22 @@
             font-weight: 700;
             color: #FFFFFF;
             margin-top: 8px;
-            background: rgba(0,0,0,0.2);
-            padding: 4px 10px;
+            background: rgba(0,0,0,0.25);
+            padding: 5px 12px;
             border-radius: 12px;
             display: inline-block;
         }
 
         .main-title {
-            color: #FF5722;
-            font-size: 24px;
+            color: #E65100;
+            font-size: 26px;
             margin: 15px 0 20px 0;
             font-weight: 800;
             text-shadow: 1px 1px 0px #FFF;
             cursor: pointer;
         }
 
-        /* --- Category Container --- */
+        /* Category Blocks */
         .category-container {
             display: flex;
             flex-direction: column;
@@ -195,9 +189,9 @@
         }
         .category-block {
             background: #FFFFFF;
-            border-radius: 18px;
-            padding: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
             border: 3px solid #E3F2FD;
         }
         .category-header {
@@ -212,8 +206,9 @@
             cursor: pointer;
         }
 
+        /* Menu Cards (Kid-Friendly 3D Buttons) */
         .menu-card {
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 12px 6px;
             text-decoration: none;
             font-size: 14px;
@@ -223,45 +218,51 @@
             align-items: center;
             justify-content: center;
             transition: all 0.1s ease;
-            min-height: 85px;
+            min-height: 90px;
         }
         .menu-card:active {
-            transform: translateY(3px);
+            transform: translateY(4px);
             box-shadow: none !important;
         }
         .menu-card span.icon {
-            font-size: 28px;
-            margin-bottom: 4px;
+            font-size: 30px;
+            margin-bottom: 5px;
+            transition: transform 0.2s;
+        }
+        .menu-card:hover span.icon {
+            transform: scale(1.15);
         }
 
-        .grid-2x3 {
+        .grid-3x {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
-        .grid-1x3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-        .grid-1x2 {
+        .grid-2x {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
 
-        .bg-lang { background-color: #E8F5E9; border: 2px solid #A5D6A7; box-shadow: 0 4px 0px #81C784; color: #1B5E20; }
-        .bg-vocab { background-color: #FFF3E0; border: 2px solid #FFCC80; box-shadow: 0 4px 0px #FFB74D; color: #E65100; }
-        .bg-math { background-color: #F3E5F5; border: 2px solid #CE93D8; box-shadow: 0 4px 0px #BA68C8; color: #4A148C; }
-        .bg-activity { background-color: #E0F7FA; border: 2px solid #80DEEA; box-shadow: 0 4px 0px #26C6DA; color: #006064; }
+        /* Theme Colors for Grids */
+        .bg-lang { background-color: #E8F5E9; border: 2px solid #A5D6A7; box-shadow: 0 5px 0px #66BB6A; color: #1B5E20; }
+        .bg-vocab { background-color: #FFF3E0; border: 2px solid #FFCC80; box-shadow: 0 5px 0px #FFA726; color: #E65100; }
+        .bg-math { background-color: #F3E5F5; border: 2px solid #CE93D8; box-shadow: 0 5px 0px #AB47BC; color: #4A148C; }
+        .bg-activity { background-color: #E0F7FA; border: 2px solid #80DEEA; box-shadow: 0 5px 0px #26C6DA; color: #006064; }
 
+        /* Test Speak Button */
+        .speak-test-box {
+            margin: 15px 0;
+        }
+
+        /* Footer */
         .app-footer {
             margin-top: 35px;
-            padding: 20px 15px;
+            padding: 22px 15px;
             background: #FFFFFF;
-            border-radius: 16px;
+            border-radius: 18px;
             border: 3px solid #E3F2FD;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
             text-align: center;
         }
         .footer-title { font-size: 16px; font-weight: 800; color: #FF5722; margin-bottom: 10px; }
@@ -269,16 +270,11 @@
         .footer-links a { color: #1E88E5; text-decoration: none; }
         .footer-copyright { font-size: 13px; color: #78909C; font-weight: 600; }
 
+        /* Responsive Layouts */
         @media screen and (min-width: 600px) {
-            body { padding: 20px 40px !important; }
-            .main-container { max-width: 100% !important; width: 100% !important; }
-            .national-box { width: 100% !important; padding: 30px !important; }
-            .nepal-3d-card { width: 100% !important; }
-            .nepal-3d-card img { max-height: 500px !important; width: 100% !important; object-fit: contain; }
-            .grid-2x3 { grid-template-columns: repeat(6, 1fr) !important; gap: 15px !important; }
-            .grid-1x3 { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
-            .grid-1x2 { grid-template-columns: repeat(2, 1fr) !important; gap: 15px !important; }
-            .menu-card { min-height: 120px !important; font-size: 18px !important; }
+            body { padding: 30px !important; }
+            .main-container { max-width: 100% !important; }
+            .menu-card { min-height: 120px !important; font-size: 16px !important; }
         }
     </style>
 </head>
@@ -286,7 +282,7 @@
 
 <div class="main-container">
 
-    <!-- Header Tools: Dark Mode & Parental Lock -->
+    <!-- Top Action Bar -->
     <div class="top-action-bar">
         <button class="action-btn" onclick="toggleDarkMode()">🌙 डार्क मोड</button>
         <button class="action-btn" onclick="openParentalLock(showParentDashboard)">🔒 अभिभावक मोड</button>
@@ -313,9 +309,9 @@
 
     <div class="main-title" onclick="playAIVoice('बालबालिका सिकाइ केन्द्र')">✨ बालबालिका सिकाइ केन्द्र ✨</div>
 
-    <!-- 🔊 परीक्षण स्पिक बटन (SpeakBtn ID राखिएको) -->
-    <div style="margin-bottom: 15px;">
-        <button id="speakBtn" class="action-btn" style="background: #4CAF50; color: white; border: none; padding: 10px 20px; font-size: 15px;">🔊 अडियो परीक्षण गर्नुहोस्</button>
+    <!-- अडियो परीक्षण बटन -->
+    <div class="speak-test-box">
+        <button id="speakBtn" class="action-btn" style="background: #4CAF50; color: white; border: none; padding: 10px 22px; font-size: 15px; box-shadow: 0 4px 0px #388E3C;">🔊 अडियो परीक्षण गर्नुहोस्</button>
     </div>
 
     <div class="category-container">
@@ -323,7 +319,7 @@
         <!-- २. भाषा र अक्षर -->
         <div class="category-block">
             <div class="category-header" style="color: #2E7D32;" onclick="playAIVoice('भाषा र अक्षर')">📚 भाषा र अक्षर (Alphabets)</div>
-            <div class="grid-2x3">
+            <div class="grid-3x">
                 <a href="./alphabet.html" class="menu-card bg-lang" onclick="playAIVoice('अल्फाबेट');"><span class="icon">🔤</span>Alphabet</a>
                 <a href="./image.html" class="menu-card bg-lang" onclick="playAIVoice('इङ्ग्रेजी इमेज');"><span class="icon">🖼️</span>English Image</a>
                 <a href="./vowels.html" class="menu-card bg-lang" onclick="playAIVoice('स्वर वर्ण');"><span class="icon">अ</span>स्वर वर्ण</a>
@@ -336,7 +332,7 @@
         <!-- ३. शब्द ज्ञान -->
         <div class="category-block">
             <div class="category-header" style="color: #E65100;" onclick="playAIVoice('शब्द ज्ञान')">🍎 शब्द ज्ञान (Vocabulary)</div>
-            <div class="grid-2x3">
+            <div class="grid-3x">
                 <a href="./barahakhari.html" class="menu-card bg-vocab" onclick="playAIVoice('बाह्रखरी');"><span class="icon">📝</span>बाह्रखरी</a>
                 <a href="./colors.html" class="menu-card bg-vocab" onclick="playAIVoice('रङहरूको नाम');"><span class="icon">🎨</span>रङहरूको नाम</a>
                 <a href="./fruits-vegetables.html" class="menu-card bg-vocab" onclick="playAIVoice('फलफूल र तरकारी');"><span class="icon">🍎</span>फलफूल/तरकारी</a>
@@ -349,7 +345,7 @@
         <!-- ४. गणित र समय -->
         <div class="category-block">
             <div class="category-header" style="color: #6A1B9A;" onclick="playAIVoice('गणित र समय')">🔢 गणित र समय (Maths & GK)</div>
-            <div class="grid-1x3">
+            <div class="grid-3x">
                 <a href="./days-months.html" class="menu-card bg-math" onclick="playAIVoice('वार र महिना');"><span class="icon">📅</span>वार र महिना</a>
                 <a href="./numbers.html" class="menu-card bg-math" onclick="playAIVoice('नम्बर्स र अंक');"><span class="icon">🔢</span>Numbers / अंक</a>
                 <a href="./pahada.html" class="menu-card bg-math" onclick="playAIVoice('गणित पहाडा');"><span class="icon">✖️</span>गणित पहाडा</a>
@@ -359,21 +355,21 @@
         <!-- ५. मनोरञ्जन र अभ्यास -->
         <div class="category-block">
             <div class="category-header" style="color: #00838F;" onclick="playAIVoice('मनोरञ्जन र अभ्यास')">🎨 मनोरञ्जन र अभ्यास (Activities)</div>
-            <div class="grid-1x3">
-                <a href="./quiz.html" class="menu-card bg-activity" onclick="playAIVoice('बाल क्विज खेल');"><span class="icon">🧠</span>बाल क्विज (Quiz)</a>
-                <a href="./drawing.html" class="menu-card bg-activity" onclick="playAIVoice('चित्र कोर्ने बोर्ड');"><span class="icon">✏️</span>चित्र कोर्ने बोर्ड</a>
-                <a href="./sarswati-secondary-school/" class="menu-card bg-activity" onclick="playAIVoice('सरस्वती स्कुल गृहकार्य');"><span class="icon">🎒</span>सरस्वती गृहकार्य</a>
+            <div class="grid-3x">
+                <a href="./quiz.html" class="menu-card bg-activity" onclick="playAIVoice('बाल क्विज खेल');"><span class="icon">🧠</span>बाल क्विज</a>
+                <a href="./drawing.html" class="menu-card bg-activity" onclick="playAIVoice('चित्र कोर्ने बोर्ड');"><span class="icon">✏️</span>ड्रइङ बोर्ड</a>
+                <a href="./sarswati-secondary-school/" class="menu-card bg-activity" onclick="playAIVoice('सरस्वती स्कुल गृहकार्य');"><span class="icon">🎒</span>गृहकार्य</a>
             </div>
         </div>
 
     </div>
 
-    <!-- ६. Footer Section (गोपनीयता नीति लिङ्कसहित) -->
+    <!-- ६. Footer Section -->
     <footer class="app-footer">
         <div class="footer-title">🇳🇵 बाल पाठशाला - बालबालिकाको उज्ज्वल भविष्यका लागि 🇳🇵</div>
         <div class="footer-links">
             🌐 <a href="https://kamalgc.com.np" target="_blank">kamalgc.com.np</a> | 
-            <a href="privacy.html">🔒 गोपनीयता नीति र प्रतिक्रिया</a> | 
+            <a href="privacy.html">🔒 गोपनीयता नीति</a> | 
             ✉️ <a href="mailto:Support@kamalgc.com.np">Support@kamalgc.com.np</a>
         </div>
         <div class="footer-copyright">
@@ -389,14 +385,14 @@
         <h2 style="color: #FF7043; margin-bottom: 15px; text-align:center;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
         <p style="margin-bottom: 15px; font-size:13px; color:#ECEFF1; text-align:center;">यहाँबाट एपका सेटिङहरू, समय सीमा र बच्चाको सिकाइ प्रगति नियन्त्रण गर्नुहोस्:</p>
         
-        <!-- 📊 बच्चाको प्रगति ट्र्याकर -->
+        <!-- बच्चाको प्रगति ट्र्याकर -->
         <div id="progress-report" style="display:none; background:#1A252F; padding:15px; border-radius:12px; margin-bottom:15px;">
             <h4 style="color:#2ECC71; margin-bottom:8px; text-align:center;">📊 बच्चाको सिकाइ रिपोर्ट</h4>
             <p style="font-size:14px; margin:5px 0; color:#FFF;">🎯 मिलाएका सही उत्तर: <b id="total-score-val" style="color:#F1C40F;">0</b></p>
             <p style="font-size:14px; margin:5px 0; color:#FFF;">🎮 कुल प्रयास गरेका प्रश्न: <b id="total-played-val" style="color:#3498DB;">0</b></p>
         </div>
 
-        <!-- ⏱️ स्क्रिन टाइम र 📌 लक्ष्य सेटिङ -->
+        <!-- समय र लक्ष्य सेटिङ -->
         <div style="background:#1A252F; padding:15px; border-radius:12px; margin-bottom:15px;">
             <h4 style="color:#F39C12; margin-bottom:10px; text-align:center;">⚙️ समय र लक्ष्य सेटिङ</h4>
             
@@ -421,23 +417,18 @@
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 10px;">
-            <a href="privacy.html" style="text-decoration:none; text-align:center; padding:10px; font-size:14px; background:#34495E; color:white; border-radius:8px; display:block; font-weight:bold;">🔒 गोपनीयता नीति र प्रतिक्रिया</a>
-            
             <button onclick="showChildProgress()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#2ECC71; color:white; border:none; border-radius:8px;">📊 बच्चाको प्रगति हेर्नुहोस्</button>
-            
-            <!-- 🛠️ सुरक्षित गरिएको Developer Mode बटन (साधारण प्रयोगकर्ताबाट लुकाइएको) -->
             <button onclick="openDeveloperReset()" class="action-btn" style="width:100%; padding:10px; font-size:12px; border:2px dashed #95A5A6; color:#95A5A6; background:transparent; border-radius:8px;">🛠️ Developer Mode (Reset)</button>
-            
             <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#78909C; color:white; border:none; border-radius:8px;">✖️ बन्द गर्नुहोस्</button>
         </div>
     </div>
 </div>
 
-<!-- ⏱️ Time Limit Screen Lock Overlay -->
+<!-- Screen Lock Overlay -->
 <div id="screen-lock-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#111; z-index:99999; color:white; text-align:center; padding-top:120px;">
     <h1 style="font-size:50px;">⏳</h1>
     <h2 style="color:#FF5252; margin-top:10px;">आजको समय सकियो!</h2>
-    <p style="font-size:16px; margin:15px 20px; color:#BBB;">अभिभावकले तोक्नुभएको दैनिक प्रयोग समय पूरा भएको छ। अब भोलि पुन: प्रयोग गर्न सकिनेछ।</p>
+    <p style="font-size:16px; margin:15px 20px; color:#BBB;">अभिभावकले тоक्नुभएको दैनिक प्रयोग समय पूरा भएको छ।</p>
     <button onclick="openParentalLock(unlockScreenManually)" style="padding:10px 20px; background:#4CAF50; color:white; border:none; border-radius:10px; font-size:15px; font-weight:bold; cursor:pointer; margin-top:10px;">🔐 अभिभावक अनलक</button>
 </div>
 
@@ -446,38 +437,24 @@
 
   async function playAIVoice(textToSpeak) {
     try {
-      if (currentAudio) {
-        currentAudio.pause();
-      }
-
+      if (currentAudio) currentAudio.pause();
       const response = await fetch('/api/tts?t=' + Date.now(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: textToSpeak })
       });
-
-      if (!response.ok) {
-        const errData = await response.json().catch(() => ({ error: 'Unknown Error' }));
-        throw new Error(errData.error || 'सर्भरमा समस्या छ');
-      }
-
+      if (!response.ok) throw new Error('सर्भरमा समस्या छ');
       const data = await response.json();
-      const audioUrl = `data:audio/mpeg;base64,${data.audioData}`;
-      currentAudio = new Audio(audioUrl);
-      
+      currentAudio = new Audio(`data:audio/mpeg;base64,${data.audioData}`);
       await currentAudio.play(); 
     } catch (error) {
       console.error("त्रुटि:", error);
-      alert("❌ समस्या: " + error.message); 
     }
   }
 
-  const speakButton = document.getElementById('speakBtn');
-  if (speakButton) {
-    speakButton.addEventListener('click', () => {
-      playAIVoice("नमस्ते, बाल पाठशालामा स्वागत छ।");
-    });
-  }
+  document.getElementById('speakBtn').addEventListener('click', () => {
+    playAIVoice("नमस्ते, बाल पाठशालामा स्वागत छ।");
+  });
 
   function toggleAnthem() {
     const anthem = document.getElementById('national-anthem');
@@ -488,16 +465,12 @@
       statusText.innerHTML = "🔊 राष्ट्रिय गान बज्दैछ... (रोक्न थिच्नुहोस्)";
     } else {
       anthem.pause();
-      statusText.innerHTML = "🎵 राष्ट्रिय गान बज्न रोकियो (बजाउन थिच्नुहोस्)";
+      statusText.innerHTML = "🎵 राष्ट्रिय गान बजाउन/रोक्न फोटोमा थिच्नुहोस्";
     }
   }
 
-  document.getElementById('national-anthem').onended = function() {
-    document.getElementById('audio-status').innerHTML = "🎵 राष्ट्रिय गान समाप्त भयो (पुनः बजाउन थिच्नुहोस्)";
-  };
-
   function openParentalLock(callback) {
-      let pin = prompt("अभिभावक नियन्त्रण कक्ष खोल्न पिन (पासवर्ड) राख्नुहोस् (उदाहरण: 1234):");
+      let pin = prompt("अभिभावक पिन (पासवर्ड) राख्नुहोस् (उदाहरण: 1234):");
       if (pin === "1234" || pin === "admin") {
           if (typeof callback === "function") callback();
       } else if (pin !== null) {
@@ -511,104 +484,45 @@
       document.getElementById('parent-dashboard').style.display = 'block';
   }
 
-  function closeDashboard() {
-      document.getElementById('parent-dashboard').style.display = 'none';
-  }
+  function closeDashboard() { document.getElementById('parent-dashboard').style.display = 'none'; }
 
   function showChildProgress() {
-      const totalScore = localStorage.getItem('quiz_total_score') || 0;
-      const totalPlayed = localStorage.getItem('quiz_played_count') || 0;
-      
-      document.getElementById('total-score-val').innerText = totalScore;
-      document.getElementById('total-played-val').innerText = totalPlayed;
-      
+      document.getElementById('total-score-val').innerText = localStorage.getItem('quiz_total_score') || 0;
+      document.getElementById('total-played-val').innerText = localStorage.getItem('quiz_played_count') || 0;
       const reportBox = document.getElementById('progress-report');
       reportBox.style.display = reportBox.style.display === 'none' ? 'block' : 'none';
   }
 
   function saveParentSettings() {
-      const timeLimit = document.getElementById('screen-time-select').value;
-      const targetVal = document.getElementById('target-select').value;
-
-      localStorage.setItem('app_screen_limit', timeLimit);
-      localStorage.setItem('app_daily_target', targetVal);
-
+      localStorage.setItem('app_screen_limit', document.getElementById('screen-time-select').value);
+      localStorage.setItem('app_daily_target', document.getElementById('target-select').value);
       alert("सेटिङहरू सेभ भयो!");
       updateTargetDisplay();
   }
 
-  // केवल डेभलपरले मात्र पासवर्ड हालेर डेटा रिसेट गर्न मिल्ने सुरक्षित फंक्सन
   function openDeveloperReset() {
-      let devPin = prompt("🛠️ यो केवल विकासकर्ता (Developer) का लागि हो। गुप्त कोड (Secret Key) हाल्नुहोस्:");
+      let devPin = prompt("🛠️ गुप्त कोड (Secret Key) हाल्नुहोस्:");
       if (devPin === "kamal_dev@2026") {
-          if(confirm("के तपाईं पक्का एपको डेटा रिसेट गर्न चाहनुहुन्छ?")) {
+          if(confirm("डेटा रिसेट गर्ने हो?")) {
               localStorage.clear();
-              caches.keys().then((keys) => {
-                  keys.forEach((key) => caches.delete(key));
-                  alert("डेटा रिसेट भयो! कृपया पेज रिफ्रेस गर्नुहोस्।");
-                  location.reload();
-              });
+              location.reload();
           }
-      } else if (devPin !== null) {
-          alert("❌ गलत गुप्त कोड! डेटा रिसेट गर्न मिलेन।");
       }
   }
 
   function updateTargetDisplay() {
       const target = parseInt(localStorage.getItem('app_daily_target') || 10);
       const score = parseInt(localStorage.getItem('quiz_total_score') || 0);
-      
-      const titleText = document.getElementById('target-title-text');
-      const progressFill = document.getElementById('target-progress-fill');
-      
       let percentage = Math.min(100, Math.round((score / target) * 100));
-      titleText.innerText = `📌 आजको दैनिक लक्ष्य: ${score} / ${target} क्विज मिलाउने (${percentage}%)`;
-      progressFill.style.width = `${percentage}%`;
-  }
-
-  function initScreenTimer() {
-      const limitMinutes = parseInt(localStorage.getItem('app_screen_limit') || 0);
-      if (limitMinutes <= 0) return;
-
-      const todayKey = 'used_time_' + new Date().toISOString().slice(0, 10);
-      let usedSeconds = parseInt(localStorage.getItem(todayKey) || 0);
-
-      const interval = setInterval(() => {
-          usedSeconds++;
-          localStorage.setItem(todayKey, usedSeconds);
-
-          if (usedSeconds >= limitMinutes * 60) {
-              document.getElementById('screen-lock-overlay').style.display = 'block';
-              clearInterval(interval);
-          }
-      }, 1000);
-  }
-
-  function unlockScreenManually() {
-      document.getElementById('screen-lock-overlay').style.display = 'none';
-      localStorage.setItem('app_screen_limit', 0);
-      alert("समय सीमा अनलक गरियो!");
+      document.getElementById('target-title-text').innerText = `📌 आजको दैनिक लक्ष्य: ${score} / ${target} क्विज मिलाउने (${percentage}%)`;
+      document.getElementById('target-progress-fill').style.width = `${percentage}%`;
   }
 
   window.addEventListener('load', () => {
       updateTargetDisplay();
-      initScreenTimer();
   });
 </script>
 
-<!-- External Script for Dark Mode (v=7 थपिएको ताकि क्यासको समस्या नआओस्) -->
-<script src="./dark-mode.js?v=2.1"></script>
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      // sw.js पछाडि पनि भर्सन जोडियो
-      navigator.serviceWorker.register('/sw.js?v=7')
-        .then(reg => console.log('SW active'))
-        .catch(err => console.log('SW error:', err));
-    });
-  }
-</script>
-
+<script src="./dark-mode.js?v=2.2"></script>
 </body>
 </html>
