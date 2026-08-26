@@ -1,22 +1,23 @@
-const CACHE_NAME = 'bal-pathshala-v6';
+const CACHE_NAME = 'bal-pathshala-v7'; // नयाँ अपडेटको लागि यसलाई v8, v9 बनाउँदै जाने
 
-// Install Event (अहिले सबै फाइल एकैचोटि तानेर ब्लक गर्दैन, सुरक्षित रूपमा इन्स्टल हुन्छ)
+// Install Event (सुरक्षित रूपमा इन्स्टल हुने)
 self.addEventListener('install', (e) => {
   self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('Service Worker Installed');
+      console.log('Service Worker Installed & Updated to ' + CACHE_NAME);
     })
   );
 });
 
-// Activate Event (पुरानो क्यास स्वतः सफा गर्ने)
+// Activate Event (पुरानो सबै क्यास स्वतः सफा गर्ने)
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
           if (key !== CACHE_NAME) {
+            console.log('Old cache deleted:', key);
             return caches.delete(key);
           }
         })
@@ -25,19 +26,23 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Fetch Event (जुन पेज वा फाइल खोल्छ, त्यसलाई अटोमेटिक क्यास गर्दै जाने)
+// Fetch Event (नयाँ फाइल देखिने बनाउने र अफलाइन सपोर्ट गर्ने)
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
 
   e.respondWith(
-    caches.match(e.request).then((cachedResponse) => {
-      // यदि क्यासमा छ भने त्यही देखाउने, नभए इन्टरनेटबाट तानेर ल्याउने र क्याسमा सेभ गर्ने
-      return cachedResponse || fetch(e.request).then((networkResponse) => {
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(e.request, networkResponse.clone());
-          return networkResponse;
-        });
-      }).catch(() => {
+    fetch(e.request).then((networkResponse) => {
+      // नेटवर्कबाट लेटेस्ट फाइल तानेर क्यासमा अपडेट गर्ने
+      return caches.open(CACHE_NAME).then((cache) => {
+        cache.put(e.request, networkResponse.clone());
+        return networkResponse;
+      });
+    }).catch(() => {
+      // यदि इन्टरनेट छैन भने मात्र क्यास भएको पुरानो फाइल वा पेज देखाउने
+      return caches.match(e.request).then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
         // यदि अफलाइन छ र मुख्य पेज हो भने index.html देखाइदिने
         if (e.request.mode === 'navigate') {
           return caches.match('/index.html');
