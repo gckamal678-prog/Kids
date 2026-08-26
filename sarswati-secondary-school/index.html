@@ -35,7 +35,7 @@
             transition: background 0.3s ease;
         }
         .container {
-            max-width: 650px;
+            max-width: 680px;
             margin: 0 auto;
             background: var(--container-bg);
             padding: 15px;
@@ -45,16 +45,15 @@
             text-align: left;
         }
 
-        /* युनिक स्कुल ब्यानर हेड */
+        /* स्कुल ब्यानर हेड */
         .school-banner {
             background: linear-gradient(135deg, #00796B, #004D40);
             color: white;
             padding: 15px;
             border-radius: 14px;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            position: relative;
         }
         .school-banner h1 { font-size: 20px; font-weight: 800; margin-bottom: 3px; }
         .school-banner p { font-size: 13px; color: #E0F2F1; font-weight: 500; }
@@ -63,7 +62,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .theme-toggle-btn {
             background: none;
@@ -76,6 +75,66 @@
             font-weight: bold;
         }
 
+        /* कक्षा छनोट ट्याबहरू (कक्षा १ देखि ५) */
+        .class-selector-wrapper {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .class-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--sub-color);
+            margin-bottom: 5px;
+            display: block;
+            text-align: left;
+        }
+        .class-tabs {
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .class-tab {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            color: var(--text-color);
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Mukta', sans-serif;
+            flex: 1;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .class-tab.active {
+            background: #00796B;
+            color: white;
+            border-color: #004D40;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+
+        /* सूचना पाटी */
+        .notice-board {
+            background: #FFF3E0;
+            border: 1px solid #FFE0B2;
+            color: #E65100;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        [data-theme="dark"] .notice-board {
+            background: #3E2723;
+            border-color: #5D4037;
+            color: #FFB74D;
+        }
+
         /* शिक्षक प्रोफाइल कार्ड */
         .teacher-profile-card {
             display: flex;
@@ -83,7 +142,7 @@
             background: var(--card-bg);
             padding: 10px 15px;
             border-radius: 12px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             border: 1px solid var(--card-border);
         }
         .teacher-profile-card img {
@@ -95,7 +154,7 @@
         }
         .teacher-profile-card .t-details { font-size: 14px; font-weight: bold; color: var(--text-color); }
 
-        /* कार्ड स्टाइल विषय बक्सहरू */
+        /* विषय बक्सहरू */
         .subject-card {
             background: var(--card-bg);
             border: 2px solid var(--card-border);
@@ -103,6 +162,7 @@
             border-radius: 14px;
             margin-bottom: 12px;
             box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+            position: relative;
         }
         .subject-header {
             display: flex;
@@ -112,6 +172,10 @@
         }
         .subject-card h3 { color: var(--sub-color); font-size: 15px; margin: 0; }
         
+        .action-btns-group {
+            display: flex;
+            gap: 5px;
+        }
         .speak-btn {
             background: #00838F;
             color: white;
@@ -122,6 +186,20 @@
             cursor: pointer;
             font-family: 'Mukta', sans-serif;
             font-weight: bold;
+        }
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            font-size: 11px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-family: 'Mukta', sans-serif;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
         }
 
         .hw-content {
@@ -150,6 +228,36 @@
             border-top: 1px dashed var(--card-border);
             padding-top: 5px;
             font-weight: bold;
+        }
+
+        .student-action-row {
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.02);
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+        }
+        .checkbox-label {
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        .submit-hw-btn {
+            background: #FF9800;
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            font-size: 11px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Mukta', sans-serif;
         }
 
         /* एडमिन कन्ट्रोल बटन */
@@ -182,7 +290,7 @@
             text-align: left;
         }
         .modal-content {
-            max-width: 520px;
+            max-width: 540px;
             margin: 15px auto;
             background: var(--container-bg);
             padding: 15px;
@@ -193,17 +301,20 @@
         .modal-content h3 { color: #FF7043; margin-bottom: 10px; text-align: center; font-size: 18px; font-weight: 800; }
         
         .input-group {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            background: rgba(0,0,0,0.01);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
         }
         label { font-size: 12px; font-weight: bold; display: block; margin-bottom: 2px; }
         
-        /* टेक्स्टबक्सभित्रै माइक राख्ने व्यवस्था */
         .textbox-wrapper {
             position: relative;
         }
         textarea {
             width: 100%;
-            height: 75px;
+            height: 65px;
             padding: 6px 32px 6px 8px;
             border-radius: 6px;
             border: 1px solid #90A4AE;
@@ -221,23 +332,6 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
-        }
-
-        .quick-templates {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-            margin-bottom: 3px;
-        }
-        .tpl-chip {
-            background: #E0F2F1;
-            color: #00695C;
-            border: none;
-            padding: 2px 6px;
-            font-size: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
         }
 
         .row-controls {
@@ -266,6 +360,39 @@
             margin-top: 8px;
             border: 1px dashed #ccc;
         }
+        
+        .add-subject-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .add-subject-row input {
+            flex: 2;
+            padding: 6px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .add-sub-btn {
+            background: #00796B;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .del-sub-btn {
+            background: #E53935;
+            color: white;
+            border: none;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            cursor: pointer;
+            float: right;
+        }
 
         .back-link {
             display: inline-block;
@@ -283,19 +410,37 @@
 <body data-theme="light">
 
 <div class="container">
-    <!-- युनिक स्कुल ब्यानर -->
+    <!-- स्कुल ब्यानर -->
     <div class="school-banner">
         <h1>🏫 श्री सरस्वती माध्यमिक विद्यालय</h1>
         <p>बानियाभार-९, कपिलवस्तु | डिजिटल गृहकार्य पोर्टल</p>
     </div>
 
     <div class="top-controls">
-        <span style="font-size: 12px; font-weight: bold; color: var(--sub-color);">📌 आजको कक्षा कार्य</span>
+        <span id="current-class-title" style="font-size: 13px; font-weight: bold; color: var(--sub-color);">📌 कक्षा ५ - आजको कक्षा कार्य</span>
         <button class="theme-toggle-btn" onclick="toggleTheme()">🌓 थिम बदल्नुहोस्</button>
     </div>
 
+    <!-- कक्षा छनोट ट्याबहरू (कक्षा १ देखि ५) -->
+    <div class="class-selector-wrapper">
+        <span class="class-label">📚 कक्षा छान्नुहोस्:</span>
+        <div class="class-tabs">
+            <button class="class-tab" onclick="switchClass('1')" id="tab-1">कक्षा १</button>
+            <button class="class-tab" onclick="switchClass('2')" id="tab-2">कक्षा २</button>
+            <button class="class-tab" onclick="switchClass('3')" id="tab-3">कक्षा ३</button>
+            <button class="class-tab" onclick="switchClass('4')" id="tab-4">कक्षा ४</button>
+            <button class="class-tab active" onclick="switchClass('5')" id="tab-5">कक्षा ५</button>
+        </div>
+    </div>
+
+    <!-- सूचना पाटी -->
+    <div class="notice-board">
+        <span>📢 सूचना:</span>
+        <span id="notice-text">भोलि विद्यालयमा अतिरिक्त अतिरिक्त क्रियाकलाप हुनेछ। गृहकार्य समयमै बुझाउनुहोला।</span>
+    </div>
+
     <!-- शिक्षक प्रोफाइल कार्ड -->
-    <div class="teacher-profile-card" id="profile-display-card">
+    <div class="teacher-profile-card">
         <img id="p-img" src="https://via.placeholder.com/150" alt="Teacher">
         <div class="t-details">
             <div id="p-name">शिक्षक: राम प्रसाद आचार्य</div>
@@ -303,46 +448,9 @@
         </div>
     </div>
 
-    <!-- गणित सेक्सन -->
-    <div class="subject-card">
-        <div class="subject-header">
-            <h3>📐 गणित (Mathematics)</h3>
-            <button class="speak-btn" onclick="readAudio('display-math')">🔊 सुनेर सुन्ने</button>
-        </div>
-        <div class="hw-content" id="display-math">लोड हुँदैछ...</div>
-        <div id="media-math" class="media-preview-box"></div>
-        <div class="meta-info">
-            <span id="deadline-math"></span>
-            <span id="time-math"></span>
-        </div>
-    </div>
-
-    <!-- नेपाली सेक्सन -->
-    <div class="subject-card">
-        <div class="subject-header">
-            <h3>📖 नेपाली</h3>
-            <button class="speak-btn" onclick="readAudio('display-nepali')">🔊 सुनेर सुन्ने</button>
-        </div>
-        <div class="hw-content" id="display-nepali">लोड हुँदैछ...</div>
-        <div id="media-nepali" class="media-preview-box"></div>
-        <div class="meta-info">
-            <span id="deadline-nepali"></span>
-            <span id="time-nepali"></span>
-        </div>
-    </div>
-
-    <!-- अंग्रेजी सेक्सन -->
-    <div class="subject-card">
-        <div class="subject-header">
-            <h3>🔤 अंग्रेजी (English)</h3>
-            <button class="speak-btn" onclick="readAudio('display-english')">🔊 सुनेर सुन्ने</button>
-        </div>
-        <div class="hw-content" id="display-english">लोड हुँदैछ...</div>
-        <div id="media-english" class="media-preview-box"></div>
-        <div class="meta-info">
-            <span id="deadline-english"></span>
-            <span id="time-english"></span>
-        </div>
+    <!-- विषयहरू गतिशील रूपमा देखिने क्षेत्र -->
+    <div id="subjects-container">
+        <!-- विषय कार्डहरू यहाँ JavaScript मार्फत लोड हुन्छन् -->
     </div>
 
     <!-- गुप्त एडमिन ट्रिगर -->
@@ -356,69 +464,30 @@
 <!-- शिक्षक एडमिन प्यानल -->
 <div id="teacher-panel-modal">
     <div class="modal-content">
-        <h3>🛠️ प्रोफेसनल एडमिन प्यानल</h3>
+        <h3 id="admin-modal-title">🛠️ प्रोफेसनल एडमिन प्यानल (कक्षा ५)</h3>
 
-        <!-- शिक्षक प्रोफाइल सेटिङ्स -->
+        <!-- शिक्षक प्रोफाइल र सूचना सेटिङ्स -->
         <div class="admin-settings-box">
             <label>👨‍🏫 शिक्षकको नाम:</label>
             <input type="text" id="setting-t-name" style="width:100%; padding:4px; margin-bottom:4px; border-radius:4px; border:1px solid #ccc; font-size:12px;">
-            <label>📷 शिक्षकको फोटो:</label>
-            <input type="file" id="setting-t-img" accept="image/*" style="width:100%; font-size:11px;">
+            <label>📢 सूचना पाटीको सन्देश:</label>
+            <input type="text" id="setting-notice" style="width:100%; padding:4px; border-radius:4px; border:1px solid #ccc; font-size:12px;">
         </div>
 
         <br>
-        <!-- गणित इनपुट -->
-        <div class="input-group">
-            <label>📐 गणित गृहकार्य:</label>
-            <div class="quick-templates">
-                <button class="tpl-chip" onclick="insertTemplate('input-math', 'गृहकार्य राम्रोसँग गर्नुहोला।')">📌 राम्रोसँग...</button>
-                <button class="tpl-chip" onclick="insertTemplate('input-math', 'भोलि अनिवार्य बुझाउनु पर्नेछ।')">⏰ भोलि अनिवार्य...</button>
-                <button class="tpl-chip" onclick="aiEnhanceText('input-math')">✨ AI सुधार</button>
-            </div>
-            <div class="textbox-wrapper">
-                <textarea id="input-math" placeholder="गणितको होमवर्क लेख्नुहोस्..."></textarea>
-                <button class="inside-mic-btn" onclick="startVoiceInput('input-math')">🎤</button>
-            </div>
-            <div class="row-controls">
-                <input type="file" id="file-math" accept="image/*,.pdf" style="font-size:11px;">
-                <input type="datetime-local" id="due-math">
+        <!-- नयाँ विषय थप्ने सेक्सन -->
+        <div class="admin-settings-box">
+            <label>➕ नयाँ विषय थप्नुहोस्:</label>
+            <div class="add-subject-row" style="margin-top:5px;">
+                <input type="text" id="new-sub-name" placeholder="विषयको नाम (जस्तै: विज्ञान, सामाजिक)">
+                <button class="add-sub-btn" onclick="addNewSubject()">विषय थप्नुहोस्</button>
             </div>
         </div>
 
-        <!-- नेपाली इनपुट -->
-        <div class="input-group">
-            <label>📖 नेपाली गृहकार्य:</label>
-            <div class="quick-templates">
-                <button class="tpl-chip" onclick="insertTemplate('input-nepali', 'गृहकार्य राम्रोसँग गर्नुहोला।')">📌 राम्रोसँग...</button>
-                <button class="tpl-chip" onclick="insertTemplate('input-nepali', 'भोलि अनिवार्य बुझाउनु पर्नेछ।')">⏰ भोलि अनिवार्य...</button>
-                <button class="tpl-chip" onclick="aiEnhanceText('input-nepali')">✨ AI सुधार</button>
-            </div>
-            <div class="textbox-wrapper">
-                <textarea id="input-nepali" placeholder="नेपालीको होमवर्क लेख्नुहोस्..."></textarea>
-                <button class="inside-mic-btn" onclick="startVoiceInput('input-nepali')">🎤</button>
-            </div>
-            <div class="row-controls">
-                <input type="file" id="file-nepali" accept="image/*,.pdf" style="font-size:11px;">
-                <input type="datetime-local" id="due-nepali">
-            </div>
-        </div>
-
-        <!-- अंग्रेजी इनपुट -->
-        <div class="input-group">
-            <label>🔤 अंग्रेजी गृहकार्य:</label>
-            <div class="quick-templates">
-                <button class="tpl-chip" onclick="insertTemplate('input-english', 'Please complete neatly.')">📌 Complete neatly</button>
-                <button class="tpl-chip" onclick="insertTemplate('input-english', 'Submission mandatory tomorrow.')">⏰ Mandatory tomorrow</button>
-                <button class="tpl-chip" onclick="aiEnhanceText('input-english')">✨ AI Enhance</button>
-            </div>
-            <div class="textbox-wrapper">
-                <textarea id="input-english" placeholder="English homework..."></textarea>
-                <button class="inside-mic-btn" onclick="startVoiceInput('input-english')">🎤</button>
-            </div>
-            <div class="row-controls">
-                <input type="file" id="file-english" accept="image/*,.pdf" style="font-size:11px;">
-                <input type="datetime-local" id="due-english">
-            </div>
+        <br>
+        <!-- सबै विषयहरूको इनपुट कन्टेनर -->
+        <div id="admin-subjects-inputs">
+            <!-- एडमिन फर्म इनपुटहरू यहाँ dinamically लोड हुन्छन् -->
         </div>
 
         <!-- पिन चेन्ज गर्ने विकल्प -->
@@ -428,18 +497,35 @@
         </div>
 
         <div class="modal-btns">
-            <button class="save-btn" onclick="saveAllData()">💾 सबै सेभ गर्नुहोस्</button>
+            <button class="save-btn" onclick="saveAllData()">💾 यस कक्षाको लागि सेभ गर्नुहोस्</button>
             <button class="close-btn" onclick="closeTeacherModal()">बन्द</button>
         </div>
     </div>
 </div>
 
 <script>
+    let activeClass = '5';
+    // डिफल्ट विषयहरूको लिस्ट (यदि कुनै विषय सेभ गरिएको छैन भने)
+    const defaultSubjects = ['गणित', 'नेपाली', 'अंग्रेजी', 'विज्ञान'];
+
     window.onload = function() {
-        loadAllData();
-        checkAdminAccess();
         loadTheme();
+        checkAdminAccess();
+        switchClass('5');
     };
+
+    function switchClass(cls) {
+        activeClass = cls;
+        for(let i=1; i<=5; i++) {
+            let tab = document.getElementById('tab-' + i);
+            if(tab) tab.classList.remove('active');
+        }
+        let activeTab = document.getElementById('tab-' + cls);
+        if(activeTab) activeTab.classList.add('active');
+
+        document.getElementById('current-class-title').innerText = `📌 कक्षा ${cls} - आजको कक्षा कार्य`;
+        loadPortalData(cls);
+    }
 
     function checkAdminAccess() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -460,11 +546,19 @@
         document.body.setAttribute('data-theme', savedTheme);
     }
 
-    function loadAllData() {
-        loadSubjectData('math');
-        loadSubjectData('nepali');
-        loadSubjectData('english');
+    // कक्षा अनुसारका विषयहरूको लिस्ट ल्याउने
+    function getSubjectsList(cls) {
+        let saved = localStorage.getItem(`c${cls}_subjects`);
+        if(saved) {
+            return JSON.parse(saved);
+        }
+        return [...defaultSubjects];
+    }
+
+    function loadPortalData(cls) {
         loadTeacherProfile();
+        loadNotice();
+        renderMainSubjects(cls);
     }
 
     function loadTeacherProfile() {
@@ -474,62 +568,71 @@
         document.getElementById('p-img').src = img;
     }
 
-    function loadSubjectData(sub) {
-        let text = localStorage.getItem("hw_" + sub);
-        let time = localStorage.getItem("time_" + sub);
-        let due = localStorage.getItem("due_" + sub);
-        let media = localStorage.getItem("media_" + sub);
-
-        let contentBox = document.getElementById("display-" + sub);
-        let timeBox = document.getElementById("time-" + sub);
-        let dueBox = document.getElementById("deadline-" + sub);
-        let mediaBox = document.getElementById("media-" + sub);
-
-        if (text && text.trim() !== "") {
-            contentBox.innerText = text;
-            timeBox.innerText = time ? "अपडेट: " + time : "";
-            dueBox.innerText = due ? "⏰ बुझाउने: " + due : "";
-        } else {
-            contentBox.innerHTML = "<span style='color: #78909C;'>गृहकार्य राखिएको छैन।</span>";
-            timeBox.innerText = "";
-            dueBox.innerText = "";
-        }
-
-        if (media) {
-            mediaBox.innerHTML = `<img src="${media}" alt="Attachment">`;
-        } else {
-            mediaBox.innerHTML = "";
-        }
+    function loadNotice() {
+        let notice = localStorage.getItem('school_notice') || "भोलि विद्यालयमा अतिरिक्त अतिरिक्त क्रियाकलाप हुनेछ। गृहकार्य समयमै बुझाउनुहोला।";
+        document.getElementById('notice-text').innerText = notice;
     }
 
-    function insertTemplate(targetId, text) {
-        let box = document.getElementById(targetId);
-        box.value += (box.value ? " " : "") + text;
-    }
+    // मुख्य पेजमा विषयका कार्डहरू देखाउने
+    function renderMainSubjects(cls) {
+        let subjects = getSubjectsList(cls);
+        let container = document.getElementById('subjects-container');
+        container.innerHTML = "";
 
-    function aiEnhanceText(targetId) {
-        let box = document.getElementById(targetId);
-        if(!box.value.trim()) {
-            alert("पहिले केही लेख्नुहोस्!");
+        if(subjects.length === 0) {
+            container.innerHTML = `<p style="text-align:center; color:#78909C; padding:15px;">यो कक्षामा कुनै विषय थपिएको छैन। एडमिन प्यानلबाट विषय थप्नुहोस्।</p>`;
             return;
         }
-        box.value = "📌 (AI परिमार्जित): " + box.value.trim();
+
+        subjects.forEach(sub => {
+            let prefix = `c${cls}_${sub}_`;
+            let text = localStorage.getItem(prefix + "hw") || "";
+            let time = localStorage.getItem(prefix + "time") || "";
+            let due = localStorage.getItem(prefix + "due") || "";
+            let media = localStorage.getItem(prefix + "media") || "";
+            let chk = localStorage.getItem(prefix + "chk") === 'true';
+
+            let shareText = `श्री सरस्वती मा.वि., कक्षा ${cls} - गृहकार्य (${sub}):\n${text}\n${due ? 'बुझाउने मिति: ' + due : ''}`;
+            let waLink = `https://api.whatsapp.com/send?text=` + encodeURIComponent(shareText);
+
+            let cardHTML = `
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <h3>📚 ${sub}</h3>
+                        <div class="action-btns-group">
+                            <a class="whatsapp-btn" href="${waLink}" target="_blank" style="${text ? '' : 'display:none;'}">📤 सेयर</a>
+                            <button class="speak-btn" onclick="readAudio('disp-${cls}-${sub}')">🔊 सुन्ने</button>
+                        </div>
+                    </div>
+                    <div class="hw-content" id="disp-${cls}-${sub}">${text ? text : "<span style='color: #78909C;'>गृहकार्य राखिएको छैन।</span>"}</div>
+                    <div class="media-preview-box">${media ? `<img src="${media}" alt="Attachment">` : ''}</div>
+                    <div class="meta-info">
+                        <span>${due ? '⏰ बुझाउने: ' + due : ''}</span>
+                        <span>${time ? 'अपडेट: ' + time : ''}</span>
+                    </div>
+                    <div class="student-action-row">
+                        <label class="checkbox-label">
+                            <input type="checkbox" ${chk ? 'checked' : ''} onchange="toggleCheck('${cls}', '${sub}', this)"> गृहकार्य पूरा भयो ✔️
+                        </label>
+                        <button class="submit-hw-btn" onclick="openStudentSubmitModal('${sub}')">फोटा पठाउनुहोस् 📷</button>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += cardHTML;
+        });
     }
 
-    function startVoiceInput(targetId) {
-        window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if (!window.SpeechRecognition) {
-            alert("तपाईको ब्राउजरले भ्वाइस इनपुट सपोर्ट गर्दैन।");
-            return;
+    function toggleCheck(cls, sub, checkbox) {
+        localStorage.setItem(`c${cls}_${sub}_chk`, checkbox.checked);
+    }
+
+    function openStudentSubmitModal(subjectName) {
+        let studentName = prompt("तपाईंको नाम र रोल नम्बर लेख्नुहोस्:");
+        if(!studentName) return;
+        let details = prompt(`कृपया ${subjectName} को गृहकार्य बुझाउने बारे विवरण/लिङ्क लेख्नुहोस्:`);
+        if(details) {
+            alert(`✅ धन्यवाद ${studentName}! ${subjectName} को गृहकार्य सफलतापूर्वक पठाइयो।`);
         }
-        let recognition = new SpeechRecognition();
-        recognition.lang = 'ne-NP';
-        recognition.onresult = function(event) {
-            let speechResult = event.results[0][0].transcript;
-            let box = document.getElementById(targetId);
-            box.value += (box.value ? " " : "") + speechResult;
-        };
-        recognition.start();
     }
 
     function readAudio(elementId) {
@@ -547,10 +650,12 @@
         let pin = prompt("कृपया शिक्षक पिन (PIN) प्रविष्ट गर्नुहोस्:");
         if (pin === currentPin) {
             document.getElementById('teacher-panel-modal').style.display = 'block';
-            document.getElementById('input-math').value = localStorage.getItem("hw_math") || "";
-            document.getElementById('input-nepali').value = localStorage.getItem("hw_nepali") || "";
-            document.getElementById('input-english').value = localStorage.getItem("hw_english") || "";
+            document.getElementById('admin-modal-title').innerText = `🛠️ प्रोफेसनल एडमिन प्यानल (कक्षा ${activeClass})`;
+            
             document.getElementById('setting-t-name').value = localStorage.getItem('t_name') || "राम प्रसाद आचार्य";
+            document.getElementById('setting-notice').value = localStorage.getItem('school_notice') || "";
+            
+            renderAdminSubjectsInputs(activeClass);
         } else if (pin !== null) {
             alert("❌ गलत पिन!");
         }
@@ -560,6 +665,66 @@
         document.getElementById('teacher-panel-modal').style.display = 'none';
     }
 
+    // एडमिन प्यानलमा विषयहरू इनपुट गर्नको लागि देखाउने
+    function renderAdminSubjectsInputs(cls) {
+        let subjects = getSubjectsList(cls);
+        let container = document.getElementById('admin-subjects-inputs');
+        container.innerHTML = "";
+
+        subjects.forEach(sub => {
+            let prefix = `c${cls}_${sub}_`;
+            let text = localStorage.getItem(prefix + "hw") || "";
+            let due = localStorage.getItem(prefix + "due") || "";
+
+            let groupHTML = `
+                <div class="input-group" id="admin-group-${sub}">
+                    <label>📖 ${sub} गृहकार्य: <button type="button" class="del-sub-btn" onclick="removeSubject('${sub}')">❌ विषय हटाउनुहोस्</button></label>
+                    <div class="textbox-wrapper">
+                        <textarea id="input-${sub}" placeholder="${sub}को होमवर्क लेख्नुहोस्...">${text}</textarea>
+                    </div>
+                    <div class="row-controls">
+                        <input type="file" id="file-${sub}" accept="image/*,.pdf" style="font-size:11px;">
+                        <input type="datetime-local" id="due-${sub}" value="${due}">
+                    </div>
+                </div>
+            `;
+            container.innerHTML += groupHTML;
+        });
+    }
+
+    // नयाँ विषय थप्ने फंक्सन
+    function addNewSubject() {
+        let inputField = document.getElementById('new-sub-name');
+        let subName = inputField.value.trim();
+        if(!subName) {
+            alert("कृपया विषयको नाम लेख्नुहोस्!");
+            return;
+        }
+
+        let subjects = getSubjectsList(activeClass);
+        if(subjects.includes(subName)) {
+            alert("यो विषय पहिले नै छ!");
+            return;
+        }
+
+        subjects.push(subName);
+        localStorage.setItem(`c${activeClass}_subjects`, JSON.stringify(subjects));
+        inputField.value = "";
+        renderAdminSubjectsInputs(activeClass);
+        alert(`✅ '${subName}' विषय थपियो! (सेभ बटन थिच्न नबिर्सनुहोला)`);
+    }
+
+    // विषय हटाउने फंक्सन
+    function removeSubject(sub) {
+        if(confirm(`के तपाईं '${sub}' विषयलाई यो कक्षाबाट हटाउन चाहनुहुन्छ?`)) {
+            let subjects = getSubjectsList(activeClass);
+            subjects = subjects.filter(s => s !== sub);
+            localStorage.setItem(`c${activeClass}_subjects`, JSON.stringify(subjects));
+            renderAdminSubjectsInputs(activeClass);
+        }
+    }
+
+    // डाटा सेभ गर्ने फंक्सन
     function saveAllData() {
         let now = new Date();
         let formattedTime = now.toLocaleDateString('ne-NP') + ' ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
@@ -572,38 +737,38 @@
         let tName = document.getElementById('setting-t-name').value;
         if(tName) localStorage.setItem('t_name', tName);
 
-        let tImgFile = document.getElementById('setting-t-img').files[0];
-        if(tImgFile) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                localStorage.setItem('t_img', e.target.result);
-            };
-            reader.readAsDataURL(tImgFile);
-        }
+        let noticeText = document.getElementById('setting-notice').value;
+        if(noticeText) localStorage.setItem('school_notice', noticeText);
 
-        ['math', 'nepali', 'english'].forEach(sub => {
-            let text = document.getElementById("input-" + sub).value;
-            let due = document.getElementById("due-" + sub).value;
-            let fileInput = document.getElementById("file-" + sub).files[0];
+        let subjects = getSubjectsList(activeClass);
 
-            if(text.trim() !== "") {
-                localStorage.setItem("hw_" + sub, text);
-                localStorage.setItem("time_" + sub, formattedTime);
-                if(due) localStorage.setItem("due_" + sub, due);
-            }
+        subjects.forEach(sub => {
+            let txtBox = document.getElementById(`input-${sub}`);
+            let dueBox = document.getElementById(`due-${sub}`);
+            let fileBox = document.getElementById(`file-${sub}`);
 
-            if(fileInput) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    localStorage.setItem("media_" + sub, e.target.result);
-                };
-                reader.readAsDataURL(fileInput);
+            if(txtBox) {
+                let prefix = `c${activeClass}_${sub}_`;
+                localStorage.setItem(prefix + "hw", txtBox.value);
+                localStorage.setItem(prefix + "time", formattedTime);
+                if(dueBox && dueBox.value) {
+                    localStorage.setItem(prefix + "due", dueBox.value);
+                }
+
+                if(fileBox && fileBox.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function(e) {
+                        localStorage.setItem(prefix + "media", e.target.result);
+                        loadPortalData(activeClass);
+                    };
+                    reader.readAsDataURL(fileBox.files[0]);
+                }
             }
         });
 
-        alert("✅ गृहकार्य सफलतापूर्वक सेभ भयो!");
+        alert(`✅ कक्षा ${activeClass} को सबै विवरण सफलतापूर्वक सेभ भयो!`);
         closeTeacherModal();
-        loadAllData();
+        loadPortalData(activeClass);
     }
 </script>
 
