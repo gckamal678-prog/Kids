@@ -203,7 +203,7 @@
             transform-style: preserve-3d;
             transition: all 0.2s ease;
             box-shadow: 0 8px 0px rgba(0,0,0,0.2), 0 12px 25px rgba(0,0,0,0.15);
-            border-left: 8px solid rgba(0,0,0,0.15);
+            border-left: 8px solid rgba(0,0,0,0.15); /* Book Binding Edge */
             user-select: none;
         }
         .book-3d:active {
@@ -239,7 +239,7 @@
         .book-vocab { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border: 3px solid #FFB74D; border-left: 8px solid #E65100; color: #E65100; }
         .book-activity { background: linear-gradient(135deg, #E0F7FA, #B2EBF2); border: 3px solid #4DD0E1; border-left: 8px solid #00838F; color: #006064; grid-column: span 2; }
 
-        /* --- 📖 Book Open Modal --- */
+        /* --- 📖 Book Open Modal (किताब खोलेपछि देखिने पानाहरू) --- */
         #book-open-modal {
             display: none;
             position: fixed;
@@ -261,7 +261,7 @@
             border-radius: 24px;
             padding: 25px 20px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            border: 6px solid #8D6E63;
+            border: 6px solid #8D6E63; /* Wooden / Leather Book Border */
             position: relative;
             text-align: center;
             animation: bookOpenAnim 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -376,46 +376,55 @@
         <div class="bookshelf-title" onclick="playAIVoice('डिजिटल किताबहरू')">📖 डिजिटल किताबहरू (छोडेर खोल्नुहोस्)</div>
         
         <div class="books-grid">
-            <!-- Book 1: English -->
-            <div class="book-3d book-english" onclick="openBook('english')">
-                <span class="book-icon">🇬🇧</span>
-                <div class="book-name">English</div>
-                <div class="book-tag">Alphabet & Words</div>
+            <!-- Book 1: Nepali -->
+            <div class="book-3d book-nepali" onclick="openBook('nepali')">
+                <span class="book-icon">🇳🇵</span>
+                <div class="book-name">नेपाली किताब</div>
+                <div class="book-tag">स्वर, व्यञ्जन, बाह्रखरी</div>
             </div>
 
-            <!-- Book 2: Knowledge -->
-            <div class="book-3d book-vocab" onclick="openBook('knowledge')">
-                <span class="book-icon">🌍</span>
-                <div class="book-name">Knowledge</div>
-                <div class="book-tag">Drawing & Quiz</div>
+            <!-- Book 2: English -->
+            <div class="book-3d book-english" onclick="openBook('english')">
+                <span class="book-icon">🇬🇧</span>
+                <div class="book-name">अंग्रेजी किताब</div>
+                <div class="book-tag">Alphabet & English</div>
             </div>
 
             <!-- Book 3: Maths -->
-            <div class="book-3d book-math" onclick="openBook('maths')">
+            <div class="book-3d book-math" onclick="openBook('math')">
                 <span class="book-icon">🔢</span>
-                <div class="book-name">Maths</div>
+                <div class="book-name">Mathematics</div>
                 <div class="book-tag">Numbers & Pahada</div>
             </div>
 
-            <!-- Book 4: Nepali -->
-            <div class="book-3d book-nepali" onclick="openBook('nepali')">
-                <span class="book-icon">🇳🇵</span>
-                <div class="book-name">Nepali</div>
-                <div class="book-tag">Vowels & Consonants</div>
+            <!-- Book 4: Vocabulary -->
+            <div class="book-3d book-vocab" onclick="openBook('vocab')">
+                <span class="book-icon">🌍</span>
+                <div class="book-name">शब्द ज्ञान</div>
+                <div class="book-tag">रङ, फलफूल, जनावर आदि</div>
+            </div>
+
+            <!-- Book 5: Activities -->
+            <div class="book-3d book-activity" onclick="openBook('activity')">
+                <span class="book-icon">🎨</span>
+                <div class="book-name">मनोरञ्जन र क्रियाकलाप</div>
+                <div class="book-tag">Quiz & Drawing Board</div>
             </div>
         </div>
     </div>
 
-    <!-- 📖 Book Open Modal -->
+    <!-- 📖 Book Open Modal (किताब खोलेपछि देखिने भित्री पानाहरू) -->
     <div id="book-open-modal">
         <div class="book-modal-content">
             <div class="modal-book-title" id="modal-title">किताबको नाम</div>
-            <div class="pages-grid" id="modal-pages-list"></div>
+            <div class="pages-grid" id="modal-pages-list">
+                <!-- Javascript ले dynamically पानाहरू राख्नेछ -->
+            </div>
             <button class="close-book-btn" onclick="closeBook()">✖️ किताब बन्द गर्नुहोस्</button>
         </div>
     </div>
 
-    <!-- Footer Section -->
+    <!-- ६. Footer Section -->
     <footer class="app-footer">
         <div class="footer-title">🇳🇵 बाल पाठशाला - बालबालिकाको उज्ज्वल भविष्यका लागि 🇳🇵</div>
         <div class="footer-links">
@@ -470,43 +479,48 @@
     }
   }
 
-  // --- 📖 नयाँ फाइल संरचना अनुसारको Book Data ---
+  // --- 📖 Book Open / Close Logic ---
   const bookData = {
-    english: {
-      title: "📁 English",
-      pages: [
-        { name: "alphabet-image.html", url: "english/alphabet-image.html", icon: "🔤" },
-        { name: "alphabet.html", url: "english/alphabet.html", icon: "🅰️" },
-        { name: "animals-birds.html", url: "english/animals-birds.html", icon: "🐅" },
-        { name: "body-parts.html", url: "english/body-parts.html", icon: "👀" },
-        { name: "colors.html", url: "english/colors.html", icon: "🎨" },
-        { name: "days-months.html", url: "english/days-months.html", icon: "📅" },
-        { name: "fruits-vegetables.html", url: "english/fruits-vegetables.html", icon: "🍎" },
-        { name: "vehicles.html", url: "english/vehicles.html", icon: "🚗" }
-      ]
-    },
-    knowledge: {
-      title: "📁 Knowledge",
-      pages: [
-        { name: "drawing.html", url: "knowledge/drawing.html", icon: "✏️" },
-        { name: "quiz.html", url: "knowledge/quiz.html", icon: "🧠" }
-      ]
-    },
-    maths: {
-      title: "📁 Maths",
-      pages: [
-        { name: "numbers.html", url: "maths/numbers.html", icon: "🔢" },
-        { name: "pahada.html", url: "maths/pahada.html", icon: "✖️" }
-      ]
-    },
     nepali: {
-      title: "📁 Nepali",
+      title: "🇳🇵 नेपाली किताब",
       pages: [
-        { name: "barahakhari.html", url: "nepali/barahakhari.html", icon: "📝" },
-        { name: "consonants.html", url: "nepali/consonants.html", icon: "क" },
-        { name: "imageconsonants.html", url: "nepali/imageconsonants.html", icon: "🧩" },
-        { name: "imagevowels.html", url: "nepali/imagevowels.html", icon: "🎨" },
-        { name: "vowels.html", url: "nepali/vowels.html", icon: "अ" }
+        { name: "स्वर वर्ण (Vowels)", url: "./vowels.html", icon: "अ" },
+        { name: "व्यञ्जन वर्ण (Consonants)", url: "./consonants.html", icon: "क" },
+        { name: "बाह्रखरी (Barahakhari)", url: "./barahakhari.html", icon: "📝" },
+        { name: "स्वर (Image Vowels)", url: "./imagevowels.html", icon: "🎨" },
+        { name: "व्यञ्जन (Image Consonants)", url: "./imageconsonants.html", icon: "🧩" }
+      ]
+    },
+    english: {
+      title: "🇬🇧 अंग्रेजी किताब (English)",
+      pages: [
+        { name: "English Alphabet", url: "./alphabet.html", icon: "🔤" },
+        { name: "English Words / Images", url: "./english.html", icon: "🖼️" }
+      ]
+    },
+    math: {
+      title: "🔢 Mathematics किताब",
+      pages: [
+        { name: "Numbers & अंक", url: "./numbers.html", icon: "🔢" },
+        { name: "गणित पहाडा (Pahada)", url: "./pahada.html", icon: "✖️" }
+      ]
+    },
+    vocab: {
+      title: "🌍 शब्द ज्ञान तथा सामान्य ज्ञान",
+      pages: [
+        { name: "वार र महिना (Days & Months)", url: "./days-months.html", icon: "📅" },
+        { name: "रङहरूको नाम (Colors)", url: "./colors.html", icon: "🎨" },
+        { name: "फलफूल र तरकारी", url: "./fruits-vegetables.html", icon: "🍎" },
+        { name: "जनावर र पन्छी", url: "./animals-birds.html", icon: "🐅" },
+        { name: "शरीरका अंगहरू (Body Parts)", url: "./body-parts.html", icon: "👀" },
+        { name: "सवारी साधनहरू (Vehicles)", url: "./vehicles.html", icon: "🚗" }
+      ]
+    },
+    activity: {
+      title: "🎨 मनोरञ्जन र अन्य क्रियाकलाप",
+      pages: [
+        { name: "बाल क्विज खेल (Quiz)", url: "./quiz.html", icon: "🧠" },
+        { name: "चित्र कोर्ने बोर्ड (Drawing)", url: "./drawing.html", icon: "✏️" }
       ]
     }
   };
