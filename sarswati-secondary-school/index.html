@@ -6,7 +6,7 @@
     <title>श्री सरस्वती माध्यमिक विद्यालय - डिजिटल गृहकार्य पोर्टल</title>
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&display=swap" rel="stylesheet">
     <link rel="manifest" href="/sarswati-secondary-school/manifest.json">
-<meta name="theme-color" content="#00796B">
+    <meta name="theme-color" content="#00796B">
 
     <style>
         :root {
@@ -327,15 +327,6 @@
             background: var(--container-bg);
             color: var(--text-color);
         }
-        .inside-mic-btn {
-            position: absolute;
-            right: 6px;
-            top: 6px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
 
         .row-controls {
             display: flex;
@@ -452,9 +443,7 @@
     </div>
 
     <!-- विषयहरू गतिशील रूपमा देखिने क्षेत्र -->
-    <div id="subjects-container">
-        <!-- विषय कार्डहरू यहाँ JavaScript मार्फत लोड हुन्छन् -->
-    </div>
+    <div id="subjects-container"></div>
 
     <!-- गुप्त एडमिन ट्रिगर -->
     <div class="teacher-section" id="admin-trigger-box">
@@ -469,7 +458,6 @@
     <div class="modal-content">
         <h3 id="admin-modal-title">🛠️ प्रोफेसनल एडमिन प्यानल (कक्षा ५)</h3>
 
-        <!-- शिक्षक प्रोफाइल र सूचना सेटिङ्स -->
         <div class="admin-settings-box">
             <label>👨‍🏫 शिक्षकको नाम:</label>
             <input type="text" id="setting-t-name" style="width:100%; padding:4px; margin-bottom:4px; border-radius:4px; border:1px solid #ccc; font-size:12px;">
@@ -478,7 +466,6 @@
         </div>
 
         <br>
-        <!-- नयाँ विषय थप्ने सेक्सन -->
         <div class="admin-settings-box">
             <label>➕ नयाँ विषय थप्नुहोस्:</label>
             <div class="add-subject-row" style="margin-top:5px;">
@@ -488,12 +475,8 @@
         </div>
 
         <br>
-        <!-- सबै विषयहरूको इनपुट कन्टेनर -->
-        <div id="admin-subjects-inputs">
-            <!-- एडमिन फर्म इनपुटहरू यहाँ dinamically लोड हुन्छन् -->
-        </div>
+        <div id="admin-subjects-inputs"></div>
 
-        <!-- पिन चेन्ज गर्ने विकल्प -->
         <div class="admin-settings-box">
             <label>🔑 एडमिन पिन (PIN) परिवर्तन गर्नुहोस्:</label>
             <input type="password" id="new-pin-input" placeholder="नयाँ 4-digit पिन लेख्नुहोस्" style="width:100%; padding:4px; border-radius:4px; border:1px solid #ccc; font-size:12px;">
@@ -508,7 +491,6 @@
 
 <script>
     let activeClass = '5';
-    // डिफल्ट विषयहरूको लिस्ट (यदि कुनै विषय सेभ गरिएको छैन भने)
     const defaultSubjects = ['गणित', 'नेपाली', 'अंग्रेजी', 'विज्ञान'];
 
     window.onload = function() {
@@ -549,7 +531,6 @@
         document.body.setAttribute('data-theme', savedTheme);
     }
 
-    // कक्षा अनुसारका विषयहरूको लिस्ट ल्याउने
     function getSubjectsList(cls) {
         let saved = localStorage.getItem(`c${cls}_subjects`);
         if(saved) {
@@ -576,14 +557,13 @@
         document.getElementById('notice-text').innerText = notice;
     }
 
-    // मुख्य पेजमा विषयका कार्डहरू देखाउने
     function renderMainSubjects(cls) {
         let subjects = getSubjectsList(cls);
         let container = document.getElementById('subjects-container');
         container.innerHTML = "";
 
         if(subjects.length === 0) {
-            container.innerHTML = `<p style="text-align:center; color:#78909C; padding:15px;">यो कक्षामा कुनै विषय थपिएको छैन। एडमिन प्यानلबाट विषय थप्नुहोस्।</p>`;
+            container.innerHTML = `<p style="text-align:center; color:#78909C; padding:15px;">यो कक्षामा कुनै विषय थपिएको छैन। एडमिन प्यानलबाट विषय थप्नुहोस्।</p>`;
             return;
         }
 
@@ -668,7 +648,6 @@
         document.getElementById('teacher-panel-modal').style.display = 'none';
     }
 
-    // एडमिन प्यानलमा विषयहरू इनपुट गर्नको लागि देखाउने
     function renderAdminSubjectsInputs(cls) {
         let subjects = getSubjectsList(cls);
         let container = document.getElementById('admin-subjects-inputs');
@@ -695,7 +674,6 @@
         });
     }
 
-    // नयाँ विषय थप्ने फंक्सन
     function addNewSubject() {
         let inputField = document.getElementById('new-sub-name');
         let subName = inputField.value.trim();
@@ -717,7 +695,6 @@
         alert(`✅ '${subName}' विषय थपियो! (सेभ बटन थिच्न नबिर्सनुहोला)`);
     }
 
-    // विषय हटाउने फंक्सन
     function removeSubject(sub) {
         if(confirm(`के तपाईं '${sub}' विषयलाई यो कक्षाबाट हटाउन चाहनुहुन्छ?`)) {
             let subjects = getSubjectsList(activeClass);
@@ -727,7 +704,6 @@
         }
     }
 
-    // डाटा सेभ गर्ने फंक्सन
     function saveAllData() {
         let now = new Date();
         let formattedTime = now.toLocaleDateString('ne-NP') + ' ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
