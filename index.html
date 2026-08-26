@@ -41,12 +41,13 @@
             background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%) !important;
             color: #E0E0E0 !important;
         }
-        body.dark-mode .bookshelf-container, 
+        body.dark-mode .bookshelf-shelf, 
         body.dark-mode .app-footer, 
         body.dark-mode .nepal-3d-card,
         body.dark-mode .target-widget,
         body.dark-mode .action-btn,
-        body.dark-mode .book-modal-content {
+        body.dark-mode .book-modal-content,
+        body.dark-mode .parent-modal-box {
             background: #1E1E1E !important;
             border-color: #333333 !important;
             color: #FFFFFF !important;
@@ -237,7 +238,6 @@
         .book-english { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border: 3px solid #64B5F6; border-left: 8px solid #1565C0; color: #0D47A1; }
         .book-math { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); border: 3px solid #BA68C8; border-left: 8px solid #6A1B9A; color: #4A148C; }
         .book-vocab { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border: 3px solid #FFB74D; border-left: 8px solid #E65100; color: #E65100; }
-        .book-activity { background: linear-gradient(135deg, #E0F7FA, #B2EBF2); border: 3px solid #4DD0E1; border-left: 8px solid #00838F; color: #006064; grid-column: span 2; }
 
         /* --- 📖 Book Open Modal --- */
         #book-open-modal {
@@ -264,11 +264,6 @@
             border: 6px solid #8D6E63;
             position: relative;
             text-align: center;
-            animation: bookOpenAnim 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes bookOpenAnim {
-            0% { transform: scale(0.5) rotateY(90deg); opacity: 0; }
-            100% { transform: scale(1) rotateY(0deg); opacity: 1; }
         }
         .modal-book-title {
             font-size: 22px;
@@ -335,8 +330,7 @@
 
         @media screen and (min-width: 600px) {
             body { padding: 30px !important; }
-            .books-grid { grid-template-columns: repeat(3, 1fr); }
-            .book-activity { grid-column: span 1; }
+            .books-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -371,7 +365,7 @@
 
     <div class="main-title" onclick="playAIVoice('बालबालिका सिकाइ केन्द्र')">✨ बालबालिका सिकाइ केन्द्र ✨</div>
 
-    <!-- 📚 3D Bookshelf (5 Interactive Books) -->
+    <!-- 📚 3D Bookshelf (4 Interactive Books) -->
     <div class="bookshelf-shelf">
         <div class="bookshelf-title" onclick="playAIVoice('डिजिटल किताबहरू')">📖 डिजिटल किताबहरू (छोडेर खोल्नुहोस्)</div>
         
@@ -432,7 +426,7 @@
 
 <!-- Parent Dashboard Modal -->
 <div id="parent-dashboard" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; color:#FFF; padding:20px; text-align:center; overflow-y:auto;">
-    <div style="max-width: 450px; margin: 30px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align:left;">
+    <div class="parent-modal-box" style="max-width: 450px; margin: 30px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align:left;">
         <h2 style="color: #FF7043; margin-bottom: 15px; text-align:center;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
         <p style="margin-bottom: 15px; font-size:13px; color:#ECEFF1; text-align:center;">यहाँबाट एपका सेटिङहरू नियन्त्रण गर्नुहोस्:</p>
         
@@ -446,7 +440,13 @@
             </select>
             <button onclick="saveParentSettings()" style="width:100%; padding:8px; background:#F39C12; color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">💾 सेभ गर्नुहोस्</button>
         </div>
-        <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#78909C; color:white; border:none; border-radius:8px;">✖️ बन्द गर्नुहोस्</button>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <!-- 🛠️ Developer Mode (गुप्त पासकोडवाला डेटा रिसेट बटन) -->
+            <button onclick="openDeveloperReset()" style="width:100%; padding:10px; font-size:12px; border:2px dashed #95A5A6; color:#95A5A6; background:transparent; border-radius:8px; cursor:pointer;">🛠️ Developer Mode (Reset)</button>
+            
+            <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#78909C; color:white; border:none; border-radius:8px;">✖️ बन्द गर्नुहोस्</button>
+        </div>
     </div>
 </div>
 
@@ -470,43 +470,43 @@
     }
   }
 
-  // --- 📖 नयाँ फाइल संरचना अनुसारको Book Data ---
+  // फोल्डर स्ट्रक्चरअनुसारको बुक डेटा
   const bookData = {
     english: {
-      title: "📁 English",
+      title: "📁 English Books",
       pages: [
-        { name: "alphabet-image.html", url: "english/alphabet-image.html", icon: "🔤" },
-        { name: "alphabet.html", url: "english/alphabet.html", icon: "🅰️" },
-        { name: "animals-birds.html", url: "english/animals-birds.html", icon: "🐅" },
-        { name: "body-parts.html", url: "english/body-parts.html", icon: "👀" },
-        { name: "colors.html", url: "english/colors.html", icon: "🎨" },
-        { name: "days-months.html", url: "english/days-months.html", icon: "📅" },
-        { name: "fruits-vegetables.html", url: "english/fruits-vegetables.html", icon: "🍎" },
-        { name: "vehicles.html", url: "english/vehicles.html", icon: "🚗" }
+        { name: "Alphabet Image", url: "english/alphabet-image.html", icon: "🔤" },
+        { name: "Alphabet", url: "english/alphabet.html", icon: "🅰️" },
+        { name: "Animals & Birds", url: "english/animals-birds.html", icon: "🐅" },
+        { name: "Body Parts", url: "english/body-parts.html", icon: "👀" },
+        { name: "Colors", url: "english/colors.html", icon: "🎨" },
+        { name: "Days & Months", url: "english/days-months.html", icon: "📅" },
+        { name: "Fruits & Vegetables", url: "english/fruits-vegetables.html", icon: "🍎" },
+        { name: "Vehicles", url: "english/vehicles.html", icon: "🚗" }
       ]
     },
     knowledge: {
-      title: "📁 Knowledge",
+      title: "📁 Knowledge & Activities",
       pages: [
-        { name: "drawing.html", url: "knowledge/drawing.html", icon: "✏️" },
-        { name: "quiz.html", url: "knowledge/quiz.html", icon: "🧠" }
+        { name: "Drawing Board", url: "knowledge/drawing.html", icon: "✏️" },
+        { name: "Bal Quiz", url: "knowledge/quiz.html", icon: "🧠" }
       ]
     },
     maths: {
-      title: "📁 Maths",
+      title: "📁 Maths & Numbers",
       pages: [
-        { name: "numbers.html", url: "maths/numbers.html", icon: "🔢" },
-        { name: "pahada.html", url: "maths/pahada.html", icon: "✖️" }
+        { name: "Numbers", url: "maths/numbers.html", icon: "🔢" },
+        { name: "Math Pahada", url: "maths/pahada.html", icon: "✖️" }
       ]
     },
     nepali: {
-      title: "📁 Nepali",
+      title: "📁 नेपाली किताब",
       pages: [
-        { name: "barahakhari.html", url: "nepali/barahakhari.html", icon: "📝" },
-        { name: "consonants.html", url: "nepali/consonants.html", icon: "क" },
-        { name: "imageconsonants.html", url: "nepali/imageconsonants.html", icon: "🧩" },
-        { name: "imagevowels.html", url: "nepali/imagevowels.html", icon: "🎨" },
-        { name: "vowels.html", url: "nepali/vowels.html", icon: "अ" }
+        { name: "बाह्रखरी", url: "nepali/barahakhari.html", icon: "📝" },
+        { name: "व्यञ्जन वर्ण", url: "nepali/consonants.html", icon: "क" },
+        { name: "व्यञ्जन (Image)", url: "nepali/imageconsonants.html", icon: "🧩" },
+        { name: "स्वर (Image)", url: "nepali/imagevowels.html", icon: "🎨" },
+        { name: "स्वर वर्ण", url: "nepali/vowels.html", icon: "अ" }
       ]
     }
   };
@@ -570,6 +570,23 @@
       localStorage.setItem('app_daily_target', document.getElementById('target-select').value);
       alert("सेटिङ सेभ भयो!");
       updateTargetDisplay();
+  }
+
+  // केवल डेभलपरले मात्र पासवर्ड हालेर डेटा रिसेट गर्न मिल्ने सुरक्षित फंक्सन
+  function openDeveloperReset() {
+      let devPin = prompt("🛠️ यो केवल विकासकर्ता (Developer) का लागि हो। गुप्त कोड (Secret Key) हाल्नुहोस्:");
+      if (devPin === "kamal_dev@2026") {
+          if(confirm("के तपाईं पक्का एपको डेटा रिसेट गर्न चाहनुहुन्छ?")) {
+              localStorage.clear();
+              caches.keys().then((keys) => {
+                  keys.forEach((key) => caches.delete(key));
+                  alert("डेटा रिसेट भयो! कृपया पेज रिफ्रेस गर्नुहोस्।");
+                  location.reload();
+              });
+          }
+      } else if (devPin !== null) {
+          alert("❌ गलत गुप्त कोड! डेटा रिसेट गर्न मिलेन।");
+      }
   }
 
   function updateTargetDisplay() {
