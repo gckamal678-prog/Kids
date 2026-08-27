@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar Hub - Lessons 3 to 6</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --accent-gold: #fbbf24;
+            --accent-cyan: #38bdf8;
+            --accent-green: #34d399;
+            --accent-pink: #f472b6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            text-align: center;
+            padding: 10px;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        header {
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+        }
+
+        h1 {
+            color: var(--accent-gold);
+            font-size: 22px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .lesson-container {
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+
+        .theory-box {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .theory-box h3 {
+            color: var(--accent-cyan);
+            margin: 0 0 5px 0;
+            font-size: 15px;
+        }
+
+        .theory-box p {
+            color: var(--text-main);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        /* 3 Columns Grid Layout - एउटै लाइनमा ३ वटा कार्ड */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            padding: 10px 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+            background: var(--bg-card-hover);
+        }
+
+        .card:active {
+            transform: scale(0.95);
+        }
+
+        .word {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--text-main);
+            margin-top: 3px;
+        }
+
+        .icon {
+            font-size: 24px;
+        }
+
+        /* Practice Section */
+        .practice-section {
+            background: #1e293b;
+            border: 2px dashed var(--accent-pink);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .practice-section h2 {
+            color: var(--accent-pink);
+            font-size: 15px;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+
+        .score-board {
+            text-align: center;
+            font-size: 13px;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .question-box {
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .opt-btn {
+            background: #0f172a;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .opt-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-pink);
+        }
+
+        .feedback {
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 10px;
+            min-height: 20px;
+            text-align: center;
+        }
+
+        .next-btn {
+            display: block;
+            width: 100%;
+            background: var(--accent-cyan);
+            color: #0f172a;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>✨ Grammar Kids Hub ✨</h1>
+        <p class="subtitle">Lessons 3 to 6: Adverbs, Prepositions, Conjunctions & Interjections</p>
+    </header>
+
+    <!-- ==================== LESSON 3: ADVERBS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-cyan); margin-top:0; font-size: 17px;">📚 Lesson 3: Adverbs (क्रियाविशेषण)</h2>
+        <div class="theory-box">
+            <h3>📖 What is an Adverb?</h3>
+            <p>Words that modify verbs, adjectives, or other adverbs, telling how, when, or where.</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('Quickly')"><div class="icon">🏃‍♂️</div><div class="word">Quickly</div></div>
+            <div class="card" onclick="speakWord('Slowly')"><div class="icon">🐢</div><div class="word">Slowly</div></div>
+            <div class="card" onclick="speakWord('Fast')"><div class="icon">⚡</div><div class="word">Fast</div></div>
+            <div class="card" onclick="speakWord('Well')"><div class="icon">⭐</div><div class="word">Well</div></div>
+            <div class="card" onclick="speakWord('Very')"><div class="icon">🔍</div><div class="word">Very</div></div>
+            <div class="card" onclick="speakWord('Loudly')"><div class="icon">📢</div><div class="word">Loudly</div></div>
+            <div class="card" onclick="speakWord('Softly')"><div class="icon">🍃</div><div class="word">Softly</div></div>
+            <div class="card" onclick="speakWord('Quietly')"><div class="icon">🤫</div><div class="word">Quietly</div></div>
+        </div>
+
+        <div class="practice-section">
+            <h2>🎯 Adverb Practice Zone</h2>
+            <div class="score-board" id="scoreBoard3">Score: ⭐ 0</div>
+            <div class="question-box" id="qBox3">Loading...</div>
+            <div class="options-grid" id="optGrid3"></div>
+            <div class="feedback" id="fb3"></div>
+            <button class="next-btn" id="nextBtn3" onclick="loadQuiz3()">Next ➡️</button>
+        </div>
+    </div>
+
+    <!-- ==================== LESSON 4: PREPOSITIONS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-pink); margin-top:0; font-size: 17px;">📚 Lesson 4: Prepositions (नामैयोगी)</h2>
+        <div class="theory-box" style="border-color: var(--accent-pink);">
+            <h3>📖 What is a Preposition?</h3>
+            <p>Words that show the spatial or temporal relationship (e.g., in, on, under, at).</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('In')"><div class="icon">📥</div><div class="word">In</div></div>
+            <div class="card" onclick="speakWord('On')"><div class="icon">📦</div><div class="word">On</div></div>
+            <div class="card" onclick="speakWord('Under')"><div class="icon">🔻</div><div class="word">Under</div></div>
+            <div class="card" onclick="speakWord('At')"><div class="icon">📍</div><div class="word">At</div></div>
+            <div class="card" onclick="speakWord('Behind')"><div class="icon">🔙</div><div class="word">Behind</div></div>
+            <div class="card" onclick="speakWord('Over')"><div class="icon">🚀</div><div class="word">Over</div></div>
+            <div class="card" onclick="speakWord('Near')"><div class="icon">🤝</div><div class="word">Near</div></div>
+            <div class="card" onclick="speakWord('Between')"><div class="icon">↔️</div><div class="word">Between</div></div>
+        </div>
+
+        <div class="practice-section" style="border-color: var(--accent-cyan);">
+            <h2 style="color: var(--accent-cyan);">🎯 Preposition Practice Zone</h2>
+            <div class="score-board" id="scoreBoard4">Score: ⭐ 0</div>
+            <div class="question-box" id="qBox4">Loading...</div>
+            <div class="options-grid" id="optGrid4"></div>
+            <div class="feedback" id="fb4"></div>
+            <button class="next-btn" id="nextBtn4" onclick="loadQuiz4()" style="background: var(--accent-pink); color:#fff;">Next ➡️</button>
+        </div>
+    </div>
+
+    <!-- ==================== LESSON 5: CONJUNCTIONS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-gold); margin-top:0; font-size: 17px;">📚 Lesson 5: Conjunctions (संयोजक)</h2>
+        <div class="theory-box" style="border-color: var(--accent-gold);">
+            <h3>📖 What is a Conjunction?</h3>
+            <p>Joining words used to connect phrases, clauses, or words (e.g., and, but, because).</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('And')"><div class="icon">➕</div><div class="word">And</div></div>
+            <div class="card" onclick="speakWord('But')"><div class="icon">🔀</div><div class="word">But</div></div>
+            <div class="card" onclick="speakWord('Because')"><div class="icon">💡</div><div class="word">Because</div></div>
+            <div class="card" onclick="speakWord('Or')"><div class="icon">❓</div><div class="word">Or</div></div>
+            <div class="card" onclick="speakWord('So')"><div class="icon">➡️</div><div class="word">So</div></div>
+            <div class="card" onclick="speakWord('If')"><div class="icon">🎛️</div><div class="word">If</div></div>
+            <div class="card" onclick="speakWord('Although')"><div class="icon">⛅</div><div class="word">Although</div></div>
+            <div class="card" onclick="speakWord('While')"><div class="icon">⏳</div><div class="word">While</div></div>
+        </div>
+
+        <div class="practice-section" style="border-color: var(--accent-gold);">
+            <h2 style="color: var(--accent-gold);">🎯 Conjunction Practice Zone</h2>
+            <div class="score-board" id="scoreBoard5">Score: ⭐ 0</div>
+            <div class="question-box" id="qBox5">Loading...</div>
+            <div class="options-grid" id="optGrid5"></div>
+            <div class="feedback" id="fb5"></div>
+            <button class="next-btn" id="nextBtn5" onclick="loadQuiz5()" style="background: var(--accent-gold); color:#0f172a;">Next ➡️</button>
+        </div>
+    </div>
+
+    <!-- ==================== LESSON 6: INTERJECTIONS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-green); margin-top:0; font-size: 17px;">📚 Lesson 6: Interjections (विस्मयादिबोधक)</h2>
+        <div class="theory-box" style="border-color: var(--accent-green);">
+            <h3>📖 What is an Interjection?</h3>
+            <p>Exclamatory words used to express sudden emotion (e.g., Wow!, Oh!, Alas!).</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('Wow')"><div class="icon">😲</div><div class="word">Wow</div></div>
+            <div class="card" onclick="speakWord('Oh')"><div class="icon">😯</div><div class="word">Oh</div></div>
+            <div class="card" onclick="speakWord('Alas')"><div class="icon">😞</div><div class="word">Alas</div></div>
+            <div class="card" onclick="speakWord('Hurrah')"><div class="icon">🎉</div><div class="word">Hurrah</div></div>
+            <div class="card" onclick="speakWord('Ouch')"><div class="icon">😖</div><div class="word">Ouch</div></div>
+            <div class="card" onclick="speakWord('Bravo')"><div class="icon">👏</div><div class="word">Bravo</div></div>
+            <div class="card" onclick="speakWord('Hey')"><div class="icon">👋</div><div class="word">Hey</div></div>
+            <div class="card" onclick="speakWord('Oops')"><div class="icon">🙈</div><div class="word">Oops</div></div>
+        </div>
+
+        <div class="practice-section" style="border-color: var(--accent-green);">
+            <h2 style="color: var(--accent-green);">🎯 Interjection Practice Zone</h2>
+            <div class="score-board" id="scoreBoard6">Score: ⭐ 0</div>
+            <div class="question-box" id="qBox6">Loading...</div>
+            <div class="options-grid" id="optGrid6"></div>
+            <div class="feedback" id="fb6"></div>
+            <button class="next-btn" id="nextBtn6" onclick="loadQuiz6()" style="background: var(--accent-green); color:#0f172a;">Next ➡️</button>
+        </div>
+    </div>
+
+    <script>
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        /* Generic Quiz Engine */
+        function setupQuiz(pool, scoreId, qBoxId, optGridId, fbId, nextBtnId) {
+            let score = 0;
+            let currentAns = "";
+
+            function loadQuestion() {
+                document.getElementById(fbId).textContent = "";
+                document.getElementById(nextBtnId).style.display = "none";
+                
+                let rand = pool[Math.floor(Math.random() * pool.length)];
+                document.getElementById(qBoxId).textContent = "Q. " + rand.q;
+                currentAns = rand.correct;
+
+                let grid = document.getElementById(optGridId);
+                grid.innerHTML = "";
+                [...rand.options].sort(() => Math.random() - 0.5).forEach(opt => {
+                    let btn = document.createElement('button');
+                    btn.className = 'opt-btn';
+                    btn.textContent = opt;
+                    btn.onclick = () => check(opt, btn);
+                    grid.appendChild(btn);
+                });
+            }
+
+            function check(selected, btn) {
+                let fb = document.getElementById(fbId);
+                document.querySelectorAll('#' + optGridId + ' .opt-btn').forEach(b => b.disabled = true);
+                if (selected === currentAns) {
+                    btn.style.background = '#34d399';
+                    btn.style.color = '#0f172a';
+                    fb.style.color = '#34d399';
+                    fb.textContent = "🎉 Correct!";
+                    score += 10;
+                    document.getElementById(scoreId).textContent = "Score: ⭐ " + score;
+                    speakWord("Correct");
+                } else {
+                    btn.style.background = '#f472b6';
+                    btn.style.color = '#0f172a';
+                    fb.style.color = '#f472b6';
+                    fb.textContent = "❌ Answer is: " + currentAns;
+                    speakWord("Try again");
+                }
+                document.getElementById(nextBtnId).style.display = "block";
+            }
+
+            loadQuestion();
+            return loadQuestion;
+        }
+
+        // Pools
+        const pool3 = [
+            { q: "Which word is an Adverb telling 'how'?", options: ["Quickly", "School", "Apple", "In"], correct: "Quickly" },
+            { q: "Which of these is an Adverb?", options: ["Slowly", "Cat", "Dog", "Under"], correct: "Slowly" },
+            { q: "Identify the Adverb from choices:", options: ["Loudly", "Book", "Big", "And"], correct: "Loudly" }
+        ];
+
+        const pool4 = [
+            { q: "Which word is a Preposition showing position?", options: ["Under", "Run", "Fast", "Wow"], correct: "Under" },
+            { q: "Which word is a Preposition?", options: ["In", "Sing", "Happy", "Alas"], correct: "In" },
+            { q: "Identify the Preposition:", options: ["Between", "Jump", "Slow", "Or"], correct: "Between" }
+        ];
+
+        const pool5 = [
+            { q: "Which word is a Conjunction used to join words?", options: ["And", "Under", "Quickly", "Wow"], correct: "And" },
+            { q: "Which of these is a Conjunction?", options: ["Because", "Dog", "Tall", "In"], correct: "Because" },
+            { q: "Identify the Conjunction:", options: ["But", "Slowly", "Cat", "On"], correct: "But" }
+        ];
+
+        const pool6 = [
+            { q: "Which word is an Interjection for surprise?", options: ["Wow", "And", "In", "Slowly"], correct: "Wow" },
+            { q: "Which word is an Interjection for sadness?", options: ["Alas", "But", "On", "Fast"], correct: "Alas" },
+            { q: "Identify the Interjection:", options: ["Hurrah", "Run", "Book", "Under"], correct: "Hurrah" }
+        ];
+
+        window.onload = function() {
+            setupQuiz(pool3, 'scoreBoard3', 'qBox3', 'optGrid3', 'fb3', 'nextBtn3');
+            setupQuiz(pool4, 'scoreBoard4', 'qBox4', 'optGrid4', 'fb4', 'nextBtn4');
+            setupQuiz(pool5, 'scoreBoard5', 'qBox5', 'optGrid5', 'fb5', 'nextBtn5');
+            setupQuiz(pool6, 'scoreBoard6', 'qBox6', 'optGrid6', 'fb6', 'nextBtn6');
+        };
+    </script>
+
+</body>
+</html>
