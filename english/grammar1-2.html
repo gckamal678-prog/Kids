@@ -212,18 +212,57 @@
         .info-list strong {
             color: var(--accent-gold);
         }
+
+        .alphabet-display {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #e0e0e0;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>✨ Grammar Kids Hub ✨</h1>
-        <p class="subtitle">Lesson 1: Nouns & Pronouns + More Parts of Speech</p>
+        <p class="subtitle">Complete English Learning Lessons</p>
     </header>
 
-    <!-- ==================== LESSON 1: NOUNS ==================== -->
+    <!-- ==================== LESSON 1: ALPHABETS & BASICS ==================== -->
     <div class="lesson-container">
-        <h2 style="color: var(--accent-cyan); margin-top:0; font-size: 17px;">📚 Lesson 1 (Part 1): Nouns</h2>
+        <h2 style="color: var(--accent-gold); margin-top:0; font-size: 17px;">📚 Lesson 1: Alphabets & Basics</h2>
+        <div class="theory-box" style="border-color: var(--accent-gold);">
+            <h3>📖 English Alphabet Info</h3>
+            <div class="alphabet-display">
+                <p>English has <b>26 Alphabets</b>:</p>
+                <p><b>Capital:</b> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+                <p><b>Small:</b> a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+                <p><span style="color:var(--accent-cyan)">Vowels (5):</span> A, E, I, O, U</p>
+                <p><span style="color:var(--accent-pink)">Consonants (21):</span> B, C, D, F, G, H, J, K, L, M, N, P, Q, R, S, T, V, W, X, Y, Z</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== LESSON 2: LETTERS TO WORDS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-pink); margin-top:0; font-size: 17px;">📚 Lesson 2: Letters to Words</h2>
+        <div class="theory-box" style="border-color: var(--accent-pink);">
+            <h3>📖 Basic Vocabulary</h3>
+            <p>Tap any card to hear the pronunciation!</p>
+        </div>
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('Apple')"><div class="icon">🍎</div><div class="word">A - Apple</div></div>
+            <div class="card" onclick="speakWord('Ball')"><div class="icon">⚽</div><div class="word">B - Ball</div></div>
+            <div class="card" onclick="speakWord('Cat')"><div class="icon">🐱</div><div class="word">C - Cat</div></div>
+            <div class="card" onclick="speakWord('Dog')"><div class="icon">🐕</div><div class="word">D - Dog</div></div>
+            <div class="card" onclick="speakWord('Elephant')"><div class="icon">🐘</div><div class="word">E - Elephant</div></div>
+            <div class="card" onclick="speakWord('Fish')"><div class="icon">🐟</div><div class="word">F - Fish</div></div>
+        </div>
+    </div>
+
+    <!-- ==================== LESSON 3 (PART 1): NOUNS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-cyan); margin-top:0; font-size: 17px;">📚 Lesson 3 (Part 1): Nouns</h2>
         
         <div class="theory-box">
             <h3>📖 What is a Noun?</h3>
@@ -281,9 +320,9 @@
         </div>
     </div>
 
-    <!-- ==================== LESSON 1 (PART 2): PRONOUNS ==================== -->
+    <!-- ==================== LESSON 3 (PART 2): PRONOUNS ==================== -->
     <div class="lesson-container">
-        <h2 style="color: var(--accent-pink); margin-top:0; font-size: 17px;">📚 Lesson 1 (Part 2): Pronouns</h2>
+        <h2 style="color: var(--accent-pink); margin-top:0; font-size: 17px;">📚 Lesson 3 (Part 2): Pronouns</h2>
         
         <div class="theory-box" style="border-color: var(--accent-pink);">
             <h3>📖 What is a Pronoun?</h3>
@@ -318,12 +357,12 @@
         <div class="theory-box" style="border-color: var(--accent-gold);">
             <h3>💡 Other Core Parts of Speech</h3>
             <ul class="info-list">
-                <li><strong>Adjective (विशेषण):</strong> Words that describe nouns or pronouns, adding detail like color, size, or quality (e.g., <em>big, red, smart</em>).</li>
-                <li><strong>Verb (क्रिया):</strong> Action words or states of being that tell what the noun is doing (e.g., <em>run, jump, is, are</em>).</li>
-                <li><strong>Adverb (क्रियाविशेषण):</strong> Words that modify verbs, adjectives, or other adverbs, usually telling how, when, or where something happens (e.g., <em>quickly, very, well</em>).</li>
-                <li><strong>Preposition (नामैयोगी):</strong> Words that show the spatial or temporal relationship between a noun/pronoun and other words (e.g., <em>in, on, under, at</em>).</li>
-                <li><strong>Conjunction (संयोजक):</strong> Joining words used to connect phrases, clauses, or other words (e.g., <em>and, but, because</em>).</li>
-                <li><strong>Interjection (विस्मयादिबोधक):</strong> Exclamatory words used to express sudden emotion (e.g., <em>Wow!, Oh!, Alas!</em>).</li>
+                <li><strong>Adjective (विशेषण):</strong> Words that describe nouns or pronouns (e.g., <em>big, red, smart</em>).</li>
+                <li><strong>Verb (क्रिया):</strong> Action words or states of being (e.g., <em>run, jump, is, are</em>).</li>
+                <li><strong>Adverb (क्रियाविशेषण):</strong> Words that modify verbs or adjectives (e.g., <em>quickly, very, well</em>).</li>
+                <li><strong>Preposition (नामैयोगी):</strong> Words that show spatial/temporal relations (e.g., <em>in, on, under, at</em>).</li>
+                <li><strong>Conjunction (संयोजक):</strong> Joining words (e.g., <em>and, but, because</em>).</li>
+                <li><strong>Interjection (विस्मयादिबोधक):</strong> Exclamatory words for sudden emotion (e.g., <em>Wow!, Oh!, Alas!</em>).</li>
             </ul>
         </div>
     </div>
