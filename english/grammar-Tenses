@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenses & Daily Sentences - Kids App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            margin: 0;
+        }
+        h1 {
+            color: #ffcc00;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            color: #00ffcc;
+            font-size: 20px;
+            margin-top: 35px;
+            border-bottom: 2px solid #00ffcc;
+            padding-bottom: 5px;
+            text-align: left;
+        }
+        h3 {
+            color: #3399ff;
+            text-align: left;
+            margin: 20px 0 10px 0;
+            font-size: 16px;
+        }
+        p.subtitle {
+            color: #cccccc;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .content-box {
+            background: #252525;
+            border: 1px solid #444;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .sentence-card {
+            background: #2d2d2d;
+            border: 2px solid #444;
+            padding: 12px 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+        .sentence-card:active {
+            transform: scale(0.98);
+            background: #3d3d3d;
+        }
+        .sentence-text {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .sentence-nepali {
+            font-size: 13px;
+            color: #aaaaaa;
+        }
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .speaker-icon {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🌟 Tenses & Daily Sentences App 🌟</h1>
+    <p class="subtitle">Tap any rule or sentence to hear it spoken! (सुन्नको लागि टच गर्नुहोस्)</p>
+
+    <!-- LESSON 3: TENSES -->
+    <div style="max-width: 600px; margin: 0 auto; text-align: left;">
+        
+        <h2>Lesson 3: Tenses (समयको ज्ञान)</h2>
+        <p style="color: #ccc; font-size: 14px;">Tenses show the time of an action.</p>
+
+        <!-- 1. Present Tense -->
+        <div class="content-box">
+            <h3>1. Present Tense (वर्तमान काल)</h3>
+            <p><i>Actions that happen now or every day.</i></p>
+            
+            <p><b>• Simple Present Tense:</b> (Habits, daily routines, general truths)</p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + Verb (s/es) + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I go to school.')" style="cursor: pointer;">I go to school. (म स्कुल जान्छु।) 🔊</li>
+                <li onclick="speakWord('He plays football.')" style="cursor: pointer; margin-top: 5px;">He plays football. (ऊ फुटबल खेल्छ।) 🔊</li>
+            </ul>
+
+            <p style="margin-top: 15px;"><b>• Present Continuous Tense:</b> (Actions happening right now)</p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + is/am/are + Verb(ing) + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I am reading a book.')" style="cursor: pointer;">I am reading a book. (म किताब पढ्दै छु।) 🔊</li>
+                <li onclick="speakWord('She is singing a song.')" style="cursor: pointer; margin-top: 5px;">She is singing a song. (उनी गीत गाउँदै छिन्।) 🔊</li>
+            </ul>
+        </div>
+
+        <!-- 2. Past Tense -->
+        <div class="content-box">
+            <h3>2. Past Tense (भूत काल)</h3>
+            <p><i>Actions that already happened in the past.</i></p>
+            
+            <p><b>• Simple Past Tense:</b> (Actions finished in the past)</p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + Verb (V2) + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I went to school yesterday.')" style="cursor: pointer;">I went to school yesterday. (म हजो स्कुल गएँ।) 🔊</li>
+                <li onclick="speakWord('He played cricket.')" style="cursor: pointer; margin-top: 5px;">He played cricket. (उसले क्रिकेट खेल्यो।) 🔊</li>
+            </ul>
+
+            <p style="margin-top: 15px;"><b>• Past Continuous Tense:</b> (Actions continuing in the past)</p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + was/were + Verb(ing) + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I was eating an apple.')" style="cursor: pointer;">I was eating an apple. (म स्याउ खाँदै थिएँ।) 🔊</li>
+                <li onclick="speakWord('They were playing.')" style="cursor: pointer; margin-top: 5px;">They were playing. (तिनीहरू खेल्दै थिए।) 🔊</li>
+            </ul>
+        </div>
+
+        <!-- 3. Future Tense -->
+        <div class="content-box">
+            <h3>3. Future Tense (भविष्य काल)</h3>
+            <p><i>Actions that will happen in the coming time.</i></p>
+            
+            <p><b>• Simple Future Tense:</b> (Actions that will happen later)</p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + will + Verb + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I will go to Pokhara tomorrow.')" style="cursor: pointer;">I will go to Pokhara tomorrow. (म भोलि पोखरा जानेछु।) 🔊</li>
+                <li onclick="speakWord('She will write a letter.')" style="cursor: pointer; margin-top: 5px;">She will write a letter. (उनी पत्र लेख्नेछिन्।) 🔊</li>
+            </ul>
+        </div>
+
+        <!-- Tense Quiz Tip -->
+        <div class="content-box" style="border-left: 4px solid #ffcc00;">
+            <h3 style="color: #ffcc00; margin-top: 0;">App Exercise / Quiz Tip for Kids:</h3>
+            <p>1. Yesterday, I <span class="highlight">_____</span> (go/went) to the park.<br>👉 <b>Answer:</b> went</p>
+            <p>2. Now, she is <span class="highlight">_____</span> (eat/eating) an apple.<br>👉 <b>Answer:</b> eating</p>
+        </div>
+
+
+        <!-- LESSON 4: DAILY CONVERSATION SENTENCES -->
+        <h2>Lesson 4: Daily Conversation Sentences</h2>
+        <p style="color: #ccc; font-size: 14px;">Common sentences we use every day at home and school:</p>
+
+        <h3>1. Greetings & Politeness (अभिवादन र शिष्टाचार)</h3>
+        <div class="list-container">
+            <div class="sentence-card" onclick="speakWord('Good morning!')">
+                <div><div class="sentence-text">Good morning!</div><div class="sentence-nepali">शुभ प्रभात!</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('Good afternoon!')">
+                <div><div class="sentence-text">Good afternoon!</div><div class="sentence-nepali">नमस्कार / शुभ दिन!</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('Thank you.')">
+                <div><div class="sentence-text">Thank you.</div><div class="sentence-nepali">धन्यवाद।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('Please.')">
+                <div><div class="sentence-text">Please.</div><div class="sentence-nepali">कृपया।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('Sorry.')">
+                <div><div class="sentence-text">Sorry.</div><div class="sentence-nepali">माफ गर्नुहोला।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('How are you?')">
+                <div><div class="sentence-text">How are you?</div><div class="sentence-nepali">तपाईंलाई कस्तो छ?</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('I am fine, thank you.')">
+                <div><div class="sentence-text">I am fine, thank you.</div><div class="sentence-nepali">मलाई सन्चो छ, धन्यवाद।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+        </div>
+
+        <h3>2. Classroom & School Sentences (स्कुलमा बोल्ने वाक्यहरू)</h3>
+        <div class="list-container">
+            <div class="sentence-card" onclick="speakWord('May I come in, Sir or Madam?')">
+                <div><div class="sentence-text">May I come in, Sir/Madam?</div><div class="sentence-nepali">सर/म्याम, म भित्र आउन सक्छु?</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('May I go to the toilet?')">
+                <div><div class="sentence-text">May I go to the toilet?</div><div class="sentence-nepali">म शौचालय जान सक्छु?</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('Open your book.')">
+                <div><div class="sentence-text">Open your book.</div><div class="sentence-nepali">तपाईंको किताब खोल्नुहोस्।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('Listen to the teacher.')">
+                <div><div class="sentence-text">Listen to the teacher.</div><div class="sentence-nepali">शिक्षकको कुरा सुनुहोस्।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('I do not understand.')">
+                <div><div class="sentence-text">I don't understand.</div><div class="sentence-nepali">मैले बुझिनँ।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+        </div>
+
+        <h3>3. Home & Daily Life Sentences (घरमा बोल्ने वाक्यहरू)</h3>
+        <div class="list-container" style="margin-bottom: 30px;">
+            <div class="sentence-card" onclick="speakWord('I am hungry.')">
+                <div><div class="sentence-text">I am hungry.</div><div class="sentence-nepali">मलाई भोक लागेको छ।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('Give me some water, please.')">
+                <div><div class="sentence-text">Give me some water, please.</div><div class="sentence-nepali">कृपया मलाई पानी दिनुहोस्।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('I am going to play.')">
+                <div><div class="sentence-text">I am going to play.</div><div class="sentence-nepali">म खेल्न जाँदैछु।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('Good night, Mom and Dad.')">
+                <div><div class="sentence-text">Good night, Mom and Dad.</div><div class="sentence-nepali">शुभ रात्रि, बुवा र आमा।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+            <div class="sentence-card" onclick="speakWord('I love my family.')">
+                <div><div class="sentence-text">I love my family.</div><div class="sentence-nepali">म मेरो परिवारलाई माया गर्छु।</div></div>
+                <div class="speaker-icon">🔊</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Speech synthesis not supported in this browser.");
+            }
+        }
+    </script>
+
+</body>
+</html>
