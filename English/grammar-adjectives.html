@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Describing Words (Adjectives) - Kids App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            margin: 0;
+        }
+        h1 {
+            color: #ff9900;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            color: #cccccc;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 5px;
+        }
+        @media (min-width: 600px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .card {
+            background: #2d2d2d;
+            border: 2px solid #444;
+            padding: 15px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .card:active {
+            transform: scale(0.95);
+            background: #3d3d3d;
+        }
+        .word {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 5px;
+        }
+        .icon {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🌟 Describing Words (Adjectives) 🌟</h1>
+    <p class="subtitle">Tap any word to hear and learn!</p>
+
+    <div class="grid-container">
+        <div class="card" onclick="speakWord('Big')"><div class="icon">🐘</div><div class="word">Big</div></div>
+        <div class="card" onclick="speakWord('Small')"><div class="icon">🐜</div><div class="word">Small</div></div>
+        <div class="card" onclick="speakWord('Hot')"><div class="icon">☕</div><div class="word">Hot</div></div>
+        <div class="card" onclick="speakWord('Cold')"><div class="icon">🍦</div><div class="word">Cold</div></div>
+        <div class="card" onclick="speakWord('Happy')"><div class="icon">😊</div><div class="word">Happy</div></div>
+        <div class="card" onclick="speakWord('Sad')"><div class="icon">😢</div><div class="word">Sad</div></div>
+        <div class="card" onclick="speakWord('Tall')"><div class="icon">🦒</div><div class="word">Tall</div></div>
+        <div class="card" onclick="speakWord('Short')"><div class="icon">🐇</div><div class="word">Short</div></div>
+        <div class="card" onclick="speakWord('Fast')"><div class="icon">🚀</div><div class="word">Fast</div></div>
+        <div class="card" onclick="speakWord('Slow')"><div class="icon">🐢</div><div class="word">Slow</div></div>
+        <div class="card" onclick="speakWord('Red')"><div class="icon">🔴</div><div class="word">Red</div></div>
+        <div class="card" onclick="speakWord('Blue')"><div class="icon">🔵</div><div class="word">Blue</div></div>
+    </div>
+
+    <script>
+        // अडियो उच्चारण गर्ने JavaScript फंक्सन
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Speech synthesis not supported in this browser.");
+            }
+        }
+    </script>
+
+</body>
+</html>
