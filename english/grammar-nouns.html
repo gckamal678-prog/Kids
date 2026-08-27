@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Nouns - Kids App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            margin: 0;
+        }
+        h1 {
+            color: #ffcc00;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            color: #cccccc;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .category-title {
+            color: #00ffcc;
+            text-align: left;
+            margin: 20px 10px 10px 10px;
+            font-size: 18px;
+            border-bottom: 2px solid #00ffcc;
+            padding-bottom: 5px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr50);
+            gap: 10px;
+            padding: 5px;
+        }
+        /* मोबाइलमा राम्रो देखिने गरी grid मिलाइएको */
+        @media (min-width: 600px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .card {
+            background: #2d2d2d;
+            border: 2px solid #444;
+            padding: 15px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .card:active {
+            transform: scale(0.95);
+            background: #3d3d3d;
+        }
+        .word {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 5px;
+        }
+        .icon {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>✨ Naming Words (Nouns) ✨</h1>
+    <p class="subtitle">Tap any word to hear its pronunciation!</p>
+
+    <!-- 1. Persons (मानिसहरू) -->
+    <div class="category-title">👥 Persons (People)</div>
+    <div class="grid-container">
+        <div class="card" onclick="speakWord('Boy')"><div class="icon">👦</div><div class="word">Boy</div></div>
+        <div class="card" onclick="speakWord('Girl')"><div class="icon">👧</div><div class="word">Girl</div></div>
+        <div class="card" onclick="speakWord('Teacher')"><div class="icon">👩‍🏫</div><div class="word">Teacher</div></div>
+        <div class="card" onclick="speakWord('Doctor')"><div class="icon">👨‍⚕️</div><div class="word">Doctor</div></div>
+    </div>
+
+    <!-- 2. Places (ठाउँहरू) -->
+    <div class="category-title">🏡 Places</div>
+    <div class="grid-container">
+        <div class="card" onclick="speakWord('School')"><div class="icon">🏫</div><div class="word">School</div></div>
+        <div class="card" onclick="speakWord('Park')"><div class="icon">🌳</div><div class="word">Park</div></div>
+        <div class="card" onclick="speakWord('Home')"><div class="icon">🏠</div><div class="word">Home</div></div>
+        <div class="card" onclick="speakWord('Zoo')"><div class="icon">🦁</div><div class="word">Zoo</div></div>
+    </div>
+
+    <!-- 3. Animals & Birds (जनावर र पन्छी) -->
+    <div class="category-title">🐱 Animals & Birds</div>
+    <div class="grid-container">
+        <div class="card" onclick="speakWord('Cat')"><div class="icon">🐱</div><div class="word">Cat</div></div>
+        <div class="card" onclick="speakWord('Dog')"><div class="icon">🐶</div><div class="word">Dog</div></div>
+        <div class="card" onclick="speakWord('Cow')"><div class="icon">🐮</div><div class="word">Cow</div></div>
+        <div class="card" onclick="speakWord('Parrot')"><div class="icon">🦜</div><div class="word">Parrot</div></div>
+    </div>
+
+    <!-- 4. Things (वस्तुहरू) -->
+    <div class="category-title">🎁 Things</div>
+    <div class="grid-container">
+        <div class="card" onclick="speakWord('Apple')"><div class="icon">🍎</div><div class="word">Apple</div></div>
+        <div class="card" onclick="speakWord('Ball')"><div class="icon">⚽</div><div class="word">Ball</div></div>
+        <div class="card" onclick="speakWord('Book')"><div class="icon">📖</div><div class="word">Book</div></div>
+        <div class="card" onclick="speakWord('Pencil')"><div class="icon"> láp</div><div class="word">Pencil</div></div>
+    </div>
+
+    <script>
+        // अडियो उच्चारण गर्ने JavaScript फंक्सन
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // अगाडिको आवाज रोकियोस् भन्नलाई
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9; // साना नानीबाबुहरूले बुझ्ने गरी अलि बिस्तारै बोल्ने
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Speech synthesis not supported in this browser.");
+            }
+        }
+    </script>
+
+</body>
+</html>
