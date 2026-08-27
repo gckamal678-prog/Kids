@@ -3,122 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Nouns - Kids App</title>
+    <title>English Grammar Kids Hub - Lessons 1 & 2</title>
     <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --accent-gold: #fbbf24;
+            --accent-cyan: #38bdf8;
+            --accent-green: #34d399;
+            --accent-pink: #f472b6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
             text-align: center;
+            padding: 10px;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        header {
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+        }
+
+        h1 {
+            color: var(--accent-gold);
+            font-size: 22px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .lesson-container {
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
             padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .theory-box {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        .theory-box.lesson2-border {
+            border-color: var(--accent-pink);
+        }
+
+        .theory-box h3 {
+            color: var(--accent-cyan);
+            margin: 0 0 5px 0;
+            font-size: 15px;
+        }
+
+        .theory-box.lesson2-border h3 {
+            color: var(--accent-pink);
+        }
+
+        .theory-box p {
+            color: var(--text-main);
+            font-size: 12px;
             margin: 0;
         }
-        h1 {
-            color: #ffcc00;
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-        p.subtitle {
-            color: #cccccc;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
+
         .category-title {
-            color: #00ffcc;
+            color: var(--accent-green);
             text-align: left;
-            margin: 20px 10px 10px 10px;
-            font-size: 18px;
-            border-bottom: 2px solid #00ffcc;
-            padding-bottom: 5px;
+            margin: 15px 2px 8px 2px;
+            font-size: 15px;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 3px;
+            font-weight: bold;
         }
+
+        .category-title.lesson2-title {
+            color: var(--accent-gold);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        /* 3 Columns Grid Layout - एउटै लाइनमा ३ वटा कार्ड */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr50);
-            gap: 10px;
-            padding: 5px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
         }
-        /* मोबाइलमा राम्रो देखिने गरी grid मिलाइएको */
-        @media (min-width: 600px) {
-            .grid-container {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
+
         .card {
-            background: #2d2d2d;
-            border: 2px solid #444;
-            padding: 15px 10px;
-            border-radius: 12px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            padding: 10px 5px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+            background: var(--bg-card-hover);
+        }
+
         .card:active {
             transform: scale(0.95);
-            background: #3d3d3d;
         }
+
         .word {
-            font-size: 18px;
+            font-size: 13px;
             font-weight: bold;
-            color: #ffffff;
-            margin-top: 5px;
+            color: var(--text-main);
+            margin-top: 3px;
         }
+
         .icon {
-            font-size: 30px;
+            font-size: 24px;
+        }
+
+        /* Practice Section */
+        .practice-section {
+            background: #1e293b;
+            border: 2px dashed var(--accent-pink);
+            border-radius: 10px;
+            padding: 12px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .practice-section.lesson2-practice {
+            border-color: var(--accent-cyan);
+        }
+
+        .practice-section h2 {
+            color: var(--accent-pink);
+            font-size: 15px;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+
+        .practice-section.lesson2-practice h2 {
+            color: var(--accent-cyan);
+        }
+
+        .question-box {
+            font-size: 13px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .opt-btn {
+            background: #0f172a;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .opt-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-pink);
+        }
+
+        .feedback {
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 6px;
+            min-height: 15px;
+        }
+
+        .divider {
+            border: 0;
+            height: 1px;
+            background: var(--border-color);
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
 
-    <h1>✨ Naming Words (Nouns) ✨</h1>
-    <p class="subtitle">Tap any word to hear its pronunciation!</p>
+    <header>
+        <h1>✨ Grammar Kids Hub ✨</h1>
+        <p class="subtitle">Lesson 1 & Lesson 2 - Tap items for voice!</p>
+    </header>
 
-    <!-- 1. Persons (मानिसहरू) -->
-    <div class="category-title">👥 Persons (People)</div>
-    <div class="grid-container">
-        <div class="card" onclick="speakWord('Boy')"><div class="icon">👦</div><div class="word">Boy</div></div>
-        <div class="card" onclick="speakWord('Girl')"><div class="icon">👧</div><div class="word">Girl</div></div>
-        <div class="card" onclick="speakWord('Teacher')"><div class="icon">👩‍🏫</div><div class="word">Teacher</div></div>
-        <div class="card" onclick="speakWord('Doctor')"><div class="icon">👨‍⚕️</div><div class="word">Doctor</div></div>
+    <!-- ==================== LESSON 1: NOUNS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-cyan); margin-top:0; font-size: 17px;">📚 Lesson 1: Nouns (Naming Words)</h2>
+        
+        <div class="theory-box">
+            <h3>📖 What is a Noun?</h3>
+            <p>A noun names a <strong>person, place, animal, or thing</strong>.</p>
+        </div>
+
+        <!-- 1. Persons -->
+        <div class="category-title">👥 Persons</div>
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('Boy')"><div class="icon">👦</div><div class="word">Boy</div></div>
+            <div class="card" onclick="speakWord('Girl')"><div class="icon">👧</div><div class="word">Girl</div></div>
+            <div class="card" onclick="speakWord('Teacher')"><div class="icon">👩‍🏫</div><div class="word">Teacher</div></div>
+            <div class="card" onclick="speakWord('Doctor')"><div class="icon">👨‍⚕️</div><div class="word">Doctor</div></div>
+            <div class="card" onclick="speakWord('Police')"><div class="icon">👮‍♂️</div><div class="word">Police</div></div>
+            <div class="card" onclick="speakWord('Baby')"><div class="icon">👶</div><div class="word">Baby</div></div>
+        </div>
+
+        <!-- 2. Places -->
+        <div class="category-title">🏡 Places</div>
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('School')"><div class="icon">🏫</div><div class="word">School</div></div>
+            <div class="card" onclick="speakWord('Park')"><div class="icon">🌳</div><div class="word">Park</div></div>
+            <div class="card" onclick="speakWord('Home')"><div class="icon">🏠</div><div class="word">Home</div></div>
+            <div class="card" onclick="speakWord('Zoo')"><div class="icon">🦁</div><div class="word">Zoo</div></div>
+            <div class="card" onclick="speakWord('Hospital')"><div class="icon">🏥</div><div class="word">Hospital</div></div>
+            <div class="card" onclick="speakWord('Beach')"><div class="icon">🏖️</div><div class="word">Beach</div></div>
+        </div>
+
+        <!-- 3. Animals -->
+        <div class="category-title">🐱 Animals</div>
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('Cat')"><div class="icon">🐱</div><div class="word">Cat</div></div>
+            <div class="card" onclick="speakWord('Dog')"><div class="icon">🐶</div><div class="word">Dog</div></div>
+            <div class="card" onclick="speakWord('Cow')"><div class="icon">🐮</div><div class="word">Cow</div></div>
+            <div class="card" onclick="speakWord('Parrot')"><div class="icon">🦜</div><div class="word">Parrot</div></div>
+            <div class="card" onclick="speakWord('Lion')"><div class="icon">🦁</div><div class="word">Lion</div></div>
+            <div class="card" onclick="speakWord('Elephant')"><div class="icon">🐘</div><div class="word">Elephant</div></div>
+        </div>
+
+        <!-- 4. Things -->
+        <div class="category-title">🎁 Things</div>
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('Apple')"><div class="icon">🍎</div><div class="word">Apple</div></div>
+            <div class="card" onclick="speakWord('Ball')"><div class="icon">⚽</div><div class="word">Ball</div></div>
+            <div class="card" onclick="speakWord('Book')"><div class="icon">📖</div><div class="word">Book</div></div>
+            <div class="card" onclick="speakWord('Pencil')"><div class="icon">✏️</div><div class="word">Pencil</div></div>
+            <div class="card" onclick="speakWord('Car')"><div class="icon">🚗</div><div class="word">Car</div></div>
+            <div class="card" onclick="speakWord('Clock')"><div class="icon">⏰</div><div class="word">Clock</div></div>
+        </div>
+
+        <!-- Practice 1 -->
+        <div class="practice-section">
+            <h2>🎯 Lesson 1 Practice</h2>
+            <div class="question-box">Q. Which word is a Noun (Place)?</div>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="checkAns(1, false)">Run</button>
+                <button class="opt-btn" onclick="checkAns(1, true)">School</button>
+            </div>
+            <div class="feedback" id="fb1"></div>
+        </div>
     </div>
 
-    <!-- 2. Places (ठाउँहरू) -->
-    <div class="category-title">🏡 Places</div>
-    <div class="grid-container">
-        <div class="card" onclick="speakWord('School')"><div class="icon">🏫</div><div class="word">School</div></div>
-        <div class="card" onclick="speakWord('Park')"><div class="icon">🌳</div><div class="word">Park</div></div>
-        <div class="card" onclick="speakWord('Home')"><div class="icon">🏠</div><div class="word">Home</div></div>
-        <div class="card" onclick="speakWord('Zoo')"><div class="icon">🦁</div><div class="word">Zoo</div></div>
-    </div>
+    <hr class="divider">
 
-    <!-- 3. Animals & Birds (जनावर र पन्छी) -->
-    <div class="category-title">🐱 Animals & Birds</div>
-    <div class="grid-container">
-        <div class="card" onclick="speakWord('Cat')"><div class="icon">🐱</div><div class="word">Cat</div></div>
-        <div class="card" onclick="speakWord('Dog')"><div class="icon">🐶</div><div class="word">Dog</div></div>
-        <div class="card" onclick="speakWord('Cow')"><div class="icon">🐮</div><div class="word">Cow</div></div>
-        <div class="card" onclick="speakWord('Parrot')"><div class="icon">🦜</div><div class="word">Parrot</div></div>
-    </div>
+    <!-- ==================== LESSON 2: PRONOUNS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-pink); margin-top:0; font-size: 17px;">📚 Lesson 2: Pronouns (Replacement)</h2>
+        
+        <div class="theory-box lesson2-border">
+            <h3>📖 What is a Pronoun?</h3>
+            <p>A word used <strong>in place of a noun</strong> (e.g., He, She, It).</p>
+        </div>
 
-    <!-- 4. Things (वस्तुहरू) -->
-    <div class="category-title">🎁 Things</div>
-    <div class="grid-container">
-        <div class="card" onclick="speakWord('Apple')"><div class="icon">🍎</div><div class="word">Apple</div></div>
-        <div class="card" onclick="speakWord('Ball')"><div class="icon">⚽</div><div class="word">Ball</div></div>
-        <div class="card" onclick="speakWord('Book')"><div class="icon">📖</div><div class="word">Book</div></div>
-        <div class="card" onclick="speakWord('Pencil')"><div class="icon"> láp</div><div class="word">Pencil</div></div>
+        <!-- Pronouns List -->
+        <div class="category-title lesson2-title">👤 Pronouns</div>
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('He')"><div class="icon">👨</div><div class="word">He</div></div>
+            <div class="card" onclick="speakWord('She')"><div class="icon">👩</div><div class="word">She</div></div>
+            <div class="card" onclick="speakWord('It')"><div class="icon">📦</div><div class="word">It</div></div>
+            <div class="card" onclick="speakWord('They')"><div class="icon">👥</div><div class="word">They</div></div>
+            <div class="card" onclick="speakWord('We')"><div class="icon">🧑‍🤝‍🧑</div><div class="word">We</div></div>
+            <div class="card" onclick="speakWord('You')"><div class="icon">🫵</div><div class="word">You</div></div>
+        </div>
+
+        <!-- Practice 2 -->
+        <div class="practice-section lesson2-practice">
+            <h2>🎯 Lesson 2 Practice</h2>
+            <div class="question-box">Q. Pronoun for a girl/woman?</div>
+            <div class="options-grid">
+                <button class="opt-btn" onclick="checkAns(2, false)">He</button>
+                <button class="opt-btn" onclick="checkAns(2, true)">She</button>
+            </div>
+            <div class="feedback" id="fb2"></div>
+        </div>
     </div>
 
     <script>
-        // अडियो उच्चारण गर्ने JavaScript फंक्सन
         function speakWord(text) {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // अगाडिको आवाज रोकियोस् भन्नलाई
+                window.speechSynthesis.cancel();
                 let utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'en-US';
-                utterance.rate = 0.9; // साना नानीबाबुहरूले बुझ्ने गरी अलि बिस्तारै बोल्ने
+                utterance.rate = 0.9;
                 window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function checkAns(lesson, isCorrect) {
+            let fb = document.getElementById('fb' + lesson);
+            if (isCorrect) {
+                fb.style.color = '#34d399';
+                fb.textContent = "🎉 Correct! Great job.";
+                speakWord("Correct");
             } else {
-                alert("Speech synthesis not supported in this browser.");
+                fb.style.color = '#f472b6';
+                fb.textContent = "❌ Try again!";
+                speakWord("Try again");
             }
         }
     </script>
