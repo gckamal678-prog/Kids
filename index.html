@@ -183,7 +183,6 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
-        /* 1*3 / 1*3 Grid Layout (6 Items total) */
         .books-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -235,12 +234,12 @@
         }
 
         /* Unique Book Colors (3D Themes) */
-        .book-english { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border: 3px solid #64B5F6; border-left: 8px solid #1565C0; color: #0D47A1; }
-        .book-grammar { background: linear-gradient(135deg, #EDE7F6, #D1C4E9); border: 3px solid #9575CD; border-left: 8px solid #512DA8; color: #311B92; }
-        .book-knowledge { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border: 3px solid #FFB74D; border-left: 8px solid #E65100; color: #E65100; }
         .book-nepali { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); border: 3px solid #81C784; border-left: 8px solid #2E7D32; color: #1B5E20; }
-        .book-byakaran { background: linear-gradient(135deg, #FCE4EC, #F8BBD0); border: 3px solid #F06292; border-left: 8px solid #C2185B; color: #880E4F; }
+        .book-english { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border: 3px solid #64B5F6; border-left: 8px solid #1565C0; color: #0D47A1; }
         .book-math { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); border: 3px solid #BA68C8; border-left: 8px solid #6A1B9A; color: #4A148C; }
+        .book-vocab { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border: 3px solid #FFB74D; border-left: 8px solid #E65100; color: #E65100; }
+        .book-grammar { background: linear-gradient(135deg, #E0F7FA, #B2EBF2); border: 3px solid #4DD0E1; border-left: 8px solid #00838F; color: #006064; }
+        .book-byakaran { background: linear-gradient(135deg, #FBE9E7, #FFCCBC); border: 3px solid #FF8A65; border-left: 8px solid #D84315; color: #BF360C; }
 
         /* --- 📖 Book Open Modal --- */
         #book-open-modal {
@@ -333,7 +332,7 @@
 
         @media screen and (min-width: 600px) {
             body { padding: 30px !important; }
-            .books-grid { grid-template-columns: repeat(3, 1fr); }
+            .books-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -368,50 +367,50 @@
 
     <div class="main-title" onclick="playAIVoice('बालबालिका सिकाइ केन्द्र')">✨ बालबालिका सिकाइ केन्द्र ✨</div>
 
-    <!-- 📚 3D Bookshelf (6 Interactive Books in 1*3 / 1*3 Layout) -->
+    <!-- 📚 3D Bookshelf (6 Interactive Books - 3x2 Grid structure) -->
     <div class="bookshelf-shelf">
         <div class="bookshelf-title" onclick="playAIVoice('डिजिटल किताबहरू')">📖 डिजिटल किताबहरू (छोडेर खोल्नुहोस्)</div>
         
         <div class="books-grid">
-            <!-- 1. English -->
+            <!-- Book 1: English -->
             <div class="book-3d book-english" onclick="openBook('english')">
                 <span class="book-icon">🇬🇧</span>
                 <div class="book-name">English</div>
                 <div class="book-tag">Alphabet & Words</div>
             </div>
 
-            <!-- 2. Grammar (Added) -->
+            <!-- Book 2: Grammar -->
             <div class="book-3d book-grammar" onclick="openBook('grammar')">
-                <span class="book-icon">📖</span>
+                <span class="book-icon">✍️</span>
                 <div class="book-name">Grammar</div>
-                <div class="book-tag">Lessons & Rules</div>
+                <div class="book-tag">English Grammar</div>
             </div>
 
-            <!-- 3. Knowledge -->
-            <div class="book-3d book-knowledge" onclick="openBook('knowledge')">
+            <!-- Book 3: Knowledge -->
+            <div class="book-3d book-vocab" onclick="openBook('knowledge')">
                 <span class="book-icon">🌍</span>
                 <div class="book-name">Knowledge</div>
                 <div class="book-tag">Drawing & Quiz</div>
             </div>
 
-            <!-- 4. Nepali -->
+            <!-- Book 4: Nepali -->
             <div class="book-3d book-nepali" onclick="openBook('nepali')">
                 <span class="book-icon">🇳🇵</span>
                 <div class="book-name">Nepali</div>
                 <div class="book-tag">Vowels & Consonants</div>
             </div>
 
-            <!-- 5. ब्याकरण (Reserved for Nepali Grammar if needed) -->
+            <!-- Book 5: Byakaran -->
             <div class="book-3d book-byakaran" onclick="openBook('byakaran')">
-                <span class="book-icon">✍️</span>
+                <span class="book-icon">📖</span>
                 <div class="book-name">ब्याकरण</div>
                 <div class="book-tag">नेपाली ब्याकरण</div>
             </div>
 
-            <!-- 6. Maths -->
+            <!-- Book 6: Maths -->
             <div class="book-3d book-math" onclick="openBook('maths')">
                 <span class="book-icon">🔢</span>
-                <div class="book-name">Maths</div>
+                <div class="book-name">गणित</div>
                 <div class="book-tag">Numbers & Pahada</div>
             </div>
         </div>
@@ -493,7 +492,7 @@
     }
   }
 
-  // फोल्डर स्ट्रक्चर र व्याकरणका लेसनहरू अनुसारको बुक डेटा
+  // अपडेट गरिएको बुक डेटा (Grammar फाइलहरू सहित)
   const bookData = {
     english: {
       title: "📁 English Books",
@@ -509,13 +508,12 @@
       ]
     },
     grammar: {
-      title: "📁 English Grammar Lessons",
+      title: "📁 English Grammar",
       pages: [
-        { name: "Lesson 1: Nouns", url: "English/grammar-nouns.html", icon: "🏷️" },
-        { name: "Lesson 2: Pronouns", url: "English/grammar-pronouns.html", icon: "👤" },
-        { name: "Lesson 3: Verbs", url: "English/grammar-verbs.html", icon: "🏃" },
-        { name: "Lesson 4: Adjectives", url: "English/grammar-adjectives.html", icon: "🌟" },
-        { name: "Lesson 5: Sentences", url: "English/grammar-sentences.html", icon: "📝" }
+        { name: "Nouns", url: "english/grammar-nouns.html", icon: "🏷️" },
+        { name: "Pronouns", url: "english/grammar-pronouns.html", icon: "🔄" },
+        { name: "Adjectives", url: "english/grammar-adjectives.html", icon: "✨" },
+        { name: "Sentences", url: "english/grammar-sentences.html", icon: "📝" }
       ]
     },
     knowledge: {
@@ -538,11 +536,11 @@
     byakaran: {
       title: "📁 नेपाली ब्याकरण",
       pages: [
-        { name: "वर्णमाला र शब्द", url: "nepali/byakaran-intro.html", icon: "📖" }
+        { name: "वर्णमाला अभ्यास", url: "nepali/byakaran.html", icon: "📘" }
       ]
     },
     maths: {
-      title: "📁 Maths & Numbers",
+      title: "📁 गणित & Numbers",
       pages: [
         { name: "Numbers", url: "maths/numbers.html", icon: "🔢" },
         { name: "Math Pahada", url: "maths/pahada.html", icon: "✖️" }
@@ -606,7 +604,7 @@
   function closeDashboard() { document.getElementById('parent-dashboard').style.display = 'none'; }
 
   function saveParentSettings() {
-      localStorage.setItem('app_daily_target', document.getElementById('target-select').value);
+      localStorage.setItem('app_daily_target', document.getElementById('target-select5').value || document.getElementById('target-select').value);
       alert("सेटिङ सेभ भयो!");
       updateTargetDisplay();
   }
