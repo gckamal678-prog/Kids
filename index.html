@@ -183,6 +183,7 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
+        /* 1*3 / 1*3 Grid Layout (6 Items total) */
         .books-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -234,10 +235,12 @@
         }
 
         /* Unique Book Colors (3D Themes) */
-        .book-nepali { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); border: 3px solid #81C784; border-left: 8px solid #2E7D32; color: #1B5E20; }
         .book-english { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border: 3px solid #64B5F6; border-left: 8px solid #1565C0; color: #0D47A1; }
+        .book-grammar { background: linear-gradient(135deg, #EDE7F6, #D1C4E9); border: 3px solid #9575CD; border-left: 8px solid #512DA8; color: #311B92; }
+        .book-knowledge { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border: 3px solid #FFB74D; border-left: 8px solid #E65100; color: #E65100; }
+        .book-nepali { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); border: 3px solid #81C784; border-left: 8px solid #2E7D32; color: #1B5E20; }
+        .book-byakaran { background: linear-gradient(135deg, #FCE4EC, #F8BBD0); border: 3px solid #F06292; border-left: 8px solid #C2185B; color: #880E4F; }
         .book-math { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); border: 3px solid #BA68C8; border-left: 8px solid #6A1B9A; color: #4A148C; }
-        .book-vocab { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); border: 3px solid #FFB74D; border-left: 8px solid #E65100; color: #E65100; }
 
         /* --- 📖 Book Open Modal --- */
         #book-open-modal {
@@ -330,7 +333,7 @@
 
         @media screen and (min-width: 600px) {
             body { padding: 30px !important; }
-            .books-grid { grid-template-columns: repeat(2, 1fr); }
+            .books-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
@@ -365,37 +368,51 @@
 
     <div class="main-title" onclick="playAIVoice('बालबालिका सिकाइ केन्द्र')">✨ बालबालिका सिकाइ केन्द्र ✨</div>
 
-    <!-- 📚 3D Bookshelf (4 Interactive Books) -->
+    <!-- 📚 3D Bookshelf (6 Interactive Books in 1*3 / 1*3 Layout) -->
     <div class="bookshelf-shelf">
         <div class="bookshelf-title" onclick="playAIVoice('डिजिटल किताबहरू')">📖 डिजिटल किताबहरू (छोडेर खोल्नुहोस्)</div>
         
         <div class="books-grid">
-            <!-- Book 1: English -->
+            <!-- 1. English -->
             <div class="book-3d book-english" onclick="openBook('english')">
                 <span class="book-icon">🇬🇧</span>
                 <div class="book-name">English</div>
                 <div class="book-tag">Alphabet & Words</div>
             </div>
 
-            <!-- Book 2: Knowledge -->
-            <div class="book-3d book-vocab" onclick="openBook('knowledge')">
+            <!-- 2. Grammar (Added) -->
+            <div class="book-3d book-grammar" onclick="openBook('grammar')">
+                <span class="book-icon">📖</span>
+                <div class="book-name">Grammar</div>
+                <div class="book-tag">Lessons & Rules</div>
+            </div>
+
+            <!-- 3. Knowledge -->
+            <div class="book-3d book-knowledge" onclick="openBook('knowledge')">
                 <span class="book-icon">🌍</span>
                 <div class="book-name">Knowledge</div>
                 <div class="book-tag">Drawing & Quiz</div>
             </div>
 
-            <!-- Book 3: Maths -->
-            <div class="book-3d book-math" onclick="openBook('maths')">
-                <span class="book-icon">🔢</span>
-                <div class="book-name">Maths</div>
-                <div class="book-tag">Numbers & Pahada</div>
-            </div>
-
-            <!-- Book 4: Nepali -->
+            <!-- 4. Nepali -->
             <div class="book-3d book-nepali" onclick="openBook('nepali')">
                 <span class="book-icon">🇳🇵</span>
                 <div class="book-name">Nepali</div>
                 <div class="book-tag">Vowels & Consonants</div>
+            </div>
+
+            <!-- 5. ब्याकरण (Reserved for Nepali Grammar if needed) -->
+            <div class="book-3d book-byakaran" onclick="openBook('byakaran')">
+                <span class="book-icon">✍️</span>
+                <div class="book-name">ब्याकरण</div>
+                <div class="book-tag">नेपाली ब्याकरण</div>
+            </div>
+
+            <!-- 6. Maths -->
+            <div class="book-3d book-math" onclick="openBook('maths')">
+                <span class="book-icon">🔢</span>
+                <div class="book-name">Maths</div>
+                <div class="book-tag">Numbers & Pahada</div>
             </div>
         </div>
     </div>
@@ -409,7 +426,7 @@
         </div>
     </div>
 
-        <!-- 🤝 डिजिटल पोर्टल प्रयोग गर्ने विद्यालयहरू -->
+    <!-- 🤝 डिजिटल पोर्टल प्रयोग गर्ने विद्यालयहरू -->
     <div style="background: rgba(255, 255, 255, 0.95); border: 2px dashed #FF9800; padding: 15px; border-radius: 18px; margin-bottom: 25px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-align: center;">
         <h3 style="color: #E65100; font-size: 15px; font-weight: 800; margin-bottom: 8px;">🤝 डिजिटल पोर्टल प्रयोग गर्ने विद्यालयहरू</h3>
         <p style="font-size: 13px; color: #2C3E50; font-weight: 700; margin: 0;">
@@ -450,9 +467,7 @@
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 10px;">
-            <!-- 🛠️ Developer Mode (गुप्त पासकोडवाला डेटा रिसेट बटन) -->
             <button onclick="openDeveloperReset()" style="width:100%; padding:10px; font-size:12px; border:2px dashed #95A5A6; color:#95A5A6; background:transparent; border-radius:8px; cursor:pointer;">🛠️ Developer Mode (Reset)</button>
-            
             <button onclick="closeDashboard()" class="action-btn" style="width:100%; padding:10px; font-size:14px; background:#78909C; color:white; border:none; border-radius:8px;">✖️ बन्द गर्नुहोस्</button>
         </div>
     </div>
@@ -478,7 +493,7 @@
     }
   }
 
-  // फोल्डर स्ट्रक्चरअनुसारको बुक डेटा
+  // फोल्डर स्ट्रक्चर र व्याकरणका लेसनहरू अनुसारको बुक डेटा
   const bookData = {
     english: {
       title: "📁 English Books",
@@ -493,18 +508,21 @@
         { name: "Vehicles", url: "english/vehicles.html", icon: "🚗" }
       ]
     },
+    grammar: {
+      title: "📁 English Grammar Lessons",
+      pages: [
+        { name: "Lesson 1: Nouns", url: "English/grammar-nouns.html", icon: "🏷️" },
+        { name: "Lesson 2: Pronouns", url: "English/grammar-pronouns.html", icon: "👤" },
+        { name: "Lesson 3: Verbs", url: "English/grammar-verbs.html", icon: "🏃" },
+        { name: "Lesson 4: Adjectives", url: "English/grammar-adjectives.html", icon: "🌟" },
+        { name: "Lesson 5: Sentences", url: "English/grammar-sentences.html", icon: "📝" }
+      ]
+    },
     knowledge: {
       title: "📁 Knowledge & Activities",
       pages: [
         { name: "Drawing Board", url: "knowledge/drawing.html", icon: "✏️" },
         { name: "Bal Quiz", url: "knowledge/quiz.html", icon: "🧠" }
-      ]
-    },
-    maths: {
-      title: "📁 Maths & Numbers",
-      pages: [
-        { name: "Numbers", url: "maths/numbers.html", icon: "🔢" },
-        { name: "Math Pahada", url: "maths/pahada.html", icon: "✖️" }
       ]
     },
     nepali: {
@@ -515,6 +533,19 @@
         { name: "व्यञ्जन (Image)", url: "nepali/imageconsonants.html", icon: "🧩" },
         { name: "स्वर (Image)", url: "nepali/imagevowels.html", icon: "🎨" },
         { name: "स्वर वर्ण", url: "nepali/vowels.html", icon: "अ" }
+      ]
+    },
+    byakaran: {
+      title: "📁 नेपाली ब्याकरण",
+      pages: [
+        { name: "वर्णमाला र शब्द", url: "nepali/byakaran-intro.html", icon: "📖" }
+      ]
+    },
+    maths: {
+      title: "📁 Maths & Numbers",
+      pages: [
+        { name: "Numbers", url: "maths/numbers.html", icon: "🔢" },
+        { name: "Math Pahada", url: "maths/pahada.html", icon: "✖️" }
       ]
     }
   };
@@ -580,7 +611,6 @@
       updateTargetDisplay();
   }
 
-  // केवल डेभलपरले मात्र पासवर्ड हालेर डेटा रिसेट गर्न मिल्ने सुरक्षित फंक्सन
   function openDeveloperReset() {
       let devPin = prompt("🛠️ यो केवल विकासकर्ता (Developer) का लागि हो। गुप्त कोड (Secret Key) हाल्नुहोस्:");
       if (devPin === "kamal_dev@2026") {
