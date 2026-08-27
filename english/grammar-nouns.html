@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Grammar Kids Hub - Lessons 1 & 2</title>
+    <title>English Grammar Hub - Complete Lessons</title>
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -54,6 +54,7 @@
             border-radius: 14px;
             padding: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-align: left;
         }
 
         .theory-box {
@@ -62,21 +63,12 @@
             border-radius: 10px;
             padding: 12px;
             margin: 10px 0;
-            text-align: left;
-        }
-
-        .theory-box.lesson2-border {
-            border-color: var(--accent-pink);
         }
 
         .theory-box h3 {
             color: var(--accent-cyan);
             margin: 0 0 5px 0;
             font-size: 15px;
-        }
-
-        .theory-box.lesson2-border h3 {
-            color: var(--accent-pink);
         }
 
         .theory-box p {
@@ -87,7 +79,6 @@
 
         .category-title {
             color: var(--accent-green);
-            text-align: left;
             margin: 15px 2px 8px 2px;
             font-size: 15px;
             border-bottom: 2px solid var(--accent-green);
@@ -95,12 +86,6 @@
             font-weight: bold;
         }
 
-        .category-title.lesson2-title {
-            color: var(--accent-gold);
-            border-bottom: 2px solid var(--accent-gold);
-        }
-
-        /* 3 Columns Grid Layout - एउटै लाइनमा ३ वटा कार्ड */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -115,6 +100,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-align: center;
         }
 
         .card:hover {
@@ -142,13 +128,8 @@
             background: #1e293b;
             border: 2px dashed var(--accent-pink);
             border-radius: 10px;
-            padding: 12px;
+            padding: 15px;
             margin-top: 20px;
-            text-align: left;
-        }
-
-        .practice-section.lesson2-practice {
-            border-color: var(--accent-cyan);
         }
 
         .practice-section h2 {
@@ -158,30 +139,35 @@
             text-align: center;
         }
 
-        .practice-section.lesson2-practice h2 {
-            color: var(--accent-cyan);
+        .score-board {
+            text-align: center;
+            font-size: 13px;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            font-weight: bold;
         }
 
         .question-box {
-            font-size: 13px;
-            margin-bottom: 8px;
+            font-size: 14px;
+            margin-bottom: 12px;
             font-weight: 500;
         }
 
         .options-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 6px;
+            gap: 8px;
         }
 
         .opt-btn {
             background: #0f172a;
             color: var(--text-main);
             border: 1px solid var(--border-color);
-            padding: 8px;
+            padding: 10px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
+            transition: 0.2s;
         }
 
         .opt-btn:hover {
@@ -190,17 +176,41 @@
         }
 
         .feedback {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: bold;
-            margin-top: 6px;
-            min-height: 15px;
+            margin-top: 10px;
+            min-height: 20px;
+            text-align: center;
         }
 
-        .divider {
-            border: 0;
-            height: 1px;
-            background: var(--border-color);
-            margin: 20px 0;
+        .next-btn {
+            display: block;
+            width: 100%;
+            background: var(--accent-cyan);
+            color: #0f172a;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .info-list {
+            font-size: 13px;
+            color: var(--text-muted);
+            padding-left: 18px;
+            margin: 8px 0;
+        }
+
+        .info-list li {
+            margin-bottom: 6px;
+        }
+
+        .info-list strong {
+            color: var(--accent-gold);
         }
     </style>
 </head>
@@ -208,19 +218,18 @@
 
     <header>
         <h1>✨ Grammar Kids Hub ✨</h1>
-        <p class="subtitle">Lesson 1 & Lesson 2 - Tap items for voice!</p>
+        <p class="subtitle">Lesson 1: Nouns & Pronouns + More Parts of Speech</p>
     </header>
 
     <!-- ==================== LESSON 1: NOUNS ==================== -->
     <div class="lesson-container">
-        <h2 style="color: var(--accent-cyan); margin-top:0; font-size: 17px;">📚 Lesson 1: Nouns (Naming Words)</h2>
+        <h2 style="color: var(--accent-cyan); margin-top:0; font-size: 17px;">📚 Lesson 1 (Part 1): Nouns</h2>
         
         <div class="theory-box">
             <h3>📖 What is a Noun?</h3>
-            <p>A noun names a <strong>person, place, animal, or thing</strong>.</p>
+            <p>A noun names a person, place, animal, or thing.</p>
         </div>
 
-        <!-- 1. Persons -->
         <div class="category-title">👥 Persons</div>
         <div class="grid-container">
             <div class="card" onclick="speakWord('Boy')"><div class="icon">👦</div><div class="word">Boy</div></div>
@@ -231,7 +240,6 @@
             <div class="card" onclick="speakWord('Baby')"><div class="icon">👶</div><div class="word">Baby</div></div>
         </div>
 
-        <!-- 2. Places -->
         <div class="category-title">🏡 Places</div>
         <div class="grid-container">
             <div class="card" onclick="speakWord('School')"><div class="icon">🏫</div><div class="word">School</div></div>
@@ -242,7 +250,6 @@
             <div class="card" onclick="speakWord('Beach')"><div class="icon">🏖️</div><div class="word">Beach</div></div>
         </div>
 
-        <!-- 3. Animals -->
         <div class="category-title">🐱 Animals</div>
         <div class="grid-container">
             <div class="card" onclick="speakWord('Cat')"><div class="icon">🐱</div><div class="word">Cat</div></div>
@@ -253,7 +260,6 @@
             <div class="card" onclick="speakWord('Elephant')"><div class="icon">🐘</div><div class="word">Elephant</div></div>
         </div>
 
-        <!-- 4. Things -->
         <div class="category-title">🎁 Things</div>
         <div class="grid-container">
             <div class="card" onclick="speakWord('Apple')"><div class="icon">🍎</div><div class="word">Apple</div></div>
@@ -264,31 +270,27 @@
             <div class="card" onclick="speakWord('Clock')"><div class="icon">⏰</div><div class="word">Clock</div></div>
         </div>
 
-        <!-- Practice 1 -->
+        <!-- Dynamic Practice for Nouns -->
         <div class="practice-section">
-            <h2>🎯 Lesson 1 Practice</h2>
-            <div class="question-box">Q. Which word is a Noun (Place)?</div>
-            <div class="options-grid">
-                <button class="opt-btn" onclick="checkAns(1, false)">Run</button>
-                <button class="opt-btn" onclick="checkAns(1, true)">School</button>
-            </div>
-            <div class="feedback" id="fb1"></div>
+            <h2>🎯 Noun Practice Zone</h2>
+            <div class="score-board" id="scoreBoard1">Score: ⭐ 0</div>
+            <div class="question-box" id="questionBox1">Loading question...</div>
+            <div class="options-grid" id="optionsGrid1"></div>
+            <div class="feedback" id="feedback1"></div>
+            <button class="next-btn" id="nextBtn1" onclick="loadNewQuestion1()">Next Question ➡️</button>
         </div>
     </div>
 
-    <hr class="divider">
-
-    <!-- ==================== LESSON 2: PRONOUNS ==================== -->
+    <!-- ==================== LESSON 1 (PART 2): PRONOUNS ==================== -->
     <div class="lesson-container">
-        <h2 style="color: var(--accent-pink); margin-top:0; font-size: 17px;">📚 Lesson 2: Pronouns (Replacement)</h2>
+        <h2 style="color: var(--accent-pink); margin-top:0; font-size: 17px;">📚 Lesson 1 (Part 2): Pronouns</h2>
         
-        <div class="theory-box lesson2-border">
+        <div class="theory-box" style="border-color: var(--accent-pink);">
             <h3>📖 What is a Pronoun?</h3>
-            <p>A word used <strong>in place of a noun</strong> (e.g., He, She, It).</p>
+            <p>Words used in place of nouns (e.g., he, she, they, it).</p>
         </div>
 
-        <!-- Pronouns List -->
-        <div class="category-title lesson2-title">👤 Pronouns</div>
+        <div class="category-title" style="color: var(--accent-pink); border-color: var(--accent-pink);">👤 Pronouns</div>
         <div class="grid-container">
             <div class="card" onclick="speakWord('He')"><div class="icon">👨</div><div class="word">He</div></div>
             <div class="card" onclick="speakWord('She')"><div class="icon">👩</div><div class="word">She</div></div>
@@ -298,15 +300,31 @@
             <div class="card" onclick="speakWord('You')"><div class="icon">🫵</div><div class="word">You</div></div>
         </div>
 
-        <!-- Practice 2 -->
-        <div class="practice-section lesson2-practice">
-            <h2>🎯 Lesson 2 Practice</h2>
-            <div class="question-box">Q. Pronoun for a girl/woman?</div>
-            <div class="options-grid">
-                <button class="opt-btn" onclick="checkAns(2, false)">He</button>
-                <button class="opt-btn" onclick="checkAns(2, true)">She</button>
-            </div>
-            <div class="feedback" id="fb2"></div>
+        <!-- Dynamic Practice for Pronouns -->
+        <div class="practice-section" style="border-color: var(--accent-cyan);">
+            <h2 style="color: var(--accent-cyan);">🎯 Pronoun Practice Zone</h2>
+            <div class="score-board" id="scoreBoard2">Score: ⭐ 0</div>
+            <div class="question-box" id="questionBox2">Loading question...</div>
+            <div class="options-grid" id="optionsGrid2"></div>
+            <div class="feedback" id="feedback2"></div>
+            <button class="next-btn" id="nextBtn2" onclick="loadNewQuestion2()" style="background: var(--accent-pink); color: #fff;">Next Question ➡️</button>
+        </div>
+    </div>
+
+    <!-- ==================== OTHER ESSENTIAL GRAMMAR LESSONS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-gold); margin-top:0; font-size: 17px;">🚀 More Grammar Essentials</h2>
+        
+        <div class="theory-box" style="border-color: var(--accent-gold);">
+            <h3>💡 Other Core Parts of Speech</h3>
+            <ul class="info-list">
+                <li><strong>Adjective (विशेषण):</strong> Words that describe nouns or pronouns, adding detail like color, size, or quality (e.g., <em>big, red, smart</em>).</li>
+                <li><strong>Verb (क्रिया):</strong> Action words or states of being that tell what the noun is doing (e.g., <em>run, jump, is, are</em>).</li>
+                <li><strong>Adverb (क्रियाविशेषण):</strong> Words that modify verbs, adjectives, or other adverbs, usually telling how, when, or where something happens (e.g., <em>quickly, very, well</em>).</li>
+                <li><strong>Preposition (नामैयोगी):</strong> Words that show the spatial or temporal relationship between a noun/pronoun and other words (e.g., <em>in, on, under, at</em>).</li>
+                <li><strong>Conjunction (संयोजक):</strong> Joining words used to connect phrases, clauses, or other words (e.g., <em>and, but, because</em>).</li>
+                <li><strong>Interjection (विस्मयादिबोधक):</strong> Exclamatory words used to express sudden emotion (e.g., <em>Wow!, Oh!, Alas!</em>).</li>
+            </ul>
         </div>
     </div>
 
@@ -321,18 +339,111 @@
             }
         }
 
-        function checkAns(lesson, isCorrect) {
-            let fb = document.getElementById('fb' + lesson);
-            if (isCorrect) {
+        /* --- Noun Quiz Logic --- */
+        const nounPool = [
+            { q: "Which of the following is a Noun (Place)?", options: ["School", "Run", "Eat", "Quickly"], correct: "School" },
+            { q: "Which of the following is a Noun (Person)?", options: ["Teacher", "Jump", "Happy", "Slow"], correct: "Teacher" },
+            { q: "Which of the following is a Noun (Animal)?", options: ["Cat", "Sing", "Blue", "Under"], correct: "Cat" },
+            { q: "Which of the following is a Noun (Thing)?", options: ["Apple", "Walk", "Tall", "In"], correct: "Apple" }
+        ];
+
+        let score1 = 0;
+        let currentAns1 = "";
+
+        function loadNewQuestion1() {
+            document.getElementById('feedback1').textContent = "";
+            document.getElementById('nextBtn1').style.display = "none";
+            let rand = nounPool[Math.floor(Math.random() * nounPool.length)];
+            document.getElementById('questionBox1').textContent = "Q. " + rand.q;
+            currentAns1 = rand.correct;
+
+            let grid = document.getElementById('optionsGrid1');
+            grid.innerHTML = "";
+            [...rand.options].sort(() => Math.random() - 0.5).forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkAns1(opt, btn);
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkAns1(selected, btn) {
+            let fb = document.getElementById('feedback1');
+            document.querySelectorAll('#optionsGrid1 .opt-btn').forEach(b => b.disabled = true);
+            if (selected === currentAns1) {
+                btn.style.background = '#34d399';
+                btn.style.color = '#0f172a';
                 fb.style.color = '#34d399';
-                fb.textContent = "🎉 Correct! Great job.";
+                fb.textContent = "🎉 Correct!";
+                score1 += 10;
+                document.getElementById('scoreBoard1').textContent = "Score: ⭐ " + score1;
                 speakWord("Correct");
             } else {
+                btn.style.background = '#f472b6';
+                btn.style.color = '#0f172a';
                 fb.style.color = '#f472b6';
-                fb.textContent = "❌ Try again!";
+                fb.textContent = "❌ Answer is: " + currentAns1;
                 speakWord("Try again");
             }
+            document.getElementById('nextBtn1').style.display = "block";
         }
+
+        /* --- Pronoun Quiz Logic --- */
+        const pronounPool = [
+            { q: "Which word is a Pronoun used for a girl or woman?", options: ["She", "He", "Apple", "School"], correct: "She" },
+            { q: "Which word is a Pronoun used for a boy or man?", options: ["He", "She", "Dog", "Park"], correct: "He" },
+            { q: "Which word is a Pronoun used for a thing or animal?", options: ["It", "They", "Teacher", "Boy"], correct: "It" },
+            { q: "Which word is a Pronoun for multiple people?", options: ["They", "He", "Book", "Car"], correct: "They" }
+        ];
+
+        let score2 = 0;
+        let currentAns2 = "";
+
+        function loadNewQuestion2() {
+            document.getElementById('feedback2').textContent = "";
+            document.getElementById('nextBtn2').style.display = "none";
+            let rand = pronounPool[Math.floor(Math.random() * pronounPool.length)];
+            document.getElementById('questionBox2').textContent = "Q. " + rand.q;
+            currentAns2 = rand.correct;
+
+            let grid = document.getElementById('optionsGrid2');
+            grid.innerHTML = "";
+            [...rand.options].sort(() => Math.random() - 0.5).forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkAns2(opt, btn);
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkAns2(selected, btn) {
+            let fb = document.getElementById('feedback2');
+            document.querySelectorAll('#optionsGrid2 .opt-btn').forEach(b => b.disabled = true);
+            if (selected === currentAns2) {
+                btn.style.background = '#34d399';
+                btn.style.color = '#0f172a';
+                fb.style.color = '#34d399';
+                fb.textContent = "🎉 Correct!";
+                score2 += 10;
+                document.getElementById('scoreBoard2').textContent = "Score: ⭐ " + score2;
+                speakWord("Correct");
+            } else {
+                btn.style.background = '#f472b6';
+                btn.style.color = '#0f172a';
+                fb.style.color = '#f472b6';
+                fb.textContent = "❌ Answer is: " + currentAns2;
+                speakWord("Try again");
+            }
+            document.getElementById('nextBtn2').style.display = "block";
+        }
+
+        // Initialize both quizzes on load
+        window.onload = function() {
+            loadNewQuestion1();
+            loadNewQuestion2();
+        };
     </script>
 
 </body>
