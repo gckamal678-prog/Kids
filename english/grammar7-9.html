@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar Hub - Advanced Lessons</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --accent-gold: #fbbf24;
+            --accent-cyan: #38bdf8;
+            --accent-green: #34d399;
+            --accent-pink: #f472b6;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            text-align: center;
+            padding: 10px;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        header {
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+        }
+
+        h1 {
+            color: var(--accent-gold);
+            font-size: 22px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .lesson-container {
+            max-width: 600px;
+            margin: 0 auto 25px auto;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+
+        .theory-box {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .theory-box h3 {
+            color: var(--accent-cyan);
+            margin: 0 0 5px 0;
+            font-size: 15px;
+        }
+
+        .theory-box p {
+            color: var(--text-main);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .category-title {
+            color: var(--accent-green);
+            margin: 15px 2px 8px 2px;
+            font-size: 15px;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 3px;
+            font-weight: bold;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            padding: 10px 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+            background: var(--bg-card-hover);
+        }
+
+        .card:active {
+            transform: scale(0.95);
+        }
+
+        .word {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--text-main);
+            margin-top: 3px;
+        }
+
+        .icon {
+            font-size: 24px;
+        }
+
+        /* Practice Section */
+        .practice-section {
+            background: #1e293b;
+            border: 2px dashed var(--accent-pink);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .practice-section h2 {
+            color: var(--accent-pink);
+            font-size: 15px;
+            margin: 0 0 8px 0;
+            text-align: center;
+        }
+
+        .score-board {
+            text-align: center;
+            font-size: 13px;
+            color: var(--accent-gold);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .question-box {
+            font-size: 14px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .opt-btn {
+            background: #0f172a;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .opt-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-pink);
+        }
+
+        .feedback {
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 10px;
+            min-height: 20px;
+            text-align: center;
+        }
+
+        .next-btn {
+            display: block;
+            width: 100%;
+            background: var(--accent-cyan);
+            color: #0f172a;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>✨ Advanced Grammar Hub ✨</h1>
+        <p class="subtitle">Lessons 7, 8 & 9: Prepositions, Conjunctions & Interjections</p>
+    </header>
+
+    <!-- ==================== LESSON 7: PREPOSITIONS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-cyan); margin-top:0; font-size: 17px;">📚 Lesson 7: Prepositions (नामैयोगी)</h2>
+        
+        <div class="theory-box">
+            <h3>📖 What is a Preposition?</h3>
+            <p>Words that show place, position, time, or relationship between words (e.g., in, on, under).</p>
+        </div>
+
+        <div class="category-title">📍 Common Prepositions</div>
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('In')"><div class="icon">📦</div><div class="word">In (भित्र)</div></div>
+            <div class="card" onclick="speakWord('On')"><div class="icon">📘</div><div class="word">On (माथि)</div></div>
+            <div class="card" onclick="speakWord('Under')"><div class="icon">🪑</div><div class="word">Under (मुनि)</div></div>
+            <div class="card" onclick="speakWord('At')"><div class="icon">⏰</div><div class="word">At (मा/माथि)</div></div>
+            <div class="card" onclick="speakWord('Behind')"><div class="icon">🚪</div><div class="word">Behind (पछाडि)</div></div>
+            <div class="card" onclick="speakWord('Between')"><div class="icon">↔️</div><div class="word">Between (बीचमा)</div></div>
+            <div class="card" onclick="speakWord('In front of')"><div class="icon">👀</div><div class="word">In front of</div></div>
+            <div class="card" onclick="speakWord('Over')"><div class="icon">☁️</div><div class="word">Over (माथि)</div></div>
+            <div class="card" onclick="speakWord('Near')"><div class="icon">🏠</div><div class="word">Near (नजिक)</div></div>
+        </div>
+
+        <!-- Practice Section for Prepositions -->
+        <div class="practice-section">
+            <h2>🎯 Preposition Practice Zone</h2>
+            <div class="score-board" id="scoreBoard7">Score: ⭐ 0</div>
+            <div class="question-box" id="questionBox7">Loading question...</div>
+            <div class="options-grid" id="optionsGrid7"></div>
+            <div class="feedback" id="feedback7"></div>
+            <button class="next-btn" id="nextBtn7" onclick="loadNewQuestion7()">Next Question ➡️</button>
+        </div>
+    </div>
+
+    <!-- ==================== LESSON 8: CONJUNCTIONS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-pink); margin-top:0; font-size: 17px;">📚 Lesson 8: Conjunctions (संयोजक)</h2>
+        
+        <div class="theory-box" style="border-color: var(--accent-pink);">
+            <h3>📖 What is a Conjunction?</h3>
+            <p>Words used to connect words, phrases, or clauses together (e.g., and, but, because).</p>
+        </div>
+
+        <div class="category-title" style="color: var(--accent-pink); border-color: var(--accent-pink);">🔗 Common Conjunctions</div>
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('And')"><div class="icon">➕</div><div class="word">And (र)</div></div>
+            <div class="card" onclick="speakWord('But')"><div class="icon">⚡</div><div class="word">But (तर)</div></div>
+            <div class="card" onclick="speakWord('Because')"><div class="icon">💡</div><div class="word">Because (किनकि)</div></div>
+            <div class="card" onclick="speakWord('Or')"><div class="icon">🔀</div><div class="word">Or (वा)</div></div>
+            <div class="card" onclick="speakWord('So')"><div class="icon">➡️</div><div class="word">So (त्यसैले)</div></div>
+            <div class="card" onclick="speakWord('Although')"><div class="icon">⛅</div><div class="word">Although (यद्यपि)</div></div>
+        </div>
+
+        <!-- Practice Section for Conjunctions -->
+        <div class="practice-section" style="border-color: var(--accent-cyan);">
+            <h2 style="color: var(--accent-cyan);">🎯 Conjunction Practice Zone</h2>
+            <div class="score-board" id="scoreBoard8">Score: ⭐ 0</div>
+            <div class="question-box" id="questionBox8">Loading question...</div>
+            <div class="options-grid" id="optionsGrid8"></div>
+            <div class="feedback" id="feedback8"></div>
+            <button class="next-btn" id="nextBtn8" onclick="loadNewQuestion8()" style="background: var(--accent-pink); color: #fff;">Next Question ➡️</button>
+        </div>
+    </div>
+
+    <!-- ==================== LESSON 9: INTERJECTIONS ==================== -->
+    <div class="lesson-container">
+        <h2 style="color: var(--accent-gold); margin-top:0; font-size: 17px;">📚 Lesson 9: Interjections (विस्मयादिबोधक)</h2>
+        
+        <div class="theory-box" style="border-color: var(--accent-gold);">
+            <h3>📖 What is an Interjection?</h3>
+            <p>Exclamatory words used to express sudden feelings or emotions (e.g., Wow!, Oh!, Alas!).</p>
+        </div>
+
+        <div class="category-title" style="color: var(--accent-gold); border-color: var(--accent-gold);">🗣️ Common Interjections</div>
+        <div class="grid-container">
+            <div class="card" onclick="speakWord('Wow!')"><div class="icon">🤩</div><div class="word">Wow! (वाः!)</div></div>
+            <div class="card" onclick="speakWord('Oh!')"><div class="icon">😲</div><div class="word">Oh! (ओहो!)</div></div>
+            <div class="card" onclick="speakWord('Alas!')"><div class="icon">😢</div><div class="word">Alas! (हाइ-हाइ!)</div></div>
+            <div class="card" onclick="speakWord('Hurrah!')"><div class="icon">🎉</div><div class="word">Hurrah! (जय हो!)</div></div>
+            <div class="card" onclick="speakWord('Ouch!')"><div class="icon">😣</div><div class="word">Ouch! (आः!)</div></div>
+            <div class="card" onclick="speakWord('Bravo!')"><div class="icon">👏</div><div class="word">Bravo! (शाबास!)</div></div>
+        </div>
+
+        <!-- Practice Section for Interjections -->
+        <div class="practice-section" style="border-color: var(--accent-green);">
+            <h2 style="color: var(--accent-green);">🎯 Interjection Practice Zone</h2>
+            <div class="score-board" id="scoreBoard9">Score: ⭐ 0</div>
+            <div class="question-box" id="questionBox9">Loading question...</div>
+            <div class="options-grid" id="optionsGrid9"></div>
+            <div class="feedback" id="feedback9"></div>
+            <button class="next-btn" id="nextBtn9" onclick="loadNewQuestion9()" style="background: var(--accent-gold); color: #0f172a;">Next Question ➡️</button>
+        </div>
+    </div>
+
+    <script>
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        /* --- Lesson 7: Preposition Quiz Logic --- */
+        const prepPool = [
+            { q: "The cat is ___ the box. (भित्र)", options: ["In", "On", "Under", "At"], correct: "In" },
+            { q: "The book is ___ the table. (माथि)", options: ["On", "In", "Behind", "Near"], correct: "On" },
+            { q: "The ball is ___ the chair. (मुनि)", options: ["Under", "Over", "In", "At"], correct: "Under" },
+            { q: "He is standing ___ the door. (पछाडि)", options: ["Behind", "On", "In", "Under"], correct: "Behind" }
+        ];
+
+        let score7 = 0;
+        let currentAns7 = "";
+
+        function loadNewQuestion7() {
+            document.getElementById('feedback7').textContent = "";
+            document.getElementById('nextBtn7').style.display = "none";
+            let rand = prepPool[Math.floor(Math.random() * prepPool.length)];
+            document.getElementById('questionBox7').textContent = "Q. " + rand.q;
+            currentAns7 = rand.correct;
+
+            let grid = document.getElementById('optionsGrid7');
+            grid.innerHTML = "";
+            [...rand.options].sort(() => Math.random() - 0.5).forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkAns7(opt, btn);
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkAns7(selected, btn) {
+            let fb = document.getElementById('feedback7');
+            document.querySelectorAll('#optionsGrid7 .opt-btn').forEach(b => b.disabled = true);
+            if (selected === currentAns7) {
+                btn.style.background = '#34d399';
+                btn.style.color = '#0f172a';
+                fb.style.color = '#34d399';
+                fb.textContent = "🎉 Correct!";
+                score7 += 10;
+                document.getElementById('scoreBoard7').textContent = "Score: ⭐ " + score7;
+                speakWord("Correct");
+            } else {
+                btn.style.background = '#f472b6';
+                btn.style.color = '#0f172a';
+                fb.style.color = '#f472b6';
+                fb.textContent = "❌ Answer is: " + currentAns7;
+                speakWord("Try again");
+            }
+            document.getElementById('nextBtn7').style.display = "block";
+        }
+
+        /* --- Lesson 8: Conjunction Quiz Logic --- */
+        const conjPool = [
+            { q: "I like apples ___ bananas. (जोड्नको लागि)", options: ["And", "But", "Because", "Or"], correct: "And" },
+            { q: "He ran fast, ___ he missed the bus. (विपरित कुरा)", options: ["But", "And", "So", "Or"], correct: "But" },
+            { q: "She is happy ___ she won the game. (कारण देखाउन)", options: ["Because", "And", "But", "Or"], correct: "Because" },
+            { q: "Do you want tea ___ coffee? (विकल्प)", options: ["Or", "And", "Because", "But"], correct: "Or" }
+        ];
+
+        let score8 = 0;
+        let currentAns8 = "";
+
+        function loadNewQuestion8() {
+            document.getElementById('feedback8').textContent = "";
+            document.getElementById('nextBtn8').style.display = "none";
+            let rand = conjPool[Math.floor(Math.random() * conjPool.length)];
+            document.getElementById('questionBox8').textContent = "Q. " + rand.q;
+            currentAns8 = rand.correct;
+
+            let grid = document.getElementById('optionsGrid8');
+            grid.innerHTML = "";
+            [...rand.options].sort(() => Math.random() - 0.5).forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkAns8(opt, btn);
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkAns8(selected, btn) {
+            let fb = document.getElementById('feedback8');
+            document.querySelectorAll('#optionsGrid8 .opt-btn').forEach(b => b.disabled = true);
+            if (selected === currentAns8) {
+                btn.style.background = '#34d399';
+                btn.style.color = '#0f172a';
+                fb.style.color = '#34d399';
+                fb.textContent = "🎉 Correct!";
+                score8 += 10;
+                document.getElementById('scoreBoard8').textContent = "Score: ⭐ " + score8;
+                speakWord("Correct");
+            } else {
+                btn.style.background = '#f472b6';
+                btn.style.color = '#0f172a';
+                fb.style.color = '#f472b6';
+                fb.textContent = "❌ Answer is: " + currentAns8;
+                speakWord("Try again");
+            }
+            document.getElementById('nextBtn8').style.display = "block";
+        }
+
+        /* --- Lesson 9: Interjection Quiz Logic --- */
+        const interPool = [
+            { q: "___ ! What a beautiful dress. (आश्चर्य व्यक्त गर्दा)", options: ["Wow!", "Alas!", "Ouch!", "Oh!"], correct: "Wow!" },
+            { q: "___ ! I hurt my finger. (दुखाई वा पीडਾ हुँदा)", options: ["Ouch!", "Hurrah!", "Bravo!", "Wow!"], correct: "Ouch!" },
+            { q: "___ ! We won the match. (खुसी मनाउँदा)", options: ["Hurrah!", "Alas!", "Oh!", "Ouch!"], correct: "Hurrah!" },
+            { q: "___ ! He lost his pet dog. (दुख व्यक्त गर्दा)", options: ["Alas!", "Wow!", "Hurrah!", "Bravo!"], correct: "Alas!" }
+        ];
+
+        let score9 = 0;
+        let currentAns9 = "";
+
+        function loadNewQuestion9() {
+            document.getElementById('feedback9').textContent = "";
+            document.getElementById('nextBtn9').style.display = "none";
+            let rand = interPool[Math.floor(Math.random() * interPool.length)];
+            document.getElementById('questionBox9').textContent = "Q. " + rand.q;
+            currentAns9 = rand.correct;
+
+            let grid = document.getElementById('optionsGrid9');
+            grid.innerHTML = "";
+            [...rand.options].sort(() => Math.random() - 0.5).forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkAns9(opt, btn);
+                grid.appendChild(btn);
+            });
+        }
+
+        function checkAns9(selected, btn) {
+            let fb = document.getElementById('feedback9');
+            document.querySelectorAll('#optionsGrid9 .opt-btn').forEach(b => b.disabled = true);
+            if (selected === currentAns9) {
+                btn.style.background = '#34d399';
+                btn.style.color = '#0f172a';
+                fb.style.color = '#34d399';
+                fb.textContent = "🎉 Correct!";
+                score9 += 10;
+                document.getElementById('scoreBoard9').textContent = "Score: ⭐ " + score9;
+                speakWord("Correct");
+            } else {
+                btn.style.background = '#f472b6';
+                btn.style.color = '#0f172a';
+                fb.style.color = '#f472b6';
+                fb.textContent = "❌ Answer is: " + currentAns9;
+                speakWord("Try again");
+            }
+            document.getElementById('nextBtn9').style.display = "block";
+        }
+
+        // Initialize all quizzes on load
+        window.onload = function() {
+            loadNewQuestion7();
+            loadNewQuestion8();
+            loadNewQuestion9();
+        };
+    </script>
+
+</body>
+</html>
