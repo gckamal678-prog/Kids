@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Simple Sentences - Kids App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            margin: 0;
+        }
+        h1 {
+            color: #ff3399;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            color: #cccccc;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .sentence-card {
+            background: #2d2d2d;
+            border: 2px solid #444;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+        .sentence-card:active {
+            transform: scale(0.98);
+            background: #3d3d3d;
+        }
+        .icon {
+            font-size: 30px;
+            min-width: 40px;
+            text-align: center;
+        }
+        .sentence-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>💬 Simple Sentences 💬</h1>
+    <p class="subtitle">Tap any sentence to hear it spoken!</p>
+
+    <div class="list-container">
+        <div class="sentence-card" onclick="speakWord('This is an apple.')">
+            <div class="icon">🍎</div>
+            <div class="sentence-text">This is an apple.</div>
+        </div>
+        <div class="sentence-card" onclick="speakWord('I am a boy.')">
+            <div class="icon">👦</div>
+            <div class="sentence-text">I am a boy.</div>
+        </div>
+        <div class="sentence-card" onclick="speakWord('The cat is small.')">
+            <div class="icon">🐱</div>
+            <div class="sentence-text">The cat is small.</div>
+        </div>
+        <div class="sentence-card" onclick="speakWord('She is reading a book.')">
+            <div class="icon">📖</div>
+            <div class="sentence-text">She is reading a book.</div>
+        </div>
+        <div class="sentence-card" onclick="speakWord('He can run fast.')">
+            <div class="icon">🏃‍♂️</div>
+            <div class="sentence-text">He can run fast.</div>
+        </div>
+        <div class="sentence-card" onclick="speakWord('It is a big dog.')">
+            <div class="icon">🐶</div>
+            <div class="sentence-text">It is a big dog.</div>
+        </div>
+        <div class="sentence-card" onclick="speakWord('We are happy.')">
+            <div class="icon">😊</div>
+            <div class="sentence-text">We are happy.</div>
+        </div>
+    </div>
+
+    <script>
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Speech synthesis not supported in this browser.");
+            }
+        }
+    </script>
+
+</body>
+</html>
