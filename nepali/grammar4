@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली व्याकरण - काल (Tenses)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffaf0;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 3px solid #fa8c16;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #d46b08;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .section-box {
+            background: #fff7e6;
+            border-left: 5px solid #fa8c16;
+            padding: 12px;
+            margin: 15px 0;
+            text-align: left;
+            border-radius: 5px;
+        }
+
+        .section-title {
+            color: #ad4e00;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .card {
+            background: #e6f7ff;
+            border: 2px dashed #91d5ff;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #0050b3;
+            text-align: center;
+        }
+
+        .quiz-box {
+            margin-top: 20px;
+            background: #f6ffed;
+            border: 2px solid #b7eb8f;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            background: #52c41a;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin: 4px;
+            border-radius: 5px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #389e0d;
+        }
+
+        #result4 {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fa8c16;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🌟 व्याकरण: काल (Tenses) 🌟</h1>
+        
+        <!-- Tense Section -->
+        <div class="section-box">
+            <div class="section-title">काल भनेको के हो?</div>
+            <p>काम हुने समयलाई <strong>काल</strong> भनिन्छ। काल मुख्यतया ३ प्रकारका हुन्छन्:</p>
+            <div class="grid">
+                <div class="card">🕒 वर्तमान काल<br>(अहिले हुने)</div>
+                <div class="card">⏳ भूत काल<br>(भइसकेको)</div>
+                <div class="card">🔮 भविष्य काल<br>(हुनेवाला)</div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <div class="section-title">उदाहरणहरू:</div>
+            <p>• <strong>वर्तमान:</strong> म भात खान्छु। / पढ्दैछु।<br>
+               • <strong>भूत:</strong> म भात खाएँ। / पढेँ।<br>
+               • <strong>भविष्य:</strong> म भात खानेछु। / पढ्नेछु।</p>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-box">
+            <h3>सानी खेल (Quiz):</h3>
+            <p><strong>"उसले किताब पढ्यो।"</strong> यो वाक्य कुन काल हो?</p>
+            <button class="btn" onclick="checkTense('p')">वर्तमान काल</button>
+            <button class="btn" onclick="checkTense('b')">भूत काल</button>
+            <button class="btn" onclick="checkTense('f')">भविष्य काल</button>
+            <p id="result4"></p>
+        </div>
+
+        <div class="nav-links">
+            <a href="grammar3.html">⬅️ अघिल्लो (लिङ्ग/वचन)</a>
+            <a href="grammar_index.html">🏠 मुख्य सूची</a>
+        </div>
+    </div>
+
+    <script>
+        function checkTense(type) {
+            const res = document.getElementById("result4");
+            if (type === 'b') {
+                res.style.color = "green";
+                res.textContent = "🎉 एकदम सहि! 'पढ्यो' ले काम भइसकेको बुझाउँछ (भूत काल)।";
+            } else {
+                res.style.color = "red";
+                res.textContent = "❌ मिलेन, सही उत्तर 'भूत काल' हो।";
+            }
+        }
+    </script>
+
+</body>
+</html>
