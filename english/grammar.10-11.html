@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Structure & Tenses - Kids App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            margin: 0;
+        }
+        h1 {
+            color: #ffcc00;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            color: #00ffcc;
+            font-size: 20px;
+            margin-top: 35px;
+            border-bottom: 2px solid #00ffcc;
+            padding-bottom: 5px;
+            text-align: left;
+        }
+        h3 {
+            color: #3399ff;
+            text-align: left;
+            margin: 20px 0 10px 0;
+            font-size: 16px;
+        }
+        p.subtitle {
+            color: #cccccc;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .content-box {
+            background: #252525;
+            border: 1px solid #444;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: left;
+            line-height: 1.6;
+        }
+        .highlight {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .hero { color: #ff6b6b; font-weight: bold; }
+        .action { color: #4dabf7; font-weight: bold; }
+        .target { color: #51cf66; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>✨ Sentence Structure & Tenses Hub ✨</h1>
+    <p class="subtitle">Tap any rule or sentence to hear it spoken! (सुन्नको लागि टच गर्नुहोस्)</p>
+
+    <div style="max-width: 600px; margin: 0 auto; text-align: left;">
+        
+        <!-- LESSON 10: SENTENCE STRUCTURE -->
+        <h2>Lesson 10: Sentence Structure (वाक्य संरचना)</h2>
+        <p style="color: #ccc; font-size: 14px;">How to build an English sentence using the Golden Formula.</p>
+
+        <div class="content-box">
+            <h3>📖 The Golden Formula (सुवर्ण सुत्र)</h3>
+            <p style="text-align: center; font-size: 16px; margin: 15px 0;">
+                <span class="hero">Subject</span> + <span class="action">Verb</span> + <span class="target">Object</span>
+            </p>
+            
+            <p><b>१. Subject (कर्ता / Hero) =</b> काम गर्ने मान्छे (जस्तै: I, He, She, Ram)</p>
+            <p><b>२. Verb (क्रिया / Action) =</b> काम वा गतिविधि (जस्तै: eat, play, read)</p>
+            <p><b>३. Object (कर्म / Target) =</b> कुन चिजमा काम भयो (जस्तै: apple, football, book)</p>
+
+            <h3 style="margin-top: 20px;">💡 उदाहरणहरू (Examples):</h3>
+            <ul style="margin-top: 5px; line-height: 1.8;">
+                <li onclick="speakWord('I eat an apple.')" style="cursor: pointer;">
+                    <span class="hero">I</span> + <span class="action">eat</span> + <span class="target">an apple</span>. (म स्याउ खान्छु।) 🔊
+                </li>
+                <li onclick="speakWord('He plays football.')" style="cursor: pointer; margin-top: 5px;">
+                    <span class="hero">He</span> + <span class="action">plays</span> + <span class="target">football</span>. (ऊ फुटबल खेल्छ।) 🔊
+                </li>
+                <li onclick="speakWord('She reads a book.')" style="cursor: pointer; margin-top: 5px;">
+                    <span class="hero">She</span> + <span class="action">reads</span> + <span class="target">a book</span>. (उनी किताब पढ्छिन्।) 🔊
+                </li>
+            </ul>
+        </div>
+
+
+        <!-- LESSON 11: TENSES -->
+        <h2>Lesson 11: Tenses (समयको ज्ञान)</h2>
+        <p style="color: #ccc; font-size: 14px;">Tenses show the time of an action.</p>
+
+        <!-- 1. Present Tense -->
+        <div class="content-box">
+            <h3>1. Present Tense (वर्तमान काल)</h3>
+            <p><i>Actions that happen now or every day.</i></p>
+            
+            <p><b>• Simple Present Tense:</b></p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + Verb (s/es) + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I go to school.')" style="cursor: pointer;">I go to school. (म स्कुल जान्छु।) 🔊</li>
+                <li onclick="speakWord('He plays football.')" style="cursor: pointer; margin-top: 5px;">He plays football. (ऊ फुटबल खेल्छ।) 🔊</li>
+            </ul>
+
+            <p style="margin-top: 15px;"><b>• Present Continuous Tense:</b></p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + is/am/are + Verb(ing) + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I am reading a book.')" style="cursor: pointer;">I am reading a book. (म किताब पढ्दै छु।) 🔊</li>
+                <li onclick="speakWord('She is singing a song.')" style="cursor: pointer; margin-top: 5px;">She is singing a song. (उनी गीत गाउँदै छिन्।) 🔊</li>
+            </ul>
+        </div>
+
+        <!-- 2. Past Tense -->
+        <div class="content-box">
+            <h3>2. Past Tense (भूत काल)</h3>
+            <p><i>Actions that already happened in the past.</i></p>
+            
+            <p><b>• Simple Past Tense:</b></p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + Verb (V2) + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I went to school yesterday.')" style="cursor: pointer;">I went to school yesterday. (म हजो स्कुल गएँ।) 🔊</li>
+                <li onclick="speakWord('He played cricket.')" style="cursor: pointer; margin-top: 5px;">He played cricket. (उसले क्रिकेट खेल्यो।) 🔊</li>
+            </ul>
+
+            <p style="margin-top: 15px;"><b>• Past Continuous Tense:</b></p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + was/were + Verb(ing) + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I was eating an apple.')" style="cursor: pointer;">I was eating an apple. (म स्याउ खाँदै थिएँ।) 🔊</li>
+                <li onclick="speakWord('They were playing.')" style="cursor: pointer; margin-top: 5px;">They were playing. (तिनीहरू खेल्दै थिए।) 🔊</li>
+            </ul>
+        </div>
+
+        <!-- 3. Future Tense -->
+        <div class="content-box" style="margin-bottom: 30px;">
+            <h3>3. Future Tense (भविष्य काल)</h3>
+            <p><i>Actions that will happen in the coming time.</i></p>
+            
+            <p><b>• Simple Future Tense:</b></p>
+            <p style="margin-left: 10px;"><span class="highlight">Formula:</span> Subject + will + Verb + Object</p>
+            <ul style="margin-top: 5px;">
+                <li onclick="speakWord('I will go to Pokhara tomorrow.')" style="cursor: pointer;">I will go to Pokhara tomorrow. (म भोलि पोखरा जानेछु।) 🔊</li>
+                <li onclick="speakWord('She will write a letter.')" style="cursor: pointer; margin-top: 5px;">She will write a letter. (उनी पत्र लेख्नेछिन्।) 🔊</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        function speakWord(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                let utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Speech synthesis not supported in this browser.");
+            }
+        }
+    </script>
+
+</body>
+</html>
