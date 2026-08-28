@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली व्याकरण - सर्वनाम र क्रियापद (Pronouns & Verbs)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 3px solid #1890ff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1890ff;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .section-box {
+            background: #e6f7ff;
+            border-left: 5px solid #0050b3;
+            padding: 12px;
+            margin: 15px 0;
+            text-align: left;
+            border-radius: 5px;
+        }
+
+        .section-title {
+            color: #003a8c;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .card {
+            background: #fff7e6;
+            border: 2px dashed #ffa940;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #d46b08;
+        }
+
+        .quiz-box {
+            margin-top: 20px;
+            background: #f6ffed;
+            border: 2px solid #b7eb8f;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            background: #52c41a;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #389e0d;
+        }
+
+        #result2 {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1890ff;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🌟 व्याकरण: सर्वनाम र क्रियापद 🌟</h1>
+        
+        <!-- Pronoun Section -->
+        <div class="section-box">
+            <div class="section-title">१. सर्वनाम (Pronoun):</div>
+            <p>नामको सट्टा प्रयोग हुने शब्दलाई सर्वनाम भनिन्छ। (जस्तै: म, हामी, तिमी, उनी, यो, त्यो)</p>
+            <div class="grid">
+                <div class="card">👤 म, हामी (I, We)</div>
+                <div class="card">👥 तिमी, उनी (You, He/She)</div>
+            </div>
+        </div>
+
+        <!-- Verb Section -->
+        <div class="section-box">
+            <div class="section-title">२. क्रियापद (Verb):</div>
+            <p>कुनै पनि काम गर्ने वा भएको बुझाउने शब्दलाई क्रियापद भनिन्छ। (जस्तै: खेल्नु, खानु, पढ्नु)</p>
+            <div class="grid">
+                <div class="card">⚽ खेल्दैछ (Playing)</div>
+                <div class="card">🍎 खाँदैछ (Eating)</div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-box">
+            <h3>सानी खेल (Quiz):</h3>
+            <p>वाक्यमा क्रियापद ( काम गर्ने शब्द) पहिचान गर्नुहोस्:<br><strong>"राम भात खान्छ।"</strong></p>
+            <button class="btn" onclick="checkVerb(false)">राम</button>
+            <button class="btn" onclick="checkVerb(false)">भात</button>
+            <button class="btn" onclick="checkVerb(true)">खान्छ</button>
+            <p id="result2"></p>
+        </div>
+
+        <div class="nav-links">
+            <a href="grammar1.html">⬅️ अघिल्लो (नाम)</a>
+            <a href="grammar_index.html">🏠 मुख्य सूची</a>
+        </div>
+    </div>
+
+    <script>
+        function checkVerb(isCorrect) {
+            const res = document.getElementById("result2");
+            if (isCorrect) {
+                res.style.color = "green";
+                res.textContent = "🎉 एकदम सहि! 'खान्छ' क्रियापद हो।";
+            } else {
+                res.style.color = "red";
+                res.textContent = "❌ मिलेन, 'खान्छ' ले काम बुझाउँछ त्यसैले यो क्रियापद हो।";
+            }
+        }
+    </script>
+
+</body>
+</html>
