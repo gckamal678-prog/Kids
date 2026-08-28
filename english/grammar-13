@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - English Learning Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background: #252525;
+            border: 2px solid #444;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+        }
+
+        .sparkle {
+            font-size: 40px;
+            margin-bottom: 10px;
+            animation: bounce 1.5s infinite;
+        }
+
+        h1 {
+            color: #ffcc00;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #cccccc;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* Coming Soon Animation */
+        .coming-soon-box {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #ff6b6b, #ffcc00, #00ffcc);
+            background-size: 200% 200%;
+            animation: gradientMove 3s ease infinite;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+        }
+
+        .coming-soon-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            animation: pulse 1s infinite alternate;
+        }
+
+        /* Keyframes for animations */
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .footer-note {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #777777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="sparkle">✨🚀✨</div>
+        <h1>New Lessons Are On The Way!</h1>
+        <p>हामी तपाईंको लागि अझै धेरै उत्कृष्ट र रमाइलो पाठहरू (Lessons) तयार गर्दैछौं। छिट्टै यहाँ नयाँ कन्टेन्ट थपिनेछ!</p>
+        
+        <div class="coming-soon-box">
+            <div class="coming-soon-text">Coming Soon ❣️❣️❣️</div>
+        </div>
+
+        <div class="footer-note">Stay tuned for amazing updates!</div>
+    </div>
+
+</body>
+</html>
