@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली व्याकरण - लिङ्ग र वचन (Gender & Number)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0fdf4;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 3px solid #52c41a;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #389e0d;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .section-box {
+            background: #f6ffed;
+            border-left: 5px solid #52c41a;
+            padding: 12px;
+            margin: 15px 0;
+            text-align: left;
+            border-radius: 5px;
+        }
+
+        .section-title {
+            color: #237804;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .card {
+            background: #e6f7ff;
+            border: 2px dashed #91d5ff;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #0050b3;
+        }
+
+        .quiz-box {
+            margin-top: 20px;
+            background: #fffbe6;
+            border: 2px solid #ffe58f;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            background: #fa8c16;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #d46b08;
+        }
+
+        #result3 {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #52c41a;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🌟 व्याकरण: लिङ्ग र वचन 🌟</h1>
+        
+        <!-- Gender Section -->
+        <div class="section-box">
+            <div class="section-title">१. लिङ्ग (Gender):</div>
+            <p>भाले वा पुरुष र पोथी वा स्त्री छुट्याउने शब्दलाई लिङ्ग भनिन्छ।</p>
+            <div class="grid">
+                <div class="card">👨 पुल्लिङ्ग: बुबा, राजा, भाइ</div>
+                <div class="card">👩 स्त्रीलिङ्ग: आमा, रानी, बहिनी</div>
+            </div>
+        </div>
+
+        <!-- Number Section -->
+        <div class="section-box">
+            <div class="section-title">२. वचन (Number):</div>
+            <p>एउटा वा धेरै वस्तु/व्यक्ति बुझाउने रुपलाई वचन भनिन्छ।</p>
+            <div class="grid">
+                <div class="card">📌 एकवचन: किताब, चरा, कलम</div>
+                <div class="card">📚 बहुवचन: किताबहरू, चराहरू</div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-box">
+            <h3>सानी खेल (Quiz):</h3>
+            <p><strong>"किताब"</strong> शब्दको बहुवचन रूप कुन हो?</p>
+            <button class="btn" onclick="checkNumber(false)">किताबजी</button>
+            <button class="btn" onclick="checkNumber(true)">किताबहरू</button>
+            <button class="btn" onclick="checkNumber(false)">किताबपन</button>
+            <p id="result3"></p>
+        </div>
+
+        <div class="nav-links">
+            <a href="grammar2.html">⬅️ अघिल्लो (सर्वनाम/क्रियापद)</a>
+            <a href="grammar_index.html">🏠 मुख्य सूची</a>
+        </div>
+    </div>
+
+    <script>
+        function checkNumber(isCorrect) {
+            const res = document.getElementById("result3");
+            if (isCorrect) {
+                res.style.color = "green";
+                res.textContent = "🎉 एकदम सहि! 'किताबहरू' बहुवचन हो।";
+            } else {
+                res.style.color = "red";
+                res.textContent = "❌ मिलेन, सही उत्तर 'किताबहरू' हो।";
+            }
+        }
+    </script>
+
+</body>
+</html>
