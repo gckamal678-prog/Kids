@@ -492,7 +492,7 @@
     }
   }
 
-  // अपडेट गरिएको बुक डेटा (Grammar फाइलहरू सहित)
+  // बुक डेटा (Syntax मिल्ने गरी सच्याइएको)
   const bookData = {
     english: {
       title: "📁 English Books",
@@ -510,13 +510,13 @@
     grammar: {
       title: "📁 English Grammar",
       pages: [
-  { "name": "Lesson 1-2", "url": "english/grammar1-2.html", "icon: "🏷️" },
-  { "name": "Lesson 3-6", "url": "english/grammar3-6.html", "icon: "🔄" },
-  { "name": "Lesson 7-9", "url": "english/grammar7-9.html", "icon: "✨" },
-  { "name": "Lesson 10-11", "url": "english/grammar10-11.html", "icon: "📝" }
-  { "name": "Lesson 12", "url": "english/grammar12.html", "icon: "📝" }
-  { "name": "Lesson 13", "url": "english/grammar13.html", "icon: "📝" }
-   ]
+        { name: "Lesson 1-2", url: "english/grammar1-2.html", icon: "🏷️" },
+        { name: "Lesson 3-6", url: "english/grammar3-6.html", icon: "🔄" },
+        { name: "Lesson 7-9", url: "english/grammar7-9.html", icon: "✨" },
+        { name: "Lesson 10-11", url: "english/grammar10-11.html", icon: "📝" },
+        { name: "Lesson 12", url: "english/grammar12.html", icon: "📝" },
+        { name: "Lesson 13", url: "english/grammar13.html", icon: "📝" }
+      ]
     },
     knowledge: {
       title: "📁 Knowledge & Activities",
@@ -538,14 +538,12 @@
     byakaran: {
       title: "📁 नेपाली ब्याकरण",
       pages: [
-
-  { "name": "Lesson1", "url": "nepali/grammar1.html", "icon": "🏷️" },
-  { "name": "Lesson2", "url": "nepali/grammar2.html", "icon": "🔄" },
-  { "name": "Lesson3", "url": "nepali/grammar3.html", "icon": "✨" },
-  { "name": "Lesson4", "url": "nepali/grammar4.html", "icon": "📁" },
-  { "name": "Lesson5", "url": "nepali/grammar5.html", "icon": "📁" }
-]
-
+        { name: "Lesson1", url: "nepali/grammar1.html", icon: "🏷️" },
+        { name: "Lesson2", url: "nepali/grammar2.html", icon: "🔄" },
+        { name: "Lesson3", url: "nepali/grammar3.html", icon: "✨" },
+        { name: "Lesson4", url: "nepali/grammar4.html", icon: "📁" },
+        { name: "Lesson5", url: "nepali/grammar5.html", icon: "📁" }
+      ]
     },
     maths: {
       title: "📁 गणित & Numbers",
@@ -612,7 +610,7 @@
   function closeDashboard() { document.getElementById('parent-dashboard').style.display = 'none'; }
 
   function saveParentSettings() {
-      localStorage.setItem('app_daily_target', document.getElementById('target-select5').value || document.getElementById('target-select').value);
+      localStorage.setItem('app_daily_target', document.getElementById('target-select').value);
       alert("सेटिङ सेभ भयो!");
       updateTargetDisplay();
   }
