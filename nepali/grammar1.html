@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>नेपाली व्याकरण - नाम (Nouns)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 3px solid #ffcc00;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ff6b6b;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .definition {
+            background: #e6f7ff;
+            border-left: 5px solid #1890ff;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 16px;
+            text-align: left;
+            border-radius: 5px;
+        }
+
+        .section-title {
+            color: #2b580c;
+            font-size: 18px;
+            margin-top: 20px;
+            text-decoration: underline;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .card {
+            background: #fff0f5;
+            border: 2px dashed #ff69b4;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #c71585;
+        }
+
+        .quiz-box {
+            margin-top: 25px;
+            background: #fffbe6;
+            border: 2px solid #ffe58f;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            background: #52c41a;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #389e0d;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #1890ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🌟 नेपाली व्याकरण: नाम (Noun) 🌟</h1>
+        
+        <div class="definition">
+            <strong>परिभाषा:</strong> संसारमा भएका कुनै पनि व्यक्ति, ठाउँ, वस्तु वा पशुपन्छीको नाम बुझाउने शब्दलाई <strong>नाम (Noun)</strong> भनिन्छ।
+        </div>
+
+        <div class="section-title">केही मुख्य उदाहरणहरू:</div>
+        
+        <div class="grid">
+            <div class="card">👨‍👦 व्यक्ति: राम, सीता, डाक्टर</div>
+            <div class="card">🏫 ठाउँ: काठमाडौं, विद्यालय, घर</div>
+            <div class="card">📚 वस्तु: किताब, कलम, कपी</div>
+            <div class="card">🐄 पशुपन्छी: गाई, कुकुर, चरा</div>
+        </div>
+
+        <div class="quiz-box">
+            <h3>सानी खेल (Quiz):</h3>
+            <p>तलको मध्ये नाम (Noun) शब्द कुन हो?</p>
+            <p><strong>"काठमाडौं"</strong></p>
+            <button class="btn" onclick="checkAnswer(true)">सही (नाम हो)</button>
+            <button class="btn" onclick="checkAnswer(false)">गलत (नाम होइन)</button>
+            <p id="result"></p>
+        </div>
+
+        <a href="grammar_index.html" class="back-link">⬅️ मुख्य सूचीमा फर्कनुहोस्</a>
+    </div>
+
+    <script>
+        function checkAnswer(isCorrect) {
+            const resultElement = document.getElementById("result");
+            if (isCorrect) {
+                resultElement.style.color = "green";
+                resultElement.textContent = "🎉 शाबाश! तपाईंले सही उत्तर दिनुभयो (यो ठाउँको नाम हो)।";
+            } else {
+                resultElement.style.color = "red";
+                resultElement.textContent = "❌ मिलेन, फेरि प्रयास गर्नुहोस्!";
+            }
+        }
+    </script>
+
+</body>
+</html>
