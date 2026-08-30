@@ -6,18 +6,15 @@
     <title>बाल पाठशाला - नेपाल | 3D भर्चुअल लाइब्रेरी</title>
     <meta name="theme-color" content="#FF7043">
     
-    <!-- SEO & Meta Tags -->
     <meta name="description" content="बाल पाठशाला: बालबालिकाका लागि 3D भर्चुअल किताबमार्फत कखरा, नेपाली वर्णमाला, अङ्ग्रेजी अक्षर, गणित पहाडा र शब्द ज्ञान सिक्ने सजिलो माध्यम।">
     <meta name="keywords" content="kids learning nepal, nepali barnamala, 3d book learning, bal pathshala, kamal gc">
     <meta name="author" content="KAMAL G.C.">
     <meta name="robots" content="index, follow">
 
-    <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json?v=3.0">
     <link rel="apple-touch-icon" href="/192.png">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -340,13 +337,11 @@
 
 <div class="main-container">
 
-    <!-- Top Action Bar -->
     <div class="top-action-bar">
         <button class="action-btn" onclick="toggleDarkMode()">🌙 डार्क मोड</button>
         <button class="action-btn" onclick="openParentalLock(showParentDashboard)">🔒 अभिभावक मोड</button>
     </div>
 
-    <!-- 📌 दैनिक लक्ष्य विजेट -->
     <div class="target-widget">
         <div class="target-title" id="target-title-text" onclick="playAIVoice('आजको दैनिक लक्ष्य')">📌 आजको दैनिक लक्ष्य: ० / १० क्विज मिलाउने</div>
         <div class="progress-bar-bg">
@@ -354,7 +349,6 @@
         </div>
     </div>
 
-    <!-- १. हाम्रो प्यारो नेपाल -->
     <div class="national-box">
         <h1 onclick="playAIVoice('हाम्रो प्यारो नेपाल')">🇳🇵 हाम्रो प्यारो नेपाल 🇳🇵</h1>
         <div class="nepal-3d-card" onclick="toggleAnthem()">
@@ -367,47 +361,40 @@
 
     <div class="main-title" onclick="playAIVoice('बालबालिका सिकाइ केन्द्र')">✨ बालबालिका सिकाइ केन्द्र ✨</div>
 
-    <!-- 📚 3D Bookshelf (6 Interactive Books - 3x2 Grid structure) -->
     <div class="bookshelf-shelf">
         <div class="bookshelf-title" onclick="playAIVoice('डिजिटल किताबहरू')">📖 डिजिटल किताबहरू (छोडेर खोल्नुहोस्)</div>
         
         <div class="books-grid">
-            <!-- Book 1: English -->
             <div class="book-3d book-english" onclick="openBook('english')">
                 <span class="book-icon">🇬🇧</span>
                 <div class="book-name">English</div>
                 <div class="book-tag">Alphabet & Words</div>
             </div>
 
-            <!-- Book 2: Grammar -->
             <div class="book-3d book-grammar" onclick="openBook('grammar')">
                 <span class="book-icon">✍️</span>
                 <div class="book-name">Grammar</div>
                 <div class="book-tag">English Grammar</div>
             </div>
 
-            <!-- Book 3: Knowledge -->
             <div class="book-3d book-vocab" onclick="openBook('knowledge')">
                 <span class="book-icon">🌍</span>
                 <div class="book-name">Knowledge</div>
                 <div class="book-tag">Drawing & Quiz</div>
             </div>
 
-            <!-- Book 4: Nepali -->
             <div class="book-3d book-nepali" onclick="openBook('nepali')">
                 <span class="book-icon">🇳🇵</span>
                 <div class="book-name">Nepali</div>
                 <div class="book-tag">Vowels & Consonants</div>
             </div>
 
-            <!-- Book 5: Byakaran -->
             <div class="book-3d book-byakaran" onclick="openBook('byakaran')">
                 <span class="book-icon">📖</span>
                 <div class="book-name">ब्याकरण</div>
                 <div class="book-tag">नेपाली ब्याकरण</div>
             </div>
 
-            <!-- Book 6: Maths -->
             <div class="book-3d book-math" onclick="openBook('maths')">
                 <span class="book-icon">🔢</span>
                 <div class="book-name">गणित</div>
@@ -416,7 +403,6 @@
         </div>
     </div>
 
-    <!-- 📖 Book Open Modal -->
     <div id="book-open-modal">
         <div class="book-modal-content">
             <div class="modal-book-title" id="modal-title">किताबको नाम</div>
@@ -425,7 +411,6 @@
         </div>
     </div>
 
-    <!-- 🤝 डिजिटल पोर्टल प्रयोग गर्ने विद्यालयहरू -->
     <div style="background: rgba(255, 255, 255, 0.95); border: 2px dashed #FF9800; padding: 15px; border-radius: 18px; margin-bottom: 25px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); text-align: center;">
         <h3 style="color: #E65100; font-size: 15px; font-weight: 800; margin-bottom: 8px;">🤝 डिजिटल पोर्टल प्रयोग गर्ने विद्यालयहरू</h3>
         <p style="font-size: 13px; color: #2C3E50; font-weight: 700; margin: 0;">
@@ -433,7 +418,6 @@
         </p>
     </div>
 
-    <!-- Footer Section -->
     <footer class="app-footer">
         <div class="footer-title">🇳🇵 बाल पाठशाला - बालबालिकाको उज्ज्वल भविष्यका लागि 🇳🇵</div>
         <div class="footer-links">
@@ -448,7 +432,6 @@
 
 </div>
 
-<!-- Parent Dashboard Modal -->
 <div id="parent-dashboard" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; color:#FFF; padding:20px; text-align:center; overflow-y:auto;">
     <div class="parent-modal-box" style="max-width: 450px; margin: 30px auto; background: #2C3E50; padding: 25px; border-radius: 20px; border: 4px solid #FF7043; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align:left;">
         <h2 style="color: #FF7043; margin-bottom: 15px; text-align:center;">🔐 अभिभावक नियन्त्रण कक्ष</h2>
@@ -492,7 +475,7 @@
     }
   }
 
-  // बुक डेटा (Syntax मिल्ने गरी सच्याइएको)
+  // बुक डेटा (सिन्ट्याक्स मिलाइएको सफा रूप)
   const bookData = {
     english: {
       title: "📁 English Books",
@@ -537,8 +520,6 @@
     },
     byakaran: {
       title: "📁 नेपाली ब्याकरण",
-      pages:     byakaran: {
-      title: "📁 नेपाली ब्याकरण",
       pages: [
         { name: "पाठ १: शब्द र वर्ण", url: "nepali/grammar1.html", icon: "📘" },
         { name: "पाठ २: नाम र सर्वनाम", url: "nepali/grammar2.html", icon: "📗" },
@@ -546,8 +527,6 @@
         { name: "पाठ ४: क्रियापद", url: "nepali/grammar4.html", icon: "📕" },
         { name: "पाठ ५: वाक्य गठन", url: "nepali/grammar5.html", icon: "📒" }
       ]
-    },
-
     },
     maths: {
       title: "📁 गणित & Numbers",
