@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
@@ -12,6 +11,7 @@
   <link rel="manifest" href="./manifest.json?v=4">
   <link rel="apple-touch-icon" href="./192.png">
   <link rel="icon" href="./192.png">
+
   <style>
     :root {
       --bg:#f5f9ff;
@@ -24,8 +24,10 @@
       --shadow:0 8px 28px rgba(33,58,108,.09);
       --radius:22px;
     }
+
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
+
     body {
       margin:0;
       background:var(--bg);
@@ -35,198 +37,566 @@
       line-height:1.6;
       min-height:100vh;
     }
+
     button,select,a { font:inherit; }
     button,a { -webkit-tap-highlight-color:transparent; }
     button { cursor:pointer; }
     a { color:inherit; }
+
     button:focus-visible,a:focus-visible,select:focus-visible {
       outline:3px solid #f5a623;
       outline-offset:3px;
     }
-    .app { max-width:1120px; width:100%; margin:auto; padding:18px; }
-    .topbar {
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; margin-bottom:20px;
+
+    .app {
+      max-width:1120px;
+      width:100%;
+      margin:auto;
+      padding:18px;
     }
-    .brand { display:flex; align-items:center; gap:10px; min-width:0; }
+
+    .topbar {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:20px;
+    }
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+
     .brand-logo {
-      width:48px; height:48px; flex:none; display:grid;
-      place-items:center; border-radius:16px; background:#e5edff;
+      width:48px;
+      height:48px;
+      flex:none;
+      display:grid;
+      place-items:center;
+      border-radius:16px;
+      background:#e5edff;
       font-size:27px;
     }
-    .brand h1 { font-size:clamp(18px,3vw,24px); margin:0; line-height:1.3; }
-    .brand p { color:var(--muted); margin:2px 0 0; font-size:13px; }
-    .top-actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+
+    .brand h1 {
+      font-size:clamp(18px,3vw,24px);
+      margin:0;
+      line-height:1.3;
+    }
+
+    .brand p {
+      color:var(--muted);
+      margin:2px 0 0;
+      font-size:13px;
+    }
+
+    .top-actions {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
     .btn {
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:7px; border:1px solid var(--border); border-radius:14px;
-      padding:10px 14px; background:var(--surface); color:var(--text);
-      font-weight:700; text-decoration:none; min-height:44px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 14px;
+      background:var(--surface);
+      color:var(--text);
+      font-weight:700;
+      text-decoration:none;
+      min-height:44px;
     }
-    .btn-primary { background:var(--primary); color:white; border-color:var(--primary); }
-    .btn-primary:hover { background:var(--primary-dark); }
+
+    .btn-primary {
+      background:var(--primary);
+      color:white;
+      border-color:var(--primary);
+    }
+
+    .btn-primary:hover {
+      background:var(--primary-dark);
+    }
+
     .hero {
-      position:relative; overflow:hidden; border-radius:28px; padding:28px;
+      position:relative;
+      overflow:hidden;
+      border-radius:28px;
+      padding:28px;
       background:linear-gradient(125deg,#e7f0ff,#e7fbf5 65%,#fff4d9);
-      border:1px solid #dfeafa; margin-bottom:20px;
+      border:1px solid #dfeafa;
+      margin-bottom:20px;
     }
-    .hero-content { position:relative; z-index:1; max-width:700px; }
+
+    .hero-content {
+      position:relative;
+      z-index:1;
+      max-width:700px;
+    }
+
     .eyebrow {
-      display:inline-flex; background:#fff; color:#3453a5;
-      border:1px solid #dbe5ff; border-radius:999px;
-      padding:5px 12px; font-size:13px; font-weight:800;
+      display:inline-flex;
+      background:#fff;
+      color:#3453a5;
+      border:1px solid #dbe5ff;
+      border-radius:999px;
+      padding:5px 12px;
+      font-size:13px;
+      font-weight:800;
     }
-    .hero h2 { font-size:clamp(27px,5vw,43px); line-height:1.25; margin:13px 0 10px; }
+
+    .hero h2 {
+      font-size:clamp(27px,5vw,43px);
+      line-height:1.25;
+      margin:13px 0 10px;
+    }
+
     .hero h2 span { color:#345bd0; }
-    .hero p { max-width:570px; color:#465875; margin:0 0 18px; }
-    .hero-actions { display:flex; flex-wrap:wrap; gap:10px; }
+
+    .hero p {
+      max-width:570px;
+      color:#465875;
+      margin:0 0 18px;
+    }
+
+    .hero-actions {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
     .hero-art {
-      position:absolute; right:30px; bottom:12px; font-size:clamp(65px,12vw,120px);
-      opacity:.85; pointer-events:none;
+      position:absolute;
+      right:30px;
+      bottom:12px;
+      font-size:clamp(65px,12vw,120px);
+      opacity:.85;
+      pointer-events:none;
     }
+
     .section { margin:26px 0; }
+
     .section-head {
-      display:flex; align-items:end; justify-content:space-between;
-      gap:12px; margin-bottom:14px;
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
     }
-    .section-head h2 { font-size:clamp(20px,3vw,27px); margin:0; }
-    .section-head p { color:var(--muted); margin:3px 0 0; font-size:14px; }
+
+    .section-head h2 {
+      font-size:clamp(20px,3vw,27px);
+      margin:0;
+    }
+
+    .section-head p {
+      color:var(--muted);
+      margin:3px 0 0;
+      font-size:14px;
+    }
+
     .target {
-      display:grid; grid-template-columns:auto 1fr; align-items:center;
-      gap:14px; padding:18px; border:1px solid var(--border);
-      border-radius:var(--radius); background:var(--surface);
+      display:grid;
+      grid-template-columns:auto 1fr;
+      align-items:center;
+      gap:14px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--surface);
       box-shadow:var(--shadow);
     }
+
     .target-icon {
-      display:grid; place-items:center; width:54px; height:54px;
-      border-radius:18px; background:#fff1cb; font-size:27px;
+      display:grid;
+      place-items:center;
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      background:#fff1cb;
+      font-size:27px;
     }
-    .target-top { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+
+    .target-top {
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
     .target-top strong { font-size:16px; }
-    .target-top span { font-size:14px; color:var(--muted); }
-    .progress { height:11px; background:#e9eef8; border-radius:999px; overflow:hidden; margin-top:9px; }
+
+    .target-top span {
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .progress {
+      height:11px;
+      background:#e9eef8;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:9px;
+    }
+
     .progress-fill {
-      height:100%; width:0; border-radius:999px;
+      height:100%;
+      width:0;
+      border-radius:999px;
       background:linear-gradient(90deg,#4777ed,#28b98b);
       transition:width .3s ease;
     }
+
     .book-grid {
-      display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
     }
+
     .book {
-      --accent:#4169e1; --tint:#eaf0ff;
-      display:flex; flex-direction:column; align-items:flex-start;
-      text-align:left; gap:8px; width:100%; min-height:180px;
-      padding:18px; background:var(--surface); color:var(--text);
-      border:1px solid var(--border); border-radius:22px;
+      --accent:#4169e1;
+      --tint:#eaf0ff;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      text-align:left;
+      gap:8px;
+      width:100%;
+      min-height:180px;
+      padding:18px;
+      background:var(--surface);
+      color:var(--text);
+      border:1px solid var(--border);
+      border-radius:22px;
       box-shadow:0 5px 18px rgba(33,58,108,.045);
       transition:transform .18s ease,box-shadow .18s ease;
     }
-    .book:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
-    .book-icon {
-      display:grid; place-items:center; width:54px; height:54px;
-      border-radius:17px; background:var(--tint); font-size:29px;
+
+    .book:hover {
+      transform:translateY(-3px);
+      box-shadow:var(--shadow);
     }
+
+    .book-icon {
+      display:grid;
+      place-items:center;
+      width:54px;
+      height:54px;
+      border-radius:17px;
+      background:var(--tint);
+      font-size:29px;
+    }
+
     .book strong { font-size:18px; }
-    .book small { font-size:13px; color:var(--muted); }
-    .book .open-label { margin-top:auto; color:var(--accent); font-weight:800; font-size:13px; }
+
+    .book small {
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .book .open-label {
+      margin-top:auto;
+      color:var(--accent);
+      font-weight:800;
+      font-size:13px;
+    }
+
     .book.nepali { --accent:#168453; --tint:#e0f7e9; }
     .book.english { --accent:#315ac5; --tint:#e5edff; }
     .book.math { --accent:#9148c6; --tint:#f4e8ff; }
     .book.knowledge { --accent:#c26a12; --tint:#fff0d8; }
     .book.grammar { --accent:#008c99; --tint:#ddf8fa; }
     .book.byakaran { --accent:#d34b44; --tint:#ffe9e6; }
-    .quick-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-    .quick {
-      display:flex; align-items:center; gap:13px; padding:15px;
-      background:var(--surface); border:1px solid var(--border);
-      border-radius:18px; text-decoration:none; min-height:78px;
+
+    .quick-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
     }
+
+    .quick {
+      display:flex;
+      align-items:center;
+      gap:13px;
+      padding:15px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:18px;
+      text-decoration:none;
+      min-height:78px;
+    }
+
     .quick-icon { font-size:27px; }
     .quick strong { display:block; }
-    .quick small { display:block; color:var(--muted); font-size:13px; }
+
+    .quick small {
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+    }
+
     .nepal-card {
-      display:grid; grid-template-columns:1fr minmax(100px,170px);
-      gap:15px; align-items:center; padding:20px;
-      border:1px solid #f4d8c9; border-radius:var(--radius);
+      display:grid;
+      grid-template-columns:1fr minmax(100px,170px);
+      gap:15px;
+      align-items:center;
+      padding:20px;
+      border:1px solid #f4d8c9;
+      border-radius:var(--radius);
       background:linear-gradient(120deg,#fff1eb,#fffaf0);
     }
-    .nepal-card h3 { margin:0 0 6px; font-size:21px; }
-    .nepal-card p { margin:0 0 13px; color:#66544e; font-size:14px; }
-    .nepal-card img { display:block; width:100%; max-height:130px; object-fit:contain; }
-    .footer {
-      text-align:center; padding:24px 12px 12px; margin-top:30px;
-      color:var(--muted); font-size:13px;
+
+    .nepal-card h3 {
+      margin:0 0 6px;
+      font-size:21px;
     }
-    .footer a { color:var(--primary); text-decoration:none; }
-    .footer-links { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin:8px 0; }
+
+    .nepal-card p {
+      margin:0 0 13px;
+      color:#66544e;
+      font-size:14px;
+    }
+
+    .nepal-card img {
+      display:block;
+      width:100%;
+      max-height:130px;
+      object-fit:contain;
+    }
+
+    .footer {
+      text-align:center;
+      padding:24px 12px 12px;
+      margin-top:30px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .footer a {
+      color:var(--primary);
+      text-decoration:none;
+    }
+
+    .footer-links {
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin:8px 0;
+    }
+
     .modal {
-      position:fixed; inset:0; z-index:100; display:none;
-      align-items:center; justify-content:center; padding:16px;
+      position:fixed;
+      inset:0;
+      z-index:100;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
       background:rgba(15,25,45,.62);
     }
+
     .modal.open { display:flex; }
+
     .modal-panel {
-      background:var(--surface); color:var(--text); width:100%;
-      max-width:540px; max-height:85vh; overflow:auto;
-      border-radius:24px; padding:22px; box-shadow:0 24px 70px #0003;
+      background:var(--surface);
+      color:var(--text);
+      width:100%;
+      max-width:540px;
+      max-height:85vh;
+      overflow:auto;
+      border-radius:24px;
+      padding:22px;
+      box-shadow:0 24px 70px #0003;
     }
-    .modal-head { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-    .modal-head h2 { margin:0; font-size:22px; }
+
+    .modal-head {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+
+    .modal-head h2 {
+      margin:0;
+      font-size:22px;
+    }
+
     .modal-close {
-      border:0; border-radius:12px; background:var(--bg);
-      color:var(--text); width:44px; height:44px; font-size:22px;
+      border:0;
+      border-radius:12px;
+      background:var(--bg);
+      color:var(--text);
+      width:44px;
+      height:44px;
+      font-size:22px;
     }
-    .page-list { display:grid; gap:9px; margin-top:16px; }
+
+    .page-list {
+      display:grid;
+      gap:9px;
+      margin-top:16px;
+    }
+
     .page-link {
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; padding:13px 14px; border-radius:14px;
-      background:var(--bg); border:1px solid var(--border);
-      text-decoration:none; font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:13px 14px;
+      border-radius:14px;
+      background:var(--bg);
+      border:1px solid var(--border);
+      text-decoration:none;
+      font-weight:700;
     }
-    .page-link span:first-child { display:flex; gap:10px; align-items:center; }
-    .parent-note { color:var(--muted); font-size:14px; }
-    .form-row { display:grid; gap:7px; margin:15px 0; }
-    select { padding:11px; border:1px solid var(--border); border-radius:12px; background:var(--surface); color:var(--text); }
-    .notice { min-height:24px; color:var(--muted); font-size:13px; margin-top:10px; }
+
+    .page-link span:first-child {
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .parent-note {
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .form-row {
+      display:grid;
+      gap:7px;
+      margin:15px 0;
+    }
+
+    select {
+      padding:11px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:var(--surface);
+      color:var(--text);
+    }
+
+    .notice {
+      min-height:24px;
+      color:var(--muted);
+      font-size:13px;
+      margin-top:10px;
+    }
+
     body.dark-mode {
-      --bg:#111827; --surface:#1c2739; --text:#f2f5fc;
-      --muted:#bac5d8; --border:#35435b; --shadow:0 8px 28px #0002;
+      --bg:#111827;
+      --surface:#1c2739;
+      --text:#f2f5fc;
+      --muted:#bac5d8;
+      --border:#35435b;
+      --shadow:0 8px 28px #0002;
     }
-    body.dark-mode .hero { background:linear-gradient(125deg,#202f4e,#183d3b); border-color:var(--border); }
+
+    body.dark-mode .hero {
+      background:linear-gradient(125deg,#202f4e,#183d3b);
+      border-color:var(--border);
+    }
+
     body.dark-mode .hero h2 span { color:#a8c0ff; }
-    body.dark-mode .hero p, body.dark-mode .nepal-card p { color:#d0d9e9; }
-    body.dark-mode .nepal-card { background:#2d2930; border-color:var(--border); }
-    body.dark-mode .eyebrow { background:#263752; color:#d8e3ff; border-color:var(--border); }
+
+    body.dark-mode .hero p,
+    body.dark-mode .nepal-card p { color:#d0d9e9; }
+
+    body.dark-mode .nepal-card {
+      background:#2d2930;
+      border-color:var(--border);
+    }
+
+    body.dark-mode .eyebrow {
+      background:#263752;
+      color:#d8e3ff;
+      border-color:var(--border);
+    }
+
     body.dark-mode .target-icon { background:#59472a; }
     body.dark-mode .progress { background:#344156; }
+
     @media(max-width:760px) {
-      .book-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-      .hero-art { right:15px; bottom:10px; opacity:.22; }
+      .book-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+
+      .hero-art {
+        right:15px;
+        bottom:10px;
+        opacity:.22;
+      }
+
       .hero-content { max-width:100%; }
     }
+
     @media(max-width:480px) {
       .app { padding:12px; }
       .brand-logo { width:42px; height:42px; }
       .topbar { align-items:flex-start; }
       .top-actions { gap:6px; }
-      .top-actions .btn { padding:8px 10px; font-size:13px; }
-      .hero { padding:21px 18px; border-radius:23px; }
+
+      .top-actions .btn {
+        padding:8px 10px;
+        font-size:13px;
+      }
+
+      .hero {
+        padding:21px 18px;
+        border-radius:23px;
+      }
+
       .hero h2 { max-width:320px; }
       .book-grid { gap:10px; }
-      .book { min-height:160px; padding:14px 12px; border-radius:18px; }
+
+      .book {
+        min-height:160px;
+        padding:14px 12px;
+        border-radius:18px;
+      }
+
       .book strong { font-size:16px; }
-      .book-icon { width:47px; height:47px; font-size:25px; }
+
+      .book-icon {
+        width:47px;
+        height:47px;
+        font-size:25px;
+      }
+
       .quick-grid { grid-template-columns:1fr; }
-      .nepal-card { grid-template-columns:1fr 90px; padding:15px; }
-      .target { padding:13px; gap:10px; }
-      .target-icon { width:44px; height:44px; }
+
+      .nepal-card {
+        grid-template-columns:1fr 90px;
+        padding:15px;
+      }
+
+      .target {
+        padding:13px;
+        gap:10px;
+      }
+
+      .target-icon {
+        width:44px;
+        height:44px;
+      }
     }
+
     @media(prefers-reduced-motion:reduce) {
-      *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; }
+      *,*::before,*::after {
+        scroll-behavior:auto!important;
+        transition:none!important;
+      }
     }
   </style>
 </head>
+
 <body>
   <main class="app">
     <header class="topbar">
@@ -237,6 +607,7 @@
           <p>सिकौँ, खेलौँ, अघि बढौँ!</p>
         </div>
       </div>
+
       <div class="top-actions">
         <button class="btn" id="voice-toggle" type="button" aria-pressed="false">🔊 आवाज</button>
         <button class="btn" id="theme-toggle" type="button" aria-pressed="false">🌙 मोड</button>
@@ -281,35 +652,47 @@
           <p>किताब छान्नुहोस् र नयाँ कुरा सिक्नुहोस्।</p>
         </div>
       </div>
+
       <div class="book-grid">
         <button class="book nepali" type="button" data-book="nepali">
           <span class="book-icon" aria-hidden="true">🇳🇵</span>
-          <strong>नेपाली अक्षर</strong><small>स्वर, व्यञ्जन र बाह्रखरी</small>
+          <strong>नेपाली अक्षर</strong>
+          <small>स्वर, व्यञ्जन र बाह्रखरी</small>
           <span class="open-label">किताब खोल्नुहोस् →</span>
         </button>
+
         <button class="book english" type="button" data-book="english">
           <span class="book-icon" aria-hidden="true">🔤</span>
-          <strong>English</strong><small>Alphabet, words र चित्र</small>
+          <strong>English</strong>
+          <small>Alphabet, words र चित्र</small>
           <span class="open-label">किताब खोल्नुहोस् →</span>
         </button>
+
         <button class="book math" type="button" data-book="maths">
           <span class="book-icon" aria-hidden="true">🔢</span>
-          <strong>गणित</strong><small>अङ्क र गुणन तालिका</small>
+          <strong>गणित</strong>
+          <small>अङ्क र गुणन तालिका</small>
           <span class="open-label">किताब खोल्नुहोस् →</span>
         </button>
+
         <button class="book knowledge" type="button" data-book="knowledge">
           <span class="book-icon" aria-hidden="true">🧩</span>
-          <strong>ज्ञान र खेल</strong><small>क्विज र चित्रकला</small>
+          <strong>ज्ञान र खेल</strong>
+          <small>क्विज र चित्रकला</small>
           <span class="open-label">गतिविधि खोल्नुहोस् →</span>
         </button>
+
         <button class="book grammar" type="button" data-book="grammar">
           <span class="book-icon" aria-hidden="true">✍️</span>
-          <strong>English Grammar</strong><small>सरल व्याकरण पाठहरू</small>
+          <strong>English Grammar</strong>
+          <small>सरल व्याकरण पाठहरू</small>
           <span class="open-label">किताब खोल्नुहोस् →</span>
         </button>
+
         <button class="book byakaran" type="button" data-book="byakaran">
           <span class="book-icon" aria-hidden="true">📖</span>
-          <strong>नेपाली व्याकरण</strong><small>शब्द, नाम, क्रिया र वाक्य</small>
+          <strong>नेपाली व्याकरण</strong>
+          <small>शब्द, नाम, क्रिया र वाक्य</small>
           <span class="open-label">किताब खोल्नुहोस् →</span>
         </button>
       </div>
@@ -322,11 +705,13 @@
           <p>एकै थिचाइमा मनपर्ने गतिविधि खोल्नुहोस्।</p>
         </div>
       </div>
+
       <div class="quick-grid">
         <a class="quick" href="knowledge/quiz.html">
           <span class="quick-icon" aria-hidden="true">🧠</span>
           <span><strong>बाल क्विज</strong><small>प्रश्नको उत्तर दिऔँ</small></span>
         </a>
+
         <a class="quick" href="knowledge/drawing.html">
           <span class="quick-icon" aria-hidden="true">🎨</span>
           <span><strong>चित्रकला</strong><small>आफ्नो कल्पना कोरौँ</small></span>
@@ -378,7 +763,9 @@
         <button class="modal-close" id="parent-close" type="button"
           aria-label="सेटिङ बन्द गर्नुहोस्">×</button>
       </div>
+
       <p class="parent-note">यो सामान्य अभिभावक जाँच हो; वेबसाइटमा राखिएको PIN ले वास्तविक सुरक्षा प्रदान गर्दैन।</p>
+
       <div id="parent-check">
         <p id="math-question">अभिभावक जाँच</p>
         <label class="form-row" for="math-answer">जवाफ लेख्नुहोस्
@@ -387,6 +774,7 @@
         </label>
         <button class="btn btn-primary" id="verify-parent" type="button">जाँच गर्नुहोस्</button>
       </div>
+
       <div id="parent-settings" hidden>
         <label class="form-row" for="daily-target">दैनिक सही उत्तरको लक्ष्य
           <select id="daily-target">
@@ -398,14 +786,19 @@
         </label>
         <button class="btn btn-primary" id="save-settings" type="button">💾 सेटिङ सेभ गर्नुहोस्</button>
       </div>
+
       <p class="notice" id="parent-notice" aria-live="polite"></p>
     </div>
   </div>
+
+  <!-- Gemini AI Voice को लागि root script.js लोड गर्नुहोस् -->
+  <script src="./script.js?v=3"></script>
 
   <script>
     "use strict";
 
     const $ = (selector) => document.querySelector(selector);
+
     const storage = {
       get(key, fallback) {
         try {
@@ -415,6 +808,7 @@
           return fallback;
         }
       },
+
       set(key, value) {
         try {
           localStorage.setItem(key, String(value));
@@ -436,6 +830,7 @@
           ["व्यञ्जन वर्ण — चित्रसहित", "nepali/imageconsonants.html", "🧩"]
         ]
       },
+
       english: {
         title: "🔤 English",
         pages: [
@@ -449,6 +844,7 @@
           ["Vehicles", "english/vehicles.html", "🚗"]
         ]
       },
+
       maths: {
         title: "🔢 गणित",
         pages: [
@@ -456,6 +852,7 @@
           ["गुणन तालिका (पहाडा)", "maths/pahada.html", "✖️"]
         ]
       },
+
       knowledge: {
         title: "🧩 ज्ञान र गतिविधि",
         pages: [
@@ -463,6 +860,7 @@
           ["चित्रकला", "knowledge/drawing.html", "🎨"]
         ]
       },
+
       grammar: {
         title: "✍️ English Grammar",
         pages: [
@@ -474,6 +872,7 @@
           ["Lesson 13", "english/grammar13.html", "📝"]
         ]
       },
+
       byakaran: {
         title: "📖 नेपाली व्याकरण",
         pages: [
@@ -493,8 +892,10 @@
       modal.classList.add("open");
       document.body.style.overflow = "hidden";
     }
+
     function hideModal(modal) {
       modal.classList.remove("open");
+
       if (!document.querySelector(".modal.open")) {
         document.body.style.overflow = "";
       }
@@ -503,7 +904,9 @@
     function openBook(key) {
       const book = books[key];
       if (!book) return;
+
       $("#modal-title").textContent = book.title;
+
       const list = $("#page-list");
       list.replaceChildren();
 
@@ -514,6 +917,7 @@
 
         const label = document.createElement("span");
         label.textContent = `${icon} ${name}`;
+
         const arrow = document.createElement("span");
         arrow.textContent = "→";
         arrow.setAttribute("aria-hidden", "true");
@@ -547,122 +951,239 @@
       }
     });
 
+    // ===============================
+    // Gemini AI Voice Integration
+    // ===============================
+
     let voiceEnabled = false;
+
     function speak(text) {
       if (!voiceEnabled) return;
-      if (!("speechSynthesis" in window)) {
-        $("#target-message").textContent = "यो ब्राउजरमा आवाज सुविधा उपलब्ध छैन।";
-        return;
+
+      if (typeof window.playAIVoice === "function") {
+        // script.js ले Cloudflare Worker मा अनुरोध पठाउँछ।
+        // Worker ले Gemini AI को अडियो फर्काउँछ।
+        window.playAIVoice(String(text));
+      } else {
+        $("#target-message").textContent =
+          "AI आवाज स्क्रिप्ट लोड भएन। पेज refresh गरेर फेरि प्रयास गर्नुहोस्।";
+
+        console.error(
+          "playAIVoice() उपलब्ध छैन। ./script.js लोड भयो कि जाँच्नुहोस्।"
+        );
       }
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "ne-NP";
-      utterance.rate = 0.88;
-      window.speechSynthesis.speak(utterance);
     }
 
     $("#voice-toggle").addEventListener("click", () => {
       voiceEnabled = !voiceEnabled;
-      $("#voice-toggle").setAttribute("aria-pressed", String(voiceEnabled));
-      $("#voice-toggle").textContent = voiceEnabled ? "🔊 आवाज चालु" : "🔇 आवाज बन्द";
-      if (!voiceEnabled && "speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
+
+      $("#voice-toggle").setAttribute(
+        "aria-pressed",
+        String(voiceEnabled)
+      );
+
+      $("#voice-toggle").textContent = voiceEnabled
+        ? "🔊 आवाज चालु"
+        : "🔇 आवाज बन्द";
+
+      if (!voiceEnabled) {
+        // चलिरहेको Gemini अडियो रोक्ने।
+        if (typeof window.stopVoice === "function") {
+          window.stopVoice();
+        }
+
+        // पुरानो browser speech चलिरहेको भए त्यो पनि रोक्ने।
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+
+        $("#target-message").textContent = "आवाज बन्द गरिएको छ।";
       } else {
         speak("बाल पाठशालामा स्वागत छ");
+        $("#target-message").textContent = "Gemini AI आवाज सुरु हुँदैछ…";
       }
     });
 
+    // ===============================
+    // Theme Settings
+    // ===============================
+
     function applyTheme(theme) {
       const dark = theme === "dark";
+
       document.body.classList.toggle("dark-mode", dark);
-      $("#theme-toggle").textContent = dark ? "☀️ उज्यालो मोड" : "🌙 डार्क मोड";
+
+      $("#theme-toggle").textContent = dark
+        ? "☀️ उज्यालो मोड"
+        : "🌙 डार्क मोड";
+
       $("#theme-toggle").setAttribute("aria-pressed", String(dark));
+
       const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.content = dark ? "#111827" : "#f7fbff";
+
+      if (meta) {
+        meta.content = dark ? "#111827" : "#f7fbff";
+      }
+
       storage.set("theme", dark ? "dark" : "light");
     }
 
     $("#theme-toggle").addEventListener("click", () => {
-      applyTheme(document.body.classList.contains("dark-mode") ? "light" : "dark");
+      applyTheme(
+        document.body.classList.contains("dark-mode") ? "light" : "dark"
+      );
     });
+
     applyTheme(storage.get("theme", "light"));
 
+    // ===============================
+    // Daily Learning Target
+    // ===============================
+
     function updateTargetDisplay() {
-      const target = Math.max(1, Number.parseInt(storage.get("app_daily_target", "10"), 10) || 10);
-      const score = Math.max(0, Number.parseInt(storage.get("quiz_total_score", "0"), 10) || 0);
-      const percent = Math.min(100, Math.round((score / target) * 100));
+      const target = Math.max(
+        1,
+        Number.parseInt(storage.get("app_daily_target", "10"), 10) || 10
+      );
+
+      const score = Math.max(
+        0,
+        Number.parseInt(storage.get("quiz_total_score", "0"), 10) || 0
+      );
+
+      const percent = Math.min(
+        100,
+        Math.round((score / target) * 100)
+      );
+
       $("#target-count").textContent = `${score} / ${target} सही उत्तर`;
       $("#target-fill").style.width = `${percent}%`;
-      $("#target-progress").setAttribute("aria-valuenow", String(percent));
+
+      $("#target-progress").setAttribute(
+        "aria-valuenow",
+        String(percent)
+      );
+
       $("#target-message").textContent = percent >= 100
         ? "🎉 लक्ष्य पूरा भयो! आजको प्रयासका लागि बधाई!"
         : "सानो प्रयास, ठूलो प्रगति! 🌱";
     }
 
+    // ===============================
+    // Parent Settings
+    // ===============================
+
     let expectedAnswer = 0;
+
     $("#parent-open").addEventListener("click", () => {
       const a = Math.floor(Math.random() * 8) + 2;
       const b = Math.floor(Math.random() * 8) + 2;
+
       expectedAnswer = a + b;
-      $("#math-question").textContent = `अभिभावक जाँच: ${a} + ${b} कति हुन्छ?`;
+
+      $("#math-question").textContent =
+        `अभिभावक जाँच: ${a} + ${b} कति हुन्छ?`;
+
       $("#math-answer").value = "";
       $("#parent-check").hidden = false;
       $("#parent-settings").hidden = true;
       $("#parent-notice").textContent = "";
+
       showModal(parentModal);
       $("#math-answer").focus();
     });
 
     $("#verify-parent").addEventListener("click", () => {
-      if (Number($("#math-answer").value) !== expectedAnswer || $("#math-answer").value.trim() === "") {
-        $("#parent-notice").textContent = "उत्तर मिलेन। फेरि प्रयास गर्नुहोस्।";
+      if (
+        Number($("#math-answer").value) !== expectedAnswer ||
+        $("#math-answer").value.trim() === ""
+      ) {
+        $("#parent-notice").textContent =
+          "उत्तर मिलेन। फेरि प्रयास गर्नुहोस्।";
         return;
       }
+
       $("#parent-check").hidden = true;
       $("#parent-settings").hidden = false;
-      $("#daily-target").value = storage.get("app_daily_target", "10");
-      $("#parent-notice").textContent = "जाँच पूरा भयो। चाहिएको लक्ष्य छान्नुहोस्।";
+
+      $("#daily-target").value = storage.get(
+        "app_daily_target",
+        "10"
+      );
+
+      $("#parent-notice").textContent =
+        "जाँच पूरा भयो। चाहिएको लक्ष्य छान्नुहोस्।";
     });
 
     $("#save-settings").addEventListener("click", () => {
       const value = $("#daily-target").value;
+
       if (!["5", "10", "15", "20"].includes(value)) return;
+
       if (storage.set("app_daily_target", value)) {
         updateTargetDisplay();
-        $("#parent-notice").textContent = "सेटिङ यो ब्राउजरमा सेभ भयो।";
+
+        $("#parent-notice").textContent =
+          "सेटिङ यो ब्राउजरमा सेभ भयो।";
       } else {
-        $("#parent-notice").textContent = "सेभ गर्न सकिएन। ब्राउजरको storage उपलब्ध छ कि जाँच्नुहोस्।";
+        $("#parent-notice").textContent =
+          "सेभ गर्न सकिएन। ब्राउजरको storage उपलब्ध छ कि जाँच्नुहोस्।";
       }
     });
 
+    // ===============================
+    // National Anthem Audio
+    // ===============================
+
     const anthem = $("#national-anthem");
+
     $("#anthem-toggle").addEventListener("click", async () => {
       const status = $("#anthem-status");
+
       try {
         if (anthem.paused) {
           await anthem.play();
-          $("#anthem-toggle").textContent = "⏸ राष्ट्रिय गान रोक्नुहोस्";
+
+          $("#anthem-toggle").textContent =
+            "⏸ राष्ट्रिय गान रोक्नुहोस्";
+
           status.textContent = "राष्ट्रिय गान बजिरहेको छ।";
         } else {
           anthem.pause();
-          $("#anthem-toggle").textContent = "▶ राष्ट्रिय गान बजाउनुहोस्";
+
+          $("#anthem-toggle").textContent =
+            "▶ राष्ट्रिय गान बजाउनुहोस्";
+
           status.textContent = "राष्ट्रिय गान रोकियो।";
         }
       } catch (_) {
-        status.textContent = "अडियो चल्न सकेन। anthem.mp3 फाइल उपलब्ध छ कि जाँच्नुहोस्।";
+        status.textContent =
+          "अडियो चल्न सकेन। anthem.mp3 फाइल उपलब्ध छ कि जाँच्नुहोस्।";
       }
     });
 
     anthem.addEventListener("ended", () => {
-      $("#anthem-toggle").textContent = "▶ राष्ट्रिय गान बजाउनुहोस्";
-      $("#anthem-status").textContent = "राष्ट्रिय गान समाप्त भयो।";
+      $("#anthem-toggle").textContent =
+        "▶ राष्ट्रिय गान बजाउनुहोस्";
+
+      $("#anthem-status").textContent =
+        "राष्ट्रिय गान समाप्त भयो।";
     });
 
+    // ===============================
+    // Keep Homepage Data Updated
+    // ===============================
+
     window.addEventListener("storage", (event) => {
-      if (["quiz_total_score", "app_daily_target"].includes(event.key)) {
+      if (
+        ["quiz_total_score", "app_daily_target"].includes(event.key)
+      ) {
         updateTargetDisplay();
       }
-      if (event.key === "theme") applyTheme(event.newValue || "light");
+
+      if (event.key === "theme") {
+        applyTheme(event.newValue || "light");
+      }
     });
 
     updateTargetDisplay();
