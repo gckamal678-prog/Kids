@@ -1,8 +1,8 @@
 
 /*
- * बाल पाठशाला — AI Voice System
- * Gemini TTS + Cloudflare Worker
- * Nepali and English support
+ * बाल पाठशाला — Gemini AI Voice System
+ * Cloudflare Worker + Gemini TTS
+ * Browser/mobile voice fallback disabled
  */
 
 (function () {
@@ -13,6 +13,7 @@
 
   let currentAudio = null;
   let currentAudioUrl = null;
+  let activeController = null;
   let requestNumber = 0;
 
   function releaseCurrentAudio() {
@@ -20,6 +21,8 @@
       currentAudio.pause();
       currentAudio.onended = null;
       currentAudio.onerror = null;
+      currentAudio.removeAttribute("src");
+      currentAudio.load();
       currentAudio = null;
     }
 
@@ -29,54 +32,15 @@
     }
   }
 
-  function browserSpeak(text, callback, id) {
+  function finishCallback(callback, id) {
     if (id !== requestNumber) return;
 
-    if (!("speechSynthesis" in window)) {
-      if (typeof callback === "function") callback();
-      return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    const nepali = /[\u0900-\u097F]/.test(text);
-
-    utterance.lang = nepali ? "ne-NP" : "en-US";
-    utterance.rate = 0.88;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-
-    const voices = window.speechSynthesis.getVoices();
-
-    const voice = voices.find(function (item) {
-      return nepali
-        ? /^ne([-_]|$)/i.test(item.lang)
-        : /^en([-_]|$)/i.test(item.lang);
-    });
-
-    if (voice) utterance.voice = voice;
-
-    let finished = false;
-
-    function finish() {
-      if (finished || id !== requestNumber) return;
-
-      finished = true;
-
-      if (typeof callback === "function") {
+    if (typeof callback === "function") {
+      try {
         callback();
+      } catch (error) {
+        console.error("Voice callback error:", error);
       }
-    }
-
-    utterance.onend = finish;
-    utterance.onerror = finish;
-
-    try {
-      window.speechSynthesis.speak(utterance);
-    } catch (error) {
-      console.warn("Browser voice error:", error);
-      finish();
     }
   }
 
@@ -92,39 +56,71 @@
 
     const id = ++requestNumber;
 
-    releaseCurrentAudio();
-
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
+    // Stop the previous request and audio.
+    if (activeController) {
+      activeController.abort();
+      activeController = null;
     }
 
-    // Try Gemini AI voice through Cloudflare Worker.
+    releaseCurrentAudio();
+
+    const controller = new AbortController();
+    activeController = controller;
+
     try {
       const response = await fetch(VOICE_WORKER, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          text: text
-        })
+        body: JSON.stringify({ text: text }),
+        signal: controller.signal
       });
 
+      if (id !== requestNumber) return;
+
       if (!response.ok) {
+        let details = "";
+
+        try {
+          const data = await response.json();
+          if (data && data.error) {
+            details = ": " + data.error;
+          }
+        } catch (_) {}
+
         throw new Error(
-          "AI voice request failed: " + response.status
+          "Gemini Worker failed (" +
+          response.status +
+          ")" +
+          details
         );
       }
 
       const blob = await response.blob();
 
-      if (!blob.size || id !== requestNumber) {
-        return;
+      if (id !== requestNumber) return;
+
+      if (!blob.size) {
+        throw new Error("Gemini returned an empty audio file.");
+      }
+
+      if (
+        blob.type &&
+        !/^audio\//i.test(blob.type) &&
+        blob.type !== "application/octet-stream"
+      ) {
+        throw new Error(
+          "Worker returned unexpected content type: " +
+          blob.type
+        );
       }
 
       currentAudioUrl = URL.createObjectURL(blob);
-      currentAudio = new Audio(currentAudioUrl);
-      currentAudio.preload = "auto";
+
+      const audio = new Audio(currentAudioUrl);
+      currentAudio = audio;
+      audio.preload = "auto";
 
       let finished = false;
 
@@ -133,48 +129,66 @@
 
         finished = true;
         releaseCurrentAudio();
-
-        if (typeof callback === "function") {
-          callback();
-        }
+        activeController = null;
+        finishCallback(callback, id);
       }
 
-      currentAudio.onended = finish;
+      audio.onended = finish;
 
-      currentAudio.onerror = function () {
+      audio.onerror = function () {
         if (id !== requestNumber) return;
 
-        releaseCurrentAudio();
-        browserSpeak(text, callback, id);
+        console.error(
+          "Gemini audio playback failed."
+        );
+
+        finish();
       };
 
       try {
-        await currentAudio.play();
+        await audio.play();
       } catch (error) {
         if (id !== requestNumber) return;
 
-        releaseCurrentAudio();
-        browserSpeak(text, callback, id);
-      }
+        console.error(
+          "Gemini audio could not play:",
+          error
+        );
 
-      return;
+        finish();
+      }
     } catch (error) {
       if (id !== requestNumber) return;
 
-      console.warn(
-        "Gemini voice unavailable; using browser voice:",
+      if (error && error.name === "AbortError") {
+        return;
+      }
+
+      activeController = null;
+
+      console.error(
+        "Gemini voice failed. Browser voice fallback is disabled:",
         error
       );
 
-      browserSpeak(text, callback, id);
+      // IMPORTANT:
+      // Do not call speechSynthesis or browserSpeak here.
+      // Gemini failure must never switch to mobile voice.
+      finishCallback(callback, id);
     }
   }
 
   function stopVoice() {
     requestNumber++;
 
+    if (activeController) {
+      activeController.abort();
+      activeController = null;
+    }
+
     releaseCurrentAudio();
 
+    // Stop any browser speech left over from an older script.
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
     }
@@ -182,8 +196,10 @@
 
   // Keep compatibility with existing learning pages.
   window.playVoice = playVoice;
+
   window.playAIVoice = function (text, callback) {
     return playVoice(text, callback);
   };
+
   window.stopVoice = stopVoice;
 })();
