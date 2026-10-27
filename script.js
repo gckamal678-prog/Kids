@@ -1,18 +1,15 @@
-JavaScript
 
 /*
- * बाल पाठशाला — Shared Voice Utilities
- * Stage 3
- *
- * Supports:
- * - playVoice(text, callback)
- * - playAIVoice(text, callback) for older pages
- * - stopVoice()
- * - Optional /api/tts endpoint with browser speech fallback
+ * बाल पाठशाला — AI Voice System
+ * Gemini TTS + Cloudflare Worker
+ * Nepali and English support
  */
 
 (function () {
   "use strict";
+
+  const VOICE_WORKER =
+    "https://bal-pathshala-voice.gckamal67.workers.dev";
 
   let currentAudio = null;
   let currentAudioUrl = null;
@@ -44,12 +41,14 @@ JavaScript
 
     const utterance = new SpeechSynthesisUtterance(text);
     const nepali = /[\u0900-\u097F]/.test(text);
+
     utterance.lang = nepali ? "ne-NP" : "en-US";
     utterance.rate = 0.88;
     utterance.pitch = 1;
     utterance.volume = 1;
 
     const voices = window.speechSynthesis.getVoices();
+
     const voice = voices.find(function (item) {
       return nepali
         ? /^ne([-_]|$)/i.test(item.lang)
@@ -62,8 +61,12 @@ JavaScript
 
     function finish() {
       if (finished || id !== requestNumber) return;
+
       finished = true;
-      if (typeof callback === "function") callback();
+
+      if (typeof callback === "function") {
+        callback();
+      }
     }
 
     utterance.onend = finish;
@@ -72,41 +75,52 @@ JavaScript
     try {
       window.speechSynthesis.speak(utterance);
     } catch (error) {
-      console.warn("Browser voice could not start:", error);
+      console.warn("Browser voice error:", error);
       finish();
     }
   }
 
   async function playVoice(textToSpeak, callback) {
-    const text = String(textToSpeak == null ? "" : textToSpeak).trim();
+    const text = String(
+      textToSpeak == null ? "" : textToSpeak
+    ).trim();
+
     if (!text) {
       if (typeof callback === "function") callback();
       return;
     }
 
     const id = ++requestNumber;
+
     releaseCurrentAudio();
 
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
     }
 
-    // Optional server-side text-to-speech.
-    // If /api/tts is not deployed or fails, use browser speech.
+    // Try Gemini AI voice through Cloudflare Worker.
     try {
-      const response = await fetch("/api/tts", {
+      const response = await fetch(VOICE_WORKER, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: text })
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          text: text
+        })
       });
 
       if (!response.ok) {
-        throw new Error("TTS endpoint returned " + response.status);
+        throw new Error(
+          "AI voice request failed: " + response.status
+        );
       }
 
       const blob = await response.blob();
 
-      if (!blob.size || id !== requestNumber) return;
+      if (!blob.size || id !== requestNumber) {
+        return;
+      }
 
       currentAudioUrl = URL.createObjectURL(blob);
       currentAudio = new Audio(currentAudioUrl);
@@ -116,14 +130,20 @@ JavaScript
 
       function finish() {
         if (finished || id !== requestNumber) return;
+
         finished = true;
         releaseCurrentAudio();
-        if (typeof callback === "function") callback();
+
+        if (typeof callback === "function") {
+          callback();
+        }
       }
 
       currentAudio.onended = finish;
+
       currentAudio.onerror = function () {
         if (id !== requestNumber) return;
+
         releaseCurrentAudio();
         browserSpeak(text, callback, id);
       };
@@ -131,20 +151,28 @@ JavaScript
       try {
         await currentAudio.play();
       } catch (error) {
+        if (id !== requestNumber) return;
+
         releaseCurrentAudio();
         browserSpeak(text, callback, id);
       }
 
       return;
     } catch (error) {
-      // Expected when the optional server endpoint is not configured.
       if (id !== requestNumber) return;
+
+      console.warn(
+        "Gemini voice unavailable; using browser voice:",
+        error
+      );
+
       browserSpeak(text, callback, id);
     }
   }
 
   function stopVoice() {
     requestNumber++;
+
     releaseCurrentAudio();
 
     if ("speechSynthesis" in window) {
@@ -152,18 +180,10 @@ JavaScript
     }
   }
 
-  // Preserve an existing implementation if another page defines one first.
-  if (typeof window.playVoice !== "function") {
-    window.playVoice = playVoice;
-  }
-
-  if (typeof window.playAIVoice !== "function") {
-    window.playAIVoice = function (text, callback) {
-      return window.playVoice(text, callback);
-    };
-  }
-
-  if (typeof window.stopVoice !== "function") {
-    window.stopVoice = stopVoice;
-  }
+  // Keep compatibility with existing learning pages.
+  window.playVoice = playVoice;
+  window.playAIVoice = function (text, callback) {
+    return playVoice(text, callback);
+  };
+  window.stopVoice = stopVoice;
 })();
