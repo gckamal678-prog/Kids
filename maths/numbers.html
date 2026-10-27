@@ -1,186 +1,793 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>अंकहरू (1-100) - पाठशाला</title>
-    <meta name="theme-color" content="#3F51B5">
-    <!-- Child-friendly Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Fredoka', 'Mukta', sans-serif;
-            background: linear-gradient(180deg, #E8EAF6 0%, #C5CAE9 100%);
-            margin: 0;
-            padding: 12px;
-            text-align: center;
-            min-height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#3949ab">
+  <meta name="description" content="बालबालिकाका लागि नेपाली र अंग्रेजी अंक १ देखि १०० सम्म सिक्ने, सुन्ने र अभ्यास गर्ने रमाइलो पाठ।">
+  <title>गन्ती सिकौँ १–१०० | बाल पाठशाला</title>
 
-        /* Header Layout */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto 12px auto;
-            background: #FFFFFF;
-            padding: 8px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        h2 { 
-            color: #1A237E; 
-            margin: 0; 
-            font-size: 19px; 
-            font-weight: 800;
-        }
-        .home-btn {
-            background-color: #3F51B5;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            box-shadow: 0 3px 0 #1A237E;
-            transition: all 0.1s ease;
-        }
-        .home-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
+  <style>
+    :root {
+      color-scheme: light;
+      --primary: #3949ab;
+      --primary-dark: #283593;
+      --ink: #202755;
+      --muted: #59627b;
+      --paper: #ffffff;
+      --bg: #eef0ff;
+      --border: #cbd0f5;
+      --green: #16834a;
+      --red: #bd3434;
+      --radius: 18px;
+    }
 
-        /* Tab Buttons */
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .tab-btn {
-            background-color: #FFFFFF;
-            color: #3F51B5;
-            border: 3px solid #7986CB;
-            padding: 8px 16px;
-            font-size: 15px;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #303F9F;
-            transition: all 0.1s ease;
-        }
-        .tab-btn.active {
-            background-color: #3F51B5;
-            color: white;
-            border-color: #303F9F;
-            box-shadow: 0 4px 0 #1A237E;
-        }
-        .tab-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #1A237E;
-        }
+    * { box-sizing: border-box; }
 
-        /* 10 Columns Grid Layout */
-        .grid-container {
-            display: none;
-            grid-template-columns: repeat(10, 1fr);
-            gap: 5px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .grid-container.active {
-            display: grid;
-        }
+    body {
+      margin: 0;
+      padding: 14px;
+      min-height: 100vh;
+      font-family: "Noto Sans Devanagari", "Mukta",
+                   "Arial Unicode MS", system-ui, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #e8eaff, #f7f8ff);
+    }
 
-        /* 3D Soft Number Card */
-        .number-card {
-            background-color: #FFFFFF;
-            color: #1A237E;
-            border: 2px solid #7986CB;
-            border-radius: 10px;
-            padding: 10px 0;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            user-select: none;
-            box-shadow: 0 3px 0 #303F9F;
-            transition: all 0.1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .number-card:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #303F9F;
-            background-color: #E8EAF6;
-        }
-    </style>
+    button, select { font: inherit; }
 
-    <!-- ElevenLabs को लागि script.js जोडिएको -->
-    <script src="script.js"></script>
+    button {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible, select:focus-visible, a:focus-visible {
+      outline: 3px solid #ff9800;
+      outline-offset: 3px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 15px;
+      background: var(--paper);
+      border-radius: var(--radius);
+      box-shadow: 0 5px 18px #20275512;
+    }
+
+    .home-btn {
+      display: inline-block;
+      flex-shrink: 0;
+      padding: 10px 13px;
+      border-radius: 12px;
+      color: white;
+      background: var(--primary);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(19px, 4vw, 27px);
+      text-align: right;
+    }
+
+    .subtitle {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .hero {
+      margin: 16px 0;
+      padding: 20px 14px;
+      text-align: center;
+      border-radius: 22px;
+      color: white;
+      background: linear-gradient(135deg, #3949ab, #6978e8);
+    }
+
+    .hero .emoji { font-size: 34px; }
+
+    .hero h2 {
+      margin: 7px 0;
+      font-size: clamp(21px, 5vw, 29px);
+    }
+
+    .hero p { margin: 0; line-height: 1.7; }
+
+    .panel {
+      padding: 16px;
+      margin-bottom: 15px;
+      border: 1px solid #dfe2fa;
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: 0 4px 14px #2027550a;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 19px;
+    }
+
+    .tabs, .ranges, .actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .tab, .range-btn, .action-btn {
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      color: var(--primary-dark);
+      background: white;
+      font-weight: 800;
+    }
+
+    .tab[aria-pressed="true"],
+    .range-btn[aria-pressed="true"] {
+      color: white;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .action-btn.primary {
+      color: white;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .action-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 16px 0 12px;
+    }
+
+    .toolbar label { font-weight: 800; }
+
+    select {
+      min-height: 44px;
+      max-width: 100%;
+      padding: 9px 12px;
+      color: var(--ink);
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .number-card {
+      min-width: 0;
+      min-height: 56px;
+      padding: 7px 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      border: 2px solid var(--border);
+      border-radius: 13px;
+      color: var(--primary-dark);
+      background: #f8f8ff;
+      box-shadow: 0 3px 0 #d8dcfa;
+      font-size: clamp(16px, 4vw, 21px);
+      font-weight: 900;
+      transition: background .12s ease, transform .12s ease;
+    }
+
+    .number-card small {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .number-card:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+
+    .number-card.speaking {
+      background: #fff1b8;
+      border-color: #e5ad20;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .status {
+      min-height: 28px;
+      margin: 12px 0 0;
+      text-align: center;
+      font-weight: 800;
+      line-height: 1.6;
+    }
+
+    .status.good { color: var(--green); }
+    .status.bad { color: var(--red); }
+
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-weight: 800;
+    }
+
+    .progress-track {
+      height: 12px;
+      overflow: hidden;
+      margin: 12px 0;
+      border-radius: 20px;
+      background: #e8eaf7;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: #39a96b;
+      transition: width .2s ease;
+    }
+
+    .question {
+      margin: 18px 0;
+      text-align: center;
+      font-size: clamp(19px, 5vw, 25px);
+      font-weight: 900;
+      line-height: 1.7;
+    }
+
+    .question-number {
+      display: block;
+      margin: 12px 0;
+      color: var(--primary);
+      font-size: clamp(45px, 12vw, 70px);
+      line-height: 1.25;
+    }
+
+    .answer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .answer-btn {
+      min-height: 58px;
+      padding: 12px 8px;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      color: var(--ink);
+      background: #f8f8ff;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .answer-btn:disabled { cursor: default; }
+
+    .answer-btn.correct {
+      color: #075c30;
+      background: #d9f8e5;
+      border-color: #38a96b;
+    }
+
+    .answer-btn.wrong {
+      color: #8c2020;
+      background: #ffe1e1;
+      border-color: #d64c4c;
+    }
+
+    .quiz-result {
+      padding: 14px;
+      text-align: center;
+      border-radius: 15px;
+      background: #f1f2ff;
+      line-height: 1.8;
+    }
+
+    footer {
+      padding: 12px 5px 22px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    [hidden] { display: none !important; }
+
+    @media (min-width: 540px) {
+      .number-grid { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+      .number-card { min-height: 60px; }
+    }
+
+    @media (max-width: 360px) {
+      body { padding: 8px; }
+      .header { padding: 11px; }
+      .home-btn { padding: 9px; }
+      .panel { padding: 12px; }
+      .number-grid { gap: 6px; }
+      .number-card { min-height: 48px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <main class="app">
+    <header class="header">
+      <a class="home-btn" href="../index.html">🏠 होम</a>
+      <div>
+        <h1>🔢 गन्ती सिकौँ</h1>
+        <p class="subtitle">बाल पाठशाला · १ देखि १००</p>
+      </div>
+    </header>
 
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>गन्ती (१ - १००)</h2>
-    </div>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="emoji" aria-hidden="true">🌟 🎈 📚</div>
+      <h2 id="heroTitle">खेल्दै सिकौँ, रमाउँदै बढौँ!</h2>
+      <p>अंक हेरौँ, आवाज सुनौँ र सानो खेल खेलौँ।</p>
+    </section>
 
-    <div class="tab-container">
-        <button class="tab-btn active" onclick="switchTab('nepali', event)">नेपाली (१-१००)</button>
-        <button class="tab-btn" onclick="switchTab('english', event)">English (1-100)</button>
-    </div>
+    <section class="panel" aria-labelledby="learnTitle">
+      <h2 class="section-title" id="learnTitle">📖 अंकहरू सिक्ने</h2>
 
-    <div class="grid-container active" id="nepaliGrid"></div>
-    <div class="grid-container" id="englishGrid"></div>
+      <div class="tabs" aria-label="भाषा छान्नुहोस्">
+        <button class="tab" id="nepaliTab" type="button"
+          aria-pressed="true">नेपाली अंक</button>
+        <button class="tab" id="englishTab" type="button"
+          aria-pressed="false">English Numbers</button>
+      </div>
 
-    <script>
-        const nepaliDigits = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९'];
-        function toNepaliNumber(n) {
-            return n.toString().split('').map(digit => nepaliDigits[digit]).join('');
+      <div class="toolbar">
+        <label for="rangeSelect">कुन अंक सिक्ने?</label>
+        <select id="rangeSelect">
+          <option value="all">सबै अंक (१–१००)</option>
+          <option value="1-20">१–२०</option>
+          <option value="21-50">२१–५०</option>
+          <option value="51-100">५१–१००</option>
+        </select>
+      </div>
+
+      <p class="hint">
+        कुनै अंक थिच्नुहोस्। आवाज उपलब्ध छ भने अंक पढेर सुनाउँछ।
+      </p>
+
+      <div id="numberGrid" class="number-grid"
+        aria-label="अंकहरूको सूची"></div>
+
+      <div class="actions" style="margin-top:14px">
+        <button class="action-btn" id="stopVoiceBtn" type="button">
+          🔇 आवाज रोक्नुहोस्
+        </button>
+      </div>
+
+      <p id="voiceStatus" class="status" role="status"
+        aria-live="polite"></p>
+    </section>
+
+    <section class="panel" aria-labelledby="quizTitle">
+      <h2 class="section-title" id="quizTitle">🎮 अंक चिन्ने खेल</h2>
+      <p class="hint">
+        प्रश्नमा देखाइएको अंकसँग मिल्ने उत्तर छान्नुहोस्।
+        प्रत्येक खेलमा १० प्रश्न हुन्छन्।
+      </p>
+
+      <div class="quiz-top">
+        <span id="questionCount">प्रश्न: ०/१०</span>
+        <span id="score">⭐ स्कोर: ०</span>
+      </div>
+
+      <div class="progress-track" role="progressbar"
+        aria-label="खेलको प्रगति" aria-valuemin="0"
+        aria-valuemax="10" aria-valuenow="0" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div id="quizArea">
+        <div class="question" id="questionText">
+          खेल सुरु गर्न तलको बटन थिच्नुहोस्।
+        </div>
+
+        <div class="answer-grid" id="answerGrid" hidden></div>
+
+        <p id="quizFeedback" class="status" role="status"
+          aria-live="polite"></p>
+
+        <div class="actions">
+          <button class="action-btn primary" id="startQuizBtn"
+            type="button">🚀 खेल सुरु गरौँ</button>
+          <button class="action-btn" id="nextQuestionBtn"
+            type="button" hidden>अर्को प्रश्न ➜</button>
+        </div>
+      </div>
+
+      <div id="quizResult" class="quiz-result" hidden
+        aria-live="polite"></div>
+
+      <div class="actions" id="restartArea" hidden
+        style="margin-top:12px">
+        <button class="action-btn primary" id="restartQuizBtn"
+          type="button">🔄 फेरि खेलौँ</button>
+      </div>
+
+      <p class="hint" style="margin-top:14px">
+        टिप: नेपाली वा English अंकको अभ्यास गर्न माथिको भाषा छानेर
+        त्यसपछि खेल सुरु गर्नुहोस्।
+      </p>
+    </section>
+
+    <footer>
+      💛 गल्ती हुनु सिकाइको भाग हो। फेरि प्रयास गरौँ!<br>
+      बाल पाठशाला · सिकाइ रमाइलो बनाऔँ।
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const nepaliDigits = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
+
+      let language = "ne";
+      let currentRange = "all";
+      let currentQuestion = 0;
+      let score = 0;
+      let questions = [];
+      let answered = false;
+      let voiceSequence = 0;
+
+      function toNepaliNumber(number) {
+        return String(number).replace(/[0-9]/g, digit =>
+          nepaliDigits[Number(digit)]
+        );
+      }
+
+      function displayNumber(number) {
+        return language === "ne" ? toNepaliNumber(number) : String(number);
+      }
+
+      function getRange() {
+        if (currentRange === "all") return [1, 100];
+        const parts = currentRange.split("-").map(Number);
+        return [parts[0], parts[1]];
+      }
+
+      function speakNumber(number) {
+        const status = $("voiceStatus");
+        const sequence = ++voiceSequence;
+
+        document.querySelectorAll(".number-card.speaking")
+          .forEach(card => card.classList.remove("speaking"));
+
+        if (!("speechSynthesis" in window) ||
+            !("SpeechSynthesisUtterance" in window)) {
+          status.textContent =
+            "यो ब्राउजरमा आवाज सुविधा उपलब्ध छैन। अंक हेरेर अभ्यास गर्न सक्नुहुन्छ।";
+          return;
         }
 
-        const nepGrid = document.getElementById('nepaliGrid');
-        const engGrid = document.getElementById('englishGrid');
+        window.speechSynthesis.cancel();
 
-        // १० स्तम्भ र १० पङ्क्ति मिलाएर १ देखि १०० सम्म कार्डहरू बनाउने
-        for (let r = 1; r <= 10; r++) {
-            for (let c = 0; c < 10; c++) {
-                let num = c * 10 + r;
-                
-                // नेपाली कार्ड (playAIVoice प्रयोग गरिएको)
-                let nepCard = document.createElement('div');
-                nepCard.className = 'number-card';
-                let nepVal = toNepaliNumber(num);
-                nepCard.innerText = nepVal;
-                nepCard.addEventListener('click', () => playAIVoice(nepVal));
-                nepGrid.appendChild(nepCard);
+        const utterance = new SpeechSynthesisUtterance(String(number));
+        utterance.lang = language === "ne" ? "ne-NP" : "en-US";
+        utterance.rate = 0.78;
+        utterance.pitch = 1.05;
 
-                // अङ्ग्रेजी कार्ड (playAIVoice प्रयोग गरिएको)
-                let engCard = document.createElement('div');
-                engCard.className = 'number-card';
-                engCard.innerText = num;
-                engCard.addEventListener('click', () => playAIVoice(num.toString()));
-                engGrid.appendChild(engCard);
-            }
+        utterance.onstart = () => {
+          if (sequence === voiceSequence) {
+            status.textContent = "🔊 " +
+              (language === "ne" ? "नेपाली अंक" : "English number") +
+              " सुनिँदै छ।";
+          }
+        };
+
+        utterance.onerror = (event) => {
+          if (sequence === voiceSequence &&
+              event.error !== "canceled" &&
+              event.error !== "interrupted") {
+            status.textContent =
+              "आवाज चल्न सकेन। तपाईंको ब्राउजर वा उपकरणको आवाज सेटिङ जाँच्नुहोस्।";
+          }
+        };
+
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function stopVoice() {
+        voiceSequence++;
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+        $("voiceStatus").textContent = "आवाज रोकियो।";
+        document.querySelectorAll(".number-card.speaking")
+          .forEach(card => card.classList.remove("speaking"));
+      }
+
+      function renderGrid() {
+        const grid = $("numberGrid");
+        const [start, end] = getRange();
+
+        grid.replaceChildren();
+
+        for (let number = start; number <= end; number++) {
+          const card = document.createElement("button");
+          card.type = "button";
+          card.className = "number-card";
+          card.setAttribute("aria-label",
+            (language === "ne" ? "नेपाली अंक " : "English number ") +
+            displayNumber(number) + ", आवाजमा सुन्न थिच्नुहोस्");
+
+          const value = document.createElement("span");
+          value.textContent = displayNumber(number);
+          card.appendChild(value);
+
+          const hint = document.createElement("small");
+          hint.textContent = language === "ne" ? "सुन्नुहोस् 🔊" : "Listen 🔊";
+          card.appendChild(hint);
+
+          card.addEventListener("click", () => {
+            document.querySelectorAll(".number-card.speaking")
+              .forEach(item => item.classList.remove("speaking"));
+            card.classList.add("speaking");
+            speakNumber(number);
+          });
+
+          grid.appendChild(card);
         }
 
-        function switchTab(type, event) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.grid-container').forEach(grid => grid.classList.remove('active'));
-            event.target.classList.add('active');
-            if (type === 'nepali') {
-                document.getElementById('nepaliGrid').classList.add('active');
-            } else {
-                document.getElementById('englishGrid').classList.add('active');
-            }
-        }
-    </script>
+        $("voiceStatus").textContent = "";
+      }
 
+      function setLanguage(nextLanguage) {
+        stopVoice();
+        language = nextLanguage;
+
+        $("nepaliTab").setAttribute("aria-pressed",
+          String(language === "ne"));
+        $("englishTab").setAttribute("aria-pressed",
+          String(language === "en"));
+
+        $("rangeSelect").value = currentRange;
+        renderGrid();
+
+        if (questions.length && currentQuestion < questions.length) {
+          showQuestion();
+        }
+      }
+
+      function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function shuffle(items) {
+        for (let i = items.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [items[i], items[j]] = [items[j], items[i]];
+        }
+        return items;
+      }
+
+      function makeQuestions() {
+        const [min, max] = getRange();
+        const pool = [];
+
+        for (let n = min; n <= max; n++) pool.push(n);
+        shuffle(pool);
+
+        questions = pool.slice(0, Math.min(10, pool.length)).map(answer => {
+          const choices = new Set([answer]);
+
+          while (choices.size < Math.min(4, pool.length)) {
+            let candidate = randomInt(min, max);
+            choices.add(candidate);
+          }
+
+          return {
+            answer,
+            choices: shuffle(Array.from(choices))
+          };
+        });
+      }
+
+      function updateProgress() {
+        $("questionCount").textContent =
+          "प्रश्न: " + displayNumber(Math.min(currentQuestion + (answered ? 1 : 0), questions.length)) +
+          "/" + displayNumber(questions.length);
+
+        $("score").textContent = "⭐ स्कोर: " + displayNumber(score);
+
+        const completed = answered ? currentQuestion + 1 : currentQuestion;
+        $("progressFill").style.width =
+          (questions.length ? completed / questions.length * 100 : 0) + "%";
+        $("progressBar").setAttribute("aria-valuenow", String(completed));
+      }
+
+      function showQuestion() {
+        if (currentQuestion >= questions.length) {
+          finishQuiz();
+          return;
+        }
+
+        answered = false;
+        const question = questions[currentQuestion];
+
+        $("questionText").replaceChildren();
+
+        const prompt = document.createElement("span");
+        prompt.textContent = language === "ne"
+          ? "यो कुन अंक हो?"
+          : "Which number is this?";
+        $("questionText").appendChild(prompt);
+
+        const number = document.createElement("span");
+        number.className = "question-number";
+        number.textContent = displayNumber(question.answer);
+        $("questionText").appendChild(number);
+
+        $("answerGrid").replaceChildren();
+        $("answerGrid").hidden = false;
+
+        question.choices.forEach(choice => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "answer-btn";
+          button.textContent = displayNumber(choice);
+          button.setAttribute("aria-label", "उत्तर " + displayNumber(choice));
+          button.addEventListener("click", () => checkAnswer(choice, button));
+          $("answerGrid").appendChild(button);
+        });
+
+        $("quizFeedback").textContent = "";
+        $("quizFeedback").className = "status";
+        $("nextQuestionBtn").hidden = true;
+        $("startQuizBtn").hidden = true;
+        $("quizResult").hidden = true;
+        $("restartArea").hidden = true;
+
+        updateProgress();
+      }
+
+      function checkAnswer(choice, selectedButton) {
+        if (answered) return;
+        answered = true;
+
+        const correct = questions[currentQuestion].answer;
+        const buttons = $("answerGrid").querySelectorAll("button");
+
+        buttons.forEach(button => {
+          button.disabled = true;
+          if (button.textContent === displayNumber(correct)) {
+            button.classList.add("correct");
+          }
+        });
+
+        if (choice === correct) {
+          score++;
+          $("quizFeedback").textContent = "🎉 स्याबास! सही उत्तर!";
+          $("quizFeedback").className = "status good";
+        } else {
+          selectedButton.classList.add("wrong");
+          $("quizFeedback").textContent =
+            "राम्रो प्रयास! सही उत्तर " + displayNumber(correct) + " हो।";
+          $("quizFeedback").className = "status bad";
+        }
+
+        updateProgress();
+        $("nextQuestionBtn").hidden = false;
+        $("nextQuestionBtn").textContent =
+          currentQuestion === questions.length - 1
+            ? "नतिजा हेरौँ 🏆"
+            : "अर्को प्रश्न ➜";
+      }
+
+      function startQuiz() {
+        stopVoice();
+        currentQuestion = 0;
+        score = 0;
+        answered = false;
+        makeQuestions();
+        $("quizResult").hidden = true;
+        showQuestion();
+      }
+
+      function finishQuiz() {
+        $("answerGrid").hidden = true;
+        $("nextQuestionBtn").hidden = true;
+        $("startQuizBtn").hidden = true;
+        $("questionText").textContent = "🏆 खेल पूरा भयो!";
+        $("quizFeedback").textContent = "";
+
+        const result = $("quizResult");
+        result.hidden = false;
+        result.replaceChildren();
+
+        const heading = document.createElement("h3");
+        heading.textContent = score === questions.length
+          ? "🌟 उत्कृष्ट! सबै उत्तर मिल्यो!"
+          : score >= 7
+            ? "👏 धेरै राम्रो प्रयास!"
+            : "💛 राम्रो प्रयास! फेरि अभ्यास गरौँ।";
+        result.appendChild(heading);
+
+        const details = document.createElement("p");
+        details.textContent = "तपाईंको स्कोर: " +
+          displayNumber(score) + " / " + displayNumber(questions.length);
+        result.appendChild(details);
+
+        const note = document.createElement("p");
+        note.textContent = "अभ्यासले अझ राम्रो बनाउँछ।";
+        result.appendChild(note);
+
+        $("restartArea").hidden = false;
+        updateProgress();
+      }
+
+      $("nepaliTab").addEventListener("click", () => setLanguage("ne"));
+      $("englishTab").addEventListener("click", () => setLanguage("en"));
+
+      $("rangeSelect").addEventListener("change", event => {
+        currentRange = event.target.value;
+        stopVoice();
+        renderGrid();
+        if (!$("answerGrid").hidden) {
+          $("questionText").textContent =
+            "नयाँ अंक दायरा छानियो। नयाँ खेल सुरु गर्नुहोस्।";
+          $("answerGrid").hidden = true;
+          $("quizFeedback").textContent = "";
+          $("nextQuestionBtn").hidden = true;
+          $("startQuizBtn").hidden = false;
+          $("quizResult").hidden = true;
+          $("restartArea").hidden = true;
+        }
+      });
+
+      $("stopVoiceBtn").addEventListener("click", stopVoice);
+      $("startQuizBtn").addEventListener("click", startQuiz);
+      $("restartQuizBtn").addEventListener("click", startQuiz);
+
+      $("nextQuestionBtn").addEventListener("click", () => {
+        if (!answered) return;
+        currentQuestion++;
+        showQuestion();
+      });
+
+      renderGrid();
+    })();
+  </script>
 </body>
 </html>
