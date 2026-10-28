@@ -1,164 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 12: 50 Reading & Conversation Chapters</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            text-align: center;
-            padding: 15px;
-            margin: 0;
-        }
-        h1 {
-            color: #ffcc00;
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
-        h2 {
-            color: #00ffcc;
-            font-size: 18px;
-            margin-top: 25px;
-            border-bottom: 2px solid #00ffcc;
-            padding-bottom: 5px;
-            text-align: left;
-        }
-        p.subtitle {
-            color: #cccccc;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-        .chapter-box {
-            background: #252525;
-            border: 1px solid #444;
-            padding: 12px 15px;
-            border-radius: 10px;
-            margin-top: 12px;
-            text-align: left;
-            line-height: 1.5;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .chapter-box:hover {
-            border-color: #ffcc00;
-            background: #2a2a2a;
-        }
-        .chapter-title {
-            color: #ffcc00;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .english-text {
-            font-size: 15px;
-            color: #ffffff;
-            margin-bottom: 5px;
-        }
-        .nepali-text {
-            color: #aaaaaa;
-            font-size: 13px;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <meta name="robots" content="noindex">
+  <title>English Reading | बाल पाठशाला</title>
+  <meta http-equiv="refresh" content="0;url=reading.html">
+  <script>
+    window.location.replace("reading.html");
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      font-family: system-ui, Arial, sans-serif;
+      background: #101827;
+      color: #f7f9ff;
+      text-align: center;
+    }
+    main {
+      width: min(100%, 420px);
+      padding: 28px 20px;
+      border: 1px solid #3a4d68;
+      border-radius: 20px;
+      background: #1b2940;
+    }
+    .emoji { font-size: 42px; }
+    h1 { color: #ffd166; font-size: 25px; }
+    p { line-height: 1.7; color: #c3cee0; }
+    a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: #72e6b1;
+      color: #102033;
+      font-weight: 800;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-
-    <h1>✨ Lesson 12: 50 Reading & Story Chapters ✨</h1>
-    <p class="subtitle">Tap any chapter to listen to its pronunciation! (सुन्नको लागि टच गर्नुहोस्)</p>
-
-    <div style="max-width: 600px; margin: 0 auto; text-align: left;">
-        
-        <h2>📖 Daily Reading Chapters (1 to 50)</h2>
-
-        <!-- Chapter 1 -->
-        <div class="chapter-box" onclick="speakText('My name is Ram. I am a student. I go to school every day. I read books and play football with my friends. I love my school very much.')">
-            <div class="chapter-title">Chapter 1: My School Life</div>
-            <div class="english-text">"My name is Ram. I am a student. I go to school every day. I read books and play football with my friends. I love my school very much."</div>
-            <div class="nepali-text"><b>नेपाली:</b> मेरो नाम राम हो। म एक विद्यार्थी हुँ। म हरेक दिन स्कुल जान्छु। म किताबहरू पढ्छु र मेरा साथीहरूसँग फुटबल खेल्छु। म मेरो स्कुललाई धेरै माया गर्छु।</div>
-        </div>
-
-        <!-- Chapter 2 -->
-        <div class="chapter-box" onclick="speakText('I wake up early in the morning. I brush my teeth and wash my face. Then I drink a glass of milk and eat some breakfast with my family.')">
-            <div class="chapter-title">Chapter 2: Morning Routine</div>
-            <div class="english-text">"I wake up early in the morning. I brush my teeth and wash my face. Then I drink a glass of milk and eat some breakfast with my family."</div>
-            <div class="nepali-text"><b>नेपाली:</b> म बिहान सबेरै उठ्छु। म दाँत माझ्छु र अनुहार धुन्छ Its। त्यसपछि म एक गिलास दूध पिउँछु र परिवारसँग केही खाजा खान्छु।</div>
-        </div>
-
-        <!-- Chapter 3 -->
-        <div class="chapter-box" onclick="speakText('My mother is a kind woman. She cooks delicious food for us. She helps me with my homework every evening and tells me wonderful bedtime stories.')">
-            <div class="chapter-title">Chapter 3: My Mother</div>
-            <div class="english-text">"My mother is a kind woman. She cooks delicious food for us. She helps me with my homework every evening and tells me wonderful bedtime stories."</div>
-            <div class="nepali-text"><b>नेपाली:</b> मेरी आमा एक दयालु महिला हुनुहुन्छ। उहाँ हामी, लागि मीठो खाना पकाउनुहुन्छ। उहाँले मलाई हरेक बेलुका गृहकार्यमा सहयोग गर्नुहुन्छ र राम्रा कथाहरू सुनाउनुहुन्छ।</div>
-        </div>
-
-        <!-- Chapter 4 -->
-        <div class="chapter-box" onclick="speakText('My father works hard in his office. He brings fruits and toys for me on weekends. I respect him very much and want to be a good person like him.')">
-            <div class="chapter-title">Chapter 4: My Father</div>
-            <div class="english-text">"My father works hard in his office. He brings fruits and toys for me on weekends. I respect him very much and want to be a good person like him."</div>
-            <div class="nepali-text"><b>नेपाली:</b> मेरा बुवा अफिसमा कडा परिश्रम गर्नुहुन्छ। उहाँ सप्ताहन्तमा मेरा लागि फलफूल र खेलौनाहरू ल्याउनुहुन्छ। म उहाँलाई धेरै आदर गर्छु र उहाँ जस्तै राम्रो मानिस बन्न चाहन्छ Both।</div>
-        </div>
-
-        <!-- Chapter 5 -->
-        <div class="chapter-box" onclick="speakText('The cow is a very useful domestic animal. It gives us sweet and healthy milk. We make butter and cheese from milk. Hindus worship the cow as a mother.')">
-            <div class="chapter-title">Chapter 5: The Cow</div>
-            <div class="english-text">"The cow is a very useful domestic animal. It gives us sweet and healthy milk. We make butter and cheese from milk. Hindus worship the cow as a mother."</div>
-            <div class="nepali-text"><b>नेपाली:</b> गाई एक धेरै उपयोगी घरेलु जनावर हो। यसले हामीलाई मीठो र स्वस्थ दूध दिन्छ। हामी दूधबाट नौनी र पनिर बनाउँछौं। हिन्दूहरू गाईलाई आमाको रूपमा पुजा गर्छन्।</div>
-        </div>
-
-        <!-- Chapter 6 -->
-        <div class="chapter-box" onclick="speakText('Dogs are very loyal and faithful animals. They guard our houses at night. My dog name is Tommy. He loves to run and catch the ball in the garden.')">
-            <div class="chapter-title">Chapter 6: My Pet Dog</div>
-            <div class="english-text">"Dogs are very loyal and faithful animals. They guard our houses at night. My dog's name is Tommy. He loves to run and catch the ball in the garden."</div>
-            <div class="nepali-text"><b>नेपाली:</b> कुकुरहरू धेरै वफादार र विश्वासिलो जनावर हुन्। तिनीहरूले राति हाम्रो घरको पहरा दिन्छन्। मेरा कुकुरको नाम टमी हो। उसलाई बगैंचामा दौडिन र बल समात्न मन पर्छ।</div>
-        </div>
-
-        <!-- Chapter 7 -->
-        <div class="chapter-box" onclick="speakText('Water is very precious for all living beings. We cannot live without water. We use water for drinking, cooking, washing, and watering plants every day.')">
-            <div class="chapter-title">Chapter 7: Importance of Water</div>
-            <div class="english-text">"Water is very precious for all living beings. We cannot live without water. We use water for drinking, cooking, washing, and watering plants every day."</div>
-            <div class="nepali-text"><b>नेपाली:</b> पानी सबै जीवजन्तुका लागि अति महत्त्वपूर्ण छ। हामी पानी बिना बाँच्न सक्दैनौँ। हामी दैनिक पिउन, पकाउन, धुन र बिरुवामा हाल्न पानी प्रयोग गर्छौं।</div>
-        </div>
-
-        <!-- Chapter 8 -->
-        <div class="chapter-box" onclick="speakText('Trees give us fresh air, shade, fruits, and wood. They bring rain and keep our environment green and clean. We must plant more trees around our houses.')">
-            <div class="chapter-title">Chapter 8: Trees are our Friends</div>
-            <div class="english-text">"Trees give us fresh air, shade, fruits, and wood. They bring rain and keep our environment green and clean. We must plant more trees around our houses."</div>
-            <div class="nepali-text"><b>नेपाली:</b> रूखहरूले हामीलाई ताजा हावा, छाया, फलफूल र काठ दिन्छन्। तिनीहरूले वर्षा ल्याउँछन् र हाम्रो वातावरणलाई हरियो र सफਾ राख्छन्। हामीले घर वरिपरि थप रूखहरू रोप्नुपर्छ।</div>
-        </div>
-
-        <!-- Chapter 9 -->
-        <div class="chapter-box" onclick="speakText('My best friend name is Rohan. We sit on the same bench in the classroom. We share our tiffin and play cricket together during the lunch break.')">
-            <div class="chapter-title">Chapter 9: My Best Friend</div>
-            <div class="english-text">"My best friend's name is Rohan. We sit on the same bench in the classroom. We share our tiffin and play cricket together during the lunch break."</div>
-            <div class="nepali-text"><b>नेपाली:</b> मेरा मिल्ने साथीको नाम रोहन हो। हामी कक्षामा एउटै बेन्चमा बस्छौँ। हामी खाजा बाँडेर खान्छौँ र खाजाको समयमा सँगै क्रिकेट खेल्छौँ।</div>
-        </div>
-
-        <!-- Chapter 10 -->
-        <div class="chapter-box" onclick="speakText('Himalayas are the highest mountains in the world. Mount Everest is the highest peak, located in Nepal. Tourists from all over the world come to see its beauty.')">
-            <div class="chapter-title">Chapter 10: The Himalayas</div>
-            <div class="english-text">"Himalayas are the highest mountains in the world. Mount Everest is the highest peak, located in Nepal. Tourists from all over the world come to see its beauty."</div>
-            <div class="nepali-text"><b>नेपाली:</b> हिमालय विश्वका सबैभन्दा अग्ला पहाडहरू हुन्। सगरमाथा नेपालमा अवस्थित सर्वोच्च शिखर हो। विश्वभरका पर्यटकहरू यसको सौन्दर्य हेर्न आउँछन्।</div>
-        </div>
-
-        <!-- (Chapters 11 to 50 can follow this exact clean structure covering nature, science, moral values, and daily life stories) -->
-
-    </div>
-
-    <script>
-        function speakText(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                let utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'en-US';
-                utterance.rate = 0.9;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert("Speech synthesis not supported in this browser.");
-            }
-        }
-    </script>
-
+  <main>
+    <div class="emoji" aria-hidden="true">📚</div>
+    <h1>English Reading</h1>
+    <p>तपाईंलाई Reading पेजमा लगिँदैछ। यदि पेज आफैँ खुलेन भने तलको बटन थिच्नुहोस्।</p>
+    <a href="reading.html">Open English Reading →</a>
+  </main>
 </body>
 </html>
