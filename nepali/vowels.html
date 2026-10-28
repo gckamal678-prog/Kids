@@ -1,126 +1,386 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>स्वर वर्ण - पाठशाला</title>
-    <meta name="theme-color" content="#FF9800">
-    <!-- Friendly Typography Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Mukta', sans-serif;
-            background: linear-gradient(180deg, #FFF3E0 0%, #FFE0B2 100%);
-            margin: 0;
-            padding: 15px;
-            text-align: center;
-            min-height: 100vh;
-        }
-
-        /* Header Layout */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto 20px auto;
-            background: #FFFFFF;
-            padding: 10px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        h2 { 
-            color: #E65100; 
-            margin: 0; 
-            font-size: 22px;
-            font-weight: 800;
-        }
-        .home-btn {
-            background-color: #FF9800;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 3px 0 #E65100;
-            transition: all 0.1s ease;
-        }
-        .home-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-        
-        /* ग्रिड लेआउट - स्वर वर्णहरू देखाउन */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        /* Child-friendly 3D Letter Card */
-        .letter-card {
-            background-color: #FFFFFF;
-            color: #D84315;
-            border: 3px solid #FFB74D;
-            border-radius: 18px;
-            padding: 15px 0;
-            font-size: 42px;
-            font-weight: 800;
-            box-shadow: 0 6px 0 #F57C00, 0 8px 10px rgba(0,0,0,0.15);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* थिच्दा (Click गर्दा) Bounce/Press इफेक्ट */
-        .letter-card:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #F57C00, 0 3px 6px rgba(0,0,0,0.1);
-            background-color: #FFF8E1;
-        }
-    </style>
-
-    <!-- ElevenLabs को लागि script.js जोडिएको -->
-    <script src="script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f59e0b">
+<meta name="description" content="बाल पाठशालामा नेपाली स्वर वर्ण, उदाहरण शब्द र Gemini AI आवाजबाट सिकौँ।">
+<title>स्वर वर्ण — बाल पाठशाला</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<script src="../script.js"></script>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#fff8eb;--surface:#fff;--text:#43280c;--muted:#85694b;
+  --primary:#ea8a08;--border:#f3d6a5;--soft:#fff0d5;
+  --shadow:0 5px 0 #f1d5a7;
+}
+body.dark{
+  color-scheme:dark;
+  --bg:#1c1914;--surface:#2b251c;--text:#fff4df;--muted:#d1bfa2;
+  --primary:#fbbf24;--border:#5b4930;--soft:#3a2e1c;
+  --shadow:0 5px 0 #17130e;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;padding:13px;
+  background:var(--bg);color:var(--text);
+  font-family:"Mukta",sans-serif;transition:background .2s,color .2s
+}
+button,input{font:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #16a34a;outline-offset:3px}
+.page{width:min(100%,900px);margin:auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
+.home,.theme{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-height:43px;padding:8px 14px;border:1px solid var(--border);
+  border-radius:13px;background:var(--surface);color:var(--text);
+  font-weight:900;text-decoration:none
+}
+.hero{
+  padding:23px 14px;margin-bottom:15px;text-align:center;color:#fff;
+  border-radius:24px;background:linear-gradient(135deg,#f59e0b,#ea580c);
+  box-shadow:0 8px 0 #d97706
+}
+.hero .emoji{font-size:38px}
+.hero h1{margin:4px 0;font-size:clamp(26px,5vw,35px);line-height:1.3;font-weight:800}
+.hero p{margin:5px 0 0;font-weight:700}
+.info{
+  margin:14px 0;padding:13px;border:1px solid var(--border);
+  border-radius:15px;background:var(--surface);text-align:center
+}
+.info strong{font-size:18px}
+.info p{margin:3px 0;color:var(--muted)}
+.tools{display:grid;grid-template-columns:1fr auto;gap:9px;margin:14px 0}
+.searchbox{position:relative}
+.searchbox span{position:absolute;left:12px;top:50%;transform:translateY(-50%)}
+#search{
+  width:100%;min-height:46px;padding:10px 12px 10px 39px;
+  border:1px solid var(--border);border-radius:13px;
+  background:var(--surface);color:var(--text)
+}
+#search::placeholder{color:var(--muted)}
+.mode,.filter,.action{
+  padding:9px 13px;border:1px solid var(--border);border-radius:12px;
+  background:var(--surface);color:var(--text);font-weight:800
+}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+.filter.active,.action.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.section-title{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  margin:22px 2px 12px;font-size:22px;font-weight:800
+}
+.count{font-size:13px;color:var(--muted);white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.card{
+  min-width:0;min-height:166px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:5px;padding:12px 8px;
+  border:2px solid var(--border);border-radius:19px;background:var(--surface);
+  color:var(--text);box-shadow:var(--shadow);transition:transform .15s,border-color .15s
+}
+.card:hover{transform:translateY(-2px);border-color:var(--primary)}
+.card:active{transform:translateY(3px);box-shadow:none}
+.picture{
+  display:grid;place-items:center;width:70px;height:65px;
+  border-radius:17px;background:var(--soft);font-size:43px;line-height:1
+}
+.letter{font-size:39px;font-weight:900;line-height:1.1;color:var(--primary)}
+.word{font-size:19px;font-weight:800;line-height:1.2}
+.sound{font-family:"Nunito",sans-serif;color:var(--muted);font-size:11px;font-weight:900}
+.empty{grid-column:1/-1;padding:20px;border:2px dashed var(--border);border-radius:15px;text-align:center;color:var(--muted)}
+.quiz{margin-top:26px;padding:17px;border:1px solid var(--border);border-radius:19px;background:var(--surface)}
+.quiz h2{margin:0;font-size:23px}
+.quiz-meta{color:var(--muted);font-size:14px;font-weight:800}
+.question{margin:14px 0;font-size:21px;font-weight:800}
+.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.answer{
+  min-height:47px;padding:9px;border:2px solid var(--border);border-radius:12px;
+  background:var(--surface);color:var(--text);font-size:17px;font-weight:800
+}
+.answer.correct{background:#dcfce7;color:#14532d;border-color:#16a34a}
+.answer.wrong{background:#fee2e2;color:#7f1d1d;border-color:#dc2626}
+body.dark .answer.correct{background:#164329;color:#d1fae5}
+body.dark .answer.wrong{background:#4b2020;color:#fee2e2}
+.answer:disabled{opacity:.95}
+.feedback{min-height:28px;font-weight:800}
+.next{display:block;margin:8px auto 0}
+footer{text-align:center;padding:20px 0 8px;color:var(--muted);font-size:14px}
+[hidden]{display:none!important}
+@media(min-width:520px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:760px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:370px){body{padding:8px}.tools{grid-template-columns:1fr}.card{min-height:150px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+</style>
 </head>
 <body>
+<div class="page">
+  <header class="topbar">
+    <a class="home" href="../index.html">🏠 होम</a>
+    <button class="theme" id="themeBtn" type="button" aria-label="थिम परिवर्तन">🌙</button>
+  </header>
 
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>स्वर वर्ण (अ - अः)</h2>
+  <section class="hero">
+    <div class="emoji" aria-hidden="true">🔤 🌻 📚</div>
+    <h1>नेपाली स्वर वर्ण</h1>
+    <p>हेरौँ, पढौँ र आवाज सुन्दै सिकौँ!</p>
+  </section>
+
+  <section class="info">
+    <strong>🌟 स्वर वर्ण सिक्ने रमाइलो तरिका</strong>
+    <p>हरेक कार्ड थिच्नुहोस् र अक्षर तथा उदाहरण शब्दको आवाज सुन्नुहोस्।</p>
+  </section>
+
+  <div class="tools">
+    <div class="searchbox">
+      <span aria-hidden="true">🔎</span>
+      <input id="search" type="search" placeholder="अक्षर वा शब्द खोज्नुहोस्..." aria-label="स्वर वर्ण खोज्नुहोस्">
     </div>
+    <button class="mode" id="modeBtn" type="button">अक्षर + शब्द</button>
+  </div>
 
-    <div class="grid-container" id="vowelsGrid">
-        <!-- JavaScript बाट अक्षरहरू यहाँ लोड हुन्छन् -->
-    </div>
+  <nav class="filters" aria-label="अक्षर प्रदर्शन विकल्प">
+    <button class="filter active" data-mode="all" type="button">सबै</button>
+    <button class="filter" data-mode="letter" type="button">अक्षर मात्र</button>
+    <button class="filter" data-mode="example" type="button">चित्र र शब्द</button>
+  </nav>
 
-    <script>
-        const vowels = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ऋ', 'ए', 'ऐ', 'ओ', 'औ', 'अं', 'अः'];
-        const grid = document.getElementById('vowelsGrid');
+  <div class="section-title">
+    <span>🟠 स्वर वर्ण (अ–अः)</span>
+    <span class="count" id="count">१३ वटा</span>
+  </div>
+  <section class="grid" id="vowelsGrid" aria-label="स्वर वर्णका कार्ड"></section>
 
-        vowels.forEach(letter => {
-            const div = document.createElement('div');
-            div.className = 'letter-card';
-            div.innerText = letter;
-            
-            // playAIVoice प्रयोग गरिएको
-            div.addEventListener('click', () => {
-                playAIVoice(letter);
-            });
+  <section class="quiz">
+    <h2>🎯 सानो क्विज</h2>
+    <div class="quiz-meta" id="quizMeta">प्रश्न १</div>
+    <div class="question" id="question">प्रश्न तयार हुँदैछ...</div>
+    <div class="answers" id="answers"></div>
+    <p class="feedback" id="feedback" aria-live="polite"></p>
+    <button class="action primary next" id="nextBtn" type="button" hidden>अर्को प्रश्न ➜</button>
+  </section>
 
-            grid.appendChild(div);
-        });
-    </script>
+  <footer>💛 बाल पाठशाला — खेल्दै सिकौँ, सिक्दै रमाऔँ!</footer>
+</div>
 
+<script>
+"use strict";
+
+const vowels = [
+  {letter:"अ",word:"अनार",emoji:"🍎",note:"अ बाट अनार"},
+  {letter:"आ",word:"आमा",emoji:"👩",note:"आ बाट आमा"},
+  {letter:"इ",word:"इँटा",emoji:"🧱",note:"इ बाट इँटा"},
+  {letter:"ई",word:"ईख",emoji:"🌿",note:"ई बाट ईख"},
+  {letter:"उ",word:"उखु",emoji:"🎋",note:"उ बाट उखु"},
+  {letter:"ऊ",word:"ऊन",emoji:"🧶",note:"ऊ बाट ऊन"},
+  {letter:"ऋ",word:"ऋषि",emoji:"🧘",note:"ऋ बाट ऋषि"},
+  {letter:"ए",word:"एक",emoji:"☝️",note:"ए बाट एक"},
+  {letter:"ऐ",word:"ऐना",emoji:"🪞",note:"ऐ बाट ऐना"},
+  {letter:"ओ",word:"ओखर",emoji:"🌰",note:"ओ बाट ओखर"},
+  {letter:"औ",word:"औषधि",emoji:"🩺",note:"औ बाट औषधि"},
+  {letter:"अं",word:"अङ्गुर",emoji:"🍇",note:"अं बाट अङ्गुर"},
+  {letter:"अः",word:"दुःख",emoji:"📖",note:"अः लाई विसर्ग भनिन्छ"}
+];
+
+const $ = id => document.getElementById(id);
+let displayMode = "all";
+let compactWords = false;
+let questionIndex = 0;
+let score = 0;
+let answered = false;
+let questions = [];
+
+function speak(text) {
+  if (typeof window.playAIVoice !== "function") {
+    console.warn("Gemini AI voice function भेटिएन। ../script.js जाँच्नुहोस्।");
+    return;
+  }
+  try {
+    const result = window.playAIVoice(text);
+    if (result && typeof result.catch === "function") {
+      result.catch(error => console.warn("Gemini AI voice:", error));
+    }
+  } catch (error) {
+    console.warn("Gemini AI voice:", error);
+  }
+}
+
+function createCard(item) {
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "card";
+  card.dataset.search = `${item.letter} ${item.word} ${item.note}`.toLocaleLowerCase();
+  card.setAttribute("aria-label", `${item.letter}, ${item.note}`);
+
+  if (displayMode !== "example") {
+    const letter = document.createElement("span");
+    letter.className = "letter";
+    letter.textContent = item.letter;
+    card.appendChild(letter);
+  }
+
+  if (displayMode !== "letter") {
+    const picture = document.createElement("span");
+    picture.className = "picture";
+    picture.textContent = item.emoji;
+    picture.setAttribute("aria-hidden", "true");
+    card.appendChild(picture);
+
+    const word = document.createElement("span");
+    word.className = "word";
+    word.textContent = item.word;
+    card.appendChild(word);
+  }
+
+  if (displayMode === "all") {
+    const hint = document.createElement("span");
+    hint.className = "sound";
+    hint.textContent = "🔊 थिचेर सुन्नुहोस्";
+    card.appendChild(hint);
+  }
+
+  card.addEventListener("click", () => {
+    speak(`${item.letter}. ${item.note}.`);
+  });
+  return card;
+}
+
+function renderCards() {
+  const grid = $("vowelsGrid");
+  grid.replaceChildren();
+
+  const query = $("search").value.trim().toLocaleLowerCase();
+  const visible = vowels.filter(item =>
+    `${item.letter} ${item.word} ${item.note}`.toLocaleLowerCase().includes(query)
+  );
+
+  visible.forEach(item => grid.appendChild(createCard(item)));
+  $("count").textContent = `${visible.length} / ${vowels.length} वटा`;
+
+  if (!visible.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "यो अक्षर वा शब्द भेटिएन। फेरि खोज्नुहोस्।";
+    grid.appendChild(empty);
+  }
+
+  $("modeBtn").textContent =
+    displayMode === "all" ? "अक्षर + शब्द" :
+    displayMode === "letter" ? "अक्षर मात्र" : "चित्र र शब्द";
+}
+
+$("search").addEventListener("input", renderCards);
+
+document.querySelectorAll("[data-mode]").forEach(button => {
+  button.addEventListener("click", () => {
+    displayMode = button.dataset.mode;
+    document.querySelectorAll("[data-mode]").forEach(btn =>
+      btn.classList.toggle("active", btn === button)
+    );
+    renderCards();
+  });
+});
+
+$("modeBtn").addEventListener("click", () => {
+  const modes = ["all","letter","example"];
+  displayMode = modes[(modes.indexOf(displayMode) + 1) % modes.length];
+  document.querySelectorAll("[data-mode]").forEach(btn =>
+    btn.classList.toggle("active", btn.dataset.mode === displayMode)
+  );
+  renderCards();
+});
+
+$("themeBtn").addEventListener("click", () => {
+  const dark = document.body.classList.toggle("dark");
+  $("themeBtn").textContent = dark ? "☀️" : "🌙";
+  try {
+    localStorage.setItem("bal_pathshala_vowels_theme", dark ? "dark" : "light");
+  } catch (_) {}
+});
+
+try {
+  if (localStorage.getItem("bal_pathshala_vowels_theme") === "dark") {
+    document.body.classList.add("dark");
+    $("themeBtn").textContent = "☀️";
+  }
+} catch (_) {}
+
+function shuffle(list) {
+  const result = [...list];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+function startQuiz() {
+  questions = shuffle(vowels).slice(0, 8);
+  questionIndex = 0;
+  score = 0;
+  showQuestion();
+}
+
+function showQuestion() {
+  answered = false;
+  const item = questions[questionIndex];
+  $("quizMeta").textContent = `प्रश्न ${questionIndex + 1} / ${questions.length} · सही उत्तर ${score}`;
+  $("question").textContent = `“${item.letter}” को उदाहरण कुन हो?`;
+  $("answers").replaceChildren();
+  $("feedback").textContent = "";
+  $("nextBtn").hidden = true;
+
+  const options = shuffle([
+    item.word,
+    ...shuffle(vowels.filter(v => v.word !== item.word)).slice(0, 3).map(v => v.word)
+  ]);
+
+  options.forEach(option => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "answer";
+    button.textContent = option;
+    button.addEventListener("click", () => checkAnswer(button, option, item));
+    $("answers").appendChild(button);
+  });
+}
+
+function checkAnswer(button, selected, item) {
+  if (answered) return;
+  answered = true;
+
+  document.querySelectorAll(".answer").forEach(btn => {
+    btn.disabled = true;
+    if (btn.textContent === item.word) btn.classList.add("correct");
+  });
+
+  if (selected === item.word) {
+    score++;
+    $("feedback").textContent = "🎉 सही उत्तर! धेरै राम्रो!";
+  } else {
+    button.classList.add("wrong");
+    $("feedback").textContent = `🙂 सही उत्तर: ${item.word}`;
+  }
+
+  $("quizMeta").textContent = `प्रश्न ${questionIndex + 1} / ${questions.length} · सही उत्तर ${score}`;
+  $("nextBtn").hidden = false;
+  $("nextBtn").textContent = questionIndex === questions.length - 1 ? "फेरि खेलौँ ↻" : "अर्को प्रश्न ➜";
+}
+
+$("nextBtn").addEventListener("click", () => {
+  if (questionIndex >= questions.length - 1) {
+    startQuiz();
+  } else {
+    questionIndex++;
+    showQuestion();
+  }
+});
+
+renderCards();
+startQuiz();
+</script>
 </body>
 </html>
