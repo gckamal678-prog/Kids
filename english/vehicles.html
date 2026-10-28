@@ -1,157 +1,704 @@
+HTML
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>सवारी साधनहरू - पाठशाला</title>
-    <meta name="theme-color" content="#0288D1">
-    <!-- Child-friendly Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Mukta', 'Fredoka', sans-serif;
-            background: linear-gradient(180deg, #E1F5FE 0%, #B3E5FC 100%);
-            margin: 0;
-            padding: 15px;
-            text-align: center;
-            min-height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#087fbb">
+  <title>सवारी साधनहरू | बाल पाठशाला</title>
+  <meta name="description" content="बाल पाठशालामा सवारी साधनका नेपाली र अंग्रेजी नाम खेल्दै सिकौँ।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="../script.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eff8ff;
+      --surface: #ffffff;
+      --text: #17324d;
+      --muted: #60758b;
+      --primary: #087fbb;
+      --primary-dark: #075985;
+      --border: #d8eaf7;
+      --shadow: 0 8px 24px rgba(20, 81, 125, .09);
+      --input: #f5faff;
+    }
 
-        /* Header Layout */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto 15px auto;
-            background: #FFFFFF;
-            padding: 10px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        h2 { 
-            color: #0277BD; 
-            margin: 0; 
-            font-size: 20px; 
-            font-weight: 800;
-        }
-        .home-btn {
-            background-color: #0288D1;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 3px 0 #01579B;
-            transition: all 0.1s ease;
-        }
-        .home-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
+    body.dark {
+      color-scheme: dark;
+      --bg: #101a2b;
+      --surface: #1b2940;
+      --text: #edf6ff;
+      --muted: #b0c1d5;
+      --primary: #38bdf8;
+      --primary-dark: #7dd3fc;
+      --border: #34465f;
+      --shadow: 0 8px 24px rgba(0, 0, 0, .2);
+      --input: #142238;
+    }
 
-        /* Grid Layout */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            max-width: 600px;
-            margin: auto;
-        }
+    * { box-sizing: border-box; }
 
-        /* 3D Soft Card Style */
-        .card {
-            background-color: #FFFFFF;
-            color: #0277BD;
-            border: 3px solid #81D4FA;
-            border-radius: 18px;
-            padding: 15px 10px;
-            box-shadow: 0 6px 0 #0288D1, 0 8px 10px rgba(0,0,0,0.08);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .card:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #0288D1, 0 3px 6px rgba(0,0,0,0.1);
-            background-color: #E1F5FE;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 16px;
+      background:
+        radial-gradient(circle at 5% 5%, rgba(56,189,248,.12), transparent 28%),
+        radial-gradient(circle at 95% 20%, rgba(251,191,36,.12), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Nunito", "Baloo 2", sans-serif;
+      transition: background .2s, color .2s;
+    }
 
-        /* Large Emoji Style */
-        .emoji-box {
-            font-size: 52px;
-            line-height: 1.1;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-        }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 3px solid #f59e0b;
+      outline-offset: 3px;
+    }
 
-        .name-nepali {
-            font-size: 22px;
-            font-weight: 800;
-            color: #01579B;
-            line-height: 1.2;
-        }
+    .page { width: min(100%, 900px); margin: auto; }
 
-        .name-english {
-            font-size: 15px;
-            font-weight: 700;
-            color: #0288D1;
-        }
-    </style>
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
 
-    <!-- ElevenLabs को लागि script.js जोडिएको -->
-    <script src="script.js"></script>
+    .home, .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+    }
+
+    .icon-btn { min-width: 44px; padding: 8px 12px; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 24px 18px;
+      margin-bottom: 18px;
+      text-align: center;
+      color: #fff;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      box-shadow: 0 12px 28px rgba(2, 132, 199, .22);
+    }
+
+    .hero::after {
+      content: "🚗";
+      position: absolute;
+      right: 12px;
+      bottom: -15px;
+      font-size: 76px;
+      opacity: .18;
+      transform: rotate(-10deg);
+    }
+
+    .hero .hero-icon { font-size: 46px; line-height: 1.2; }
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      margin: 7px 0 4px;
+      font-family: "Baloo 2", sans-serif;
+      font-size: clamp(26px, 5vw, 36px);
+      line-height: 1.25;
+    }
+
+    .hero p { position: relative; z-index: 1; margin: 5px 0 0; font-weight: 800; }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .search-wrap { position: relative; }
+    .search-icon {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      pointer-events: none;
+    }
+
+    #search {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px 12px 42px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      color: var(--text);
+      outline-offset: 2px;
+    }
+
+    #search::placeholder { color: var(--muted); }
+
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 18px;
+    }
+
+    .filter {
+      padding: 9px 15px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 900;
+      transition: .15s;
+    }
+
+    .filter.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 18px 2px 12px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: "Baloo 2", sans-serif;
+      font-size: 23px;
+    }
+
+    #count { color: var(--muted); font-size: 13px; font-weight: 900; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .vehicle-card {
+      position: relative;
+      display: flex;
+      min-width: 0;
+      min-height: 166px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 15px 8px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      border-radius: 21px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: transform .16s, border-color .16s;
+    }
+
+    .vehicle-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .vehicle-card:active { transform: scale(.97); }
+
+    .vehicle-emoji {
+      display: grid;
+      place-items: center;
+      width: 78px;
+      height: 73px;
+      border-radius: 20px;
+      background: var(--input);
+      font-size: 49px;
+      line-height: 1;
+    }
+
+    .vehicle-np {
+      margin-top: 5px;
+      font-family: "Baloo 2", sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .vehicle-en { color: var(--muted); font-size: 14px; font-weight: 900; }
+    .speak-hint { margin-top: 3px; font-size: 11px; color: var(--primary); font-weight: 900; }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 28px 14px;
+      border: 2px dashed var(--border);
+      border-radius: 20px;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .quiz-panel {
+      margin-top: 25px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 23px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-panel h2 {
+      margin: 0 0 5px;
+      font-family: "Baloo 2", sans-serif;
+      font-size: 25px;
+    }
+
+    .quiz-intro { margin: 0 0 16px; color: var(--muted); font-weight: 700; }
+    #quizContent { text-align: center; }
+    #quizProgress { color: var(--muted); font-size: 13px; font-weight: 900; }
+    #quizEmoji { margin: 10px 0; font-size: 65px; }
+    #quizQuestion { margin: 6px 0 16px; font-size: 20px; font-weight: 900; }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .option {
+      min-height: 48px;
+      padding: 10px;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      background: var(--input);
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .option:disabled { cursor: default; opacity: 1; }
+    .option.correct { border-color: #16a34a; background: rgba(22,163,74,.14); }
+    .option.wrong { border-color: #ef4444; background: rgba(239,68,68,.12); }
+
+    #feedback { min-height: 28px; margin: 12px 0 5px; font-weight: 900; }
+
+    .primary-btn {
+      min-height: 45px;
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 14px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .primary-btn:disabled { opacity: .45; cursor: not-allowed; }
+
+    .quiz-actions { display: flex; justify-content: center; gap: 9px; margin-top: 12px; flex-wrap: wrap; }
+    .score-box { padding: 20px 8px; }
+    .score-emoji { font-size: 58px; }
+    .score-box h3 { margin: 8px 0; font-size: 25px; }
+    .score-box p { color: var(--muted); font-weight: 800; }
+
+    footer {
+      padding: 24px 8px 10px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 12px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .vehicle-card { min-height: 157px; }
+      .hero { padding: 21px 12px; }
+      .hero::after { font-size: 56px; }
+      .toolbar { grid-template-columns: 1fr; }
+      .toggle-label { justify-self: start; }
+      .quiz-panel { padding: 16px 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
 </head>
 <body>
+  <main class="page">
+    <nav class="topbar" aria-label="मुख्य नेभिगेसन">
+      <a class="home" href="../index.html">🏠 होम</a>
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="थिम परिवर्तन गर्नुहोस्">🌙</button>
+    </nav>
 
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>सवारी साधनहरू (Vehicles)</h2>
-    </div>
+    <header class="hero">
+      <div class="hero-icon" aria-hidden="true">🚗 🚲 ✈️</div>
+      <h1>सवारी साधनहरू</h1>
+      <p>Vehicles — हेरौँ, सुनौँ र रमाउँदै सिकौँ!</p>
+    </header>
 
-    <div class="grid-container" id="vehiclesGrid"></div>
+    <section aria-label="सवारी साधन खोज्नुहोस्">
+      <div class="toolbar">
+        <label class="search-wrap">
+          <span class="search-icon" aria-hidden="true">🔎</span>
+          <input id="search" type="search" placeholder="नेपाली वा English नाम खोज्नुहोस्..." autocomplete="off" aria-label="सवारी साधन खोज्नुहोस्">
+        </label>
+        <label class="toggle-label">
+          <input id="showEnglish" type="checkbox" checked>
+          English नाम देखाउने
+        </label>
+      </div>
 
-    <script>
-        // सवारी साधनहरूको डाटा
-        const vehiclesData = [
-            { name: 'साइकल', eng: 'Bicycle', emoji: '🚲' },
-            { name: 'मोटरसाइकल', eng: 'Motorcycle', emoji: '🏍️' },
-            { name: 'कार', eng: 'Car', emoji: '🚗' },
-            { name: 'बस', eng: 'Bus', emoji: '🚌' },
-            { name: 'ट्रक', eng: 'Truck', emoji: '🚚' },
-            { name: 'ट्याक्टर', eng: 'Tractor', emoji: '🚜' },
-            { name: 'हवाइजहाज', eng: 'Aeroplane', emoji: '✈️' },
-            { name: 'हेलिकप्टर', eng: 'Helicopter', emoji: '🚁' },
-            { name: 'रेलगाडी', eng: 'Train', emoji: '🚆' },
-            { name: 'डुङ्गा', eng: 'Boat', emoji: '🛶' },
-            { name: 'पानीजहाज', eng: 'Ship', emoji: '🚢' },
-            { name: 'अटो', eng: 'Auto Rickshaw', emoji: '🛺' }
-        ];
+      <div class="filters" role="group" aria-label="सवारीको प्रकार">
+        <button class="filter active" data-filter="all" type="button" aria-pressed="true">🌟 सबै</button>
+        <button class="filter" data-filter="land" type="button" aria-pressed="false">🛣️ स्थल</button>
+        <button class="filter" data-filter="air" type="button" aria-pressed="false">☁️ हवाई</button>
+        <button class="filter" data-filter="water" type="button" aria-pressed="false">🌊 पानी</button>
+      </div>
+    </section>
 
-        const vehiclesGrid = document.getElementById('vehiclesGrid');
+    <section aria-labelledby="listTitle">
+      <div class="section-heading">
+        <h2 id="listTitle">🎒 सिकौँ सवारीका नाम</h2>
+        <span id="count" aria-live="polite">० वटा</span>
+      </div>
+      <div class="grid" id="vehiclesGrid"></div>
+    </section>
 
-        vehiclesData.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="emoji-box">${item.emoji}</div>
-                <div class="name-nepali">${item.name}</div>
-                <div class="name-english">(${item.eng})</div>
-            `;
-            // playAIVoice प्रयोग गरिएको
-            card.addEventListener('click', () => playAIVoice(item.name));
-            vehiclesGrid.appendChild(card);
+    <section class="quiz-panel" aria-labelledby="quizTitle">
+      <h2 id="quizTitle">🎯 सानो क्विज खेलौँ!</h2>
+      <p class="quiz-intro">इमोजी हेरेर सही English नाम छान्नुहोस्।</p>
+      <div id="quizContent">
+        <div id="quizProgress">प्रश्न १ / ८</div>
+        <div id="quizEmoji" aria-hidden="true">🚗</div>
+        <div id="quizQuestion">यो कुन सवारी साधन हो?</div>
+        <div class="options" id="quizOptions"></div>
+        <div id="feedback" role="status" aria-live="polite"></div>
+        <div class="quiz-actions">
+          <button class="primary-btn" id="nextBtn" type="button" disabled>अर्को प्रश्न ➜</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>🌈 बाल पाठशाला — खेल्दै सिकौँ, सिक्दै रमाऔँ!</footer>
+  </main>
+
+  <script>
+    "use strict";
+
+    const vehicles = [
+      { np: "साइकल", en: "Bicycle", emoji: "🚲", type: "land" },
+      { np: "मोटरसाइकल", en: "Motorcycle", emoji: "🏍️", type: "land" },
+      { np: "कार", en: "Car", emoji: "🚗", type: "land" },
+      { np: "बस", en: "Bus", emoji: "🚌", type: "land" },
+      { np: "ट्रक", en: "Truck", emoji: "🚚", type: "land" },
+      { np: "ट्याक्टर", en: "Tractor", emoji: "🚜", type: "land" },
+      { np: "रेलगाडी", en: "Train", emoji: "🚆", type: "land" },
+      { np: "अटो रिक्सा", en: "Auto Rickshaw", emoji: "🛺", type: "land" },
+      { np: "एम्बुलेन्स", en: "Ambulance", emoji: "🚑", type: "land" },
+      { np: "दमकल", en: "Fire Engine", emoji: "🚒", type: "land" },
+      { np: "भ्यान", en: "Van", emoji: "🚐", type: "land" },
+      { np: "हवाइजहाज", en: "Aeroplane", emoji: "✈️", type: "air" },
+      { np: "हेलिकप्टर", en: "Helicopter", emoji: "🚁", type: "air" },
+      { np: "रकेट", en: "Rocket", emoji: "🚀", type: "air" },
+      { np: "डुङ्गा", en: "Boat", emoji: "🛶", type: "water" },
+      { np: "पानीजहाज", en: "Ship", emoji: "🚢", type: "water" },
+      { np: "डुङ्गा (चप्पु)", en: "Rowboat", emoji: "🚣", type: "water" },
+      { np: "याट", en: "Yacht", emoji: "⛵", type: "water" }
+    ];
+
+    const grid = document.getElementById("vehiclesGrid");
+    const search = document.getElementById("search");
+    const showEnglish = document.getElementById("showEnglish");
+    const count = document.getElementById("count");
+    const themeBtn = document.getElementById("themeBtn");
+    let activeFilter = "all";
+
+    function speak(text) {
+      if (typeof window.playAIVoice === "function") {
+        try {
+          const result = window.playAIVoice(text);
+          if (result && typeof result.catch === "function") {
+            result.catch(err => console.warn("AI voice:", err));
+          }
+        } catch (err) {
+          console.warn("AI voice उपलब्ध छैन:", err);
+        }
+      } else {
+        console.warn("AI voice function भेटिएन। ../script.js र voice configuration जाँच्नुहोस्।");
+      }
+    }
+
+    function renderVehicles() {
+      const query = search.value.trim().toLocaleLowerCase();
+      const visible = vehicles.filter(item => {
+        const matchesType = activeFilter === "all" || item.type === activeFilter;
+        const matchesQuery =
+          item.np.toLocaleLowerCase().includes(query) ||
+          item.en.toLocaleLowerCase().includes(query);
+        return matchesType && matchesQuery;
+      });
+
+      grid.replaceChildren();
+      count.textContent = `${visible.length} वटा`;
+
+      if (visible.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "😕 सवारी साधन भेटिएन। अर्को नाम खोज्नुहोस्।";
+        grid.appendChild(empty);
+        return;
+      }
+
+      visible.forEach(item => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "vehicle-card";
+        card.setAttribute("aria-label", `${item.np}, ${item.en}। आवाज सुन्न थिच्नुहोस्।`);
+
+        const emoji = document.createElement("span");
+        emoji.className = "vehicle-emoji";
+        emoji.setAttribute("aria-hidden", "true");
+        emoji.textContent = item.emoji;
+
+        const nepali = document.createElement("span");
+        nepali.className = "vehicle-np";
+        nepali.textContent = item.np;
+
+        card.append(emoji, nepali);
+
+        if (showEnglish.checked) {
+          const english = document.createElement("span");
+          english.className = "vehicle-en";
+          english.textContent = item.en;
+          card.appendChild(english);
+        }
+
+        const hint = document.createElement("span");
+        hint.className = "speak-hint";
+        hint.textContent = "🔊 आवाज सुन्नुहोस्";
+        card.appendChild(hint);
+
+        card.addEventListener("click", () => speak(`${item.np}. ${item.en}`));
+        grid.appendChild(card);
+      });
+    }
+
+    search.addEventListener("input", renderVehicles);
+    showEnglish.addEventListener("change", renderVehicles);
+
+    document.querySelectorAll(".filter").forEach(button => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        document.querySelectorAll(".filter").forEach(filterButton => {
+          const selected = filterButton === button;
+          filterButton.classList.toggle("active", selected);
+          filterButton.setAttribute("aria-pressed", String(selected));
         });
-    </script>
+        renderVehicles();
+      });
+    });
 
+    function applyTheme(dark) {
+      document.body.classList.toggle("dark", dark);
+      themeBtn.textContent = dark ? "☀️" : "🌙";
+      themeBtn.setAttribute("aria-label", dark ? "Light Mode खोल्नुहोस्" : "Dark Mode खोल्नुहोस्");
+      document.querySelector('meta[name="theme-color"]').content = dark ? "#101a2b" : "#087fbb";
+      try {
+        localStorage.setItem("theme", dark ? "dark" : "light");
+      } catch (err) {
+        console.warn("Theme save गर्न सकिएन:", err);
+      }
+    }
+
+    try {
+      applyTheme(localStorage.getItem("theme") === "dark");
+    } catch (err) {
+      applyTheme(false);
+    }
+
+    themeBtn.addEventListener("click", () => {
+      applyTheme(!document.body.classList.contains("dark"));
+    });
+
+    // क्विज: प्रत्येक खेलमा ८ फरक प्रश्न
+    const QUIZ_LENGTH = 8;
+    let quizQuestions = [];
+    let quizIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    const quizProgress = document.getElementById("quizProgress");
+    const quizEmoji = document.getElementById("quizEmoji");
+    const quizQuestion = document.getElementById("quizQuestion");
+    const quizOptions = document.getElementById("quizOptions");
+    const feedback = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextBtn");
+    const quizContent = document.getElementById("quizContent");
+
+    function shuffle(list) {
+      const result = [...list];
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    function startQuiz() {
+      quizQuestions = shuffle(vehicles).slice(0, QUIZ_LENGTH);
+      quizIndex = 0;
+      score = 0;
+      answered = false;
+      quizContent.replaceChildren();
+
+      const progress = document.createElement("div");
+      progress.id = "quizProgress";
+      const emoji = document.createElement("div");
+      emoji.id = "quizEmoji";
+      emoji.setAttribute("aria-hidden", "true");
+      const question = document.createElement("div");
+      question.id = "quizQuestion";
+      const options = document.createElement("div");
+      options.className = "options";
+      options.id = "quizOptions";
+      const status = document.createElement("div");
+      status.id = "feedback";
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      const actions = document.createElement("div");
+      actions.className = "quiz-actions";
+      const next = document.createElement("button");
+      next.className = "primary-btn";
+      next.id = "nextBtn";
+      next.type = "button";
+      next.disabled = true;
+      next.textContent = "अर्को प्रश्न ➜";
+      next.addEventListener("click", nextQuestion);
+
+      actions.appendChild(next);
+      quizContent.append(progress, emoji, question, options, status, actions);
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      answered = false;
+      const item = quizQuestions[quizIndex];
+      const progress = document.getElementById("quizProgress");
+      const emoji = document.getElementById("quizEmoji");
+      const question = document.getElementById("quizQuestion");
+      const options = document.getElementById("quizOptions");
+      const status = document.getElementById("feedback");
+      const next = document.getElementById("nextBtn");
+
+      progress.textContent = `प्रश्न ${quizIndex + 1} / ${QUIZ_LENGTH} · अङ्क ${score}`;
+      emoji.textContent = item.emoji;
+      question.textContent = "यो कुन सवारी साधन हो?";
+      status.textContent = "";
+      next.disabled = true;
+      next.textContent = quizIndex === QUIZ_LENGTH - 1 ? "नतिजा हेर्नुहोस् 🏆" : "अर्को प्रश्न ➜";
+      options.replaceChildren();
+
+      const wrongAnswers = shuffle(vehicles.filter(v => v.en !== item.en)).slice(0, 3);
+      const choices = shuffle([item, ...wrongAnswers]);
+
+      choices.forEach(choice => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option";
+        button.textContent = choice.en;
+        button.addEventListener("click", () => selectAnswer(button, choice, item));
+        options.appendChild(button);
+      });
+    }
+
+    function selectAnswer(button, choice, correctItem) {
+      if (answered) return;
+      answered = true;
+
+      const options = document.querySelectorAll("#quizOptions .option");
+      options.forEach(option => {
+        option.disabled = true;
+        if (option.textContent === correctItem.en) option.classList.add("correct");
+      });
+
+      if (choice.en === correctItem.en) {
+        score++;
+        document.getElementById("feedback").textContent = "🎉 एकदम सही! शाबास!";
+      } else {
+        button.classList.add("wrong");
+        document.getElementById("feedback").textContent = `🙂 सही उत्तर: ${correctItem.en}`;
+      }
+
+      document.getElementById("quizProgress").textContent =
+        `प्रश्न ${quizIndex + 1} / ${QUIZ_LENGTH} · अङ्क ${score}`;
+      document.getElementById("nextBtn").disabled = false;
+    }
+
+    function nextQuestion() {
+      if (!answered) return;
+      if (quizIndex < QUIZ_LENGTH - 1) {
+        quizIndex++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      quizContent.replaceChildren();
+
+      const box = document.createElement("div");
+      box.className = "score-box";
+      const emoji = document.createElement("div");
+      emoji.className = "score-emoji";
+      emoji.textContent = score >= 7 ? "🏆" : score >= 5 ? "🌟" : "💪";
+
+      const title = document.createElement("h3");
+      title.textContent = score >= 7 ? "वाह! उत्कृष्ट!" : score >= 5 ? "धेरै राम्रो!" : "राम्रो प्रयास!";
+
+      const result = document.createElement("p");
+      result.textContent = `तपाईंको अङ्क ${QUIZ_LENGTH} मध्ये ${score} हो।`;
+
+      const restart = document.createElement("button");
+      restart.className = "primary-btn";
+      restart.type = "button";
+      restart.textContent = "🔄 फेरि खेलौँ";
+      restart.addEventListener("click", startQuiz);
+
+      box.append(emoji, title, result, restart);
+      quizContent.appendChild(box);
+    }
+
+    renderVehicles();
+    startQuiz();
+  </script>
 </body>
 </html>
