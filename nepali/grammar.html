@@ -1,502 +1,93 @@
-
 <!DOCTYPE html>
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#087f8c">
-<meta name="description" content="बाल पाठशाला — कक्षा ० देखि ५ सम्मका बालबालिकाका लागि नेपाली व्याकरण, उदाहरण, Gemini AI आवाज र क्विज।">
+<meta name="description" content="बाल पाठशाला — कक्षा ० देखि ५ सम्म नेपाली व्याकरण सिकौँ।">
 <title>नेपाली व्याकरण | बाल पाठशाला</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="../script.js"></script>
-
 <style>
-:root{
-  color-scheme:light;
-  --bg:#f2f8fa;--card:#fff;--text:#19323c;--muted:#647983;
-  --primary:#087f8c;--border:#dce9ed;--soft:#e5f7f7;
-  --shadow:0 8px 24px rgba(24,75,90,.08);
-}
-body.dark{
-  color-scheme:dark;--bg:#121b22;--card:#1d2a34;--text:#edf8fc;
-  --muted:#b1c5ce;--primary:#69d4db;--border:#344651;
-  --soft:#253d45;--shadow:0 8px 24px rgba(0,0,0,.2);
-}
-*{box-sizing:border-box}
-body{margin:0;padding:12px;background:var(--bg);color:var(--text);font-family:'Mukta',sans-serif;transition:background .2s,color .2s}
-button,input,select{font:inherit}
-button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #ffbd4a;outline-offset:3px}
-.page{max-width:1050px;margin:auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow)}
-.brand{display:flex;align-items:center;gap:10px;min-width:0}
-.logo{display:grid;place-items:center;width:46px;height:46px;border-radius:15px;background:#d9f6ed;font-size:27px;flex-shrink:0}
-h1{font-size:clamp(19px,4vw,27px);line-height:1.25;margin:0;font-weight:800}
-.sub{font-size:12px;color:var(--muted);margin:3px 0 0}
-.actions{display:flex;gap:6px;align-items:center}
-.btn,.home{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:11px;padding:8px 11px;font-weight:700;text-decoration:none;white-space:nowrap}
-.home{background:var(--primary);color:white;border-color:transparent}
-.hero{margin:14px 0;padding:22px;border-radius:22px;color:white;background:linear-gradient(120deg,#087f8c,#17a5a1 58%,#63c9ad);box-shadow:var(--shadow)}
-.hero h2{font-size:clamp(22px,5vw,31px);margin:0 0 5px}
-.hero p{margin:0 0 14px}
-.pills{display:flex;gap:7px;flex-wrap:wrap}
-.pill{padding:6px 11px;border-radius:30px;background:#ffffff25;border:1px solid #ffffff50;font-weight:700;font-size:13px}
-.panel{padding:14px;background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);margin-bottom:14px}
-.panel-title{margin:0 0 10px;font-size:18px;font-weight:800}
-.grade-list,.filters{display:flex;flex-wrap:wrap;gap:7px}
-.grade,.filter{border:1px solid var(--border);background:var(--card);color:var(--text);padding:8px 12px;border-radius:12px;font-weight:700}
-.grade.active,.filter.active{background:var(--primary);color:#fff;border-color:transparent}
-.search{width:100%;margin-bottom:11px;border:1px solid var(--border);border-radius:12px;padding:11px 13px;background:var(--bg);color:var(--text);font-size:16px}
-.note{font-size:13px;color:var(--muted);margin:10px 0 0}
-.lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.lesson{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:var(--shadow);min-width:0;display:flex;flex-direction:column}
-.lesson-top{display:flex;gap:10px;align-items:flex-start}
-.lesson-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:var(--soft);font-size:25px;flex-shrink:0}
-.lesson h3{font-size:19px;line-height:1.3;margin:0 0 3px}
-.grade-tag{font-size:12px;color:var(--primary);font-weight:800}
-.lesson-desc{font-size:14px;color:var(--muted);margin:10px 0}
-.example{padding:10px 12px;border-radius:12px;background:var(--soft);margin:0 0 10px;line-height:1.65}
-.example strong{color:var(--primary)}
-.lesson-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:5px}
-.lesson-actions button{flex:1;min-width:95px;border:1px solid var(--border);border-radius:10px;padding:8px;background:var(--card);color:var(--text);font-weight:700}
-.lesson-actions .learn{background:var(--primary);color:#fff;border-color:transparent}
-.lesson-detail{display:none;border-top:1px solid var(--border);padding-top:10px;margin-top:12px}
-.lesson-detail.open{display:block}
-.lesson-detail p{margin:7px 0;line-height:1.7}
-.lesson-detail ul{padding-left:21px;line-height:1.8;margin:6px 0}
-.empty{display:none;padding:25px;text-align:center;color:var(--muted);background:var(--card);border-radius:16px}
-.quiz{margin-top:20px;padding:17px;background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow)}
-.quiz h2{margin:0 0 4px;font-size:23px}
-.muted{color:var(--muted);margin:0 0 13px}
-.quizbox{background:var(--bg);border:1px solid var(--border);padding:16px;border-radius:16px;text-align:center}
-.progress{font-size:13px;color:var(--muted);font-weight:700}
-.qtext{font-size:clamp(21px,5vw,30px);font-weight:800;margin:13px 0}
-.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-.option{padding:11px 7px;border:2px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-weight:700}
-.option:disabled{opacity:1;cursor:default}
-.option.correct{border-color:#19985c;background:#e0f8eb;color:#075d35}
-.option.wrong{border-color:#d74d4d;background:#ffeded;color:#922323}
-body.dark .option.correct{background:#193e2d;color:#c6ffdb}
-body.dark .option.wrong{background:#48272c;color:#ffd5d5}
-.feedback{min-height:27px;margin:10px 0 0;font-weight:700}
-.quiz-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
-.primary{background:var(--primary)!important;color:#fff!important;border-color:transparent!important}
-.quiz-actions button{border:1px solid var(--border);border-radius:11px;padding:9px 13px;background:var(--card);color:var(--text);font-weight:700}
-.quiz-actions button:disabled{opacity:.45;cursor:not-allowed}
-.footer{text-align:center;color:var(--muted);padding:22px 0 10px;font-size:13px}
-.toast{display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);max-width:calc(100% - 28px);z-index:10;background:#20313b;color:white;padding:11px 15px;border-radius:12px;box-shadow:var(--shadow);text-align:center}
-@media(max-width:600px){.lesson-grid{grid-template-columns:1fr}.hero{padding:17px}.topbar{padding:9px}.logo{width:38px;height:38px;font-size:22px}.btn,.home{padding:8px;font-size:13px}}
+:root{color-scheme:light;--bg:#f2f8fa;--card:#fff;--text:#19323c;--muted:#647983;--primary:#087f8c;--border:#dce9ed;--soft:#e5f7f7;--shadow:0 8px 24px rgba(24,75,90,.08)}
+body.dark{color-scheme:dark;--bg:#121b22;--card:#1d2a34;--text:#edf8fc;--muted:#b1c5ce;--primary:#69d4db;--border:#344651;--soft:#253d45;--shadow:0 8px 24px rgba(0,0,0,.2)}
+*{box-sizing:border-box}body{margin:0;padding:12px;background:var(--bg);color:var(--text);font-family:'Mukta',sans-serif;transition:background .2s,color .2s}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #ffbd4a;outline-offset:3px}
+.page{max-width:1080px;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow)}.brand{display:flex;align-items:center;gap:10px;min-width:0}.logo{display:grid;place-items:center;width:46px;height:46px;border-radius:15px;background:#d9f6ed;font-size:27px;flex-shrink:0}h1{font-size:clamp(19px,4vw,27px);line-height:1.25;margin:0;font-weight:800}.sub{font-size:12px;color:var(--muted);margin:3px 0 0}.actions{display:flex;gap:6px;align-items:center}.btn,.home{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:11px;padding:8px 11px;font-weight:700;text-decoration:none;white-space:nowrap}.home{background:var(--primary);color:white;border-color:transparent}
+.hero{margin:14px 0;padding:22px;border-radius:22px;color:white;background:linear-gradient(120deg,#087f8c,#17a5a1 58%,#63c9ad);box-shadow:var(--shadow)}.hero h2{font-size:clamp(22px,5vw,31px);margin:0 0 5px}.hero p{margin:0 0 14px}.pills{display:flex;gap:7px;flex-wrap:wrap}.pill{padding:6px 11px;border-radius:30px;background:#ffffff25;border:1px solid #ffffff50;font-weight:700;font-size:13px}
+.panel{padding:14px;background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);margin-bottom:14px}.panel-title{margin:0 0 10px;font-size:19px;font-weight:800}.grade-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.grade{display:flex;align-items:center;justify-content:center;gap:8px;min-height:58px;border:2px solid var(--border);background:var(--card);color:var(--text);padding:9px;border-radius:14px;font-weight:800;font-size:16px}.grade .emoji{font-size:22px}.grade.active{background:var(--primary);color:#fff;border-color:var(--primary);box-shadow:0 5px 14px #087f8c35}.selection{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:var(--soft);font-weight:700}
+.search{width:100%;margin-bottom:11px;border:1px solid var(--border);border-radius:12px;padding:11px 13px;background:var(--bg);color:var(--text);font-size:16px}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{border:1px solid var(--border);background:var(--card);color:var(--text);padding:8px 12px;border-radius:12px;font-weight:700}.filter.active{background:var(--primary);color:#fff;border-color:transparent}
+.lesson-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.lesson{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:14px;box-shadow:var(--shadow);min-width:0;display:flex;flex-direction:column}.lesson-top{display:flex;gap:10px;align-items:flex-start}.lesson-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:var(--soft);font-size:25px;flex-shrink:0}.lesson h3{font-size:19px;line-height:1.3;margin:0 0 3px}.grade-tag{font-size:12px;color:var(--primary);font-weight:800}.lesson-desc{font-size:14px;color:var(--muted);margin:10px 0}.example{padding:10px 12px;border-radius:12px;background:var(--soft);margin:0 0 10px;line-height:1.65}.example strong{color:var(--primary)}.lesson-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:5px}.lesson-actions button{flex:1;min-width:90px;border:1px solid var(--border);border-radius:10px;padding:8px;background:var(--card);color:var(--text);font-weight:700}.lesson-actions .learn{background:var(--primary);color:#fff;border-color:transparent}.lesson-detail{display:none;border-top:1px solid var(--border);padding-top:10px;margin-top:12px}.lesson-detail.open{display:block}.lesson-detail p{margin:7px 0;line-height:1.7}.lesson-detail ul{padding-left:21px;line-height:1.8;margin:6px 0}.empty{display:none;padding:25px;text-align:center;color:var(--muted);background:var(--card);border-radius:16px}
+.quiz{margin-top:20px;padding:17px;background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow)}.quiz h2{margin:0 0 4px;font-size:23px}.muted{color:var(--muted);margin:0 0 13px}.quizbox{background:var(--bg);border:1px solid var(--border);padding:16px;border-radius:16px;text-align:center}.progress{font-size:13px;color:var(--muted);font-weight:700}.qtext{font-size:clamp(21px,5vw,30px);font-weight:800;margin:13px 0}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.option{padding:11px 7px;border:2px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);font-weight:700}.option:disabled{opacity:1;cursor:default}.option.correct{border-color:#19985c;background:#e0f8eb;color:#075d35}.option.wrong{border-color:#d74d4d;background:#ffeded;color:#922323}body.dark .option.correct{background:#193e2d;color:#c6ffdb}body.dark .option.wrong{background:#48272c;color:#ffd5d5}.feedback{min-height:27px;margin:10px 0 0;font-weight:700}.quiz-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}.quiz-actions button{border:1px solid var(--border);border-radius:11px;padding:9px 13px;background:var(--card);color:var(--text);font-weight:700}.quiz-actions button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--primary)!important;color:#fff!important;border-color:transparent!important}.footer{text-align:center;color:var(--muted);padding:22px 0 10px;font-size:13px}.toast{display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);max-width:calc(100% - 28px);z-index:10;background:#20313b;color:white;padding:11px 15px;border-radius:12px;box-shadow:var(--shadow);text-align:center}
+@media(max-width:600px){.lesson-grid{grid-template-columns:1fr}.hero{padding:17px}.topbar{padding:9px}.logo{width:38px;height:38px;font-size:22px}.btn,.home{padding:8px;font-size:13px}.grade-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grade{min-height:54px}.options{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
-
 <body>
 <div class="page">
-<header class="topbar">
-  <div class="brand">
-    <div class="logo" aria-hidden="true">📚</div>
-    <div>
-      <h1>नेपाली व्याकरण</h1>
-      <p class="sub">बाल पाठशाला · सिकौँ, बुझौँ, अभ्यास गरौँ</p>
-    </div>
-  </div>
-  <div class="actions">
-    <button class="btn" id="themeBtn" type="button" aria-label="डार्क मोड बदल्नुहोस्">🌙</button>
-    <a class="home" href="../index.html">🏠 होम</a>
-  </div>
-</header>
-
-<section class="hero">
-  <h2>🎨 नेपाली व्याकरण सिकाइघर</h2>
-  <p>सरल उदाहरण पढौँ, आवाज सुनौँ र रमाइलो क्विज खेलौँ!</p>
-  <div class="pills">
-    <span class="pill">📖 <span id="totalLessons">१२</span> सिकाइ विषय</span>
-    <span class="pill">🎯 अभ्यास क्विज</span>
-    <span class="pill">🔊 Gemini AI आवाज</span>
-  </div>
-</section>
-
-<section class="panel">
-  <h2 class="panel-title">🎒 आफ्नो कक्षा छान्नुहोस्</h2>
-  <div class="grade-list" id="grades">
-    <button class="grade active" data-grade="all" type="button">सबै कक्षा</button>
-    <button class="grade" data-grade="0" type="button">कक्षा ०</button>
-    <button class="grade" data-grade="1" type="button">कक्षा १</button>
-    <button class="grade" data-grade="2" type="button">कक्षा २</button>
-    <button class="grade" data-grade="3" type="button">कक्षा ३</button>
-    <button class="grade" data-grade="4" type="button">कक्षा ४</button>
-    <button class="grade" data-grade="5" type="button">कक्षा ५</button>
-  </div>
-  <p class="note">कक्षा छनोटले अभ्यासका लागि उपयुक्त विषय देखाउँछ। यो प्रारम्भिक सिकाइ वर्गीकरण हो; विद्यालयको पाठ्यक्रमअनुसार विषय क्रम फरक हुन सक्छ।</p>
-</section>
-
-<section class="panel">
-  <input class="search" id="search" type="search" placeholder="🔎 विषय खोज्नुहोस्, जस्तै: नाम, क्रिया, काल..." aria-label="व्याकरण विषय खोज्नुहोस्">
-  <div class="filters" id="filters">
-    <button class="filter active" data-topic="all" type="button">सबै विषय</button>
-    <button class="filter" data-topic="words" type="button">शब्द र वर्ण</button>
-    <button class="filter" data-topic="sentence" type="button">वाक्य</button>
-    <button class="filter" data-topic="grammar" type="button">व्याकरणका प्रकार</button>
-    <button class="filter" data-topic="writing" type="button">लेखन</button>
-  </div>
-</section>
-
-<main>
-  <div class="lesson-grid" id="lessonGrid"></div>
-  <div class="empty" id="empty">🙂 यो खोजसँग मिल्ने पाठ भेटिएन। अर्को शब्द खोज्नुहोस्।</div>
-</main>
-
-<section class="quiz" id="quiz">
-  <h2>🎯 नेपाली व्याकरण क्विज</h2>
-  <p class="muted">सही उत्तर छानेर आफ्नो ज्ञान जाँच्नुहोस्।</p>
-  <div class="quizbox">
-    <div class="progress" id="progress">प्रश्न १ / १० · अङ्क ०</div>
-    <div class="qtext" id="question">कुन शब्दले काम भएको बुझाउँछ?</div>
-    <div class="options" id="options"></div>
-    <p class="feedback" id="feedback" aria-live="polite"></p>
-    <div class="quiz-actions">
-      <button id="hear" type="button">🔊 प्रश्न सुनौँ</button>
-      <button id="next" class="primary" type="button" disabled>अर्को प्रश्न ➜</button>
-      <button id="restart" type="button">🔄 फेरि खेलौँ</button>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">💚 बाल पाठशाला — रमाउँदै सिकौँ, सिक्दै बढौँ!</footer>
-</div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
+<header class="topbar"><div class="brand"><div class="logo" aria-hidden="true">📚</div><div><h1>नेपाली व्याकरण</h1><p class="sub">बाल पाठशाला · सिकौँ, बुझौँ, अभ्यास गरौँ</p></div></div><div class="actions"><button class="btn" id="themeBtn" type="button" aria-label="डार्क मोड बदल्नुहोस्">🌙</button><a class="home" href="../index.html">🏠 होम</a></div></header>
+<section class="hero"><h2>🎨 नेपाली व्याकरण सिकाइघर</h2><p>आफ्नो कक्षा छान्नुहोस्, पाठ पढ्नुहोस्, आवाज सुन्नुहोस् र क्विज खेल्नुहोस्!</p><div class="pills"><span class="pill">📚 ६ सिकाइ तह</span><span class="pill">🧩 अभ्यास र खेल</span><span class="pill">🔊 Gemini AI आवाज</span></div></section>
+<section class="panel"><h2 class="panel-title">🎒 पहिले आफ्नो कक्षा छान्नुहोस्</h2><div class="grade-grid" id="grades">
+<button class="grade" data-grade="0" type="button"><span class="emoji">🧸</span> बाल कक्षा</button><button class="grade active" data-grade="1" type="button"><span class="emoji">🌱</span> कक्षा १</button><button class="grade" data-grade="2" type="button"><span class="emoji">🌼</span> कक्षा २</button><button class="grade" data-grade="3" type="button"><span class="emoji">🦋</span> कक्षा ३</button><button class="grade" data-grade="4" type="button"><span class="emoji">🌟</span> कक्षा ४</button><button class="grade" data-grade="5" type="button"><span class="emoji">🏆</span> कक्षा ५</button>
+</div><div class="selection" id="selection" aria-live="polite">🌱 कक्षा १ का पाठहरू देखाइँदैछन्।</div></section>
+<section class="panel"><input class="search" id="search" type="search" placeholder="🔎 यो कक्षाभित्र पाठ खोज्नुहोस्..." aria-label="पाठ खोज्नुहोस्"><div class="filters" id="filters"><button class="filter active" data-topic="all" type="button">सबै विषय</button><button class="filter" data-topic="words" type="button">वर्ण र शब्द</button><button class="filter" data-topic="sentence" type="button">वाक्य</button><button class="filter" data-topic="grammar" type="button">व्याकरण</button><button class="filter" data-topic="writing" type="button">लेखन</button></div></section>
+<main><div class="lesson-grid" id="lessonGrid"></div><div class="empty" id="empty">🙂 यो कक्षामा खोजिएको पाठ भेटिएन। अर्को शब्द खोज्नुहोस्।</div></main>
+<section class="quiz" id="quiz"><h2>🎯 कक्षाअनुसार नेपाली क्विज</h2><p class="muted">सही उत्तर छानेर आफ्नो ज्ञान जाँच्नुहोस्।</p><div class="quizbox"><div class="progress" id="progress">प्रश्न १</div><div class="qtext" id="question"></div><div class="options" id="options"></div><p class="feedback" id="feedback" aria-live="polite"></p><div class="quiz-actions"><button id="hear" type="button">🔊 प्रश्न सुनौँ</button><button id="next" class="primary" type="button" disabled>अर्को प्रश्न ➜</button><button id="restart" type="button">🔄 फेरि खेलौँ</button></div></div></section>
+<footer class="footer">💚 बाल पाठशाला — रमाउँदै सिकौँ, सिक्दै बढौँ!</footer></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
-(() => {
-"use strict";
-
-const $ = id => document.getElementById(id);
-const nepali = n => String(n).replace(/\d/g,d=>"०१२३४५६७८९"[Number(d)]);
-let grade = "all";
-let topic = "all";
-let toastTimer;
-let quizList = [];
-let qi = 0;
-let score = 0;
-let answered = false;
-let current = null;
-
-const lessons = [
-{
- id:"letters",title:"वर्ण र वर्णमाला",icon:"🔤",grades:[0,1],topic:"words",
- desc:"भाषा बोल्न र लेख्न प्रयोग हुने ध्वनि तथा अक्षरबारे जानौँ।",
- definition:"वर्ण भनेको भाषाको सबैभन्दा सानो ध्वनि एकाइ हो। वर्णहरू मिलेर शब्द बन्छन्।",
- examples:["अ, आ, इ, ई — स्वर वर्ण","क, ख, ग, घ — व्यञ्जन वर्ण"],
- activity:"स्वर र व्यञ्जन छुट्याउने अभ्यास गर्नुहोस्।",
- questions:["अ","आ","क","ख"]
-},
-{
- id:"word",title:"शब्द",icon:"🧩",grades:[0,1,2],topic:"words",
- desc:"अक्षर मिलेर अर्थ दिने शब्द कसरी बन्छन्?",
- definition:"अर्थ बुझाउने अक्षर वा अक्षरसमूहलाई शब्द भनिन्छ।",
- examples:["घर — बस्ने ठाउँ","फल — खान मिल्ने वस्तु","कलम — लेख्ने साधन"],
- activity:"चित्र वा वस्तु हेरेर त्यसको नाम भन्नुहोस्।",
- questions:["घर","फल","कलम"]
-},
-{
- id:"matra",title:"मात्रा र शुद्ध शब्द",icon:"✍️",grades:[0,1,2],topic:"writing",
- desc:"मात्रा ठीक राखेर शब्द सही तरिकाले लेख्न सिकौँ।",
- definition:"स्वरको चिह्न व्यञ्जनसँग जोडिँदा मात्रा बन्छ, जस्तै: क, का, कि, की।",
- examples:["क + ा = का","क + ि = कि","क + ी = की","क + ु = कु"],
- activity:"का, कि, की र कु पढेर फरक बुझ्नुहोस्।",
- questions:["का","कि","की","कु"]
-},
-{
- id:"sentence",title:"वाक्य",icon:"💬",grades:[1,2,3],topic:"sentence",
- desc:"शब्द मिलाएर पूरा अर्थ दिने वाक्य बनाऔँ।",
- definition:"पूरा अर्थ बुझाउने शब्दहरूको समूहलाई वाक्य भनिन्छ।",
- examples:["राम विद्यालय जान्छ।","सीता किताब पढ्छिन्।","म खेल्छु।"],
- activity:"'खेल्छु म' लाई मिलाएर 'म खेल्छु।' बनाउनुहोस्।",
- questions:["राम विद्यालय जान्छ।","सीता पढ्छिन्।"]
-},
-{
- id:"noun",title:"नाम (संज्ञा)",icon:"👧",grades:[1,2,3],topic:"grammar",
- desc:"व्यक्ति, ठाउँ, वस्तु वा प्राणीको नाम चिनौँ।",
- definition:"व्यक्ति, ठाउँ, वस्तु, प्राणी वा भावको नाम बुझाउने शब्दलाई संज्ञा भनिन्छ।",
- examples:["व्यक्ति: राम, सीता, शिक्षक","ठाउँ: घर, विद्यालय, पोखरा","वस्तु: किताब, कलम","प्राणी: गाई, कुकुर"],
- activity:"'काठमाडौं सुन्दर सहर हो।' वाक्यमा ठाउँको नाम काठमाडौं हो।",
- questions:["राम","काठमाडौं","किताब"]
-},
-{
- id:"pronoun",title:"सर्वनाम",icon:"👥",grades:[2,3,4],topic:"grammar",
- desc:"नामको सट्टामा आउने शब्द चिनौँ।",
- definition:"संज्ञाको सट्टामा प्रयोग हुने शब्दलाई सर्वनाम भनिन्छ।",
- examples:["म विद्यालय जान्छु।","उनी गीत गाउँछन्।","हामी खेल्छौँ।","तिमी पढ्छौ।"],
- activity:"'सीता पढ्छिन्। सीता लेख्छिन्।' मा दोहोरिएको नामको सट्टा 'उनी' प्रयोग गर्न सकिन्छ।",
- questions:["म","हामी","उनी"]
-},
-{
- id:"verb",title:"क्रियापद",icon:"⚽",grades:[2,3,4],topic:"grammar",
- desc:"काम वा अवस्था बुझाउने शब्द चिनौँ।",
- definition:"काम भएको, भइरहेको वा हुने बुझाउने शब्दलाई क्रियापद भनिन्छ।",
- examples:["राम खेल्छ। — खेल्छ क्रियापद हो।","सीता पढ्छिन्। — पढ्छिन् क्रियापद हो।","चरा उड्छ। — उड्छ क्रियापद हो।"],
- activity:"'म खाना खान्छु।' वाक्यमा खान्छु क्रियापद हो।",
- questions:["खान्छ","दौडन्छ","पढ्छ"]
-},
-{
- id:"adjective",title:"विशेषण",icon:"🌈",grades:[3,4,5],topic:"grammar",
- desc:"नाम वा सर्वनामको गुण, रङ, आकार वा अवस्था बताउने शब्द।",
- definition:"संज्ञा वा सर्वनामको विशेषता बताउने शब्दलाई विशेषण भनिन्छ।",
- examples:["रातो फूल","ठूलो घर","मीठो फल","असल विद्यार्थी"],
- activity:"'हरियो पात' मा 'हरियो' विशेषण हो।",
- questions:["रातो","ठूलो","मीठो"]
-},
-{
- id:"gender",title:"लिङ्ग",icon:"👫",grades:[2,3,4],topic:"grammar",
- desc:"पुल्लिङ्ग र स्त्रीलिङ्गका उदाहरण बुझौँ।",
- definition:"नेपाली व्याकरणमा शब्दको लिङ्गअनुसार पुल्लिङ्ग र स्त्रीलिङ्गका रूप प्रयोग हुन्छन्।",
- examples:["छोरा — छोरी","दाजु — दिदी","राजा — रानी","भाले — पोथी"],
- activity:"शब्दको जोडी मिलाउने अभ्यास गर्नुहोस्।",
- questions:["छोरा — छोरी","दाजु — दिदी"]
-},
-{
- id:"number",title:"वचन",icon:"📚",grades:[2,3,4],topic:"grammar",
- desc:"एउटा र धेरै जनाउने रूप बुझौँ।",
- definition:"एक जना वा एउटा वस्तु बुझाउने रूप एकवचन हो। एकभन्दा बढी बुझाउने रूप बहुवचन हो।",
- examples:["किताब — किताबहरू","चरा — चराहरू","विद्यार्थी — विद्यार्थीहरू"],
- activity:"'फूल' को बहुवचन 'फूलहरू' हुन सक्छ।",
- questions:["किताबहरू","चराहरू","फूलहरू"]
-},
-{
- id:"tense",title:"काल",icon:"⏰",grades:[3,4,5],topic:"grammar",
- desc:"काम कहिले भयो, भइरहेको छ वा हुनेछ भनेर चिनौँ।",
- definition:"काम हुने समय बुझाउने व्याकरणिक रूपलाई काल भनिन्छ।",
- examples:["वर्तमान: म पढ्छु।","भूत: मैले पढेँ।","भविष्य: म पढ्नेछु।"],
- activity:"'उसले किताब पढ्यो।' भूतकालको उदाहरण हो।",
- questions:["म पढ्छु।","मैले पढेँ।","म पढ्नेछु।"]
-},
-{
- id:"punctuation",title:"विरामचिह्न",icon:"❗",grades:[3,4,5],topic:"writing",
- desc:"वाक्यको अर्थ स्पष्ट बनाउन विरामचिह्न प्रयोग गरौँ।",
- definition:"लेखाइमा रोक, प्रश्न वा भाव देखाउन प्रयोग गरिने चिह्नलाई विरामचिह्न भनिन्छ।",
- examples:["पूर्णविराम: ।","प्रश्नवाचक: ?","अल्पविराम: ,","उद्गार: !"],
- activity:"'तिमी कहाँ जान्छौ?' प्रश्नवाचक चिह्नको उदाहरण हो।",
- questions:["।","?","!"]
-},
-{
- id:"synonyms",title:"पर्यायवाची र विपरीतार्थी",icon:"🔁",grades:[4,5],topic:"words",
- desc:"उस्तै वा उल्टो अर्थ दिने शब्द चिनौँ।",
- definition:"उस्तै वा मिल्दोजुल्दो अर्थ दिने शब्द पर्यायवाची हुन्। उल्टो अर्थ दिने शब्द विपरीतार्थी हुन्।",
- examples:["सूर्य — घाम (मिल्दोजुल्दो अर्थ)","दिन — रात (विपरीत अर्थ)","ठूलो — सानो (विपरीत अर्थ)"],
- activity:"'माथि' को विपरीतार्थी शब्द 'तल' हो।",
- questions:["दिन — रात","ठूलो — सानो"]
-}
+(()=>{'use strict';
+const $=id=>document.getElementById(id),np=n=>String(n).replace(/\d/g,d=>'०१२३४५६७८९'[+d]);let grade='1',topic='all',toastTimer,quizList=[],qi=0,score=0,answered=false,current=null;
+const lessons=[
+{id:'sounds',title:'स्वरवर्ण चिनौँ',icon:'🔤',grades:[0,1],topic:'words',desc:'आफैँ उच्चारण गर्न सकिने वर्णलाई स्वरवर्ण भनिन्छ।',definition:'अ, आ, इ, ई, उ, ऊ, ऋ, ए, ऐ, ओ, औ, अं र अः स्वरवर्णका उदाहरण हुन्।',examples:['अ — अनार 🍎','आ — आमा 👩','इ — इँटा 🧱','उ — उल्लु 🦉'],activity:'अ बाट सुरु हुने अर्को शब्द भन्नुहोस्।'},
+{id:'consonants',title:'व्यञ्जनवर्ण चिनौँ',icon:'🅰️',grades:[0,1],topic:'words',desc:'स्वरको सहायताले उच्चारण गरिने वर्णलाई व्यञ्जनवर्ण भनिन्छ।',definition:'क, ख, ग, घ, ङ आदि व्यञ्जनवर्ण हुन्।',examples:['क — कमल 🌸','ग — गाई 🐄','च — चरा 🐦','म — माछा 🐟'],activity:'क बाट सुरु हुने शब्द खोज्नुहोस्।'},
+{id:'barakhari',title:'बार्हखरी र मात्रा',icon:'✍️',grades:[0,1],topic:'writing',desc:'एउटै व्यञ्जनमा स्वर जोडिँदा बन्ने रूप पढौँ।',definition:'क, का, कि, की, कु, कू, कृ, के, कै, को, कौ, कं, कः जस्ता रूप अभ्यास गरौँ।',examples:['क + ा = का','क + ि = कि','क + ी = की','क + ु = कु'],activity:'का, कि र की को आवाज छुट्याएर पढ्नुहोस्।'},
+{id:'picturewords',title:'चित्र र शब्द मिलाऔँ',icon:'🖼️',grades:[0,1],topic:'words',desc:'वस्तु वा चित्र हेरेर त्यसको नाम चिन्न सिकौँ।',definition:'वस्तु, प्राणी र मानिसलाई चिनाउने नाम शब्द हुन्।',examples:['🍎 — स्याउ','🐄 — गाई','🏠 — घर','📚 — किताब'],activity:'घर, गाई र स्याउमध्ये खाने वस्तु छान्नुहोस्।'},
+{id:'word',title:'शब्द चिनौँ',icon:'🧩',grades:[1,2],topic:'words',desc:'अर्थ बुझाउने अक्षर वा अक्षरसमूहलाई शब्द भनिन्छ।',definition:'शब्दहरू मिलेर वाक्य बन्छन्। हरेक शब्दले केही अर्थ दिन्छ।',examples:['घर — बस्ने ठाउँ','फल — खान मिल्ने वस्तु','कलम — लेख्ने साधन'],activity:'आफ्नो वरिपरिका पाँच वस्तुको नाम भन्नुहोस्।'},
+{id:'spelling',title:'शुद्ध शब्द लेखौँ',icon:'📝',grades:[1,2,3],topic:'writing',desc:'शब्द लेख्दा अक्षर र मात्रा ठीक राख्न सिकौँ।',definition:'सही अक्षर र मात्रा प्रयोग गर्दा शब्द शुद्ध हुन्छ।',examples:['विद्यालय','विद्यार्थी','किताब','परिवार'],activity:'यी शब्द बिस्तारै पढ्नुहोस् र कापीमा लेख्नुहोस्।'},
+{id:'sentence',title:'सानो वाक्य बनाऔँ',icon:'💬',grades:[1,2],topic:'sentence',desc:'शब्दलाई मिलाएर पूरा अर्थ दिने वाक्य बनाऔँ।',definition:'पूरा अर्थ बुझाउने शब्दहरूको समूहलाई वाक्य भनिन्छ।',examples:['म खेल्छु।','राम पढ्छ।','सीता गीत गाउँछिन्।'],activity:'“म / पढ्छु” लाई मिलाएर वाक्य बनाउनुहोस्।'},
+{id:'noun',title:'नाम बताउने शब्द (संज्ञा)',icon:'👧',grades:[1,2,3],topic:'grammar',desc:'व्यक्ति, ठाउँ, वस्तु र प्राणीका नाम चिनौँ।',definition:'व्यक्ति, ठाउँ, वस्तु, प्राणी वा भावको नाम बुझाउने शब्दलाई संज्ञा भनिन्छ।',examples:['व्यक्ति: राम, सीता','ठाउँ: घर, पोखरा','वस्तु: किताब, कलम','प्राणी: गाई, कुकुर'],activity:'“सीता विद्यालय गइन्।” मा व्यक्ति र ठाउँको नाम खोज्नुहोस्।'},
+{id:'pronoun',title:'सर्वनाम',icon:'👥',grades:[2,3,4],topic:'grammar',desc:'नामको सट्टामा आउने शब्द सिकौँ।',definition:'संज्ञाको सट्टामा प्रयोग हुने शब्दलाई सर्वनाम भनिन्छ।',examples:['म विद्यालय जान्छु।','उनी गीत गाउँछन्।','हामी खेल्छौँ।','तिमी पढ्छौ।'],activity:'नाम दोहोर्‍याउनुको सट्टा “उनी” प्रयोग गर्न सकिन्छ।'},
+{id:'verb',title:'काम बताउने शब्द (क्रियापद)',icon:'⚽',grades:[2,3,4],topic:'grammar',desc:'काम वा अवस्था बुझाउने शब्द पहिचान गरौँ।',definition:'काम भएको, भइरहेको वा हुने बुझाउने शब्दलाई क्रियापद भनिन्छ।',examples:['राम खेल्छ।','सीता पढ्छिन्।','चरा उड्छ।','म खाना खान्छु।'],activity:'“म हाँस्छु।” वाक्यमा काम बताउने शब्द खोज्नुहोस्।'},
+{id:'adjective',title:'गुण बताउने शब्द (विशेषण)',icon:'🌈',grades:[3,4,5],topic:'grammar',desc:'रङ, आकार वा गुण बताउने शब्द चिनौँ।',definition:'संज्ञा वा सर्वनामको विशेषता बताउने शब्दलाई विशेषण भनिन्छ।',examples:['रातो फूल','ठूलो घर','मीठो फल','असल विद्यार्थी'],activity:'“हरियो पात” मा पातको रङ बताउने शब्द खोज्नुहोस्।'},
+{id:'gender',title:'लिङ्ग',icon:'👫',grades:[2,3,4],topic:'grammar',desc:'शब्दका पुल्लिङ्ग र स्त्रीलिङ्गका रूप बुझौँ।',definition:'शब्दको लिङ्गअनुसार पुल्लिङ्ग र स्त्रीलिङ्गका रूप प्रयोग हुन्छन्।',examples:['छोरा — छोरी','दाजु — दिदी','राजा — रानी','भाले — पोथी'],activity:'शब्दका जोडी मिलाउने अभ्यास गर्नुहोस्।'},
+{id:'number',title:'एकवचन र बहुवचन',icon:'📚',grades:[2,3,4],topic:'grammar',desc:'एउटा र धेरै जनाउने शब्दका रूप सिकौँ।',definition:'एउटा वा एक जना बुझाउने रूप एकवचन हो। एकभन्दा बढी बुझाउने रूप बहुवचन हो।',examples:['किताब — किताबहरू','चरा — चराहरू','विद्यार्थी — विद्यार्थीहरू'],activity:'“फूल” को बहुवचन भन्नुहोस्।'},
+{id:'tense',title:'काल: अहिले, पहिले, पछि',icon:'⏰',grades:[3,4,5],topic:'grammar',desc:'काम कहिले भयो वा हुनेछ भनेर बुझौँ।',definition:'काम हुने समय बुझाउने व्याकरणिक रूपलाई काल भनिन्छ।',examples:['वर्तमान: म पढ्छु।','भूत: मैले पढेँ।','भविष्य: म पढ्नेछु।'],activity:'“उसले खाना खायो।” कुन काल हो भनेर सोच्नुहोस्।'},
+{id:'punctuation',title:'विरामचिह्न',icon:'❗',grades:[3,4,5],topic:'writing',desc:'लेखाइमा रोक, प्रश्न र भाव जनाउने चिह्न चिनौँ।',definition:'लेखाइको अर्थ स्पष्ट पार्न विरामचिह्न प्रयोग गरिन्छ।',examples:['पूर्णविराम: ।','प्रश्नवाचक: ?','अल्पविराम: ,','उद्गार: !'],activity:'“तिमी कहाँ जान्छौ?” मा कुन चिह्न छ?'},
+{id:'synonyms',title:'उस्तै र उल्टो अर्थका शब्द',icon:'🔁',grades:[4,5],topic:'words',desc:'पर्यायवाची र विपरीतार्थी शब्द सिकौँ।',definition:'मिल्दोजुल्दो अर्थ दिने शब्द पर्यायवाची र उल्टो अर्थ दिने शब्द विपरीतार्थी हुन्।',examples:['सूर्य — घाम','दिन — रात','ठूलो — सानो','माथि — तल'],activity:'“माथि” को उल्टो अर्थ दिने शब्द भन्नुहोस्।'},
+{id:'sentenceorder',title:'वाक्य मिलाउने अभ्यास',icon:'🧱',grades:[2,3,4],topic:'sentence',desc:'शब्दको सही क्रम मिलाएर अर्थपूर्ण वाक्य बनाऔँ।',definition:'वाक्यमा शब्दहरू उचित क्रममा राख्दा अर्थ स्पष्ट हुन्छ।',examples:['म विद्यालय जान्छु।','हामी फुटबल खेल्छौँ।','आमा खाना पकाउनुहुन्छ।'],activity:'“पढ्छु / म” लाई मिलाएर “म पढ्छु।” बनाउनुहोस्।'},
+{id:'paragraph',title:'सानो अनुच्छेद लेखौँ',icon:'📔',grades:[4,5],topic:'writing',desc:'एउटै विषयका वाक्य मिलाएर सानो अनुच्छेद लेखौँ।',definition:'एउटै मुख्य विषयसँग सम्बन्धित वाक्यहरूको समूहलाई अनुच्छेद भनिन्छ।',examples:['मेरो विद्यालय सफा छ। त्यहाँ धेरै साथी छन्। हामी सँगै पढ्छौँ र खेल्छौँ।'],activity:'“मेरो परिवार” शीर्षकमा तीन वाक्य लेख्नुहोस्।'}
 ];
-
-const questions = [
-{q:"व्यक्ति वा ठाउँको नाम बुझाउने शब्द कुन हो?",a:["संज्ञा","क्रियापद","विशेषण","विरामचिह्न"],c:0,ex:"राम, सीता र काठमाडौं संज्ञाका उदाहरण हुन्।"},
-{q:"'म विद्यालय जान्छु।' मा सर्वनाम कुन हो?",a:["विद्यालय","जान्छु","म","वाक्य"],c:2,ex:"'म' नामको सट्टामा प्रयोग हुने सर्वनाम हो।"},
-{q:"'राम दौडन्छ।' मा क्रियापद कुन हो?",a:["राम","दौडन्छ","घर","असल"],c:1,ex:"'दौडन्छ' ले काम बुझाउँछ।"},
-{q:"'रातो फूल' मा विशेषण कुन हो?",a:["फूल","रातो","मा","छ"],c:1,ex:"'रातो' ले फूलको रङ बताउँछ।"},
-{q:"'किताब' को बहुवचन कुन हो?",a:["किताबपन","किताबहरू","किताबी","किताबजी"],c:1,ex:"'किताबहरू' बहुवचनको सामान्य रूप हो।"},
-{q:"'मैले खाना खाएँ।' कुन काल हो?",a:["वर्तमान","भूत","भविष्य","कुनै होइन"],c:1,ex:"काम भइसकेको भएकाले यो भूतकाल हो।"},
-{q:"प्रश्न सोध्दा कुन चिह्न प्रयोग हुन्छ?",a:["।",",","?","!"],c:2,ex:"प्रश्नवाचक चिह्नले प्रश्न जनाउँछ।"},
-{q:"'दिन' को विपरीतार्थी शब्द कुन हो?",a:["उज्यालो","रात","बिहान","घाम"],c:1,ex:"दिन र रात विपरीतार्थी शब्द हुन्।"},
-{q:"'घर' कस्तो शब्द हो?",a:["संज्ञा","क्रियापद","काल","विरामचिह्न"],c:0,ex:"घर वस्तु वा ठाउँ जनाउने संज्ञा हो।"},
-{q:"'म पढ्नेछु।' कुन काल हो?",a:["भूत","वर्तमान","भविष्य","वचन"],c:2,ex:"पढ्नेछु भन्ने रूपले भविष्यमा हुने काम बुझाउँछ।"},
-{q:"'ठूलो घर' मा विशेषण कुन हो?",a:["घर","ठूलो","छ","मा"],c:1,ex:"ठूलो शब्दले घरको आकार बताउँछ।"},
-{q:"'छोरा — छोरी' केको उदाहरण हो?",a:["काल","लिङ्गका जोडी","विरामचिह्न","क्रियापद"],c:1,ex:"छोरा र छोरी पुल्लिङ्ग तथा स्त्रीलिङ्गका उदाहरण हुन्।"},
-{q:"अर्थ दिने अक्षर वा अक्षरसमूहलाई के भनिन्छ?",a:["शब्द","काल","लिङ्ग","वचन"],c:0,ex:"अर्थ दिने अक्षर वा अक्षरसमूह शब्द हो।"},
-{q:"'सीता गीत गाउँछिन्।' मा क्रियापद कुन हो?",a:["सीता","गीत","गाउँछिन्","कुनै होइन"],c:2,ex:"गाउँछिन् ले काम बुझाउँछ।"}
+const questions=[
+{q:'व्यक्ति वा ठाउँको नाम बुझाउने शब्द कुन हो?',a:['संज्ञा','क्रियापद','विशेषण','काल'],c:0,grades:[1,2,3,4,5],ex:'राम र काठमाडौं संज्ञाका उदाहरण हुन्।'},
+{q:'“म विद्यालय जान्छु।” मा सर्वनाम कुन हो?',a:['विद्यालय','जान्छु','म','वाक्य'],c:2,grades:[2,3,4,5],ex:'“म” नामको सट्टामा प्रयोग हुने सर्वनाम हो।'},
+{q:'“राम दौडन्छ।” मा क्रियापद कुन हो?',a:['राम','दौडन्छ','घर','असल'],c:1,grades:[2,3,4,5],ex:'“दौडन्छ” ले काम बुझाउँछ।'},
+{q:'“रातो फूल” मा विशेषण कुन हो?',a:['फूल','रातो','मा','छ'],c:1,grades:[3,4,5],ex:'“रातो” ले फूलको रङ बताउँछ।'},
+{q:'“किताब” को बहुवचन कुन हो?',a:['किताबपन','किताबहरू','किताबी','किताबजी'],c:1,grades:[2,3,4],ex:'“किताबहरू” बहुवचनको सामान्य रूप हो।'},
+{q:'“मैले खाना खाएँ।” कुन काल हो?',a:['वर्तमान','भूत','भविष्य','वचन'],c:1,grades:[3,4,5],ex:'काम भइसकेको भएकाले यो भूतकाल हो।'},
+{q:'प्रश्न सोध्दा कुन चिह्न प्रयोग हुन्छ?',a:['।',',','?','!'],c:2,grades:[3,4,5],ex:'प्रश्नवाचक चिह्नले प्रश्न जनाउँछ।'},
+{q:'“दिन” को विपरीतार्थी शब्द कुन हो?',a:['उज्यालो','रात','बिहान','घाम'],c:1,grades:[4,5],ex:'दिन र रात विपरीतार्थी शब्द हुन्।'},
+{q:'अर्थ दिने अक्षर वा अक्षरसमूहलाई के भनिन्छ?',a:['शब्द','काल','लिङ्ग','वचन'],c:0,grades:[1,2],ex:'अर्थ दिने अक्षर वा अक्षरसमूह शब्द हो।'},
+{q:'“म पढ्नेछु।” कुन काल हो?',a:['भूत','वर्तमान','भविष्य','वचन'],c:2,grades:[3,4,5],ex:'“पढ्नेछु” ले भविष्यमा हुने काम बुझाउँछ।'},
+{q:'“छोरा — छोरी” केको उदाहरण हो?',a:['काल','लिङ्गका जोडी','विरामचिह्न','क्रियापद'],c:1,grades:[2,3,4],ex:'छोरा र छोरी लिङ्गका जोडी हुन्।'},
+{q:'वस्तुको नाम कुन हो?',a:['स्याउ','दौडन्छ','सुन्दर','तर'],c:0,grades:[0,1],ex:'स्याउ वस्तुको नाम हो।'},
+{q:'स्वरवर्णको उदाहरण कुन हो?',a:['अ','क','ग','च'],c:0,grades:[0,1],ex:'अ स्वरवर्ण हो।'},
+{q:'व्यञ्जनवर्णको उदाहरण कुन हो?',a:['आ','ई','क','ए'],c:2,grades:[0,1],ex:'क व्यञ्जनवर्ण हो।'},
+{q:'“माथि” को विपरीतार्थी शब्द कुन हो?',a:['तल','अगाडि','उज्यालो','नजिक'],c:0,grades:[4,5],ex:'माथि र तल विपरीतार्थी हुन्।'}
 ];
-
-function showToast(message){
- const t=$("toast");t.textContent=message;t.style.display="block";
- clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.display="none",2600);
-}
-
-function speak(text){
- if(typeof window.playAIVoice!=="function"){
-   showToast("Gemini AI आवाज उपलब्ध छैन। ../script.js जाँच्नुहोस्।");
-   console.warn("playAIVoice भेटिएन।");
-   return;
- }
- try{
-   const result=window.playAIVoice(text);
-   if(result&&typeof result.catch==="function"){
-     result.catch(error=>{console.warn("Gemini AI voice:",error);showToast("अहिले आवाज चल्न सकेन। फेरि प्रयास गर्नुहोस्।");});
-   }
- }catch(error){
-   console.warn("Gemini AI voice:",error);
-   showToast("अहिले आवाज चल्न सकेन।");
- }
-}
-
-function makeButton(text,className,handler){
- const b=document.createElement("button");b.type="button";b.textContent=text;b.className=className;
- b.addEventListener("click",handler);return b;
-}
-
-function renderLessons(){
- const grid=$("lessonGrid");grid.replaceChildren();
- const q=$("search").value.trim().toLowerCase();
- const filtered=lessons.filter(l=>{
-   const gradeOK=grade==="all"||l.grades.includes(Number(grade));
-   const topicOK=topic==="all"||l.topic===topic;
-   const text=[l.title,l.desc,l.definition,...l.examples].join(" ").toLowerCase();
-   return gradeOK&&topicOK&&text.includes(q);
- });
- $("empty").style.display=filtered.length?"none":"block";
- $("totalLessons").textContent=nepali(filtered.length);
-
- filtered.forEach((lesson,index)=>{
-   const card=document.createElement("article");card.className="lesson";
-   const top=document.createElement("div");top.className="lesson-top";
-   const icon=document.createElement("div");icon.className="lesson-icon";icon.textContent=lesson.icon;
-   const heading=document.createElement("div");
-   const title=document.createElement("h3");title.textContent=lesson.title;
-   const tag=document.createElement("div");tag.className="grade-tag";
-   tag.textContent="कक्षा "+lesson.grades.map(nepali).join(", ");
-   heading.append(title,tag);top.append(icon,heading);
-
-   const desc=document.createElement("p");desc.className="lesson-desc";desc.textContent=lesson.desc;
-   const example=document.createElement("div");example.className="example";
-   const strong=document.createElement("strong");strong.textContent="उदाहरण";
-   const exampleText=document.createElement("div");exampleText.textContent=lesson.examples.slice(0,2).join(" • ");
-   example.append(strong,exampleText);
-
-   const detail=document.createElement("div");detail.className="lesson-detail";
-   const definition=document.createElement("p");definition.textContent=lesson.definition;
-   const exTitle=document.createElement("strong");exTitle.textContent="थप उदाहरण";
-   const ul=document.createElement("ul");
-   lesson.examples.forEach(ex=>{const li=document.createElement("li");li.textContent=ex;ul.append(li);});
-   const activity=document.createElement("p");activity.textContent="🎮 अभ्यास: "+lesson.activity;
-   detail.append(definition,exTitle,ul,activity);
-
-   const buttons=document.createElement("div");buttons.className="lesson-actions";
-   const learn=makeButton("📖 पाठ पढौँ","learn",()=>{
-     const open=detail.classList.toggle("open");
-     learn.textContent=open?"पाठ बन्द गरौँ":"📖 पाठ पढौँ";
-   });
-   const hear=makeButton("🔊 सुनौँ","",()=>speak(lesson.title+". "+lesson.definition+". उदाहरणहरू: "+lesson.examples.join(". ")));
-   const practice=makeButton("🎯 अभ्यास","",()=>{
-     $("quiz").scrollIntoView({behavior:"smooth",block:"start"});
-     startQuiz(lesson.id);
-   });
-   buttons.append(learn,hear,practice);
-   card.append(top,desc,example,buttons,detail);
-   grid.append(card);
- });
-}
-
-$("grades").addEventListener("click",e=>{
- const b=e.target.closest("button[data-grade]");if(!b)return;
- grade=b.dataset.grade;
- document.querySelectorAll(".grade").forEach(x=>x.classList.toggle("active",x===b));
- renderLessons();
-});
-$("filters").addEventListener("click",e=>{
- const b=e.target.closest("button[data-topic]");if(!b)return;
- topic=b.dataset.topic;
- document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));
- renderLessons();
-});
-$("search").addEventListener("input",renderLessons);
-
-$("themeBtn").addEventListener("click",()=>{
- document.body.classList.toggle("dark");
- const dark=document.body.classList.contains("dark");
- $("themeBtn").textContent=dark?"☀️":"🌙";
- $("themeBtn").setAttribute("aria-label",dark?"लाइट मोड खोल्नुहोस्":"डार्क मोड खोल्नुहोस्");
- try{localStorage.setItem("balPathshalaGrammarTheme",dark?"dark":"light");}catch(_){}
-});
-try{
- if(localStorage.getItem("balPathshalaGrammarTheme")==="dark"){
-   document.body.classList.add("dark");$("themeBtn").textContent="☀️";
- }
-}catch(_){}
-
-function shuffle(arr){
- const a=arr.slice();
- for(let i=a.length-1;i>0;i--){
-  const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];
- }
- return a;
-}
-
-function startQuiz(lessonId){
- let pool=questions;
- if(lessonId){
-   const l=lessons.find(x=>x.id===lessonId);
-   const words={
-     letters:["वर्ण र वर्णमाला","अर्थ दिने अक्षर वा अक्षरसमूहलाई के भनिन्छ?"],
-     word:["अर्थ दिने अक्षर वा अक्षरसमूहलाई के भनिन्छ?"],
-     matra:["मात्रा ठीक राखेर शब्द सही तरिकाले लेख्न सिकौँ।"],
-     sentence:["पूरा अर्थ बुझाउने शब्दहरूको समूहलाई के भनिन्छ?"],
-     noun:["व्यक्ति वा ठाउँको नाम बुझाउने शब्द कुन हो?","'घर' कस्तो शब्द हो?"],
-     pronoun:["'म विद्यालय जान्छु।' मा सर्वनाम कुन हो?"],
-     verb:["'राम दौडन्छ।' मा क्रियापद कुन हो?","'सीता गीत गाउँछिन्।' मा क्रियापद कुन हो?"],
-     adjective:["'रातो फूल' मा विशेषण कुन हो?","'ठूलो घर' मा विशेषण कुन हो?"],
-     gender:["'छोरा — छोरी' केको उदाहरण हो?"],
-     number:["'किताब' को बहुवचन कुन हो?"],
-     tense:["'मैले खाना खाएँ।' कुन काल हो?","'म पढ्नेछु।' कुन काल हो?"],
-     punctuation:["प्रश्न सोध्दा कुन चिह्न प्रयोग हुन्छ?"],
-     synonyms:["'दिन' को विपरीतार्थी शब्द कुन हो?"]
-   };
-   const match=words[lessonId]||[];
-   const selected=questions.filter(q=>match.includes(q.q));
-   if(selected.length)pool=selected;
- }
- quizList=shuffle(pool).slice(0,Math.min(10,pool.length));
- qi=0;score=0;showQuestion();
-}
-
-function showQuestion(){
- current=quizList[qi];answered=false;
- $("progress").textContent="प्रश्न "+nepali(qi+1)+" / "+nepali(quizList.length)+" · अङ्क "+nepali(score);
- $("question").textContent=current.q;
- $("feedback").textContent="";
- $("next").disabled=true;
- $("next").textContent=qi===quizList.length-1?"नतिजा हेर्नुहोस्":"अर्को प्रश्न ➜";
- const options=$("options");options.replaceChildren();
- current.a.forEach((text,index)=>{
-   const b=makeButton(text,"option",()=>chooseAnswer(b,index));
-   options.append(b);
- });
-}
-
-function chooseAnswer(button,index){
- if(answered)return;
- answered=true;
- const correct=index===current.c;
- if(correct){
-   score++;
-   $("feedback").textContent="🎉 सही उत्तर! "+current.ex;
- }else{
-   $("feedback").textContent="🙂 सही उत्तर: "+current.a[current.c]+". "+current.ex;
- }
- document.querySelectorAll(".option").forEach((b,i)=>{
-   b.disabled=true;
-   if(i===current.c)b.classList.add("correct");
- });
- if(!correct)button.classList.add("wrong");
- $("progress").textContent="प्रश्न "+nepali(qi+1)+" / "+nepali(quizList.length)+" · अङ्क "+nepali(score);
- $("next").disabled=false;
-}
-
-$("hear").addEventListener("click",()=>{if(current)speak(current.q);});
-$("next").addEventListener("click",()=>{
- if(!answered)return;
- if(qi<quizList.length-1){qi++;showQuestion();}
- else{
-   $("question").textContent="🏆 "+nepali(score)+" / "+nepali(quizList.length);
-   $("options").replaceChildren();
-   $("progress").textContent="क्विज पूरा भयो!";
-   $("feedback").textContent=score>=8?"शानदार! तपाईंले धेरै राम्रो गर्नुभयो।":"राम्रो प्रयास! फेरि खेल्नुहोस् र अभ्यास गर्नुहोस्।";
-   $("next").disabled=true;$("next").textContent="क्विज पूरा भयो";
-   answered=false;
- }
-});
-$("restart").addEventListener("click",()=>startQuiz());
-
-renderLessons();
-startQuiz();
+function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.display='none',2600)}
+function speak(text){if(typeof window.playAIVoice!=='function'){toast('Gemini AI आवाज उपलब्ध छैन। ../script.js जाँच्नुहोस्।');return}try{const r=window.playAIVoice(text);if(r&&typeof r.catch==='function')r.catch(e=>{console.warn(e);toast('अहिले आवाज चल्न सकेन। फेरि प्रयास गर्नुहोस्।')})}catch(e){console.warn(e);toast('अहिले आवाज चल्न सकेन।')}}
+function btn(text,cls,fn){const b=document.createElement('button');b.type='button';b.textContent=text;b.className=cls;b.addEventListener('click',fn);return b}
+function renderLessons(){const grid=$('lessonGrid');grid.replaceChildren();const q=$('search').value.trim().toLowerCase();const found=lessons.filter(l=>l.grades.includes(+grade)&&(topic==='all'||l.topic===topic)&&[l.title,l.desc,l.definition,...l.examples].join(' ').toLowerCase().includes(q));$('empty').style.display=found.length?'none':'block';found.forEach(l=>{const card=document.createElement('article');card.className='lesson';const top=document.createElement('div');top.className='lesson-top';const ico=document.createElement('div');ico.className='lesson-icon';ico.textContent=l.icon;const head=document.createElement('div');const h=document.createElement('h3');h.textContent=l.title;const tag=document.createElement('div');tag.className='grade-tag';tag.textContent='पाठ · कक्षा '+l.grades.map(np).join(', ');head.append(h,tag);top.append(ico,head);const desc=document.createElement('p');desc.className='lesson-desc';desc.textContent=l.desc;const ex=document.createElement('div');ex.className='example';const strong=document.createElement('strong');strong.textContent='उदाहरण';const exText=document.createElement('div');exText.textContent=l.examples.slice(0,3).join(' • ');ex.append(strong,exText);const detail=document.createElement('div');detail.className='lesson-detail';const def=document.createElement('p');def.textContent=l.definition;const more=document.createElement('strong');more.textContent='थप उदाहरण';const ul=document.createElement('ul');l.examples.forEach(x=>{const li=document.createElement('li');li.textContent=x;ul.append(li)});const activity=document.createElement('p');activity.textContent='🎮 अभ्यास: '+l.activity;detail.append(def,more,ul,activity);const actions=document.createElement('div');actions.className='lesson-actions';const learn=btn('📖 पाठ पढौँ','learn',()=>{const open=detail.classList.toggle('open');learn.textContent=open?'पाठ बन्द गरौँ':'📖 पाठ पढौँ'});const hear=btn('🔊 सुनौँ','',()=>speak(l.title+'. '+l.definition+'. उदाहरणहरू: '+l.examples.join('. ')));const practice=btn('🎯 क्विज','',()=>{startQuiz(l.grades);$('quiz').scrollIntoView({behavior:'smooth',block:'start'})});actions.append(learn,hear,practice);card.append(top,desc,ex,actions,detail);grid.append(card)});$('selection').textContent=({'0':'🧸 बाल कक्षाका','1':'🌱 कक्षा १ का','2':'🌼 कक्षा २ का','3':'🦋 कक्षा ३ का','4':'🌟 कक्षा ४ का','5':'🏆 कक्षा ५ का'})[grade]+' पाठहरू देखाइँदैछन्। कुल '+np(found.length)+' पाठ।'}
+$('grades').addEventListener('click',e=>{const b=e.target.closest('[data-grade]');if(!b)return;grade=b.dataset.grade;document.querySelectorAll('.grade').forEach(x=>x.classList.toggle('active',x===b));$('search').value='';topic='all';document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x.dataset.topic==='all'));renderLessons();startQuiz()});
+$('filters').addEventListener('click',e=>{const b=e.target.closest('[data-topic]');if(!b)return;topic=b.dataset.topic;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));renderLessons()});$('search').addEventListener('input',renderLessons);
+$('themeBtn').addEventListener('click',()=>{document.body.classList.toggle('dark');const dark=document.body.classList.contains('dark');$('themeBtn').textContent=dark?'☀️':'🌙';$('themeBtn').setAttribute('aria-label',dark?'लाइट मोड खोल्नुहोस्':'डार्क मोड खोल्नुहोस्');try{localStorage.setItem('balPathshalaGrammarTheme',dark?'dark':'light')}catch(_){}});
+try{if(localStorage.getItem('balPathshalaGrammarTheme')==='dark'){document.body.classList.add('dark');$('themeBtn').textContent='☀️'}}catch(_){}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startQuiz(lessonGrades){const eligible=questions.filter(q=>q.grades.includes(+grade));quizList=shuffle(eligible.length?eligible:questions).slice(0,Math.min(8,eligible.length||questions.length));if(lessonGrades){const related=quizList.filter(q=>q.grades.some(g=>lessonGrades.includes(g)));if(related.length)quizList=related}qi=0;score=0;showQuestion()}
+function showQuestion(){current=quizList[qi];answered=false;$('progress').textContent='प्रश्न '+np(qi+1)+' / '+np(quizList.length)+' · अङ्क '+np(score);$('question').textContent=current.q;$('feedback').textContent='';$('next').disabled=true;$('next').textContent=qi===quizList.length-1?'नतिजा हेर्नुहोस्':'अर्को प्रश्न ➜';const opts=$('options');opts.replaceChildren();shuffle(current.a.map((t,i)=>({t,i}))).forEach(o=>opts.append(btn(o.t,'option',function(){answer(this,o.i)})))}
+function answer(button,i){if(answered)return;answered=true;const correct=i===current.c;if(correct){score++;$('feedback').textContent='🎉 सही उत्तर! '+current.ex}else{$('feedback').textContent='🙂 सही उत्तर: '+current.a[current.c]+'. '+current.ex}document.querySelectorAll('.option').forEach(b=>{b.disabled=true;if(b.textContent===current.a[current.c])b.classList.add('correct')});if(!correct)button.classList.add('wrong');$('progress').textContent='प्रश्न '+np(qi+1)+' / '+np(quizList.length)+' · अङ्क '+np(score);$('next').disabled=false}
+$('hear').addEventListener('click',()=>{if(current)speak(current.q)});$('next').addEventListener('click',()=>{if(!answered)return;if(qi<quizList.length-1){qi++;showQuestion()}else{$('question').textContent='🏆 '+np(score)+' / '+np(quizList.length);$('options').replaceChildren();$('progress').textContent='क्विज पूरा भयो!';$('feedback').textContent=score>=Math.ceil(quizList.length*.7)?'शानदार! तपाईंले धेरै राम्रो गर्नुभयो।':'राम्रो प्रयास! फेरि खेल्नुहोस् र अभ्यास गर्नुहोस्।';$('next').disabled=true;$('next').textContent='क्विज पूरा भयो';answered=false}});$('restart').addEventListener('click',()=>startQuiz());
+renderLessons();startQuiz();
 })();
 </script>
 </body>
