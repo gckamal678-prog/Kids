@@ -1,104 +1,587 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#4A90E2">
-  <title>English Alphabet - बाल पाठशाला</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Mukta:wght@700&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#2563eb">
+  <title>English Alphabet A–Z | बाल पाठशाला</title>
+  <meta name="description" content="A देखि Z सम्म English alphabet, शब्द, चित्र र आवाजसँग सिकौँ।">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <script src="../script.js"></script>
   <style>
+    :root {
+      color-scheme: light;
+      --bg: #eff6ff;
+      --surface: #fff;
+      --text: #19365b;
+      --muted: #607694;
+      --primary: #2563eb;
+      --border: #d8e5fc;
+      --input: #f4f8ff;
+      --shadow: 0 7px 20px rgba(37,99,235,.09);
+    }
+    body.dark {
+      color-scheme: dark;
+      --bg: #101827;
+      --surface: #1c2940;
+      --text: #eff6ff;
+      --muted: #b5c5df;
+      --primary: #60a5fa;
+      --border: #364761;
+      --input: #142036;
+      --shadow: 0 7px 20px rgba(0,0,0,.2);
+    }
     * { box-sizing: border-box; }
     body {
-      margin: 0; padding: 16px; min-height: 100vh; text-align: center;
-      font-family: 'Fredoka', 'Mukta', sans-serif;
-      background: linear-gradient(180deg,#e3f2fd,#bbdefb); color: #1565c0;
+      margin: 0;
+      min-height: 100vh;
+      padding: 13px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Nunito", sans-serif;
+      transition: background .2s, color .2s;
     }
-    .header {
-      max-width: 650px; margin: 0 auto 18px; padding: 12px 15px;
-      background: white; border-radius: 16px; box-shadow: 0 4px 12px #0001;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    button, input { font: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 3px solid #f59e0b;
+      outline-offset: 3px;
     }
-    h1 { font-size: clamp(18px,4vw,24px); margin: 0; }
-    .home-btn {
-      padding: 8px 12px; border-radius: 10px; background: #1e88e5;
-      color: white; text-decoration: none; font-weight: 700; white-space: nowrap;
+    .page { width: min(100%, 920px); margin: auto; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
     }
-    .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
-    .tab {
-      border: 2px solid #90caf9; border-radius: 12px; background: white;
-      color: #1565c0; padding: 10px 16px; font-weight: 700; cursor: pointer;
+    .home, .theme-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 43px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: var(--shadow);
     }
-    .tab.active { background: #1976d2; color: white; }
+    .theme-btn { cursor: pointer; }
+    .hero {
+      padding: 23px 15px;
+      margin-bottom: 16px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      box-shadow: 0 12px 28px rgba(37,99,235,.2);
+      color: white;
+      text-align: center;
+    }
+    .hero-icon { font-size: 42px; }
+    .hero h1 {
+      margin: 5px 0;
+      font-family: "Baloo 2", sans-serif;
+      font-size: clamp(27px, 5vw, 36px);
+      line-height: 1.25;
+    }
+    .hero p { margin: 5px 0 0; font-weight: 800; }
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .search-wrap { position: relative; }
+    .search-icon {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    #search {
+      width: 100%;
+      min-height: 47px;
+      padding: 11px 13px 11px 41px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--text);
+    }
+    #search::placeholder { color: var(--muted); }
+    .mode-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 17px;
+    }
+    .mode-btn {
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .mode-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 17px 2px 12px;
+    }
+    .section-heading h2 {
+      margin: 0;
+      font-family: "Baloo 2", sans-serif;
+      font-size: 23px;
+    }
+    #count { color: var(--muted); font-size: 13px; font-weight: 900; }
     .grid {
-      display: grid; grid-template-columns: repeat(3,minmax(0,1fr));
-      gap: 12px; max-width: 650px; margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 11px;
     }
+    .letter-card {
+      display: flex;
+      min-width: 0;
+      min-height: 168px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 12px 6px;
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform .15s, border-color .15s;
+    }
+    .letter-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .letter-card:active { transform: scale(.97); }
     .letter {
-      border: 3px solid #64b5f6; border-radius: 17px; background: white;
-      color: #1565c0; min-height: 86px; font: 700 42px 'Fredoka',sans-serif;
-      box-shadow: 0 5px 0 #1e88e5; cursor: pointer;
+      font-family: "Baloo 2", sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--primary);
     }
-    .letter:active { transform: translateY(3px); box-shadow: 0 2px 0 #1e88e5; }
-    .hint { color: #345; margin: 16px auto; font-size: 14px; }
-    @media (min-width: 520px) { .grid { grid-template-columns: repeat(4,minmax(0,1fr)); } }
-    @media (min-width: 720px) { .grid { grid-template-columns: repeat(6,minmax(0,1fr)); } }
+    .word-emoji {
+      display: grid;
+      place-items: center;
+      width: 57px;
+      height: 52px;
+      border-radius: 15px;
+      background: var(--input);
+      font-size: 37px;
+    }
+    .word { font-size: 16px; font-weight: 900; }
+    .word-np { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .sound-hint { color: var(--primary); font-size: 11px; font-weight: 900; }
+    .empty {
+      grid-column: 1 / -1;
+      padding: 24px 12px;
+      border: 2px dashed var(--border);
+      border-radius: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .quiz {
+      margin-top: 24px;
+      padding: 19px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .quiz h2 { margin: 0 0 4px; font-family: "Baloo 2", sans-serif; font-size: 24px; }
+    .quiz-intro { margin: 0 0 14px; color: var(--muted); font-weight: 700; }
+    #quizContent { text-align: center; }
+    #progress { color: var(--muted); font-size: 13px; font-weight: 900; }
+    #quizEmoji { margin: 8px 0; font-size: 58px; }
+    #question { margin: 8px 0 14px; font-size: 19px; font-weight: 900; }
+    .options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+    .option {
+      min-height: 46px;
+      padding: 10px;
+      border: 2px solid var(--border);
+      border-radius: 13px;
+      background: var(--input);
+      color: var(--text);
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .option:disabled { opacity: 1; cursor: default; }
+    .option.correct { border-color: #16a34a; background: rgba(22,163,74,.15); }
+    .option.wrong { border-color: #dc2626; background: rgba(220,38,38,.13); }
+    #feedback { min-height: 28px; margin: 11px 0 4px; font-weight: 900; }
+    .primary-btn {
+      min-height: 44px;
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 13px;
+      background: var(--primary);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .primary-btn:disabled { opacity: .45; cursor: not-allowed; }
+    .result-emoji { font-size: 57px; }
+    .result h3 { margin: 7px 0; font-size: 24px; }
+    .result p { color: var(--muted); font-weight: 800; }
+    footer { padding: 23px 8px 10px; text-align: center; color: var(--muted); font-size: 13px; font-weight: 800; }
+    @media (min-width: 520px) {
+      .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    @media (min-width: 760px) {
+      .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    }
+    @media (max-width: 500px) {
+      body { padding: 10px; }
+      .toolbar { grid-template-columns: 1fr; }
+      .letter-card { min-height: 157px; }
+      .quiz { padding: 15px 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
   </style>
 </head>
 <body>
-  <header class="header">
-    <a class="home-btn" href="../index.html">🏠 होम</a>
-    <h1>English Alphabet A–Z</h1>
-  </header>
+  <main class="page">
+    <nav class="topbar" aria-label="मुख्य नेभिगेसन">
+      <a class="home" href="../index.html">🏠 होम</a>
+      <button class="theme-btn" id="themeBtn" type="button">🌙 Dark Mode</button>
+    </nav>
 
-  <div class="tabs" role="group" aria-label="Alphabet type">
-    <button class="tab active" data-type="upper" type="button">Capital A–Z</button>
-    <button class="tab" data-type="lower" type="button">Small a–z</button>
-  </div>
+    <header class="hero">
+      <div class="hero-icon" aria-hidden="true">🔤 📚 ⭐</div>
+      <h1>English Alphabet A–Z</h1>
+      <p>अक्षर चिनौँ, शब्द सिकौँ र आवाज सुनौँ!</p>
+    </header>
 
-  <main class="grid" id="alphabetGrid" aria-label="English letters"></main>
-  <p class="hint">🔊 अक्षर थिच्नुहोस् र उच्चारण सुन्नुहोस्।</p>
+    <section aria-label="अक्षर खोज्नुहोस्">
+      <div class="toolbar">
+        <label class="search-wrap">
+          <span class="search-icon" aria-hidden="true">🔎</span>
+          <input id="search" type="search" placeholder="अक्षर वा शब्द खोज्नुहोस्..." autocomplete="off" aria-label="अक्षर वा शब्द खोज्नुहोस्">
+        </label>
+      </div>
+
+      <div class="mode-buttons" role="group" aria-label="अक्षरको प्रकार">
+        <button class="mode-btn active" type="button" data-mode="upper" aria-pressed="true">🔠 Capital A–Z</button>
+        <button class="mode-btn" type="button" data-mode="lower" aria-pressed="false">🔡 Small a–z</button>
+        <button class="mode-btn" type="button" data-mode="both" aria-pressed="false">Aa दुवै</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="lettersTitle">
+      <div class="section-heading">
+        <h2 id="lettersTitle">🌈 अक्षर र शब्द</h2>
+        <span id="count" aria-live="polite">२६ अक्षर</span>
+      </div>
+      <div class="grid" id="alphabetGrid"></div>
+    </section>
+
+    <section class="quiz" aria-labelledby="quizTitle">
+      <h2 id="quizTitle">🎯 Alphabet Quiz</h2>
+      <p class="quiz-intro">चित्र हेरेर सही English शब्द छान्नुहोस्।</p>
+      <div id="quizContent"></div>
+    </section>
+
+    <footer>🌟 बाल पाठशाला — खेल्दै सिकौँ, सिक्दै रमाऔँ!</footer>
+  </main>
 
   <script>
-    (() => {
-      "use strict";
-      const grid = document.getElementById("alphabetGrid");
-      const tabs = [...document.querySelectorAll(".tab")];
-      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-      let type = "upper";
+    "use strict";
 
-      function render() {
-        grid.replaceChildren();
+    const alphabet = [
+      { letter: "A", word: "Apple", np: "स्याउ", emoji: "🍎" },
+      { letter: "B", word: "Ball", np: "बल", emoji: "⚽" },
+      { letter: "C", word: "Cat", np: "बिरालो", emoji: "🐱" },
+      { letter: "D", word: "Dog", np: "कुकुर", emoji: "🐶" },
+      { letter: "E", word: "Elephant", np: "हात्ती", emoji: "🐘" },
+      { letter: "F", word: "Fish", np: "माछा", emoji: "🐟" },
+      { letter: "G", word: "Grapes", np: "अङ्गुर", emoji: "🍇" },
+      { letter: "H", word: "House", np: "घर", emoji: "🏠" },
+      { letter: "I", word: "Ice Cream", np: "आइसक्रिम", emoji: "🍦" },
+      { letter: "J", word: "Jug", np: "जग", emoji: "🫗" },
+      { letter: "K", word: "Kite", np: "चङ्गा", emoji: "🪁" },
+      { letter: "L", word: "Lion", np: "सिंह", emoji: "🦁" },
+      { letter: "M", word: "Mango", np: "आँप", emoji: "🥭" },
+      { letter: "N", word: "Nest", np: "गुँड", emoji: "🪺" },
+      { letter: "O", word: "Orange", np: "सुन्तला", emoji: "🍊" },
+      { letter: "P", word: "Parrot", np: "सुगा", emoji: "🦜" },
+      { letter: "Q", word: "Queen", np: "रानी", emoji: "👑" },
+      { letter: "R", word: "Rabbit", np: "खरायो", emoji: "🐇" },
+      { letter: "S", word: "Sun", np: "घाम", emoji: "☀️" },
+      { letter: "T", word: "Tiger", np: "बाघ", emoji: "🐅" },
+      { letter: "U", word: "Umbrella", np: "छाता", emoji: "☂️" },
+      { letter: "V", word: "Van", np: "भ्यान", emoji: "🚐" },
+      { letter: "W", word: "Watch", np: "घडी", emoji: "⌚" },
+      { letter: "X", word: "Xylophone", np: "सङ्गीत वाद्य", emoji: "🎵" },
+      { letter: "Y", word: "Yo-yo", np: "यो-यो खेलौना", emoji: "🪀" },
+      { letter: "Z", word: "Zebra", np: "जेब्रा", emoji: "🦓" }
+    ];
 
-        letters.forEach(letter => {
-          const shown = type === "upper" ? letter : letter.toLowerCase();
-          const button = document.createElement("button");
-          button.type = "button";
-          button.className = "letter";
-          button.textContent = shown;
-          button.setAttribute("aria-label", "Play letter " + shown);
+    const grid = document.getElementById("alphabetGrid");
+    const search = document.getElementById("search");
+    const count = document.getElementById("count");
+    const themeBtn = document.getElementById("themeBtn");
+    let letterMode = "upper";
 
-          button.addEventListener("click", () => {
-            if (typeof window.playAIVoice === "function") {
-              window.playAIVoice(shown);
-            }
-          });
+    function speak(text) {
+      if (typeof window.playAIVoice === "function") {
+        try {
+          const result = window.playAIVoice(text);
+          if (result && typeof result.catch === "function") {
+            result.catch(err => console.warn("AI voice:", err));
+          }
+        } catch (err) {
+          console.warn("AI voice उपलब्ध छैन:", err);
+        }
+      } else {
+        console.warn("AI voice function भेटिएन। ../script.js जाँच्नुहोस्।");
+      }
+    }
 
-          grid.appendChild(button);
-        });
+    function renderAlphabet() {
+      const query = search.value.trim().toLocaleLowerCase();
+      const visible = alphabet.filter(item =>
+        item.letter.toLowerCase().includes(query) ||
+        item.word.toLowerCase().includes(query) ||
+        item.np.toLocaleLowerCase().includes(query)
+      );
+
+      grid.replaceChildren();
+      count.textContent = `${visible.length} / 26 अक्षर`;
+
+      if (!visible.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "😕 अक्षर वा शब्द भेटिएन। फेरि खोज्नुहोस्।";
+        grid.appendChild(empty);
+        return;
       }
 
-      tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-          type = tab.dataset.type;
-          tabs.forEach(item => item.classList.toggle("active", item === tab));
-          render();
+      visible.forEach(item => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "letter-card";
+        card.setAttribute("aria-label", `${item.letter}, ${item.word}, ${item.np}. आवाज सुन्न थिच्नुहोस्।`);
+
+        const letter = document.createElement("span");
+        letter.className = "letter";
+        letter.textContent =
+          letterMode === "upper" ? item.letter :
+          letterMode === "lower" ? item.letter.toLowerCase() :
+          item.letter + item.letter.toLowerCase();
+
+        const emoji = document.createElement("span");
+        emoji.className = "word-emoji";
+        emoji.setAttribute("aria-hidden", "true");
+        emoji.textContent = item.emoji;
+
+        const word = document.createElement("span");
+        word.className = "word";
+        word.textContent = item.word;
+
+        const nepali = document.createElement("span");
+        nepali.className = "word-np";
+        nepali.textContent = item.np;
+
+        const hint = document.createElement("span");
+        hint.className = "sound-hint";
+        hint.textContent = "🔊 सुन्न थिच्नुहोस्";
+
+        card.append(letter, emoji, word, nepali, hint);
+        card.addEventListener("click", () => {
+          const shown = letterMode === "upper" ? item.letter :
+            letterMode === "lower" ? item.letter.toLowerCase() :
+            item.letter + item.letter.toLowerCase();
+          speak(`${shown}. ${item.word}. ${item.np}`);
         });
+        grid.appendChild(card);
+      });
+    }
+
+    search.addEventListener("input", renderAlphabet);
+
+    document.querySelectorAll("[data-mode]").forEach(button => {
+      button.addEventListener("click", () => {
+        letterMode = button.dataset.mode;
+        document.querySelectorAll("[data-mode]").forEach(other => {
+          const active = other === button;
+          other.classList.toggle("active", active);
+          other.setAttribute("aria-pressed", String(active));
+        });
+        renderAlphabet();
+      });
+    });
+
+    function applyTheme(dark) {
+      document.body.classList.toggle("dark", dark);
+      themeBtn.textContent = dark ? "☀️ Light Mode" : "🌙 Dark Mode";
+      document.querySelector('meta[name="theme-color"]').content = dark ? "#101827" : "#2563eb";
+      try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (_) {}
+    }
+
+    try {
+      applyTheme(localStorage.getItem("theme") === "dark");
+    } catch (_) {
+      applyTheme(false);
+    }
+
+    themeBtn.addEventListener("click", () => {
+      applyTheme(!document.body.classList.contains("dark"));
+    });
+
+    const quizContent = document.getElementById("quizContent");
+    const quizLength = 8;
+    let quizQuestions = [];
+    let quizIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function shuffle(list) {
+      const result = [...list];
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    function startQuiz() {
+      quizQuestions = shuffle(alphabet).slice(0, quizLength);
+      quizIndex = 0;
+      score = 0;
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      answered = false;
+      const item = quizQuestions[quizIndex];
+      quizContent.replaceChildren();
+
+      const progress = document.createElement("div");
+      progress.id = "progress";
+      progress.textContent = `प्रश्न ${quizIndex + 1} / ${quizLength} · अङ्क ${score}`;
+
+      const emoji = document.createElement("div");
+      emoji.id = "quizEmoji";
+      emoji.textContent = item.emoji;
+      emoji.setAttribute("aria-hidden", "true");
+
+      const question = document.createElement("div");
+      question.id = "question";
+      question.textContent = `“${item.letter}” बाट सुरु हुने शब्द कुन हो?`;
+
+      const options = document.createElement("div");
+      options.className = "options";
+
+      const feedback = document.createElement("div");
+      feedback.id = "feedback";
+      feedback.setAttribute("role", "status");
+      feedback.setAttribute("aria-live", "polite");
+
+      const actions = document.createElement("div");
+      actions.style.marginTop = "12px";
+
+      const next = document.createElement("button");
+      next.className = "primary-btn";
+      next.type = "button";
+      next.disabled = true;
+      next.textContent = quizIndex === quizLength - 1 ? "नतिजा हेर्नुहोस् 🏆" : "अर्को प्रश्न ➜";
+      next.addEventListener("click", nextQuestion);
+      actions.appendChild(next);
+
+      const choices = shuffle([
+        item,
+        ...shuffle(alphabet.filter(other => other.letter !== item.letter)).slice(0, 3)
+      ]);
+
+      choices.forEach(choice => {
+        const option = document.createElement("button");
+        option.type = "button";
+        option.className = "option";
+        option.textContent = choice.word;
+        option.addEventListener("click", () => {
+          if (answered) return;
+          answered = true;
+
+          if (choice.letter === item.letter) {
+            score++;
+            feedback.textContent = "🎉 सही उत्तर! शाबास!";
+          } else {
+            feedback.textContent = `🙂 सही उत्तर: ${item.word}`;
+            option.classList.add("wrong");
+          }
+
+          options.querySelectorAll("button").forEach(button => {
+            button.disabled = true;
+            if (button.textContent === item.word) button.classList.add("correct");
+          });
+
+          progress.textContent = `प्रश्न ${quizIndex + 1} / ${quizLength} · अङ्क ${score}`;
+          next.disabled = false;
+        });
+        options.appendChild(option);
       });
 
-      render();
-    })();
+      quizContent.append(progress, emoji, question, options, feedback, actions);
+    }
+
+    function nextQuestion() {
+      if (!answered) return;
+      if (quizIndex < quizLength - 1) {
+        quizIndex++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      quizContent.replaceChildren();
+
+      const box = document.createElement("div");
+      box.className = "result";
+
+      const emoji = document.createElement("div");
+      emoji.className = "result-emoji";
+      emoji.textContent = score >= 7 ? "🏆" : score >= 5 ? "🌟" : "💪";
+
+      const title = document.createElement("h3");
+      title.textContent = score >= 7 ? "उत्कृष्ट! शाबास!" : score >= 5 ? "धेरै राम्रो!" : "राम्रो प्रयास!";
+
+      const result = document.createElement("p");
+      result.textContent = `${quizLength} मध्ये ${score} सही उत्तर।`;
+
+      const restart = document.createElement("button");
+      restart.type = "button";
+      restart.className = "primary-btn";
+      restart.textContent = "🔄 फेरि खेलौँ";
+      restart.addEventListener("click", startQuiz);
+
+      box.append(emoji, title, result, restart);
+      quizContent.appendChild(box);
+    }
+
+    renderAlphabet();
+    startQuiz();
   </script>
 </body>
 </html>
