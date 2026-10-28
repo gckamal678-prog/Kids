@@ -1,178 +1,104 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>English Alphabet - पाठशाला</title>
-    <meta name="theme-color" content="#4A90E2">
-    <!-- Child-friendly Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Mukta:wght@700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Fredoka', 'Mukta', sans-serif;
-            background: linear-gradient(180deg, #E3F2FD 0%, #BBDEFB 100%);
-            margin: 0;
-            padding: 15px;
-            text-align: center;
-            min-height: 100vh;
-        }
-
-        /* Header Layout */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto 15px auto;
-            background: #FFFFFF;
-            padding: 10px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        h2 { 
-            color: #1565C0; 
-            margin: 0; 
-            font-size: 20px; 
-            font-weight: 700;
-        }
-        .home-btn {
-            background-color: #1E88E5;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 3px 0 #0D47A1;
-            transition: all 0.1s ease;
-        }
-        .home-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-
-        /* Tab Buttons */
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .tab-btn {
-            background-color: #FFFFFF;
-            color: #546E7A;
-            border: 2px solid #90CAF9;
-            padding: 10px 20px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 14px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #90CAF9;
-            transition: all 0.1s ease;
-            font-family: 'Fredoka', sans-serif;
-        }
-        .tab-btn.active {
-            background-color: #1976D2;
-            color: white;
-            border-color: #0D47A1;
-            box-shadow: 0 4px 0 #0D47A1;
-        }
-        .tab-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-
-        /* Grid Layout */
-        .grid-container {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .grid-container.active {
-            display: grid;
-        }
-
-        /* 3D Letter Card */
-        .letter-card {
-            background-color: #FFFFFF;
-            color: #1565C0;
-            border: 3px solid #64B5F6;
-            border-radius: 18px;
-            padding: 12px 0;
-            font-size: 44px;
-            font-weight: 700;
-            box-shadow: 0 6px 0 #1E88E5, 0 8px 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Click Bounce Effect */
-        .letter-card:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #1E88E5, 0 3px 6px rgba(0,0,0,0.1);
-            background-color: #E3F2FD;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4A90E2">
+  <title>English Alphabet - बाल पाठशाला</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Mukta:wght@700&display=swap" rel="stylesheet">
+  <script src="../script.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 16px; min-height: 100vh; text-align: center;
+      font-family: 'Fredoka', 'Mukta', sans-serif;
+      background: linear-gradient(180deg,#e3f2fd,#bbdefb); color: #1565c0;
+    }
+    .header {
+      max-width: 650px; margin: 0 auto 18px; padding: 12px 15px;
+      background: white; border-radius: 16px; box-shadow: 0 4px 12px #0001;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    h1 { font-size: clamp(18px,4vw,24px); margin: 0; }
+    .home-btn {
+      padding: 8px 12px; border-radius: 10px; background: #1e88e5;
+      color: white; text-decoration: none; font-weight: 700; white-space: nowrap;
+    }
+    .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
+    .tab {
+      border: 2px solid #90caf9; border-radius: 12px; background: white;
+      color: #1565c0; padding: 10px 16px; font-weight: 700; cursor: pointer;
+    }
+    .tab.active { background: #1976d2; color: white; }
+    .grid {
+      display: grid; grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 12px; max-width: 650px; margin: auto;
+    }
+    .letter {
+      border: 3px solid #64b5f6; border-radius: 17px; background: white;
+      color: #1565c0; min-height: 86px; font: 700 42px 'Fredoka',sans-serif;
+      box-shadow: 0 5px 0 #1e88e5; cursor: pointer;
+    }
+    .letter:active { transform: translateY(3px); box-shadow: 0 2px 0 #1e88e5; }
+    .hint { color: #345; margin: 16px auto; font-size: 14px; }
+    @media (min-width: 520px) { .grid { grid-template-columns: repeat(4,minmax(0,1fr)); } }
+    @media (min-width: 720px) { .grid { grid-template-columns: repeat(6,minmax(0,1fr)); } }
+  </style>
 </head>
 <body>
+  <header class="header">
+    <a class="home-btn" href="../index.html">🏠 होम</a>
+    <h1>English Alphabet A–Z</h1>
+  </header>
 
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>English Alphabet (A-Z)</h2>
-    </div>
+  <div class="tabs" role="group" aria-label="Alphabet type">
+    <button class="tab active" data-type="upper" type="button">Capital A–Z</button>
+    <button class="tab" data-type="lower" type="button">Small a–z</button>
+  </div>
 
-    <div class="tab-container">
-        <button class="tab-btn active" onclick="switchTab('upper', event)">Capital (A-Z)</button>
-        <button class="tab-btn" onclick="switchTab('lower', event)">Small (a-z)</button>
-    </div>
+  <main class="grid" id="alphabetGrid" aria-label="English letters"></main>
+  <p class="hint">🔊 अक्षर थिच्नुहोस् र उच्चारण सुन्नुहोस्।</p>
 
-    <div class="grid-container active" id="upperGrid"></div>
-    <div class="grid-container" id="lowerGrid"></div>
+  <script>
+    (() => {
+      "use strict";
+      const grid = document.getElementById("alphabetGrid");
+      const tabs = [...document.querySelectorAll(".tab")];
+      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+      let type = "upper";
 
-    <script>
-        const upperAlphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-        const lowerAlphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+      function render() {
+        grid.replaceChildren();
 
-        const upperGrid = document.getElementById('upperGrid');
-        const lowerGrid = document.getElementById('lowerGrid');
+        letters.forEach(letter => {
+          const shown = type === "upper" ? letter : letter.toLowerCase();
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "letter";
+          button.textContent = shown;
+          button.setAttribute("aria-label", "Play letter " + shown);
 
-        // Capital Alphabet Load (आवाज हटाएर खाली राखिएको)
-        upperAlphabet.forEach(letter => {
-            const div = document.createElement('div');
-            div.className = 'letter-card';
-            div.innerText = letter;
-            upperGrid.appendChild(div);
-        });
-
-        // Small Alphabet Load (आवाज हटाएर खाली राखिएको)
-        lowerAlphabet.forEach(letter => {
-            const div = document.createElement('div');
-            div.className = 'letter-card';
-            div.innerText = letter;
-            lowerGrid.appendChild(div);
-        });
-
-        function switchTab(type, event) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.grid-container').forEach(grid => grid.classList.remove('active'));
-            event.target.classList.add('active');
-            if (type === 'upper') {
-                document.getElementById('upperGrid').classList.add('active');
-            } else {
-                document.getElementById('lowerGrid').classList.add('active');
+          button.addEventListener("click", () => {
+            if (typeof window.playAIVoice === "function") {
+              window.playAIVoice(shown);
             }
-        }
-    </script>
+          });
 
+          grid.appendChild(button);
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          type = tab.dataset.type;
+          tabs.forEach(item => item.classList.toggle("active", item === tab));
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
 </body>
 </html>
