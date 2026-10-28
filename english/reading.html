@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>English Reading | Kids Learning</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101827;
+      --panel: #1b2940;
+      --card: #22334d;
+      --text: #f7f9ff;
+      --muted: #c3cee0;
+      --accent: #ffd166;
+      --green: #72e6b1;
+      --blue: #82c8ff;
+      --border: #3a4d68;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .back {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: var(--panel);
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 24px 18px;
+      text-align: center;
+      background: linear-gradient(135deg, #243e61, #24324b);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      margin-bottom: 18px;
+    }
+
+    .hero .emoji {
+      font-size: 42px;
+    }
+
+    h1 {
+      color: var(--accent);
+      margin: 8px 0;
+      font-size: clamp(25px, 5vw, 36px);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .tip {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 12px;
+      background: #17273a;
+      color: var(--green);
+      font-size: 14px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    .toolbar button {
+      flex: 1;
+      min-width: 130px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      background: var(--panel);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .toolbar button:active,
+    .back:active {
+      transform: scale(.98);
+    }
+
+    .section-title {
+      color: var(--green);
+      font-size: 21px;
+      margin: 22px 0 12px;
+    }
+
+    .chapter {
+      margin: 12px 0;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .chapter summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      cursor: pointer;
+      list-style: none;
+      font-size: 17px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    .chapter summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .chapter summary::after {
+      content: "+";
+      margin-left: auto;
+      font-size: 24px;
+      color: var(--green);
+    }
+
+    .chapter[open] summary::after {
+      content: "−";
+    }
+
+    .chapter-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: #344964;
+      color: white;
+    }
+
+    .chapter-content {
+      padding: 0 15px 17px;
+      border-top: 1px solid var(--border);
+    }
+
+    .label {
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin: 15px 0 5px;
+    }
+
+    .english-label {
+      color: var(--blue);
+    }
+
+    .nepali-label {
+      color: var(--green);
+    }
+
+    .english-text {
+      font-size: 17px;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.85;
+    }
+
+    .nepali-text {
+      font-size: 16px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.9;
+    }
+
+    .practice {
+      background: #17273a;
+      border: 1px dashed #4b6686;
+      border-radius: 14px;
+      padding: 15px;
+      margin-top: 22px;
+    }
+
+    .practice h2 {
+      color: var(--accent);
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    .practice p {
+      color: var(--muted);
+    }
+
+    .practice label {
+      display: block;
+      padding: 9px 0;
+      cursor: pointer;
+    }
+
+    .practice input {
+      margin-right: 8px;
+      transform: scale(1.15);
+    }
+
+    .check-button {
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--green);
+      color: #102033;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #quiz-result {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin: 28px 0 10px;
+    }
+
+    body.light-mode {
+      color-scheme: light;
+      --bg: #f1f5fb;
+      --panel: #ffffff;
+      --card: #edf3fb;
+      --text: #17243a;
+      --muted: #4b5c73;
+      --accent: #875400;
+      --green: #08784e;
+      --blue: #075e9b;
+      --border: #cbd7e7;
+    }
+
+    body.light-mode .hero {
+      background: linear-gradient(135deg, #dcecff, #f2e8ff);
+    }
+
+    body.light-mode .tip,
+    body.light-mode .practice {
+      background: #e7eff9;
+    }
+
+    body.light-mode .chapter-number {
+      background: #dbe6f4;
+      color: #17243a;
+    }
+
+    body.light-mode .check-button {
+      background: #08784e;
+      color: white;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 11px;
+      }
+
+      .hero {
+        padding: 20px 12px;
+      }
+
+      .chapter summary {
+        padding: 12px;
+        font-size: 15px;
+      }
+
+      .chapter-content {
+        padding: 0 12px 14px;
+      }
+
+      .english-text,
+      .nepali-text {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back" href="../index.html">← Home</a>
+      <button class="back" id="theme-toggle" type="button">
+        ☀️ Light Mode
+      </button>
+    </div>
+
+    <header class="hero">
+      <div class="emoji">📚</div>
+      <h1>English Reading</h1>
+      <p class="subtitle">Read, understand and learn English!</p>
+      <p class="subtitle">अङ्ग्रेजी पढौँ, बुझौँ र नयाँ कुरा सिकौँ।</p>
+      <div class="tip">
+        💡 एउटा पाठ खोल्नुहोस्। पहिले English पढ्नुहोस्, त्यसपछि नेपाली अर्थ बुझ्नुहोस्।
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <button id="open-all" type="button">📖 Open All Chapters</button>
+      <button id="close-all" type="button">📕 Close All Chapters</button>
+    </div>
+
+    <h2 class="section-title">🌟 Daily Reading Chapters</h2>
+
+    <section id="chapters">
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">1</span>
+          My School Life
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">My name is Ram. I am a student. I go to school every day. I read books and play football with my friends. I love my school very much.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">मेरो नाम राम हो। म एक विद्यार्थी हुँ। म हरेक दिन विद्यालय जान्छु। म किताबहरू पढ्छु र मेरा साथीहरूसँग फुटबल खेल्छु। मलाई मेरो विद्यालय धेरै मन पर्छ।</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">2</span>
+          Morning Routine
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">I wake up early in the morning. I brush my teeth and wash my face. Then I drink a glass of milk and eat some breakfast with my family.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">म बिहान सबेरै उठ्छु। म दाँत माझ्छु र अनुहार धुन्छु। त्यसपछि म एक गिलास दूध पिउँछु र परिवारसँग बिहानको खाजा खान्छु।</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">3</span>
+          My Mother
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">My mother is a kind woman. She cooks delicious food for us. She helps me with my homework every evening and tells me wonderful bedtime stories.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">मेरी आमा दयालु हुनुहुन्छ। उहाँले हाम्रा लागि स्वादिष्ट खाना पकाउनुहुन्छ। उहाँले हरेक साँझ मेरो गृहकार्यमा सहयोग गर्नुहुन्छ र सुत्ने बेलामा राम्रा कथाहरू सुनाउनुहुन्छ।</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">4</span>
+          My Father
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">My father works hard in his office. He brings fruits and toys for me on weekends. I respect him very much and want to be a good person like him.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">मेरा बुवा आफ्नो कार्यालयमा मेहनत गर्नुहुन्छ। उहाँले बिदाका दिनमा मेरा लागि फलफूल र खेलौनाहरू ल्याउनुहुन्छ। म उहाँलाई धेरै आदर गर्छु र उहाँजस्तै असल मानिस बन्न चाहन्छु।</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">5</span>
+          The Cow
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">The cow is a very useful domestic animal. It gives us milk. We make butter and cheese from milk. Many people respect the cow as a sacred animal.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">गाई उपयोगी घरपालुवा जनावर हो। यसले हामीलाई दूध दिन्छ। हामी दूधबाट नौनी र पनिर बनाउँछौँ। धेरै मानिसहरूले गाईलाई पवित्र जनावरका रूपमा सम्मान गर्छन्।</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">6</span>
+          My Pet Dog
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">Dogs are loyal and faithful animals. They can guard our houses. My dog's name is Tommy. He loves to run and catch the ball in the garden.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">कुकुरहरू वफादार र विश्वासिला जनावर हुन्। तिनीहरूले हाम्रो घरको सुरक्षा गर्न सक्छन्। मेरो कुकुरको नाम टमी हो। उसलाई बगैँचामा दौडिन र बल समात्न मन पर्छ।</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">7</span>
+          Importance of Water
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">Water is very precious for all living beings. We cannot live without water. We use water for drinking, cooking, washing and watering plants every day.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">पानी सबै जीवित प्राणीका लागि अत्यन्त महत्त्वपूर्ण छ। हामी पानीबिना बाँच्न सक्दैनौँ। हामी दैनिक पिउन, खाना पकाउन, धुन र बिरुवामा पानी हाल्न पानी प्रयोग गर्छौँ।</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">8</span>
+          Trees Are Our Friends
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">Trees give us fresh air, shade, fruits and wood. They help keep our environment green. We should plant more trees and take care of them.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">रूखहरूले हामीलाई ताजा हावा, छाया, फलफूल र काठ दिन्छन्। तिनीहरूले हाम्रो वातावरण हरियो राख्न मद्दत गर्छन्। हामीले थप रूख रोप्नुपर्छ र तिनीहरूको हेरचाह गर्नुपर्छ।</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">9</span>
+          My Best Friend
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">My best friend's name is Rohan. We sit on the same bench in the classroom. We share our lunch and play cricket together during the lunch break.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">मेरो मिल्ने साथीको नाम रोहन हो। हामी कक्षामा एउटै बेन्चमा बस्छौँ। हामी आफ्नो खाजा बाँडेर खान्छौँ र खाजा खाने समयमा सँगै क्रिकेट खेल्छौँ।</p>
+        </div>
+      </details>
+
+      <details class="chapter">
+        <summary>
+          <span class="chapter-number">10</span>
+          The Himalayas
+        </summary>
+        <div class="chapter-content">
+          <p class="label english-label">🇬🇧 English</p>
+          <p class="english-text">The Himalayas are a great mountain range in Asia. Mount Everest is the highest mountain in the world and lies on the Nepal-China border. Visitors from many countries come to see the beauty of the Himalayas.</p>
+          <p class="label nepali-label">🇳🇵 नेपाली अर्थ</p>
+          <p class="nepali-text">हिमालय एसियाको विशाल पर्वतमाला हो। सगरमाथा विश्वको सबैभन्दा अग्लो हिमाल हो र यो नेपाल–चीन सीमामा अवस्थित छ। हिमालयको सुन्दरता हेर्न धेरै देशबाट मानिसहरू आउँछन्।</p>
+        </div>
+      </details>
+
+    </section>
+
+    <section class="practice">
+      <h2>🧠 Quick Reading Quiz</h2>
+      <p>पाठ पढेपछि सही उत्तर छान्नुहोस्।</p>
+
+      <form id="reading-quiz">
+        <p><strong>1. Where does Ram go every day?</strong></p>
+        <label><input type="radio" name="q1" value="a"> To the market</label>
+        <label><input type="radio" name="q1" value="b"> To school</label>
+        <label><input type="radio" name="q1" value="c"> To the hospital</label>
+
+        <p><strong>2. What do trees give us?</strong></p>
+        <label><input type="radio" name="q2" value="a"> Fresh air and shade</label>
+        <label><input type="radio" name="q2" value="b"> Plastic toys</label>
+        <label><input type="radio" name="q2" value="c"> Books and pencils</label>
+
+        <p><strong>3. What is the name of the pet dog?</strong></p>
+        <label><input type="radio" name="q3" value="a"> Rohan</label>
+        <label><input type="radio" name="q3" value="b"> Ram</label>
+        <label><input type="radio" name="q3" value="c"> Tommy</label>
+
+        <button class="check-button" type="submit">Check My Answers</button>
+        <div id="quiz-result" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <footer>
+      🌈 Keep reading every day. Little steps make big progress!
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const themeButton = document.getElementById("theme-toggle");
+      const chapters = Array.from(document.querySelectorAll(".chapter"));
+      const openAllButton = document.getElementById("open-all");
+      const closeAllButton = document.getElementById("close-all");
+
+      function readTheme() {
+        try {
+          return localStorage.getItem("theme") || "dark";
+        } catch (error) {
+          return "dark";
+        }
+      }
+
+      function saveTheme(theme) {
+        try {
+          localStorage.setItem("theme", theme);
+        } catch (error) {
+          // The page still works if storage is unavailable.
+        }
+      }
+
+      function applyTheme(theme) {
+        const light = theme === "light";
+        document.body.classList.toggle("light-mode", light);
+        themeButton.textContent = light ? "🌙 Dark Mode" : "☀️ Light Mode";
+        themeButton.setAttribute("aria-pressed", String(light));
+      }
+
+      applyTheme(readTheme());
+
+      themeButton.addEventListener("click", () => {
+        const nextTheme = document.body.classList.contains("light-mode")
+          ? "dark"
+          : "light";
+
+        applyTheme(nextTheme);
+        saveTheme(nextTheme);
+      });
+
+      openAllButton.addEventListener("click", () => {
+        chapters.forEach(chapter => {
+          chapter.open = true;
+        });
+      });
+
+      closeAllButton.addEventListener("click", () => {
+        chapters.forEach(chapter => {
+          chapter.open = false;
+        });
+      });
+
+      document.getElementById("reading-quiz").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const answers = {
+          q1: "b",
+          q2: "a",
+          q3: "c"
+        };
+
+        const form = event.currentTarget;
+        let score = 0;
+        let unanswered = 0;
+
+        for (const [question, correctAnswer] of Object.entries(answers)) {
+          const selected = form.querySelector(
+            `input[name="${question}"]:checked`
+          );
+
+          if (!selected) {
+            unanswered++;
+          } else if (selected.value === correctAnswer) {
+            score++;
+          }
+        }
+
+        const result = document.getElementById("quiz-result");
+
+        if (unanswered > 0) {
+          result.textContent =
+            `अझै ${unanswered} वटा प्रश्नको उत्तर छान्न बाँकी छ।`;
+          return;
+        }
+
+        result.textContent = `तपाईंको अंक: ${score}/3 ${
+          score === 3
+            ? "🎉 उत्कृष्ट! सबै उत्तर सही छन्।"
+            : score === 2
+              ? "👏 राम्रो प्रयास! फेरि पढेर प्रयास गर्नुहोस्।"
+              : "💪 राम्रो प्रयास! पाठ फेरि पढेर प्रयास गर्नुहोस्।"
+        }`;
+      });
+    })();
+  </script>
+</body>
+</html>
