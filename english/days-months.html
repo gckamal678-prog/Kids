@@ -1,216 +1,464 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>वार र महिनाहरू - पाठशाला</title>
-    <meta name="theme-color" content="#6C5CE7">
-    <!-- Google Fonts for Playful Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Mukta', 'Fredoka', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #F3F0FF 0%, #E8E3FF 100%);
-            margin: 0;
-            padding: 12px;
-            text-align: center;
-            min-height: 100vh;
-        }
-
-        /* Modern Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 650px;
-            margin: 0 auto 16px auto;
-            background: #FFFFFF;
-            padding: 10px 18px;
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.12);
-        }
-        h2 { 
-            color: #2D3436; 
-            margin: 0; 
-            font-size: 22px; 
-            font-weight: 800;
-        }
-        .home-btn {
-            background: linear-gradient(135deg, #6C5CE7, #8E7CFF);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 15px;
-            box-shadow: 0 4px 0 #4B38B3;
-            transition: all 0.1s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .home-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 #4B38B3;
-        }
-
-        /* Section Titles */
-        .section-title {
-            color: #FFFFFF;
-            background: linear-gradient(135deg, #FF7675, #D63031);
-            padding: 12px 16px;
-            border-radius: 14px;
-            font-size: 19px;
-            font-weight: 800;
-            margin: 25px auto 14px auto;
-            max-width: 650px;
-            box-shadow: 0 5px 15px rgba(214, 48, 49, 0.2);
-            text-align: left;
-        }
-
-        /* Grid Container */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            max-width: 650px;
-            margin: auto;
-        }
-        @media (min-width: 480px) {
-            .grid-container {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Card 3D Styling */
-        .card {
-            background-color: #FFFFFF;
-            color: #2D3436;
-            border: 2px solid #A29BFE;
-            border-bottom: 5px solid #6C5CE7;
-            border-radius: 16px;
-            padding: 14px 10px;
-            box-shadow: 0 6px 15px rgba(108, 92, 231, 0.08);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s ease;
-            font-size: 19px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 58px;
-        }
-        .card:hover {
-            background-color: #F8F7FF;
-        }
-        .card:active {
-            transform: translateY(3px);
-            border-bottom-width: 2px;
-            background-color: #E0E7FF;
-            color: #4C51BF;
-        }
-
-        /* Section Specific Colors */
-        #nepaliDaysGrid .card {
-            border-color: #74B9FF;
-            border-bottom-color: #0984E3;
-            color: #0984E3;
-        }
-        #nepaliDaysGrid .card:active {
-            background-color: #E1F5FE;
-        }
-
-        #englishDaysGrid .card {
-            border-color: #55E6C1;
-            border-bottom-color: #58B19F;
-            color: #118A7E;
-        }
-        #englishDaysGrid .card:active {
-            background-color: #E0F2F1;
-        }
-
-        #nepaliMonthsGrid .card {
-            border-color: #F8A5C2;
-            border-bottom-color: #F78FB3;
-            color: #C44569;
-        }
-        #nepaliMonthsGrid .card:active {
-            background-color: #FCE4EC;
-        }
-
-        #englishMonthsGrid .card {
-            border-color: #FDE047;
-            border-bottom-color: #EAB308;
-            color: #CA8A04;
-        }
-        #englishMonthsGrid .card:active {
-            background-color: #FEF9C3;
-        }
-    </style>
-    <script>
-        function speakText(text, lang = 'ne-NP') {
-            window.speechSynthesis.cancel();
-            let speech = new SpeechSynthesisUtterance(text);
-            speech.lang = lang;
-            speech.rate = 0.85;
-            speech.pitch = 1.1;
-            window.speechSynthesis.speak(speech);
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6D5AE6">
+<title>वार र महिनाहरू | बाल पाठशाला</title>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="../script.js"></script>
+<style>
+:root{
+  --bg:#F4F1FF;--card:#FFFFFF;--text:#30234B;--muted:#786B92;
+  --primary:#6D5AE6;--primary-dark:#4934B1;--soft:#E9E4FF;
+  --border:#D9D0FF;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:14px;background:var(--bg);color:var(--text);font-family:'Mukta',sans-serif;min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+.page{max-width:900px;margin:auto}
+.header{display:flex;align-items:center;gap:10px;padding:11px;background:var(--card);border:2px solid var(--border);border-radius:18px;box-shadow:0 4px 0 #E4DCFF}
+.home{background:var(--primary);color:white;text-decoration:none;font-weight:800;padding:8px 12px;border-radius:12px;white-space:nowrap;box-shadow:0 3px 0 var(--primary-dark)}
+.headtext{flex:1;min-width:0;text-align:center}
+.headtext h1{font-size:clamp(18px,4vw,26px);line-height:1.3;margin:0}
+.headtext p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.theme{border:0;background:var(--soft);color:var(--text);border-radius:12px;padding:9px;font-size:19px}
+.hero{margin:19px 0;padding:21px 14px;text-align:center;border-radius:23px;color:white;background:linear-gradient(135deg,#6D5AE6,#A855F7,#EC4899);box-shadow:0 6px 0 #5943BD}
+.hero .emoji{font-size:48px;line-height:1.3}
+.hero h2{font-size:clamp(22px,5vw,29px);margin:6px 0 2px}
+.hero p{margin:0;font-size:15px}
+.tools{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}
+.search{flex:1;min-width:180px;padding:12px 14px;border:2px solid var(--border);border-radius:14px;background:var(--card);color:var(--text);outline:none;font-size:16px}
+.search:focus{border-color:var(--primary)}
+.btn{border:0;border-radius:13px;padding:10px 14px;background:var(--primary);color:white;font-weight:800;box-shadow:0 3px 0 var(--primary-dark)}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.btn.soft{background:var(--soft);color:var(--text);box-shadow:0 3px 0 var(--border)}
+.tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:17px 0}
+.tab{border:2px solid var(--border);background:var(--card);color:var(--text);padding:11px 5px;border-radius:13px;font-weight:800}
+.tab.active{background:var(--primary);border-color:var(--primary);color:white}
+.section{margin-top:21px}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 12px}
+.section-title h2{font-size:20px;margin:0}
+.count{font-size:12px;color:var(--muted);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.card{width:100%;min-width:0;min-height:105px;padding:13px 7px;border:2px solid var(--border);border-bottom:5px solid var(--primary);border-radius:17px;background:var(--card);color:var(--text);text-align:center;box-shadow:0 4px 10px #4030800D;transition:transform .15s}
+.card:active{transform:translateY(3px);border-bottom-width:2px}
+.card .emoji{font-size:30px;line-height:1.3}
+.card .np{font-size:19px;font-weight:800;line-height:1.4}
+.card .en{font-family:'Fredoka',sans-serif;color:var(--primary);font-size:17px;font-weight:600}
+.card .hint{font-size:11px;color:var(--muted);margin-top:3px}
+.card .np.hidden,.card .en.hidden{display:none}
+.empty{display:none;text-align:center;padding:20px;background:var(--card);border-radius:15px}
+.panel{margin-top:25px;padding:17px;border:2px solid var(--border);border-radius:21px;background:var(--card)}
+.panel h2{font-size:22px;margin:0 0 4px}
+.panel>p{color:var(--muted);margin:3px 0 14px}
+.quizbox{padding:15px;border-radius:17px;background:var(--bg);text-align:center}
+.progress{height:9px;border-radius:20px;background:var(--border);overflow:hidden;margin-bottom:14px}
+.progress div{height:100%;width:0;background:linear-gradient(90deg,#6D5AE6,#EC4899);transition:width .2s}
+.qcount{font-size:13px;color:var(--muted);font-weight:700}
+.qemoji{font-size:48px;line-height:1.3;margin:8px}
+.question{font-size:20px;font-weight:800;margin:8px 0 14px}
+.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.answer{border:2px solid var(--border);border-radius:13px;padding:12px 5px;background:var(--card);color:var(--text);font-weight:800;font-size:16px}
+.answer:disabled{cursor:default;opacity:.95}
+.answer.correct{background:#DCFCE7;border-color:#22C55E;color:#166534}
+.answer.wrong{background:#FEE2E2;border-color:#EF4444;color:#991B1B}
+.feedback{min-height:28px;margin:11px 0 4px;font-weight:800}
+.good{color:#15803D}.bad{color:#B91C1C}
+.quizactions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+.hidden{display:none!important}
+.footer{text-align:center;padding:23px 8px 10px;color:var(--muted);font-size:14px}
+body.dark{--bg:#191526;--card:#282139;--text:#F4EEFF;--muted:#C6B8DB;--primary:#A78BFA;--primary-dark:#7C3AED;--soft:#3B3152;--border:#514365}
+body.dark .hero{background:linear-gradient(135deg,#5B21B6,#7C3AED,#BE185D)}
+body.dark .answer.correct{background:#173B29;color:#BBF7D0}
+body.dark .answer.wrong{background:#4B2029;color:#FECACA}
+@media(min-width:520px){body{padding:20px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:780px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
+<main class="page">
+<header class="header">
+<a class="home" href="../index.html">🏠 होम</a>
+<div class="headtext">
+<h1>वार र महिनाहरू</h1>
+<p>Days &amp; Months</p>
+</div>
+<button id="themeBtn" class="theme" type="button" aria-label="थिम परिवर्तन">🌙</button>
+</header>
 
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>वार र महिनाहरू</h2>
-    </div>
+<section class="hero">
+<div class="emoji">📅🌈</div>
+<h2>समयसँगै अङ्ग्रेजी सिकौँ!</h2>
+<p>बार र महिनाका नाम पढौँ, सुनौँ अनि खेलौँ।</p>
+</section>
 
-    <!-- नेपाली बार सेक्सन -->
-    <div class="section-title">नेपाली बारहरू</div>
-    <div class="grid-container" id="nepaliDaysGrid"></div>
+<div class="tools">
+<input id="searchInput" class="search" type="search" placeholder="🔎 बार वा महिना खोज्नुहोस्..." aria-label="बार वा महिना खोज्नुहोस्">
+<button id="languageBtn" class="btn soft" type="button">नेपाली + English</button>
+</div>
 
-    <!-- अंग्रेजी बार सेक्सन -->
-    <div class="section-title">English Days of the Week</div>
-    <div class="grid-container" id="englishDaysGrid"></div>
+<nav class="tabs" aria-label="पाठ छान्नुहोस्">
+<button class="tab active" data-section="nepaliDaysSection" type="button">📆 नेपाली बार</button>
+<button class="tab" data-section="englishDaysSection" type="button">🌍 English Days</button>
+<button class="tab" data-section="nepaliMonthsSection" type="button">🇳🇵 नेपाली महिना</button>
+<button class="tab" data-section="englishMonthsSection" type="button">🗓️ English Months</button>
+</nav>
 
-    <!-- नेपाली महिना सेक्सन -->
-    <div class="section-title">नेपाली महिनाहरू (बैशाख - चैत)</div>
-    <div class="grid-container" id="nepaliMonthsGrid"></div>
+<section class="section" id="nepaliDaysSection">
+<div class="section-title"><h2>📆 नेपाली बारहरू</h2><span class="count">७ दिन</span></div>
+<div class="grid" id="nepaliDaysGrid"></div>
+</section>
 
-    <!-- अंग्रेजी महिना सेक्सन -->
-    <div class="section-title">English Months</div>
-    <div class="grid-container" id="englishMonthsGrid"></div>
+<section class="section hidden" id="englishDaysSection">
+<div class="section-title"><h2>🌍 English Days of the Week</h2><span class="count">7 days</span></div>
+<div class="grid" id="englishDaysGrid"></div>
+</section>
 
-    <script>
-        // डेटा सूचीहरू
-        const nepaliDays = ['आईतबार', 'सोमबार', 'मंगलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-        const englishDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const nepaliMonths = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पुष', 'माघ', 'फागुन', 'चैत'];
-        const englishMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+<section class="section hidden" id="nepaliMonthsSection">
+<div class="section-title"><h2>🇳🇵 नेपाली महिनाहरू</h2><span class="count">१२ महिना</span></div>
+<div class="grid" id="nepaliMonthsGrid"></div>
+</section>
 
-        // जेनेरेट गर्ने फंक्सन
-        function createCards(data, containerId, lang) {
-            const container = document.getElementById(containerId);
-            data.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerText = item;
-                card.addEventListener('click', () => speakText(item, lang));
-                container.appendChild(card);
-            });
-        }
+<section class="section hidden" id="englishMonthsSection">
+<div class="section-title"><h2>🗓️ English Months</h2><span class="count">12 months</span></div>
+<div class="grid" id="englishMonthsGrid"></div>
+</section>
 
-        // सबै लोड गर्ने
-        createCards(nepaliDays, 'nepaliDaysGrid', 'ne-NP');
-        createCards(englishDays, 'englishDaysGrid', 'en-US');
-        createCards(nepaliMonths, 'nepaliMonthsGrid', 'ne-NP');
-        createCards(englishMonths, 'englishMonthsGrid', 'en-US');
-    </script>
+<div class="empty" id="emptyState">😕 नाम भेटिएन। अर्को शब्द खोज्नुहोस्।</div>
 
+<section class="panel">
+<h2>🎮 Days &amp; Months Quiz</h2>
+<p>प्रश्नको सही उत्तर छान्नुहोस्। प्रत्येक खेलमा ८ वटा प्रश्न हुन्छन्।</p>
+<div class="quizbox">
+<div class="progress"><div id="progressBar"></div></div>
+<div id="quizPlay">
+<div class="qcount" id="quizCount">प्रश्न १ / ८</div>
+<div class="qemoji" id="quizEmoji">📅</div>
+<div class="question" id="quizQuestion">सही उत्तर छान्नुहोस्।</div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+<div class="quizactions">
+<button class="btn" id="nextBtn" type="button" disabled>अर्को प्रश्न ➜</button>
+</div>
+</div>
+<div id="quizResult" class="hidden">
+<div style="font-size:52px">🏆</div>
+<h2 id="resultTitle">शाबास!</h2>
+<p id="resultText"></p>
+<div class="quizactions"><button class="btn" id="restartBtn" type="button">🔄 फेरि खेलौँ</button></div>
+</div>
+</div>
+</section>
+
+<footer class="footer">🌈 बाल पाठशाला — रमाउँदै सिकौँ, अघि बढौँ!</footer>
+</main>
+
+<script>
+"use strict";
+
+const lessons = {
+  nepaliDays: {
+    title:"नेपाली बार",
+    emoji:"📆",
+    items:["आइतबार","सोमबार","मंगलबार","बुधबार","बिहीबार","शुक्रबार","शनिबार"]
+  },
+  englishDays: {
+    title:"English Days",
+    emoji:"🌍",
+    items:["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+  },
+  nepaliMonths: {
+    title:"नेपाली महिनाहरू",
+    emoji:"🇳🇵",
+    items:["बैशाख","जेठ","असार","साउन","भदौ","असोज","कार्तिक","मंसिर","पुष","माघ","फागुन","चैत"]
+  },
+  englishMonths: {
+    title:"English Months",
+    emoji:"🗓️",
+    items:["January","February","March","April","May","June","July","August","September","October","November","December"]
+  }
+};
+
+const $ = id => document.getElementById(id);
+let showBoth = true;
+let currentSection = "nepaliDaysSection";
+let questions = [];
+let questionIndex = 0;
+let score = 0;
+let answered = false;
+
+function speak(text){
+  // साइटको साझा AI voice मात्र। Browser/mobile TTS fallback छैन।
+  if(typeof window.playAIVoice === "function"){
+    try{
+      const result = window.playAIVoice(text);
+      if(result && typeof result.catch === "function"){
+        result.catch(err => console.warn("AI voice:",err));
+      }
+    }catch(err){
+      console.warn("AI voice उपलब्ध छैन:",err);
+    }
+  }else{
+    console.warn("AI voice function भेटिएन। ../script.js र voice configuration जाँच्नुहोस्।");
+  }
+}
+
+function makeCard(item,group,index){
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "card";
+  card.setAttribute("aria-label",item+" को आवाज सुन्नुहोस्");
+
+  const emoji = document.createElement("div");
+  emoji.className = "emoji";
+  emoji.textContent = group.emoji;
+
+  const np = document.createElement("div");
+  np.className = "np";
+  const en = document.createElement("div");
+  en.className = "en";
+
+  if(group.lang === "ne"){
+    np.textContent = item;
+    en.textContent = group.translations[index] || "";
+  }else{
+    en.textContent = item;
+    np.textContent = group.translations[index] || "";
+  }
+
+  if(!showBoth){
+    np.classList.add("hidden");
+    en.classList.add("hidden");
+  }
+
+  const hint = document.createElement("div");
+  hint.className = "hint";
+  hint.textContent = "🔊 सुन्न थिच्नुहोस्";
+
+  card.append(emoji,np,en,hint);
+  card.addEventListener("click",()=>{
+    speak(group.lang === "en" ? item : item);
+  });
+  return card;
+}
+
+const dayTranslations = {
+  sunday:"आइतबार",monday:"सोमबार",tuesday:"मंगलबार",
+  wednesday:"बुधबार",thursday:"बिहीबार",friday:"शुक्रबार",saturday:"शनिबार"
+};
+const monthTranslations = {
+  january:"जनवरी",february:"फेब्रुअरी",march:"मार्च",april:"अप्रिल",
+  may:"मे",june:"जुन",july:"जुलाई",august:"अगस्ट",
+  september:"सेप्टेम्बर",october:"अक्टोबर",november:"नोभेम्बर",december:"डिसेम्बर"
+};
+
+const nepaliMonthEnglish = [
+  "Baisakh","Jestha","Ashadh","Shrawan","Bhadra","Ashoj",
+  "Kartik","Mangsir","Poush","Magh","Falgun","Chaitra"
+];
+
+const groups = [
+  {id:"nepaliDaysGrid",key:"nepaliDays",lang:"ne",emoji:"📆",translations:lessons.nepaliDays.items.map(x=>dayTranslations[Object.keys(dayTranslations).find(k=>dayTranslations[k]===x)]||"")},
+  {id:"englishDaysGrid",key:"englishDays",lang:"en",emoji:"🌍",translations:lessons.englishDays.items.map(x=>dayTranslations[x.toLowerCase()]||"")},
+  {id:"nepaliMonthsGrid",key:"nepaliMonths",lang:"ne",emoji:"🇳🇵",translations:nepaliMonthEnglish},
+  {id:"englishMonthsGrid",key:"englishMonths",lang:"en",emoji:"🗓️",translations:lessons.englishMonths.items.map(x=>monthTranslations[x.toLowerCase()]||"")}
+];
+
+function renderCards(){
+  const query = $("searchInput").value.trim().toLocaleLowerCase();
+  let visibleTotal = 0;
+
+  groups.forEach(group=>{
+    const container = $(group.id);
+    container.replaceChildren();
+    const items = lessons[group.key].items;
+
+    items.forEach((item,index)=>{
+      const translation = group.translations[index] || "";
+      const matches = !query ||
+        item.toLocaleLowerCase().includes(query) ||
+        translation.toLocaleLowerCase().includes(query);
+
+      if(matches){
+        container.appendChild(makeCard(item,group,index));
+        visibleTotal++;
+      }
+    });
+
+    const section = container.closest(".section");
+    const hasCards = container.children.length > 0;
+    if(currentSection !== "all" && section.id !== currentSection){
+      section.classList.add("hidden");
+    }else{
+      section.classList.toggle("hidden",!hasCards);
+    }
+  });
+
+  $("emptyState").style.display = visibleTotal ? "none" : "block";
+}
+
+function selectSection(sectionId){
+  currentSection = sectionId;
+  document.querySelectorAll(".tab").forEach(tab=>{
+    tab.classList.toggle("active",tab.dataset.section === sectionId);
+  });
+  renderCards();
+}
+
+document.querySelectorAll(".tab").forEach(tab=>{
+  tab.addEventListener("click",()=>selectSection(tab.dataset.section));
+});
+
+$("searchInput").addEventListener("input",()=>{
+  if($("searchInput").value.trim()){
+    currentSection = "all";
+    document.querySelectorAll(".tab").forEach(tab=>tab.classList.remove("active"));
+  }else{
+    currentSection = document.querySelector(".tab.active")?.dataset.section || "nepaliDaysSection";
+  }
+  renderCards();
+});
+
+$("languageBtn").addEventListener("click",()=>{
+  showBoth = !showBoth;
+  $("languageBtn").textContent = showBoth ? "नेपाली + English" : "नाम देखाउनुहोस्";
+  renderCards();
+});
+
+$("themeBtn").addEventListener("click",()=>{
+  const dark = document.body.classList.toggle("dark");
+  $("themeBtn").textContent = dark ? "☀️" : "🌙";
+  try{localStorage.setItem("theme",dark ? "dark" : "light");}catch(e){}
+});
+
+try{
+  if(localStorage.getItem("theme")==="dark"){
+    document.body.classList.add("dark");
+    $("themeBtn").textContent = "☀️";
+  }
+}catch(e){}
+
+function shuffle(items){
+  const copy = [...items];
+  for(let i=copy.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]] = [copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function allQuizItems(){
+  const result = [];
+  Object.entries(lessons).forEach(([key,group])=>{
+    group.items.forEach((item,index)=>{
+      result.push({
+        answer:item,
+        np:group.key === "unused" ? "" : (groups.find(g=>g.key===key)?.translations[index] || ""),
+        group:key,
+        emoji:group.emoji || "📅"
+      });
+    });
+  });
+  return result;
+}
+
+function startQuiz(){
+  const pool = [];
+  Object.entries(lessons).forEach(([key,group])=>{
+    group.items.forEach((item,index)=>{
+      pool.push({
+        answer:item,
+        group:key,
+        emoji:key.includes("Days")?"📆":"🗓️",
+        translations:groups.find(g=>g.key===key)?.translations || []
+      });
+    });
+  });
+  questions = shuffle(pool).slice(0,8);
+  questionIndex = 0;
+  score = 0;
+  answered = false;
+  $("quizPlay").classList.remove("hidden");
+  $("quizResult").classList.add("hidden");
+  showQuestion();
+}
+
+function showQuestion(){
+  answered = false;
+  const q = questions[questionIndex];
+  $("quizCount").textContent = "प्रश्न "+(questionIndex+1)+" / "+questions.length;
+  $("quizEmoji").textContent = q.emoji;
+  $("quizQuestion").textContent = q.group.includes("Days")
+    ? "यो कुन बार हो?"
+    : "यो कुन महिनाको नाम हो?";
+  $("progressBar").style.width = (questionIndex/questions.length*100)+"%";
+  $("feedback").textContent = "";
+  $("feedback").className = "feedback";
+  $("nextBtn").disabled = true;
+  $("nextBtn").textContent = questionIndex===questions.length-1 ? "नतिजा हेर्नुहोस् 🏆" : "अर्को प्रश्न ➜";
+
+  const sameGroup = Object.entries(lessons).find(([key])=>key===q.group)[1].items;
+  const choices = shuffle([q.answer,...shuffle(sameGroup.filter(x=>x!==q.answer)).slice(0,3)]);
+  const answers = $("answers");
+  answers.replaceChildren();
+
+  choices.forEach(choice=>{
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "answer";
+    button.textContent = choice;
+    button.addEventListener("click",()=>checkAnswer(button,choice,q));
+    answers.appendChild(button);
+  });
+}
+
+function checkAnswer(button,choice,q){
+  if(answered) return;
+  answered = true;
+  const buttons = [...$("answers").querySelectorAll("button")];
+  buttons.forEach(b=>b.disabled=true);
+
+  if(choice===q.answer){
+    score++;
+    button.classList.add("correct");
+    $("feedback").textContent = "🎉 एकदम सही! शाबास!";
+    $("feedback").className = "feedback good";
+    speak(q.answer);
+  }else{
+    button.classList.add("wrong");
+    const correctButton = buttons.find(b=>b.textContent===q.answer);
+    if(correctButton) correctButton.classList.add("correct");
+    $("feedback").textContent = "🙂 सही उत्तर: "+q.answer;
+    $("feedback").className = "feedback bad";
+  }
+
+  $("progressBar").style.width = ((questionIndex+1)/questions.length*100)+"%";
+  $("nextBtn").disabled = false;
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  questionIndex++;
+  if(questionIndex>=questions.length){
+    $("quizPlay").classList.add("hidden");
+    $("quizResult").classList.remove("hidden");
+    $("progressBar").style.width="100%";
+    $("resultTitle").textContent = score>=7 ? "वाह! उत्कृष्ट! 🌟" : score>=5 ? "शाबास! राम्रो गर्नुभयो! 🎉" : "राम्रो प्रयास! 💪";
+    $("resultText").textContent = "८ मध्ये "+score+" प्रश्न सही गर्नुभयो। फेरि खेलेर अझ राम्रो गर्न सक्नुहुन्छ!";
+  }else{
+    showQuestion();
+  }
+}
+
+$("nextBtn").addEventListener("click",nextQuestion);
+$("restartBtn").addEventListener("click",startQuiz);
+
+renderCards();
+startQuiz();
+</script>
 </body>
 </html>
