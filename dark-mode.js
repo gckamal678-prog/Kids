@@ -1,13 +1,10 @@
 
 /*
- * बाल पाठशाला — Dark Mode & Voice Utilities
- * Stage 2 replacement
+ * बाल पाठशाला — Dark Mode & Parental Lock
  *
- * - Light/Dark theme support
- * - Saved theme preference
- * - Nepali/English browser voice
- * - Legacy parental-lock compatibility
- * - Avoids overwriting functions already defined by other scripts
+ * Theme preference and parental-lock compatibility only.
+ * Gemini voice is controlled by script.js.
+ * No browser speech fallback is defined here.
  */
 
 (function () {
@@ -16,28 +13,32 @@
   const THEME_KEY = "theme";
   const DARK_CLASS = "dark-mode";
 
-  /* ------------------------------
-     1. Theme management
-  ------------------------------ */
-
   function getSavedTheme() {
     try {
       return localStorage.getItem(THEME_KEY) === "dark"
         ? "dark"
         : "light";
-    } catch (error) {
+    } catch (_) {
       return "light";
     }
   }
 
-  function applySavedTheme() {
-    const isDark = getSavedTheme() === "dark";
+  function applyTheme(theme) {
+    const isDark = theme === "dark";
 
     function apply() {
-      if (!document.body) return;
+      document.documentElement.classList.toggle(
+        DARK_CLASS,
+        isDark
+      );
 
-      document.body.classList.toggle(DARK_CLASS, isDark);
-      document.documentElement.classList.toggle(DARK_CLASS, isDark);
+      if (document.body) {
+        document.body.classList.toggle(
+          DARK_CLASS,
+          isDark
+        );
+      }
+
       document.documentElement.style.colorScheme =
         isDark ? "dark" : "light";
     }
@@ -45,102 +46,52 @@
     if (document.body) {
       apply();
     } else {
-      document.addEventListener("DOMContentLoaded", apply, {
-        once: true
-      });
+      document.addEventListener(
+        "DOMContentLoaded",
+        apply,
+        { once: true }
+      );
     }
   }
 
   function setTheme(theme) {
-    const normalizedTheme = theme === "dark" ? "dark" : "light";
+    const normalized = theme === "dark" ? "dark" : "light";
 
     try {
-      localStorage.setItem(THEME_KEY, normalizedTheme);
-    } catch (error) {
-      // Theme still works for the current page if storage is unavailable.
+      localStorage.setItem(THEME_KEY, normalized);
+    } catch (_) {
+      // Theme still applies for the current page.
     }
 
-    const apply = function () {
-      if (!document.body) return;
-
-      const isDark = normalizedTheme === "dark";
-
-      document.body.classList.toggle(DARK_CLASS, isDark);
-      document.documentElement.classList.toggle(DARK_CLASS, isDark);
-      document.documentElement.style.colorScheme =
-        isDark ? "dark" : "light";
-    };
-
-    if (document.body) {
-      apply();
-    } else {
-      document.addEventListener("DOMContentLoaded", apply, {
-        once: true
-      });
-    }
+    applyTheme(normalized);
   }
 
   function toggleDarkMode() {
-    const currentlyDark =
-      document.body &&
-      document.body.classList.contains(DARK_CLASS);
-
-    setTheme(currentlyDark ? "light" : "dark");
-  }
-
-  /* ------------------------------
-     2. Voice management
-  ------------------------------ */
-
-  function playAIVoice(text) {
-    if (!("speechSynthesis" in window)) {
-      console.warn(
-        "यो ब्राउजरमा Voice सुविधा उपलब्ध छैन।"
+    const isDark =
+      document.documentElement.classList.contains(DARK_CLASS) ||
+      (
+        document.body &&
+        document.body.classList.contains(DARK_CLASS)
       );
-      return false;
-    }
 
-    const message = String(text == null ? "" : text).trim();
-
-    if (!message) return false;
-
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(message);
-
-    // नेपाली अक्षर भए नेपाली voice प्राथमिकता दिने।
-    const containsNepali = /[\u0900-\u097F]/.test(message);
-
-    utterance.lang = containsNepali ? "ne-NP" : "en-US";
-    utterance.rate = 0.85;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-
-    const voices = window.speechSynthesis.getVoices();
-
-    const preferredVoice = voices.find(function (voice) {
-      return containsNepali
-        ? /^ne([-_]|$)/i.test(voice.lang)
-        : /^en([-_]|$)/i.test(voice.lang);
-    });
-
-    if (preferredVoice) {
-      utterance.voice = preferredVoice;
-    }
-
-    window.speechSynthesis.speak(utterance);
-    return true;
+    setTheme(isDark ? "light" : "dark");
   }
 
   function stopVoice() {
+    // Delegate audio control to the Gemini voice controller.
+    if (typeof window.stopVoice === "function") {
+      window.stopVoice();
+    }
+
+    // Cancel any browser speech left over from older scripts.
     if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
+      try {
+        window.speechSynthesis.cancel();
+      } catch (_) {
+        // Ignore unsupported browser behavior.
+      }
     }
   }
-
-  /* ------------------------------
-     3. Legacy parental-lock support
-  ------------------------------ */
 
   function openParentalLock(callback) {
     const first = Math.floor(Math.random() * 9) + 1;
@@ -152,7 +103,6 @@
       first + " + " + second + " = कति हुन्छ?"
     );
 
-    // Cancel गर्दा वा खाली उत्तर दिँदा अगाडि नबढ्ने।
     if (response === null || response.trim() === "") {
       return false;
     }
@@ -161,7 +111,9 @@
       !/^\d+$/.test(response.trim()) ||
       Number(response.trim()) !== expectedAnswer
     ) {
-      window.alert("उत्तर मिलेन। कृपया फेरि प्रयास गर्नुहोस्।");
+      window.alert(
+        "उत्तर मिलेन। कृपया फेरि प्रयास गर्नुहोस्।"
+      );
       return false;
     }
 
@@ -172,11 +124,7 @@
     return true;
   }
 
-  /* ------------------------------
-     4. Safe global compatibility
-  ------------------------------ */
-
-  // पहिले नै परिभाषित function लाई overwrite नगर्ने।
+  // Keep existing theme controls working.
   if (typeof window.toggleDarkMode !== "function") {
     window.toggleDarkMode = toggleDarkMode;
   }
@@ -185,22 +133,16 @@
     window.setTheme = setTheme;
   }
 
-  if (typeof window.playAIVoice !== "function") {
-    window.playAIVoice = playAIVoice;
+  if (typeof window.openParentalLock !== "function") {
+    window.openParentalLock = openParentalLock;
   }
 
   if (typeof window.stopVoice !== "function") {
     window.stopVoice = stopVoice;
   }
 
-  if (typeof window.openParentalLock !== "function") {
-    window.openParentalLock = openParentalLock;
-  }
+  // Intentionally do NOT define window.playAIVoice here.
+  // script.js is the single source of Gemini voice playback.
 
-  /* ------------------------------
-     5. Initialize saved theme
-  ------------------------------ */
-
-  applySavedTheme();
-
+  applyTheme(getSavedTheme());
 })();
