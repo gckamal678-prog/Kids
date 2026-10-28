@@ -1,213 +1,138 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7fbff">
+  <meta name="theme-color" content="#f5f8ff">
   <meta name="description" content="बाल पाठशाला — नेपाली, English, गणित, व्याकरण, क्विज र चित्रकलाबाट रमाइलो सिकाइ।">
-  <meta name="author" content="KAMAL G.C.">
-  <meta name="color-scheme" content="light dark">
   <title>बाल पाठशाला | रमाउँदै सिकौँ</title>
   <link rel="manifest" href="./manifest.json?v=4">
-  <link rel="apple-touch-icon" href="./192.png">
   <link rel="icon" href="./192.png">
+  <link rel="apple-touch-icon" href="./192.png">
 
   <style>
     :root {
-      --bg:#f5f9ff;
+      color-scheme: light;
+      --bg:#f5f8ff;
       --surface:#fff;
-      --text:#17233c;
-      --muted:#63718a;
+      --text:#19243a;
+      --muted:#66738a;
       --primary:#4169e1;
-      --primary-dark:#2849b8;
-      --border:#e3eaf5;
-      --shadow:0 8px 28px rgba(33,58,108,.09);
-      --radius:22px;
+      --border:#e1e8f4;
+      --shadow:0 8px 28px #263c6810;
+      --radius:20px;
     }
 
     * { box-sizing:border-box; }
+
     html { scroll-behavior:smooth; }
 
     body {
       margin:0;
+      min-height:100vh;
       background:var(--bg);
       color:var(--text);
-      font-family:system-ui,-apple-system,"Noto Sans Devanagari",
-        "Mukta",sans-serif;
+      font-family:system-ui,-apple-system,"Noto Sans Devanagari","Mukta",sans-serif;
       line-height:1.6;
-      min-height:100vh;
     }
 
-    button,select,a { font:inherit; }
-    button,a { -webkit-tap-highlight-color:transparent; }
+    button,a,select,input { font:inherit; }
     button { cursor:pointer; }
     a { color:inherit; }
-
-    button:focus-visible,a:focus-visible,select:focus-visible {
-      outline:3px solid #f5a623;
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible {
+      outline:3px solid #f2ad36;
       outline-offset:3px;
     }
 
-    .app {
-      max-width:1120px;
-      width:100%;
-      margin:auto;
-      padding:18px;
-    }
+    .app { max-width:1120px; margin:auto; padding:18px; }
 
     .topbar {
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:12px;
+      align-items:center;
+      gap:14px;
       margin-bottom:20px;
     }
 
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:0;
-    }
+    .brand { display:flex; align-items:center; gap:11px; min-width:0; }
 
     .brand-logo {
-      width:48px;
-      height:48px;
-      flex:none;
       display:grid;
       place-items:center;
+      flex-shrink:0;
+      width:48px;
+      height:48px;
       border-radius:16px;
       background:#e5edff;
       font-size:27px;
     }
 
-    .brand h1 {
-      font-size:clamp(18px,3vw,24px);
-      margin:0;
-      line-height:1.3;
-    }
+    h1,h2,h3,p { overflow-wrap:anywhere; }
+    .brand h1 { margin:0; font-size:clamp(18px,3vw,25px); line-height:1.3; }
+    .brand p { margin:3px 0 0; color:var(--muted); font-size:13px; }
 
-    .brand p {
-      color:var(--muted);
-      margin:2px 0 0;
-      font-size:13px;
-    }
-
-    .top-actions {
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
+    .top-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:7px; }
 
     .btn {
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:7px;
+      min-height:43px;
+      padding:9px 13px;
       border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 14px;
+      border-radius:13px;
       background:var(--surface);
       color:var(--text);
-      font-weight:700;
+      font-weight:750;
       text-decoration:none;
-      min-height:44px;
     }
 
-    .btn-primary {
-      background:var(--primary);
-      color:white;
-      border-color:var(--primary);
-    }
-
-    .btn-primary:hover {
-      background:var(--primary-dark);
-    }
+    .btn-primary { color:#fff; background:var(--primary); border-color:var(--primary); }
+    .btn:disabled { opacity:.55; cursor:not-allowed; }
 
     .hero {
       position:relative;
       overflow:hidden;
-      border-radius:28px;
-      padding:28px;
-      background:linear-gradient(125deg,#e7f0ff,#e7fbf5 65%,#fff4d9);
-      border:1px solid #dfeafa;
-      margin-bottom:20px;
+      margin-bottom:22px;
+      padding:30px;
+      border:1px solid #dce7fa;
+      border-radius:27px;
+      background:linear-gradient(125deg,#e6efff,#e5faf1 65%,#fff4dc);
     }
 
-    .hero-content {
-      position:relative;
-      z-index:1;
-      max-width:700px;
-    }
+    .hero-content { position:relative; z-index:1; max-width:710px; }
 
     .eyebrow {
-      display:inline-flex;
-      background:#fff;
-      color:#3453a5;
+      display:inline-block;
+      padding:5px 12px;
       border:1px solid #dbe5ff;
       border-radius:999px;
-      padding:5px 12px;
+      background:#fff;
+      color:#3453a5;
       font-size:13px;
       font-weight:800;
     }
 
-    .hero h2 {
-      font-size:clamp(27px,5vw,43px);
-      line-height:1.25;
-      margin:13px 0 10px;
-    }
-
+    .hero h2 { margin:13px 0 10px; font-size:clamp(28px,5vw,44px); line-height:1.25; }
     .hero h2 span { color:#345bd0; }
+    .hero p { max-width:590px; margin:0 0 18px; color:#465875; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:10px; }
+    .hero-art { position:absolute; right:28px; bottom:6px; font-size:clamp(70px,12vw,125px); opacity:.8; pointer-events:none; }
 
-    .hero p {
-      max-width:570px;
-      color:#465875;
-      margin:0 0 18px;
-    }
+    .section { margin:27px 0; }
 
-    .hero-actions {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .hero-art {
-      position:absolute;
-      right:30px;
-      bottom:12px;
-      font-size:clamp(65px,12vw,120px);
-      opacity:.85;
-      pointer-events:none;
-    }
-
-    .section { margin:26px 0; }
-
-    .section-head {
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:14px;
-    }
-
-    .section-head h2 {
-      font-size:clamp(20px,3vw,27px);
-      margin:0;
-    }
-
-    .section-head p {
-      color:var(--muted);
-      margin:3px 0 0;
-      font-size:14px;
-    }
+    .section-head { margin-bottom:13px; }
+    .section-head h2 { margin:0; font-size:clamp(21px,3vw,27px); }
+    .section-head p { margin:3px 0 0; color:var(--muted); font-size:14px; }
 
     .target {
       display:grid;
-      grid-template-columns:auto 1fr;
+      grid-template-columns:auto minmax(0,1fr);
       align-items:center;
       gap:14px;
-      padding:18px;
+      padding:17px;
       border:1px solid var(--border);
       border-radius:var(--radius);
       background:var(--surface);
@@ -219,39 +144,28 @@
       place-items:center;
       width:54px;
       height:54px;
-      border-radius:18px;
-      background:#fff1cb;
+      border-radius:17px;
+      background:#fff0c9;
       font-size:27px;
     }
 
-    .target-top {
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .target-top strong { font-size:16px; }
-
-    .target-top span {
-      font-size:14px;
-      color:var(--muted);
-    }
+    .target-top { display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+    .target-top span,.notice { color:var(--muted); font-size:13px; }
 
     .progress {
       height:11px;
-      background:#e9eef8;
-      border-radius:999px;
-      overflow:hidden;
       margin-top:9px;
+      overflow:hidden;
+      border-radius:999px;
+      background:#e7edf7;
     }
 
     .progress-fill {
-      height:100%;
       width:0;
+      height:100%;
       border-radius:999px;
       background:linear-gradient(90deg,#4777ed,#28b98b);
-      transition:width .3s ease;
+      transition:width .25s ease;
     }
 
     .book-grid {
@@ -266,131 +180,68 @@
       display:flex;
       flex-direction:column;
       align-items:flex-start;
-      text-align:left;
       gap:8px;
       width:100%;
-      min-height:180px;
-      padding:18px;
+      min-height:175px;
+      padding:17px;
+      border:1px solid var(--border);
+      border-radius:20px;
       background:var(--surface);
       color:var(--text);
-      border:1px solid var(--border);
-      border-radius:22px;
-      box-shadow:0 5px 18px rgba(33,58,108,.045);
-      transition:transform .18s ease,box-shadow .18s ease;
+      text-align:left;
+      box-shadow:0 5px 18px #263c6808;
+      transition:transform .16s ease,box-shadow .16s ease;
     }
 
-    .book:hover {
-      transform:translateY(-3px);
-      box-shadow:var(--shadow);
-    }
-
-    .book-icon {
-      display:grid;
-      place-items:center;
-      width:54px;
-      height:54px;
-      border-radius:17px;
-      background:var(--tint);
-      font-size:29px;
-    }
-
+    .book:hover { transform:translateY(-3px); box-shadow:var(--shadow); }
+    .book-icon { display:grid; place-items:center; width:51px; height:51px; border-radius:16px; background:var(--tint); font-size:27px; }
     .book strong { font-size:18px; }
+    .book small { color:var(--muted); font-size:13px; }
+    .open-label { margin-top:auto; color:var(--accent); font-weight:800; font-size:13px; }
 
-    .book small {
-      font-size:13px;
-      color:var(--muted);
-    }
+    .nepali { --accent:#168453; --tint:#e0f7e9; }
+    .english { --accent:#315ac5; --tint:#e5edff; }
+    .math { --accent:#9148c6; --tint:#f4e8ff; }
+    .knowledge { --accent:#c26a12; --tint:#fff0d8; }
+    .grammar { --accent:#008c99; --tint:#ddf8fa; }
+    .byakaran { --accent:#d34b44; --tint:#ffe9e6; }
 
-    .book .open-label {
-      margin-top:auto;
-      color:var(--accent);
-      font-weight:800;
-      font-size:13px;
-    }
-
-    .book.nepali { --accent:#168453; --tint:#e0f7e9; }
-    .book.english { --accent:#315ac5; --tint:#e5edff; }
-    .book.math { --accent:#9148c6; --tint:#f4e8ff; }
-    .book.knowledge { --accent:#c26a12; --tint:#fff0d8; }
-    .book.grammar { --accent:#008c99; --tint:#ddf8fa; }
-    .book.byakaran { --accent:#d34b44; --tint:#ffe9e6; }
-
-    .quick-grid {
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-    }
+    .quick-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
 
     .quick {
       display:flex;
       align-items:center;
       gap:13px;
-      padding:15px;
-      background:var(--surface);
-      border:1px solid var(--border);
-      border-radius:18px;
-      text-decoration:none;
       min-height:78px;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:17px;
+      background:var(--surface);
+      text-decoration:none;
     }
 
     .quick-icon { font-size:27px; }
-    .quick strong { display:block; }
-
-    .quick small {
-      display:block;
-      color:var(--muted);
-      font-size:13px;
-    }
+    .quick strong,.quick small { display:block; }
+    .quick small { color:var(--muted); font-size:13px; }
 
     .nepal-card {
       display:grid;
-      grid-template-columns:1fr minmax(100px,170px);
-      gap:15px;
+      grid-template-columns:minmax(0,1fr) 130px;
       align-items:center;
+      gap:15px;
       padding:20px;
-      border:1px solid #f4d8c9;
+      border:1px solid #f1d9c9;
       border-radius:var(--radius);
       background:linear-gradient(120deg,#fff1eb,#fffaf0);
     }
 
-    .nepal-card h3 {
-      margin:0 0 6px;
-      font-size:21px;
-    }
+    .nepal-card h3 { margin:0 0 5px; font-size:21px; }
+    .nepal-card p { margin:0 0 12px; color:#66544e; font-size:14px; }
+    .nepal-card img { display:block; width:100%; max-height:125px; object-fit:contain; }
 
-    .nepal-card p {
-      margin:0 0 13px;
-      color:#66544e;
-      font-size:14px;
-    }
-
-    .nepal-card img {
-      display:block;
-      width:100%;
-      max-height:130px;
-      object-fit:contain;
-    }
-
-    .footer {
-      text-align:center;
-      padding:24px 12px 12px;
-      margin-top:30px;
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .footer a {
-      color:var(--primary);
-      text-decoration:none;
-    }
-
-    .footer-links {
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      flex-wrap:wrap;
-      margin:8px 0;
-    }
+    .footer { margin-top:30px; padding:22px 12px 12px; color:var(--muted); text-align:center; font-size:13px; }
+    .footer-links { display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin:8px 0; }
+    .footer a { color:var(--primary); text-decoration:none; }
 
     .modal {
       position:fixed;
@@ -399,98 +250,49 @@
       display:none;
       align-items:center;
       justify-content:center;
-      padding:16px;
-      background:rgba(15,25,45,.62);
+      padding:15px;
+      background:#101b30a8;
     }
 
     .modal.open { display:flex; }
 
     .modal-panel {
-      background:var(--surface);
-      color:var(--text);
       width:100%;
       max-width:540px;
       max-height:85vh;
       overflow:auto;
-      border-radius:24px;
-      padding:22px;
+      padding:21px;
+      border-radius:22px;
+      background:var(--surface);
+      color:var(--text);
       box-shadow:0 24px 70px #0003;
     }
 
-    .modal-head {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-    }
+    .modal-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .modal-head h2 { margin:0; font-size:22px; }
+    .modal-close { width:43px; height:43px; border:0; border-radius:12px; background:var(--bg); color:var(--text); font-size:23px; }
 
-    .modal-head h2 {
-      margin:0;
-      font-size:22px;
-    }
-
-    .modal-close {
-      border:0;
-      border-radius:12px;
-      background:var(--bg);
-      color:var(--text);
-      width:44px;
-      height:44px;
-      font-size:22px;
-    }
-
-    .page-list {
-      display:grid;
-      gap:9px;
-      margin-top:16px;
-    }
+    .page-list { display:grid; gap:9px; margin-top:15px; }
 
     .page-link {
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      padding:13px 14px;
-      border-radius:14px;
+      padding:13px;
+      border:1px solid var(--border);
+      border-radius:13px;
       background:var(--bg);
-      border:1px solid var(--border);
       text-decoration:none;
-      font-weight:700;
+      font-weight:750;
     }
 
-    .page-link span:first-child {
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
-
-    .parent-note {
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .form-row {
-      display:grid;
-      gap:7px;
-      margin:15px 0;
-    }
-
-    select {
-      padding:11px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:var(--surface);
-      color:var(--text);
-    }
-
-    .notice {
-      min-height:24px;
-      color:var(--muted);
-      font-size:13px;
-      margin-top:10px;
-    }
+    .parent-note { color:var(--muted); font-size:14px; }
+    .form-row { display:grid; gap:7px; margin:14px 0; }
+    .form-row input,.form-row select { width:100%; min-height:43px; padding:10px; border:1px solid var(--border); border-radius:11px; background:var(--surface); color:var(--text); }
 
     body.dark-mode {
+      color-scheme:dark;
       --bg:#111827;
       --surface:#1c2739;
       --text:#f2f5fc;
@@ -499,694 +301,518 @@
       --shadow:0 8px 28px #0002;
     }
 
-    body.dark-mode .hero {
-      background:linear-gradient(125deg,#202f4e,#183d3b);
-      border-color:var(--border);
-    }
-
+    body.dark-mode .hero { background:linear-gradient(125deg,#202f4e,#183d3b); border-color:var(--border); }
     body.dark-mode .hero h2 span { color:#a8c0ff; }
-
-    body.dark-mode .hero p,
-    body.dark-mode .nepal-card p { color:#d0d9e9; }
-
-    body.dark-mode .nepal-card {
-      background:#2d2930;
-      border-color:var(--border);
-    }
-
-    body.dark-mode .eyebrow {
-      background:#263752;
-      color:#d8e3ff;
-      border-color:var(--border);
-    }
-
-    body.dark-mode .target-icon { background:#59472a; }
+    body.dark-mode .hero p,body.dark-mode .nepal-card p { color:#d0d9e9; }
+    body.dark-mode .nepal-card { background:#2d2930; border-color:var(--border); }
+    body.dark-mode .eyebrow { background:#263752; color:#d8e3ff; border-color:var(--border); }
     body.dark-mode .progress { background:#344156; }
+    body.dark-mode .target-icon { background:#59472a; }
+
+    [hidden] { display:none !important; }
 
     @media(max-width:760px) {
-      .book-grid {
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-
-      .hero-art {
-        right:15px;
-        bottom:10px;
-        opacity:.22;
-      }
-
+      .book-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .hero-art { right:12px; bottom:5px; opacity:.22; }
       .hero-content { max-width:100%; }
     }
 
     @media(max-width:480px) {
       .app { padding:12px; }
-      .brand-logo { width:42px; height:42px; }
       .topbar { align-items:flex-start; }
-      .top-actions { gap:6px; }
-
-      .top-actions .btn {
-        padding:8px 10px;
-        font-size:13px;
-      }
-
-      .hero {
-        padding:21px 18px;
-        border-radius:23px;
-      }
-
-      .hero h2 { max-width:320px; }
-      .book-grid { gap:10px; }
-
-      .book {
-        min-height:160px;
-        padding:14px 12px;
-        border-radius:18px;
-      }
-
+      .brand-logo { width:42px; height:42px; }
+      .top-actions { gap:5px; }
+      .top-actions .btn { min-height:39px; padding:7px 9px; font-size:12px; }
+      .hero { padding:21px 17px; border-radius:22px; }
+      .book-grid { gap:9px; }
+      .book { min-height:158px; padding:13px 11px; border-radius:17px; }
       .book strong { font-size:16px; }
-
-      .book-icon {
-        width:47px;
-        height:47px;
-        font-size:25px;
-      }
-
+      .book-icon { width:45px; height:45px; font-size:24px; }
       .quick-grid { grid-template-columns:1fr; }
-
-      .nepal-card {
-        grid-template-columns:1fr 90px;
-        padding:15px;
-      }
-
-      .target {
-        padding:13px;
-        gap:10px;
-      }
-
-      .target-icon {
-        width:44px;
-        height:44px;
-      }
+      .nepal-card { grid-template-columns:minmax(0,1fr) 82px; padding:14px; }
+      .target { padding:12px; gap:10px; }
+      .target-icon { width:44px; height:44px; }
     }
 
     @media(prefers-reduced-motion:reduce) {
-      *,*::before,*::after {
-        scroll-behavior:auto!important;
-        transition:none!important;
-      }
+      *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; }
     }
   </style>
 </head>
 
 <body>
-  <main class="app">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-logo" aria-hidden="true">🎒</div>
-        <div>
-          <h1>बाल पाठशाला</h1>
-          <p>सिकौँ, खेलौँ, अघि बढौँ!</p>
-        </div>
-      </div>
-
-      <div class="top-actions">
-        <button class="btn" id="voice-toggle" type="button" aria-pressed="false">🔊 आवाज</button>
-        <button class="btn" id="theme-toggle" type="button" aria-pressed="false">🌙 मोड</button>
-        <button class="btn" id="parent-open" type="button">👨‍👩‍👧 अभिभावक</button>
-      </div>
-    </header>
-
-    <section class="hero" aria-labelledby="welcome-title">
-      <div class="hero-content">
-        <span class="eyebrow">🌟 आज केही नयाँ सिकौँ</span>
-        <h2 id="welcome-title">रमाउँदै सिकौँ,<br><span>आत्मविश्वास बढाऔँ!</span></h2>
-        <p>नेपाली अक्षर, English words, गणित र रमाइला गतिविधि — सबै एउटै ठाउँमा। आफ्नो मनपर्ने किताब छान्नुहोस्।</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#books">📚 सिक्न सुरु गरौँ</a>
-          <a class="btn" href="knowledge/quiz.html">🧠 क्विज खेलौँ</a>
-        </div>
-      </div>
-      <div class="hero-art" aria-hidden="true">🚀</div>
-    </section>
-
-    <section class="section" aria-labelledby="target-heading">
-      <div class="target">
-        <div class="target-icon" aria-hidden="true">🎯</div>
-        <div>
-          <div class="target-top">
-            <strong id="target-heading">आजको सिकाइ लक्ष्य</strong>
-            <span id="target-count">० / १० सही उत्तर</span>
-          </div>
-          <div class="progress" role="progressbar" aria-label="दैनिक सिकाइ लक्ष्य"
-            aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="target-progress">
-            <div class="progress-fill" id="target-fill"></div>
-          </div>
-          <div class="notice" id="target-message">सानो प्रयास, ठूलो प्रगति! 🌱</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="books" aria-labelledby="books-heading">
-      <div class="section-head">
-        <div>
-          <h2 id="books-heading">📚 मेरो सिकाइ संसार</h2>
-          <p>किताब छान्नुहोस् र नयाँ कुरा सिक्नुहोस्।</p>
-        </div>
-      </div>
-
-      <div class="book-grid">
-        <button class="book nepali" type="button" data-book="nepali">
-          <span class="book-icon" aria-hidden="true">🇳🇵</span>
-          <strong>नेपाली अक्षर</strong>
-          <small>स्वर, व्यञ्जन र बाह्रखरी</small>
-          <span class="open-label">किताब खोल्नुहोस् →</span>
-        </button>
-
-        <button class="book english" type="button" data-book="english">
-          <span class="book-icon" aria-hidden="true">🔤</span>
-          <strong>English</strong>
-          <small>Alphabet, words र चित्र</small>
-          <span class="open-label">किताब खोल्नुहोस् →</span>
-        </button>
-
-        <button class="book math" type="button" data-book="maths">
-          <span class="book-icon" aria-hidden="true">🔢</span>
-          <strong>गणित</strong>
-          <small>अङ्क र गुणन तालिका</small>
-          <span class="open-label">किताब खोल्नुहोस् →</span>
-        </button>
-
-        <button class="book knowledge" type="button" data-book="knowledge">
-          <span class="book-icon" aria-hidden="true">🧩</span>
-          <strong>ज्ञान र खेल</strong>
-          <small>क्विज र चित्रकला</small>
-          <span class="open-label">गतिविधि खोल्नुहोस् →</span>
-        </button>
-
-        <button class="book grammar" type="button" data-book="grammar">
-          <span class="book-icon" aria-hidden="true">✍️</span>
-          <strong>English Grammar</strong>
-          <small>सरल व्याकरण पाठहरू</small>
-          <span class="open-label">किताब खोल्नुहोस् →</span>
-        </button>
-
-        <button class="book byakaran" type="button" data-book="byakaran">
-          <span class="book-icon" aria-hidden="true">📖</span>
-          <strong>नेपाली व्याकरण</strong>
-          <small>शब्द, नाम, क्रिया र वाक्य</small>
-          <span class="open-label">किताब खोल्नुहोस् →</span>
-        </button>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="quick-heading">
-      <div class="section-head">
-        <div>
-          <h2 id="quick-heading">⚡ छिटो सुरु गर्नुहोस्</h2>
-          <p>एकै थिचाइमा मनपर्ने गतिविधि खोल्नुहोस्।</p>
-        </div>
-      </div>
-
-      <div class="quick-grid">
-        <a class="quick" href="knowledge/quiz.html">
-          <span class="quick-icon" aria-hidden="true">🧠</span>
-          <span><strong>बाल क्विज</strong><small>प्रश्नको उत्तर दिऔँ</small></span>
-        </a>
-
-        <a class="quick" href="knowledge/drawing.html">
-          <span class="quick-icon" aria-hidden="true">🎨</span>
-          <span><strong>चित्रकला</strong><small>आफ्नो कल्पना कोरौँ</small></span>
-        </a>
-      </div>
-    </section>
-
-    <section class="section nepal-card" aria-labelledby="nepal-heading">
+<main class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo" aria-hidden="true">🎒</div>
       <div>
-        <h3 id="nepal-heading">🇳🇵 हाम्रो प्यारो नेपाल</h3>
-        <p>नेपालप्रति माया र सम्मान व्यक्त गरौँ। राष्ट्रिय गान सुन्न चाहनुहुन्छ?</p>
-        <button class="btn btn-primary" id="anthem-toggle" type="button">▶ राष्ट्रिय गान बजाउनुहोस्</button>
-        <p id="anthem-status" class="notice" aria-live="polite">बजाउन बटन थिच्नुहोस्।</p>
+        <h1>बाल पाठशाला</h1>
+        <p>सिकौँ, खेलौँ, अघि बढौँ!</p>
       </div>
-      <img src="./nepal.png" alt="नेपालको चित्र" loading="lazy">
-    </section>
-
-    <audio id="national-anthem" src="./anthem.mp3" preload="none"></audio>
-
-    <footer class="footer">
-      <strong>बाल पाठशाला</strong>
-      <div>बालबालिकाको उज्ज्वल भविष्यका लागि 💛</div>
-      <nav class="footer-links" aria-label="अन्य लिंक">
-        <a href="privacy.html">गोपनीयता नीति</a>
-        <a href="https://kamalgc.com.np" target="_blank" rel="noopener noreferrer">kamalgc.com.np ↗</a>
-        <a href="mailto:Support@kamalgc.com.np">सम्पर्क</a>
-      </nav>
-      <div>© 2026 KAMAL G.C.</div>
-    </footer>
-  </main>
-
-  <div class="modal" id="book-modal" role="dialog" aria-modal="true"
-    aria-labelledby="modal-title">
-    <div class="modal-panel">
-      <div class="modal-head">
-        <h2 id="modal-title">किताब छान्नुहोस्</h2>
-        <button class="modal-close" id="modal-close" type="button"
-          aria-label="किताब सूची बन्द गर्नुहोस्">×</button>
-      </div>
-      <div class="page-list" id="page-list"></div>
     </div>
-  </div>
 
-  <div class="modal" id="parent-modal" role="dialog" aria-modal="true"
-    aria-labelledby="parent-title">
-    <div class="modal-panel">
-      <div class="modal-head">
-        <h2 id="parent-title">👨‍👩‍👧 अभिभावक सेटिङ</h2>
-        <button class="modal-close" id="parent-close" type="button"
-          aria-label="सेटिङ बन्द गर्नुहोस्">×</button>
-      </div>
-
-      <p class="parent-note">यो सामान्य अभिभावक जाँच हो; वेबसाइटमा राखिएको PIN ले वास्तविक सुरक्षा प्रदान गर्दैन।</p>
-
-      <div id="parent-check">
-        <p id="math-question">अभिभावक जाँच</p>
-        <label class="form-row" for="math-answer">जवाफ लेख्नुहोस्
-          <input id="math-answer" type="number" inputmode="numeric"
-            style="padding:11px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--text)">
-        </label>
-        <button class="btn btn-primary" id="verify-parent" type="button">जाँच गर्नुहोस्</button>
-      </div>
-
-      <div id="parent-settings" hidden>
-        <label class="form-row" for="daily-target">दैनिक सही उत्तरको लक्ष्य
-          <select id="daily-target">
-            <option value="5">५ सही उत्तर</option>
-            <option value="10">१० सही उत्तर</option>
-            <option value="15">१५ सही उत्तर</option>
-            <option value="20">२० सही उत्तर</option>
-          </select>
-        </label>
-        <button class="btn btn-primary" id="save-settings" type="button">💾 सेटिङ सेभ गर्नुहोस्</button>
-      </div>
-
-      <p class="notice" id="parent-notice" aria-live="polite"></p>
+    <div class="top-actions">
+      <button class="btn" id="voice-toggle" type="button" aria-pressed="false">🔊 स्वागत आवाज</button>
+      <button class="btn" id="theme-toggle" type="button" aria-pressed="false">🌙 मोड</button>
+      <button class="btn" id="parent-open" type="button">👨‍👩‍👧 अभिभावक</button>
     </div>
+  </header>
+
+  <section class="hero" aria-labelledby="welcome-title">
+    <div class="hero-content">
+      <span class="eyebrow">🌟 आज केही नयाँ सिकौँ</span>
+      <h2 id="welcome-title">रमाउँदै सिकौँ,<br><span>आत्मविश्वास बढाऔँ!</span></h2>
+      <p>नेपाली अक्षर, English words, गणित र रमाइला गतिविधि — सबै एउटै ठाउँमा। आफ्नो मनपर्ने किताब छान्नुहोस्।</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#books">📚 सिक्न सुरु गरौँ</a>
+        <a class="btn" href="knowledge/quiz.html">🧠 क्विज खेलौँ</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">🚀</div>
+  </section>
+
+  <section class="section" aria-labelledby="target-heading">
+    <div class="target">
+      <div class="target-icon" aria-hidden="true">🎯</div>
+      <div>
+        <div class="target-top">
+          <strong id="target-heading">आजको सिकाइ लक्ष्य</strong>
+          <span id="target-count">० / १० सही उत्तर</span>
+        </div>
+        <div class="progress" id="target-progress" role="progressbar" aria-label="दैनिक सिकाइ लक्ष्य" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-fill" id="target-fill"></div>
+        </div>
+        <div class="notice" id="target-message" aria-live="polite">सानो प्रयास, ठूलो प्रगति! 🌱</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="books" aria-labelledby="books-heading">
+    <div class="section-head">
+      <h2 id="books-heading">📚 मेरो सिकाइ संसार</h2>
+      <p>किताब छान्नुहोस् र नयाँ कुरा सिक्नुहोस्।</p>
+    </div>
+
+    <div class="book-grid">
+      <button class="book nepali" type="button" data-book="nepali">
+        <span class="book-icon" aria-hidden="true">🇳🇵</span>
+        <strong>नेपाली अक्षर</strong><small>स्वर, व्यञ्जन र बाह्रखरी</small>
+        <span class="open-label">किताब खोल्नुहोस् →</span>
+      </button>
+
+      <button class="book english" type="button" data-book="english">
+        <span class="book-icon" aria-hidden="true">🔤</span>
+        <strong>English</strong><small>Alphabet, words र चित्र</small>
+        <span class="open-label">किताब खोल्नुहोस् →</span>
+      </button>
+
+      <button class="book math" type="button" data-book="maths">
+        <span class="book-icon" aria-hidden="true">🔢</span>
+        <strong>गणित</strong><small>अङ्क र गुणन तालिका</small>
+        <span class="open-label">किताब खोल्नुहोस् →</span>
+      </button>
+
+      <button class="book knowledge" type="button" data-book="knowledge">
+        <span class="book-icon" aria-hidden="true">🧩</span>
+        <strong>ज्ञान र खेल</strong><small>क्विज र चित्रकला</small>
+        <span class="open-label">गतिविधि खोल्नुहोस् →</span>
+      </button>
+
+      <button class="book grammar" type="button" data-book="grammar">
+        <span class="book-icon" aria-hidden="true">✍️</span>
+        <strong>English Grammar</strong><small>सरल व्याकरण पाठहरू</small>
+        <span class="open-label">किताब खोल्नुहोस् →</span>
+      </button>
+
+      <button class="book byakaran" type="button" data-book="byakaran">
+        <span class="book-icon" aria-hidden="true">📖</span>
+        <strong>नेपाली व्याकरण</strong><small>शब्द, नाम, क्रिया र वाक्य</small>
+        <span class="open-label">किताब खोल्नुहोस् →</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="quick-heading">
+    <div class="section-head">
+      <h2 id="quick-heading">⚡ छिटो सुरु गर्नुहोस्</h2>
+      <p>एकै थिचाइमा मनपर्ने गतिविधि खोल्नुहोस्।</p>
+    </div>
+    <div class="quick-grid">
+      <a class="quick" href="knowledge/quiz.html">
+        <span class="quick-icon" aria-hidden="true">🧠</span>
+        <span><strong>बाल क्विज</strong><small>प्रश्नको उत्तर दिऔँ</small></span>
+      </a>
+      <a class="quick" href="knowledge/drawing.html">
+        <span class="quick-icon" aria-hidden="true">🎨</span>
+        <span><strong>चित्रकला</strong><small>आफ्नो कल्पना कोरौँ</small></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section nepal-card" aria-labelledby="nepal-heading">
+    <div>
+      <h3 id="nepal-heading">🇳🇵 हाम्रो प्यारो नेपाल</h3>
+      <p>नेपालप्रति माया र सम्मान व्यक्त गरौँ। राष्ट्रिय गान सुन्न चाहनुहुन्छ?</p>
+      <button class="btn btn-primary" id="anthem-toggle" type="button">▶ राष्ट्रिय गान बजाउनुहोस्</button>
+      <p id="anthem-status" class="notice" aria-live="polite">बजाउन बटन थिच्नुहोस्।</p>
+    </div>
+    <img src="./nepal.png" alt="नेपालको चित्र" loading="lazy">
+  </section>
+
+  <audio id="national-anthem" src="./anthem.mp3" preload="none"></audio>
+
+  <footer class="footer">
+    <strong>बाल पाठशाला</strong>
+    <div>बालबालिकाको उज्ज्वल भविष्यका लागि 💛</div>
+    <nav class="footer-links" aria-label="अन्य लिंक">
+      <a href="privacy.html">गोपनीयता नीति</a>
+      <a href="https://kamalgc.com.np" target="_blank" rel="noopener noreferrer">kamalgc.com.np ↗</a>
+      <a href="mailto:Support@kamalgc.com.np">सम्पर्क</a>
+    </nav>
+    <div>© 2026 KAMAL G.C.</div>
+  </footer>
+</main>
+
+<div class="modal" id="book-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h2 id="modal-title">किताब छान्नुहोस्</h2>
+      <button class="modal-close" id="modal-close" type="button" aria-label="किताब सूची बन्द गर्नुहोस्">×</button>
+    </div>
+    <div class="page-list" id="page-list"></div>
   </div>
+</div>
 
-  <!-- Gemini AI Voice को लागि root script.js लोड गर्नुहोस् -->
-  <script src="./script.js?v=3"></script>
+<div class="modal" id="parent-modal" role="dialog" aria-modal="true" aria-labelledby="parent-title">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h2 id="parent-title">👨‍👩‍👧 अभिभावक सेटिङ</h2>
+      <button class="modal-close" id="parent-close" type="button" aria-label="सेटिङ बन्द गर्नुहोस्">×</button>
+    </div>
 
-  <script>
-    "use strict";
+    <p class="parent-note">यो साधारण गणितीय जाँच हो, पूर्ण सुरक्षा प्रणाली होइन।</p>
 
-    const $ = (selector) => document.querySelector(selector);
+    <div id="parent-check">
+      <p id="math-question">अभिभावक जाँच</p>
+      <label class="form-row" for="math-answer">जवाफ लेख्नुहोस्
+        <input id="math-answer" type="number" inputmode="numeric" autocomplete="off">
+      </label>
+      <button class="btn btn-primary" id="verify-parent" type="button">जाँच गर्नुहोस्</button>
+    </div>
 
-    const storage = {
-      get(key, fallback) {
-        try {
-          const value = localStorage.getItem(key);
-          return value === null ? fallback : value;
-        } catch (_) {
-          return fallback;
-        }
-      },
+    <div id="parent-settings" hidden>
+      <label class="form-row" for="daily-target">दैनिक सही उत्तरको लक्ष्य
+        <select id="daily-target">
+          <option value="5">५ सही उत्तर</option>
+          <option value="10">१० सही उत्तर</option>
+          <option value="15">१५ सही उत्तर</option>
+          <option value="20">२० सही उत्तर</option>
+        </select>
+      </label>
+      <button class="btn btn-primary" id="save-settings" type="button">💾 सेटिङ सेभ गर्नुहोस्</button>
+    </div>
 
-      set(key, value) {
-        try {
-          localStorage.setItem(key, String(value));
-          return true;
-        } catch (_) {
-          return false;
-        }
-      }
-    };
+    <p class="notice" id="parent-notice" aria-live="polite"></p>
+  </div>
+</div>
 
-    const books = {
-      nepali: {
-        title: "🇳🇵 नेपाली अक्षर",
-        pages: [
-          ["बाह्रखरी", "nepali/barahakhari.html", "📝"],
-          ["स्वर वर्ण", "nepali/vowels.html", "अ"],
-          ["व्यञ्जन वर्ण", "nepali/consonants.html", "क"],
-          ["स्वर वर्ण — चित्रसहित", "nepali/imagevowels.html", "🎨"],
-          ["व्यञ्जन वर्ण — चित्रसहित", "nepali/imageconsonants.html", "🧩"]
-        ]
-      },
+<script src="./script.js?v=4"></script>
+<script>
+(() => {
+  "use strict";
 
-      english: {
-        title: "🔤 English",
-        pages: [
-          ["Alphabet", "english/alphabet.html", "🅰️"],
-          ["Alphabet with Pictures", "english/alphabet-image.html", "🖼️"],
-          ["Animals & Birds", "english/animals-birds.html", "🐦"],
-          ["Body Parts", "english/body-parts.html", "👀"],
-          ["Colors", "english/colors.html", "🎨"],
-          ["Days & Months", "english/days-months.html", "📅"],
-          ["Fruits & Vegetables", "english/fruits-vegetables.html", "🍎"],
-          ["Vehicles", "english/vehicles.html", "🚗"]
-        ]
-      },
+  const $ = selector => document.querySelector(selector);
 
-      maths: {
-        title: "🔢 गणित",
-        pages: [
-          ["Numbers", "maths/numbers.html", "🔢"],
-          ["गुणन तालिका (पहाडा)", "maths/pahada.html", "✖️"]
-        ]
-      },
-
-      knowledge: {
-        title: "🧩 ज्ञान र गतिविधि",
-        pages: [
-          ["बाल क्विज", "knowledge/quiz.html", "🧠"],
-          ["चित्रकला", "knowledge/drawing.html", "🎨"]
-        ]
-      },
-
-      grammar: {
-        title: "✍️ English Grammar",
-        pages: [
-          ["Lesson 1–2", "english/grammar1-2.html", "📘"],
-          ["Lesson 3–6", "english/grammar3-6.html", "📗"],
-          ["Lesson 7–9", "english/grammar7-9.html", "📙"],
-          ["Lesson 10–11", "english/grammar10-11.html", "📕"],
-          ["Lesson 12", "english/grammar12.html", "📒"],
-          ["Lesson 13", "english/grammar13.html", "📝"]
-        ]
-      },
-
-      byakaran: {
-        title: "📖 नेपाली व्याकरण",
-        pages: [
-          ["पाठ १: शब्द र वर्ण", "nepali/grammar1.html", "📘"],
-          ["पाठ २: नाम र सर्वनाम", "nepali/grammar2.html", "📗"],
-          ["पाठ ३: विशेषण", "nepali/grammar3.html", "📙"],
-          ["पाठ ४: क्रियापद", "nepali/grammar4.html", "📕"],
-          ["पाठ ५: वाक्य गठन", "nepali/grammar5.html", "📒"]
-        ]
-      }
-    };
-
-    const bookModal = $("#book-modal");
-    const parentModal = $("#parent-modal");
-
-    function showModal(modal) {
-      modal.classList.add("open");
-      document.body.style.overflow = "hidden";
+  const safeGet = (key, fallback = null) => {
+    try {
+      const value = localStorage.getItem(key);
+      return value === null ? fallback : value;
+    } catch (_) {
+      return fallback;
     }
+  };
 
-    function hideModal(modal) {
-      modal.classList.remove("open");
-
-      if (!document.querySelector(".modal.open")) {
-        document.body.style.overflow = "";
-      }
+  const safeSet = (key, value) => {
+    try {
+      localStorage.setItem(key, String(value));
+      return true;
+    } catch (_) {
+      return false;
     }
+  };
 
-    function openBook(key) {
-      const book = books[key];
-      if (!book) return;
-
-      $("#modal-title").textContent = book.title;
-
-      const list = $("#page-list");
-      list.replaceChildren();
-
-      book.pages.forEach(([name, url, icon]) => {
-        const link = document.createElement("a");
-        link.className = "page-link";
-        link.href = url;
-
-        const label = document.createElement("span");
-        label.textContent = `${icon} ${name}`;
-
-        const arrow = document.createElement("span");
-        arrow.textContent = "→";
-        arrow.setAttribute("aria-hidden", "true");
-
-        link.append(label, arrow);
-        link.addEventListener("click", () => speak(name));
-        list.appendChild(link);
-      });
-
-      showModal(bookModal);
-      $("#modal-close").focus();
-      speak(book.title);
+  const books = {
+    nepali: {
+      title: "🇳🇵 नेपाली अक्षर",
+      pages: [
+        ["बाह्रखरी", "nepali/barahakhari.html", "📝"],
+        ["स्वर वर्ण", "nepali/vowels.html", "अ"],
+        ["व्यञ्जन वर्ण", "nepali/consonants.html", "क"],
+        ["स्वर वर्ण — चित्रसहित", "nepali/imagevowels.html", "🎨"],
+        ["व्यञ्जन वर्ण — चित्रसहित", "nepali/imageconsonants.html", "🧩"]
+      ]
+    },
+    english: {
+      title: "🔤 English",
+      pages: [
+        ["Alphabet", "english/alphabet.html", "🅰️"],
+        ["Alphabet with Pictures", "english/alphabet-image.html", "🖼️"],
+        ["Animals & Birds", "english/animals-birds.html", "🐦"],
+        ["Body Parts", "english/body-parts.html", "👀"],
+        ["Colors", "english/colors.html", "🎨"],
+        ["Days & Months", "english/days-months.html", "📅"],
+        ["Fruits & Vegetables", "english/fruits-vegetables.html", "🍎"],
+        ["Vehicles", "english/vehicles.html", "🚗"]
+      ]
+    },
+    maths: {
+      title: "🔢 गणित",
+      pages: [
+        ["Numbers", "maths/numbers.html", "🔢"],
+        ["गुणन तालिका (पहाडा)", "maths/pahada.html", "✖️"]
+      ]
+    },
+    knowledge: {
+      title: "🧩 ज्ञान र गतिविधि",
+      pages: [
+        ["बाल क्विज", "knowledge/quiz.html", "🧠"],
+        ["चित्रकला", "knowledge/drawing.html", "🎨"]
+      ]
+    },
+    grammar: {
+      title: "✍️ English Grammar",
+      pages: [
+        ["Lesson 1–2", "english/grammar1-2.html", "📘"],
+        ["Lesson 3–6", "english/grammar3-6.html", "📗"],
+        ["Lesson 7–9", "english/grammar7-9.html", "📙"],
+        ["Lesson 10–11", "english/grammar10-11.html", "📕"],
+        ["Lesson 12", "english/grammar12.html", "📒"],
+        ["Lesson 13", "english/grammar13.html", "📝"]
+      ]
+    },
+    byakaran: {
+      title: "📖 नेपाली व्याकरण",
+      pages: [
+        ["पाठ १: शब्द र वर्ण", "nepali/grammar1.html", "📘"],
+        ["पाठ २: नाम र सर्वनाम", "nepali/grammar2.html", "📗"],
+        ["पाठ ३: विशेषण", "nepali/grammar3.html", "📙"],
+        ["पाठ ४: क्रियापद", "nepali/grammar4.html", "📕"],
+        ["पाठ ५: वाक्य गठन", "nepali/grammar5.html", "📒"]
+      ]
     }
+  };
 
-    document.querySelectorAll("[data-book]").forEach((button) => {
-      button.addEventListener("click", () => openBook(button.dataset.book));
+  const bookModal = $("#book-modal");
+  const parentModal = $("#parent-modal");
+
+  function showModal(modal) {
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function hideModal(modal) {
+    modal.classList.remove("open");
+    if (!document.querySelector(".modal.open")) {
+      document.body.style.overflow = "";
+    }
+  }
+
+  function openBook(key) {
+    const book = books[key];
+    if (!book) return;
+
+    $("#modal-title").textContent = book.title;
+    const list = $("#page-list");
+    list.replaceChildren();
+
+    book.pages.forEach(([name, url, icon]) => {
+      const link = document.createElement("a");
+      link.className = "page-link";
+      link.href = url;
+
+      const label = document.createElement("span");
+      label.textContent = icon + " " + name;
+
+      const arrow = document.createElement("span");
+      arrow.textContent = "→";
+      arrow.setAttribute("aria-hidden", "true");
+
+      link.append(label, arrow);
+      list.appendChild(link);
     });
 
-    $("#modal-close").addEventListener("click", () => hideModal(bookModal));
-    $("#parent-close").addEventListener("click", () => hideModal(parentModal));
+    showModal(bookModal);
+    $("#modal-close").focus();
+  }
 
-    document.querySelectorAll(".modal").forEach((modal) => {
-      modal.addEventListener("click", (event) => {
-        if (event.target === modal) hideModal(modal);
-      });
+  document.querySelectorAll("[data-book]").forEach(button => {
+    button.addEventListener("click", () => openBook(button.dataset.book));
+  });
+
+  $("#modal-close").addEventListener("click", () => hideModal(bookModal));
+  $("#parent-close").addEventListener("click", () => hideModal(parentModal));
+
+  document.querySelectorAll(".modal").forEach(modal => {
+    modal.addEventListener("click", event => {
+      if (event.target === modal) hideModal(modal);
     });
+  });
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        document.querySelectorAll(".modal.open").forEach(hideModal);
-      }
-    });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      document.querySelectorAll(".modal.open").forEach(hideModal);
+    }
+  });
 
-    // ===============================
-    // Gemini AI Voice Integration
-    // ===============================
+  // Dark Mode: पहिलेको रोजाइ सम्झने।
+  const themeToggle = $("#theme-toggle");
 
-    let voiceEnabled = false;
+  function applyTheme(dark) {
+    document.body.classList.toggle("dark-mode", dark);
+    themeToggle.setAttribute("aria-pressed", String(dark));
+    themeToggle.textContent = dark ? "☀️ Light Mode" : "🌙 Dark Mode";
+    safeSet("theme", dark ? "dark" : "light");
+  }
 
-    function speak(text) {
-      if (!voiceEnabled) return;
+  applyTheme(safeGet("theme", "light") === "dark");
+
+  themeToggle.addEventListener("click", () => {
+    applyTheme(!document.body.classList.contains("dark-mode"));
+  });
+
+  // Gemini AI Voice: Home को स्वागत सन्देशमा मात्र।
+  let welcomeVoiceEnabled = false;
+
+  const voiceToggle = $("#voice-toggle");
+  voiceToggle.addEventListener("click", async () => {
+    if (!welcomeVoiceEnabled) {
+      welcomeVoiceEnabled = true;
+      voiceToggle.setAttribute("aria-pressed", "true");
+      voiceToggle.textContent = "🔊 स्वागत आवाज रोक्नुहोस्";
+
+      const welcomeText =
+        "बाल पाठशालामा स्वागत छ। रमाउँदै सिकौँ, आत्मविश्वास बढाऔँ। " +
+        "नेपाली अक्षर, अंग्रेजी, गणित र रमाइला गतिविधि छान्नुहोस्।";
 
       if (typeof window.playAIVoice === "function") {
-        // script.js ले Cloudflare Worker मा अनुरोध पठाउँछ।
-        // Worker ले Gemini AI को अडियो फर्काउँछ।
-        window.playAIVoice(String(text));
+        try {
+          await window.playAIVoice(welcomeText);
+        } catch (error) {
+          $("#target-message").textContent =
+            "AI आवाज चल्न सकेन। इन्टरनेट जडान जाँचेर फेरि प्रयास गर्नुहोस्।";
+        }
       } else {
         $("#target-message").textContent =
-          "AI आवाज स्क्रिप्ट लोड भएन। पेज refresh गरेर फेरि प्रयास गर्नुहोस्।";
+          "AI आवाज स्क्रिप्ट उपलब्ध भएन। पेज Refresh गरेर प्रयास गर्नुहोस्।";
+      }
+    } else {
+      welcomeVoiceEnabled = false;
+      voiceToggle.setAttribute("aria-pressed", "false");
+      voiceToggle.textContent = "🔊 स्वागत आवाज";
 
-        console.error(
-          "playAIVoice() उपलब्ध छैन। ./script.js लोड भयो कि जाँच्नुहोस्।"
-        );
+      if (typeof window.stopVoice === "function") {
+        window.stopVoice();
       }
     }
+  });
 
-    $("#voice-toggle").addEventListener("click", () => {
-      voiceEnabled = !voiceEnabled;
+  // राष्ट्रिय गान।
+  const anthem = $("#national-anthem");
+  const anthemButton = $("#anthem-toggle");
 
-      $("#voice-toggle").setAttribute(
-        "aria-pressed",
-        String(voiceEnabled)
-      );
-
-      $("#voice-toggle").textContent = voiceEnabled
-        ? "🔊 आवाज चालु"
-        : "🔇 आवाज बन्द";
-
-      if (!voiceEnabled) {
-        // चलिरहेको Gemini अडियो रोक्ने।
-        if (typeof window.stopVoice === "function") {
-          window.stopVoice();
-        }
-
-        // पुरानो browser speech चलिरहेको भए त्यो पनि रोक्ने।
-        if ("speechSynthesis" in window) {
-          window.speechSynthesis.cancel();
-        }
-
-        $("#target-message").textContent = "आवाज बन्द गरिएको छ।";
-      } else {
-        speak("बाल पाठशालामा स्वागत छ");
-        $("#target-message").textContent = "Gemini AI आवाज सुरु हुँदैछ…";
-      }
-    });
-
-    // ===============================
-    // Theme Settings
-    // ===============================
-
-    function applyTheme(theme) {
-      const dark = theme === "dark";
-
-      document.body.classList.toggle("dark-mode", dark);
-
-      $("#theme-toggle").textContent = dark
-        ? "☀️ उज्यालो मोड"
-        : "🌙 डार्क मोड";
-
-      $("#theme-toggle").setAttribute("aria-pressed", String(dark));
-
-      const meta = document.querySelector('meta[name="theme-color"]');
-
-      if (meta) {
-        meta.content = dark ? "#111827" : "#f7fbff";
-      }
-
-      storage.set("theme", dark ? "dark" : "light");
-    }
-
-    $("#theme-toggle").addEventListener("click", () => {
-      applyTheme(
-        document.body.classList.contains("dark-mode") ? "light" : "dark"
-      );
-    });
-
-    applyTheme(storage.get("theme", "light"));
-
-    // ===============================
-    // Daily Learning Target
-    // ===============================
-
-    function updateTargetDisplay() {
-      const target = Math.max(
-        1,
-        Number.parseInt(storage.get("app_daily_target", "10"), 10) || 10
-      );
-
-      const score = Math.max(
-        0,
-        Number.parseInt(storage.get("quiz_total_score", "0"), 10) || 0
-      );
-
-      const percent = Math.min(
-        100,
-        Math.round((score / target) * 100)
-      );
-
-      $("#target-count").textContent = `${score} / ${target} सही उत्तर`;
-      $("#target-fill").style.width = `${percent}%`;
-
-      $("#target-progress").setAttribute(
-        "aria-valuenow",
-        String(percent)
-      );
-
-      $("#target-message").textContent = percent >= 100
-        ? "🎉 लक्ष्य पूरा भयो! आजको प्रयासका लागि बधाई!"
-        : "सानो प्रयास, ठूलो प्रगति! 🌱";
-    }
-
-    // ===============================
-    // Parent Settings
-    // ===============================
-
-    let expectedAnswer = 0;
-
-    $("#parent-open").addEventListener("click", () => {
-      const a = Math.floor(Math.random() * 8) + 2;
-      const b = Math.floor(Math.random() * 8) + 2;
-
-      expectedAnswer = a + b;
-
-      $("#math-question").textContent =
-        `अभिभावक जाँच: ${a} + ${b} कति हुन्छ?`;
-
-      $("#math-answer").value = "";
-      $("#parent-check").hidden = false;
-      $("#parent-settings").hidden = true;
-      $("#parent-notice").textContent = "";
-
-      showModal(parentModal);
-      $("#math-answer").focus();
-    });
-
-    $("#verify-parent").addEventListener("click", () => {
-      if (
-        Number($("#math-answer").value) !== expectedAnswer ||
-        $("#math-answer").value.trim() === ""
-      ) {
-        $("#parent-notice").textContent =
-          "उत्तर मिलेन। फेरि प्रयास गर्नुहोस्।";
-        return;
-      }
-
-      $("#parent-check").hidden = true;
-      $("#parent-settings").hidden = false;
-
-      $("#daily-target").value = storage.get(
-        "app_daily_target",
-        "10"
-      );
-
-      $("#parent-notice").textContent =
-        "जाँच पूरा भयो। चाहिएको लक्ष्य छान्नुहोस्।";
-    });
-
-    $("#save-settings").addEventListener("click", () => {
-      const value = $("#daily-target").value;
-
-      if (!["5", "10", "15", "20"].includes(value)) return;
-
-      if (storage.set("app_daily_target", value)) {
-        updateTargetDisplay();
-
-        $("#parent-notice").textContent =
-          "सेटिङ यो ब्राउजरमा सेभ भयो।";
-      } else {
-        $("#parent-notice").textContent =
-          "सेभ गर्न सकिएन। ब्राउजरको storage उपलब्ध छ कि जाँच्नुहोस्।";
-      }
-    });
-
-    // ===============================
-    // National Anthem Audio
-    // ===============================
-
-    const anthem = $("#national-anthem");
-
-    $("#anthem-toggle").addEventListener("click", async () => {
-      const status = $("#anthem-status");
-
+  anthemButton.addEventListener("click", async () => {
+    if (anthem.paused) {
       try {
-        if (anthem.paused) {
-          await anthem.play();
-
-          $("#anthem-toggle").textContent =
-            "⏸ राष्ट्रिय गान रोक्नुहोस्";
-
-          status.textContent = "राष्ट्रिय गान बजिरहेको छ।";
-        } else {
-          anthem.pause();
-
-          $("#anthem-toggle").textContent =
-            "▶ राष्ट्रिय गान बजाउनुहोस्";
-
-          status.textContent = "राष्ट्रिय गान रोकियो।";
-        }
+        await anthem.play();
+        anthemButton.textContent = "⏸ राष्ट्रिय गान रोक्नुहोस्";
+        $("#anthem-status").textContent = "राष्ट्रिय गान बजिरहेको छ।";
       } catch (_) {
-        status.textContent =
+        $("#anthem-status").textContent =
           "अडियो चल्न सकेन। anthem.mp3 फाइल उपलब्ध छ कि जाँच्नुहोस्।";
       }
-    });
+    } else {
+      anthem.pause();
+      anthem.currentTime = 0;
+      anthemButton.textContent = "▶ राष्ट्रिय गान बजाउनुहोस्";
+      $("#anthem-status").textContent = "राष्ट्रिय गान रोकियो।";
+    }
+  });
 
-    anthem.addEventListener("ended", () => {
-      $("#anthem-toggle").textContent =
-        "▶ राष्ट्रिय गान बजाउनुहोस्";
+  anthem.addEventListener("ended", () => {
+    anthemButton.textContent = "▶ राष्ट्रिय गान बजाउनुहोस्";
+    $("#anthem-status").textContent = "राष्ट्रिय गान पूरा भयो।";
+  });
 
-      $("#anthem-status").textContent =
-        "राष्ट्रिय गान समाप्त भयो।";
-    });
+  // अभिभावक गणितीय जाँच।
+  let expectedAnswer = 0;
 
-    // ===============================
-    // Keep Homepage Data Updated
-    // ===============================
+  function newParentQuestion() {
+    const a = Math.floor(Math.random() * 8) + 2;
+    const b = Math.floor(Math.random() * 8) + 2;
+    expectedAnswer = a + b;
+    $("#math-question").textContent = "अभिभावक जाँच: " + a + " + " + b + " = ?";
+    $("#math-answer").value = "";
+  }
 
-    window.addEventListener("storage", (event) => {
-      if (
-        ["quiz_total_score", "app_daily_target"].includes(event.key)
-      ) {
-        updateTargetDisplay();
-      }
+  $("#parent-open").addEventListener("click", () => {
+    $("#parent-check").hidden = false;
+    $("#parent-settings").hidden = true;
+    $("#parent-notice").textContent = "";
+    newParentQuestion();
+    showModal(parentModal);
+  });
 
-      if (event.key === "theme") {
-        applyTheme(event.newValue || "light");
-      }
-    });
+  $("#verify-parent").addEventListener("click", () => {
+    const answer = Number($("#math-answer").value);
 
-    updateTargetDisplay();
-  </script>
+    if ($("#math-answer").value.trim() === "" || answer !== expectedAnswer) {
+      $("#parent-notice").textContent = "उत्तर मिलेन। फेरि प्रयास गर्नुहोस्।";
+      newParentQuestion();
+      return;
+    }
+
+    $("#parent-check").hidden = true;
+    $("#parent-settings").hidden = false;
+    $("#parent-notice").textContent = "जाँच सफल भयो। सेटिङ परिवर्तन गर्न सक्नुहुन्छ।";
+    $("#daily-target").value = safeGet("daily_target", "10");
+  });
+
+  $("#save-settings").addEventListener("click", () => {
+    const target = Number($("#daily-target").value);
+    safeSet("daily_target", target);
+    $("#parent-notice").textContent = "सेटिङ सेभ भयो।";
+    updateDailyTarget();
+  });
+
+  // दैनिक लक्ष्य: क्विज पेजहरूले प्रयोग गर्ने स्कोर key बाट पढ्ने।
+  function nepaliNumber(value) {
+    const digits = ["०","१","२","३","४","५","६","७","८","९"];
+    return String(value).replace(/[0-9]/g, digit => digits[Number(digit)]);
+  }
+
+  function updateDailyTarget() {
+    const target = Math.max(1, Number(safeGet("daily_target", "10")) || 10);
+    const today = new Date().toLocaleDateString("en-CA");
+    const savedDate = safeGet("quiz_score_date", "");
+    const scoreValue = savedDate === today
+      ? Number(safeGet("quiz_daily_score", "0")) || 0
+      : 0;
+
+    const percent = Math.min(100, scoreValue / target * 100);
+    $("#target-count").textContent =
+      nepaliNumber(scoreValue) + " / " + nepaliNumber(target) + " सही उत्तर";
+    $("#target-fill").style.width = percent + "%";
+    $("#target-progress").setAttribute("aria-valuenow", String(Math.round(percent)));
+
+    $("#target-message").textContent = scoreValue >= target
+      ? "🎉 आजको लक्ष्य पूरा भयो! उत्कृष्ट काम!"
+      : "सानो प्रयास, ठूलो प्रगति! अझै " +
+        nepaliNumber(Math.max(0, target - scoreValue)) + " सही उत्तर बाँकी छन्।";
+  }
+
+  window.addEventListener("storage", updateDailyTarget);
+  updateDailyTarget();
+})();
+</script>
 </body>
 </html>
