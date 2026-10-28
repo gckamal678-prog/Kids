@@ -1,835 +1,171 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ne">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f7ff">
-  <meta name="description" content="बाल पाठशाला — रमाइलो बाल क्विज खेल">
-  <title>बाल क्विज | बाल पाठशाला</title>
-
-  <style>
-    :root {
-      --bg: #f3f6ff;
-      --card: #ffffff;
-      --text: #202b43;
-      --muted: #6c7890;
-      --border: #e0e7f4;
-      --blue: #4268df;
-      --blue-light: #edf2ff;
-      --green: #187a46;
-      --green-light: #e1f7e9;
-      --red: #b52c35;
-      --red-light: #ffebeb;
-      --orange: #a85b00;
-      --shadow: 0 12px 36px rgba(39, 58, 100, .10);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      padding: 16px;
-      background:
-        radial-gradient(circle at top left, #e1eaff, transparent 36%),
-        var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, "Noto Sans Devanagari",
-        "Mukta", sans-serif;
-      line-height: 1.55;
-    }
-
-    button, a { font: inherit; }
-    button { cursor: pointer; }
-
-    button:focus-visible, a:focus-visible {
-      outline: 3px solid #f2a52b;
-      outline-offset: 3px;
-    }
-
-    .page {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .brand-icon {
-      display: grid;
-      place-items: center;
-      flex: 0 0 46px;
-      height: 46px;
-      border-radius: 15px;
-      background: #e1eaff;
-      font-size: 25px;
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    .brand p {
-      margin: 2px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .sound-toggle, .home-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      min-height: 42px;
-      padding: 9px 12px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: var(--card);
-      color: var(--text);
-      font-weight: 750;
-      text-decoration: none;
-    }
-
-    .quiz-card {
-      padding: clamp(16px, 4vw, 28px);
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      background: var(--card);
-      box-shadow: var(--shadow);
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 9px;
-      margin-bottom: 20px;
-    }
-
-    .stat {
-      padding: 11px 5px;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      background: #fafbff;
-      text-align: center;
-    }
-
-    .stat-label {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .stat-value {
-      margin-top: 3px;
-      font-size: 22px;
-      font-weight: 850;
-    }
-
-    .score-value { color: var(--green); }
-    .timer-value { color: var(--orange); }
-
-    .goal {
-      margin-bottom: 20px;
-    }
-
-    .goal-label {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 7px;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .progress-track {
-      height: 9px;
-      overflow: hidden;
-      border-radius: 99px;
-      background: #e8edf7;
-    }
-
-    .progress-fill {
-      width: 0;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #4169e1, #28b67d);
-      transition: width .2s ease;
-    }
-
-    .question-label {
-      margin-bottom: 6px;
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .question {
-      min-height: 60px;
-      margin: 0 0 12px;
-      font-size: clamp(21px, 4.8vw, 29px);
-      font-weight: 850;
-      line-height: 1.5;
-      overflow-wrap: anywhere;
-    }
-
-    .sound-row {
-      margin-bottom: 16px;
-    }
-
-    .repeat-btn {
-      min-height: 42px;
-      padding: 9px 13px;
-      border: 1px solid #dbe4ff;
-      border-radius: 12px;
-      background: var(--blue-light);
-      color: #294ca9;
-      font-weight: 750;
-    }
-
-    .options {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 11px;
-    }
-
-    .option {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-height: 62px;
-      padding: 12px;
-      border: 2px solid #dce5f8;
-      border-radius: 15px;
-      background: #f8faff;
-      color: var(--text);
-      text-align: left;
-      font-weight: 750;
-      overflow-wrap: anywhere;
-    }
-
-    .option:hover:not(:disabled) {
-      border-color: #8da8f7;
-      background: #f0f4ff;
-    }
-
-    .option:disabled { cursor: default; opacity: 1; }
-
-    .option-letter {
-      display: grid;
-      place-items: center;
-      flex: 0 0 31px;
-      height: 31px;
-      border-radius: 10px;
-      background: #e5ebfb;
-      color: #3456b7;
-      font-size: 13px;
-    }
-
-    .option.correct {
-      border-color: #2d995e;
-      background: var(--green-light);
-      color: #145c36;
-    }
-
-    .option.correct .option-letter {
-      background: #c8efd7;
-      color: #145c36;
-    }
-
-    .option.wrong {
-      border-color: #d84a4a;
-      background: var(--red-light);
-      color: #9e2020;
-    }
-
-    .option.wrong .option-letter {
-      background: #ffd4d4;
-      color: #9e2020;
-    }
-
-    .feedback {
-      min-height: 52px;
-      margin-top: 16px;
-      padding: 12px 14px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: #fafbff;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .feedback.success {
-      border-color: #b8e8ca;
-      background: var(--green-light);
-      color: #145c36;
-    }
-
-    .feedback.error {
-      border-color: #ffd0d0;
-      background: var(--red-light);
-      color: #9e2020;
-    }
-
-    .bottom-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .home-btn { color: var(--blue); }
-
-    .next-btn {
-      min-height: 46px;
-      padding: 11px 17px;
-      border: 0;
-      border-radius: 13px;
-      background: var(--blue);
-      color: white;
-      font-weight: 800;
-    }
-
-    .next-btn:disabled {
-      cursor: not-allowed;
-      opacity: .45;
-    }
-
-    .footer {
-      margin: 18px 0 5px;
-      color: var(--muted);
-      font-size: 12px;
-      text-align: center;
-    }
-
-    @media (max-width: 460px) {
-      body { padding: 11px; }
-      .brand h1 { font-size: 17px; }
-      .brand-icon { flex-basis: 40px; height: 40px; }
-      .sound-toggle { padding: 8px 9px; font-size: 12px; }
-      .options { grid-template-columns: 1fr; gap: 9px; }
-      .option { min-height: 55px; }
-      .stats { gap: 6px; }
-      .stat-value { font-size: 19px; }
-      .bottom-row > * { flex: 1; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { transition: none !important; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<title>बाल क्विज | बाल पाठशाला</title>
+<style>
+:root{--bg:#f5f8ff;--card:#fff;--text:#18243a;--muted:#68758b;--primary:#4169e1;--border:#e0e7f2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,"Noto Sans Devanagari",sans-serif;line-height:1.6}
+body.dark-mode{--bg:#111827;--card:#1c2739;--text:#f2f5fc;--muted:#bac5d8;--border:#35435b}
+main{max-width:760px;margin:auto;padding:18px}
+header,.panel{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:16px}
+header{background:linear-gradient(130deg,#e6efff,#e3fbef)}
+h1{margin:0 0 5px;font-size:clamp(23px,5vw,34px)}
+h2{margin-top:0}
+p{overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.btn,.option{border:1px solid var(--border);border-radius:12px;padding:11px 15px;background:var(--card);color:var(--text);font:inherit;font-weight:700;cursor:pointer}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn:disabled,.option:disabled{opacity:.7;cursor:default}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:18px 0}
+.option{text-align:left;min-height:50px}
+.option.correct{background:#d9fbe8;border-color:#1d9a5c;color:#14532d}
+.option.wrong{background:#ffe3e3;border-color:#d94b4b;color:#7f1d1d}
+#feedback{min-height:28px;font-weight:800}
+.progress{height:9px;border-radius:20px;background:var(--border);overflow:hidden}
+#bar{height:100%;width:0;background:#24ad7a;transition:width .2s}
+a{color:var(--primary);font-weight:700;text-decoration:none}
+footer{text-align:center;padding:12px;color:var(--muted)}
+@media(max-width:430px){main{padding:12px}.panel,header{padding:15px}.options{grid-template-columns:1fr}}
+</style>
 </head>
-
 <body>
-  <main class="page">
-    <header class="topbar">
-      <div class="brand">
-        <div class="brand-icon" aria-hidden="true">🧠</div>
-        <div>
-          <h1>बाल क्विज</h1>
-          <p>खेल्दै सिकौँ, सिक्दै रमाऔँ!</p>
-        </div>
-      </div>
-
-      <button class="sound-toggle" id="sound-toggle" type="button">
-        🔊 आवाज चालु
-      </button>
-    </header>
-
-    <section class="quiz-card">
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-label">🏆 आजको अङ्क</div>
-          <div class="stat-value score-value" id="score">०</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">⭐ स्टार</div>
-          <div class="stat-value" id="stars">०</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">⏳ बाँकी समय</div>
-          <div class="stat-value timer-value"><span id="timer">१५</span>s</div>
-        </div>
-      </div>
-
-      <div class="goal">
-        <div class="goal-label">
-          <span>आजको सिकाइ लक्ष्य</span>
-          <span id="goal-text">० / १०</span>
-        </div>
-        <div class="progress-track" id="goal-progress"
-             role="progressbar" aria-label="दैनिक सिकाइ लक्ष्य"
-             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-          <div class="progress-fill" id="goal-fill"></div>
-        </div>
-      </div>
-
-      <div class="question-label" id="question-label">प्रश्न १</div>
-      <h2 class="question" id="question" aria-live="polite">
-        प्रश्न लोड हुँदैछ...
-      </h2>
-
-      <div class="sound-row">
-        <button class="repeat-btn" id="repeat-btn" type="button">
-          🔊 प्रश्न फेरि सुनौँ
-        </button>
-      </div>
-
-      <div class="options" id="options"></div>
-
-      <div class="feedback" id="feedback" aria-live="polite">
-        सही उत्तर छानेर अङ्क कमाउनुहोस्। 😊
-      </div>
-
-      <div class="bottom-row">
-        <a class="home-btn" href="../index.html">⬅ गृहपृष्ठ</a>
-        <button class="next-btn" id="next-btn" type="button" disabled>
-          अर्को प्रश्न ➜
-        </button>
-      </div>
-    </section>
-
-    <p class="footer">
-      सही उत्तर दिएर स्टार कमाउनुहोस्। गल्ती भए पनि फेरि प्रयास गर्न सकिन्छ! 🌱
-    </p>
-  </main>
-
-  <script>
-  (function () {
-    "use strict";
-
-    const $ = function (id) {
-      return document.getElementById(id);
-    };
-
-    const QUESTIONS = [
-      { q: "'म्याउँ म्याउँ' आवाज कुन जनावरले निकाल्छ?", options: ["कुकुर", "बिरालो", "गाई", "बाख्रा"], answer: 1 },
-      { q: "'कुखुरी काँ' भनेर कसले बास्छ?", options: ["भाले कुखुरा", "सुगा", "ढुकुर", "काग"], answer: 0 },
-      { q: "२ + ३ कति हुन्छ?", options: ["४", "५", "६", "७"], answer: 1 },
-      { q: "नेपालको राष्ट्रिय जनावर कुन हो?", options: ["बाघ", "गाई", "हात्ती", "कुकुर"], answer: 1 },
-      { q: "एक हप्तामा कति दिन हुन्छन्?", options: ["५", "६", "७", "८"], answer: 2 },
-      { q: "English alphabet को पहिलो अक्षर कुन हो?", options: ["B", "C", "A", "D"], answer: 2 },
-      { q: "गाईले हामीलाई के दिन्छ?", options: ["दूध", "पेट्रोल", "कागज", "ढुङ्गा"], answer: 0 },
-      { q: "एक वर्षमा कति महिना हुन्छन्?", options: ["१०", "११", "१२", "१३"], answer: 2 },
-      { q: "५ - २ कति हुन्छ?", options: ["२", "३", "४", "५"], answer: 1 },
-      { q: "पानी पिउन कुन अङ्ग प्रयोग गर्छौँ?", options: ["नाक", "कान", "मुख", "घुँडा"], answer: 2 },
-      { q: "English मा 'स्याउ' लाई के भनिन्छ?", options: ["Apple", "Banana", "Mango", "Orange"], answer: 0 },
-      { q: "रातमा आकाशमा के देख्न सकिन्छ?", options: ["तारा", "समुद्र", "सडक", "किताब"], answer: 0 },
-      { q: "२ × ३ कति हुन्छ?", options: ["५", "६", "७", "८"], answer: 1 },
-      { q: "'क' बाट सुरु हुने शब्द कुन हो?", options: ["कमल", "खरायो", "गमला", "घर"], answer: 0 },
-      { q: "नेपालको झण्डामा कुन रङहरू छन्?", options: ["रातो, नीलो र सेतो", "पहेंलो र हरियो", "कालो र सेतो", "गुलाबी र नीलो"], answer: 0 },
-      { q: "समोसाको आकार कस्तो हुन्छ?", options: ["गोलो", "त्रिकोण", "चौकोन", "अण्डाकार"], answer: 1 },
-      { q: "डोरेमोनलाई मन पर्ने खानेकुरा के हो?", options: ["मोमो", "डोरायाकी", "पिज्जा", "स्याउ"], answer: 1 },
-      { q: "रातो रङको फल कुन हो?", options: ["स्याउ", "काउली", "काक्रो", "आलु"], answer: 0 },
-      { q: "पृथ्वीमा उज्यालो दिने मुख्य स्रोत के हो?", options: ["चन्द्रमा", "सूर्य", "तारा", "बादल"], answer: 1 },
-      { q: "१० भन्दा ठीक अगाडिको सङ्ख्या कुन हो?", options: ["८", "९", "११", "१२"], answer: 1 }
-    ];
-
-    const DAILY_KEY = "quiz_daily_score";
-    const DATE_KEY = "quiz_daily_date";
-    const LEGACY_KEY = "quiz_total_score";
-    const ALL_TIME_KEY = "quiz_all_time_score";
-    const TARGET_KEY = "app_daily_target";
-    const LETTERS = ["क", "ख", "ग", "घ"];
-
-    let score = 0;
-    let allTimeScore = 0;
-    let target = 10;
-    let current = null;
-    let currentIndex = -1;
-    let questionCount = 0;
-    let timeLeft = 15;
-    let timerId = null;
-    let answered = false;
-    let soundEnabled = true;
-    let voicesAvailable = [];
-    let audioContext = null;
-
-    function digits(value) {
-      return String(value).replace(/[0-9]/g, function (d) {
-        return "०१२३४५६७८९"[Number(d)];
-      });
-    }
-
-    function safeGet(key) {
-      try { return localStorage.getItem(key); }
-      catch (_) { return null; }
-    }
-
-    function safeSet(key, value) {
-      try {
-        localStorage.setItem(key, String(value));
-        return true;
-      } catch (_) {
-        return false;
-      }
-    }
-
-    function numberFromStorage(key, fallback) {
-      const value = Number.parseInt(safeGet(key) || "", 10);
-      return Number.isFinite(value) && value >= 0 ? value : fallback;
-    }
-
-    function today() {
-      const d = new Date();
-      return d.getFullYear() + "-" +
-        String(d.getMonth() + 1).padStart(2, "0") + "-" +
-        String(d.getDate()).padStart(2, "0");
-    }
-
-    function readTarget() {
-      const saved = numberFromStorage(TARGET_KEY, 10);
-      return [5, 10, 15, 20].includes(saved) ? saved : 10;
-    }
-
-    function loadScores() {
-      const date = today();
-      const savedDate = safeGet(DATE_KEY);
-
-      target = readTarget();
-      allTimeScore = numberFromStorage(ALL_TIME_KEY, 0);
-
-      if (savedDate !== date) {
-        score = 0;
-        safeSet(DAILY_KEY, 0);
-        safeSet(LEGACY_KEY, 0);
-        safeSet(DATE_KEY, date);
-      } else {
-        score = numberFromStorage(
-          DAILY_KEY,
-          numberFromStorage(LEGACY_KEY, 0)
-        );
-      }
-
-      // Older versions may have saved only the legacy score.
-      if (savedDate === null && score === 0) {
-        const oldScore = numberFromStorage(LEGACY_KEY, 0);
-        if (oldScore > 0) {
-          score = oldScore;
-          safeSet(DAILY_KEY, score);
-          safeSet(DATE_KEY, date);
-        }
-      }
-
-      drawScores();
-    }
-
-    function drawScores() {
-      $("score").textContent = digits(score);
-      $("stars").textContent = digits(Math.floor(score / 5));
-      $("goal-text").textContent = digits(score) + " / " + digits(target);
-
-      const percent = Math.min(100, Math.round(score / target * 100));
-      $("goal-fill").style.width = percent + "%";
-      $("goal-progress").setAttribute("aria-valuenow", String(percent));
-    }
-
-    function stopTimer() {
-      if (timerId !== null) {
-        clearInterval(timerId);
-        timerId = null;
-      }
-    }
-
-    function stopSpeech() {
-      if ("speechSynthesis" in window) {
-        try { window.speechSynthesis.cancel(); } catch (_) {}
-      }
-    }
-
-    function speak(text) {
-      if (!soundEnabled || !("speechSynthesis" in window)) return;
-
-      try {
-        stopSpeech();
-
-        const utterance = new SpeechSynthesisUtterance(String(text));
-        const isNepali = /[\u0900-\u097F]/.test(text);
-        utterance.lang = isNepali ? "ne-NP" : "en-US";
-        utterance.rate = 0.85;
-        utterance.pitch = 1;
-
-        const voices = voicesAvailable.length
-          ? voicesAvailable
-          : window.speechSynthesis.getVoices();
-
-        const preferred = voices.find(function (voice) {
-          return isNepali
-            ? /^ne([-_]|$)/i.test(voice.lang)
-            : /^en([-_]|$)/i.test(voice.lang);
-        });
-
-        if (preferred) utterance.voice = preferred;
-        window.speechSynthesis.speak(utterance);
-      } catch (error) {
-        console.warn("Voice is not available:", error);
-      }
-    }
-
-    function playEffect(correct) {
-      try {
-        const AudioClass = window.AudioContext || window.webkitAudioContext;
-        if (!AudioClass) return;
-
-        if (!audioContext) audioContext = new AudioClass();
-        if (audioContext.state === "suspended") {
-          audioContext.resume().catch(function () {});
-        }
-
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-        const now = audioContext.currentTime;
-
-        oscillator.connect(gain);
-        gain.connect(audioContext.destination);
-
-        oscillator.frequency.setValueAtTime(correct ? 520 : 250, now);
-        oscillator.frequency.setValueAtTime(correct ? 660 : 180, now + 0.12);
-        gain.gain.setValueAtTime(0.12, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
-
-        oscillator.start(now);
-        oscillator.stop(now + 0.28);
-      } catch (_) {
-        // Sound effect is optional.
-      }
-    }
-
-    function updateTimer() {
-      $("timer").textContent = digits(timeLeft);
-      $("timer").style.color = timeLeft <= 5 ? "#b52c35" : "";
-      $("goal-fill").style.width =
-        Math.min(100, Math.round(score / target * 100)) + "%";
-    }
-
-    function startTimer() {
-      stopTimer();
-      timeLeft = 15;
-      updateTimer();
-
-      timerId = setInterval(function () {
-        if (answered) {
-          stopTimer();
-          return;
-        }
-
-        timeLeft -= 1;
-        updateTimer();
-
-        if (timeLeft <= 0) {
-          stopTimer();
-          timeoutQuestion();
-        }
-      }, 1000);
-    }
-
-    function makeOption(text, index) {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "option";
-
-      const letter = document.createElement("span");
-      letter.className = "option-letter";
-      letter.textContent = LETTERS[index];
-
-      const label = document.createElement("span");
-      label.textContent = text;
-
-      button.appendChild(letter);
-      button.appendChild(label);
-      button.addEventListener("click", function () {
-        checkAnswer(index, button);
-      });
-
-      return button;
-    }
-
-    function disableOptions() {
-      document.querySelectorAll(".option").forEach(function (button) {
-        button.disabled = true;
-      });
-    }
-
-    function newQuestion() {
-      stopTimer();
-      stopSpeech();
-
-      answered = false;
-      $("next-btn").disabled = true;
-      $("feedback").className = "feedback";
-      $("feedback").textContent = "सही उत्तर छानेर अङ्क कमाउनुहोस्। 😊";
-
-      // Prevent the same question appearing twice in a row.
-      let index = Math.floor(Math.random() * QUESTIONS.length);
-      if (QUESTIONS.length > 1 && index === currentIndex) {
-        index = (index + 1) % QUESTIONS.length;
-      }
-
-      currentIndex = index;
-      current = QUESTIONS[index];
-      questionCount += 1;
-
-      $("question-label").textContent =
-        "प्रश्न " + digits(questionCount) + " · सही उत्तर छान्नुहोस्";
-      $("question").textContent = current.q;
-
-      const options = $("options");
-      options.innerHTML = "";
-
-      current.options.forEach(function (option, optionIndex) {
-        options.appendChild(makeOption(option, optionIndex));
-      });
-
-      startTimer();
-      speak(current.q);
-    }
-
-    function saveScore() {
-      score += 1;
-      allTimeScore += 1;
-
-      safeSet(DAILY_KEY, score);
-      safeSet(DATE_KEY, today());
-      safeSet(LEGACY_KEY, score);
-      safeSet(ALL_TIME_KEY, allTimeScore);
-
-      drawScores();
-    }
-
-    function checkAnswer(index, button) {
-      if (answered || !current) return;
-
-      answered = true;
-      stopTimer();
-      disableOptions();
-
-      const correct = index === current.answer;
-      const buttons = Array.from(document.querySelectorAll(".option"));
-
-      if (correct) {
-        button.classList.add("correct");
-        saveScore();
-        playEffect(true);
-
-        $("feedback").className = "feedback success";
-        $("feedback").textContent = score >= target
-          ? "🎉 स्याबास! आजको लक्ष्य पूरा भयो!"
-          : "🎉 स्याबास! सही उत्तर। १ अङ्क प्राप्त भयो!";
-
-        speak("स्याबास! सही उत्तर दिनुभयो।");
-      } else {
-        button.classList.add("wrong");
-
-        if (buttons[current.answer]) {
-          buttons[current.answer].classList.add("correct");
-        }
-
-        playEffect(false);
-        $("feedback").className = "feedback error";
-        $("feedback").textContent =
-          "फेरि प्रयास गरौँ! सही उत्तर: " + current.options[current.answer];
-
-        speak("उत्तर मिलेन। अर्को प्रश्नमा फेरि प्रयास गर्नुहोस्।");
-      }
-
-      $("next-btn").disabled = false;
-    }
-
-    function timeoutQuestion() {
-      if (answered || !current) return;
-
-      answered = true;
-      disableOptions();
-
-      const buttons = Array.from(document.querySelectorAll(".option"));
-      if (buttons[current.answer]) {
-        buttons[current.answer].classList.add("correct");
-      }
-
-      $("feedback").className = "feedback error";
-      $("feedback").textContent =
-        "⏰ समय सकियो! सही उत्तर: " + current.options[current.answer];
-
-      playEffect(false);
-      $("next-btn").disabled = false;
-      speak("समय सकियो। अर्को प्रश्न प्रयास गर्नुहोस्।");
-    }
-
-    function showFatalError(error) {
-      console.error("Quiz initialization error:", error);
-      stopTimer();
-
-      $("question-label").textContent = "क्विज सुरु हुन सकेन";
-      $("question").textContent = "कृपया पृष्ठ फेरि खोल्नुहोस्।";
-      $("options").innerHTML = "";
-      $("feedback").className = "feedback error";
-      $("feedback").textContent =
-        "त्रुटि भेटियो। पृष्ठ Refresh गर्नुहोस्। समस्या दोहोरिएमा Console को error पठाउनुहोस्।";
-      $("next-btn").disabled = true;
-    }
-
-    $("repeat-btn").addEventListener("click", function () {
-      if (current) speak(current.q);
-    });
-
-    $("next-btn").addEventListener("click", newQuestion);
-
-    $("sound-toggle").addEventListener("click", function () {
-      soundEnabled = !soundEnabled;
-      $("sound-toggle").textContent = soundEnabled
-        ? "🔊 आवाज चालु"
-        : "🔇 आवाज बन्द";
-
-      if (!soundEnabled) stopSpeech();
-      else if (current) speak(current.q);
-    });
-
-    window.addEventListener("storage", function (event) {
-      if (event.key === TARGET_KEY) {
-        target = readTarget();
-        drawScores();
-      }
-    });
-
-    window.addEventListener("pagehide", function () {
-      stopTimer();
-      stopSpeech();
-
-      if (audioContext && audioContext.state !== "closed") {
-        audioContext.close().catch(function () {});
-      }
-    });
-
-    if ("speechSynthesis" in window) {
-      try {
-        voicesAvailable = window.speechSynthesis.getVoices();
-        window.speechSynthesis.addEventListener("voiceschanged", function () {
-          voicesAvailable = window.speechSynthesis.getVoices();
-        });
-      } catch (_) {}
-    }
-
-    // Start the quiz immediately and show any unexpected error on screen.
-    try {
-      loadScores();
-      newQuestion();
-    } catch (error) {
-      showFatalError(error);
-    }
-  })();
-  </script>
+<main>
+<header>
+<div class="row"><span>🎒 बाल पाठशाला</span><button class="btn" id="theme" type="button">🌙 / ☀️</button></div>
+<h1>🧠 रमाइलो बाल क्विज</h1>
+<p>प्रश्न पढ्नुहोस्, सही उत्तर छान्नुहोस् र आफ्नो ज्ञान बढाउनुहोस्।</p>
+<a href="../index.html">← मुख्य पृष्ठमा फर्कनुहोस्</a>
+</header>
+
+<section class="panel">
+<div class="row">
+<strong id="category">सामान्य ज्ञान</strong>
+<strong id="score">अंक: ०</strong>
+</div>
+<div class="progress" aria-label="क्विज प्रगति"><div id="bar"></div></div>
+<p id="counter" class="muted">प्रश्न १</p>
+<h2 id="question">प्रश्न तयार हुँदैछ…</h2>
+<div id="options" class="options"></div>
+<p id="feedback" aria-live="polite"></p>
+<div class="row">
+<button id="next" class="btn primary" type="button" disabled>अर्को प्रश्न →</button>
+<button id="restart" class="btn" type="button">फेरि सुरु</button>
+</div>
+</section>
+
+<section class="panel">
+<h2>🏆 आजको नतिजा</h2>
+<p id="today-score" class="muted">आजको सही उत्तर: ०</p>
+<p class="muted">हरेक सही उत्तरले आजको सिकाइ लक्ष्य पूरा गर्न मद्दत गर्छ।</p>
+</section>
+<footer>रमाउँदै सिकौँ, आत्मविश्वास बढाऔँ! 🌟</footer>
+</main>
+<script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id);
+const questions=[
+{c:"नेपाली",q:"नेपाली वर्णमालामा 'अ' कुन वर्ण हो?",o:["स्वर वर्ण","व्यञ्जन वर्ण","अङ्क","चिन्ह"],a:0},
+{c:"नेपाली",q:"'कमल' शब्दको पहिलो अक्षर कुन हो?",o:["ल","क","म","अ"],a:1},
+{c:"English",q:"How many letters are in the English alphabet?",o:["20","24","26","28"],a:2},
+{c:"English",q:"Which one is a vowel?",o:["B","K","A","T"],a:2},
+{c:"गणित",q:"५ + ३ कति हुन्छ?",o:["६","७","८","९"],a:2},
+{c:"गणित",q:"४ × २ कति हुन्छ?",o:["६","८","१०","१२"],a:1},
+{c:"प्रकृति",q:"घाम कुन दिशाबाट उदाउँछ?",o:["पूर्व","पश्चिम","उत्तर","दक्षिण"],a:0},
+{c:"प्रकृति",q:"गाईले हामीलाई के दिन्छ?",o:["ऊन","दूध","अण्डा","मह"],a:1},
+{c:"सामान्य ज्ञान",q:"एक हप्तामा कति दिन हुन्छन्?",o:["५","६","७","८"],a:2},
+{c:"सामान्य ज्ञान",q:"नेपालको राष्ट्रिय झण्डा कस्तो आकारको छ?",o:["गोलो","दुई त्रिकोण जोडिएको","चौकोर","आयताकार"],a:1},
+{c:"English",q:"What is the opposite of 'big'?",o:["Tall","Small","Long","Fast"],a:1},
+{c:"गणित",q:"१० - ४ कति हुन्छ?",o:["४","५","६","७"],a:2}
+];
+let order=[],index=0,score=0,answered=false;
+const today=()=>new Date().toLocaleDateString("en-CA");
+const read=(k,d)=>{try{return localStorage.getItem(k)??d}catch(_){return d}};
+const write=(k,v)=>{try{localStorage.setItem(k,String(v))}catch(_){}};
+const nepali=n=>String(n).replace(/[0-9]/g,d=>"०१२३४५६७८९"[+d]);
+
+function updateToday(){
+ const savedDate=read("quiz_score_date","");
+ const old=savedDate===today()?Number(read("quiz_daily_score","0"))||0:0;
+ $("today-score").textContent="आजको सही उत्तर: "+nepali(old);
+}
+function saveCorrect(){
+ const old=read("quiz_score_date","")===today()?Number(read("quiz_daily_score","0"))||0:0;
+ write("quiz_score_date",today());
+ write("quiz_daily_score",old+1);
+ updateToday();
+}
+function start(){
+ order=questions.map((_,i)=>i).sort(()=>Math.random()-.5);
+ index=0;score=0;answered=false;
+ $("score").textContent="अंक: ०";
+ $("next").textContent="अर्को प्रश्न →";
+ $("next").disabled=true;
+ render();
+}
+function render(){
+ const item=questions[order[index]];
+ answered=false;
+ $("category").textContent="📘 "+item.c;
+ $("counter").textContent="प्रश्न "+nepali(index+1)+" / "+nepali(order.length);
+ $("question").textContent=item.q;
+ $("feedback").textContent="";
+ $("next").disabled=true;
+ $("bar").style.width=(index/order.length*100)+"%";
+ const box=$("options");box.replaceChildren();
+ item.o.forEach((option,i)=>{
+  const b=document.createElement("button");
+  b.className="option";b.type="button";b.textContent=String.fromCharCode(65+i)+". "+option;
+  b.addEventListener("click",()=>choose(i,b));
+  box.appendChild(b);
+ });
+}
+function choose(selected,button){
+ if(answered)return;
+ answered=true;
+ const item=questions[order[index]];
+ [...$("options").children].forEach(b=>b.disabled=true);
+ if(selected===item.a){
+  score++;$("score").textContent="अंक: "+nepali(score);
+  button.classList.add("correct");
+  $("feedback").textContent="🎉 एकदम सही! राम्रो गर्नुभयो।";
+  $("feedback").style.color="#168453";
+  saveCorrect();
+ }else{
+  button.classList.add("wrong");
+  $("options").children[item.a].classList.add("correct");
+  $("feedback").textContent="🙂 सही उत्तर: "+item.o[item.a]+". फेरि प्रयास गरौँ!";
+  $("feedback").style.color="#c24141";
+ }
+ $("bar").style.width=((index+1)/order.length*100)+"%";
+ $("next").disabled=false;
+ $("next").textContent=index===order.length-1?"नतिजा हेर्नुहोस् 🏆":"अर्को प्रश्न →";
+}
+$("next").addEventListener("click",()=>{
+ if(!answered)return;
+ if(index<order.length-1){index++;render();return;}
+ $("question").textContent="क्विज पूरा भयो! 🎉";
+ $("category").textContent="🏆 अन्तिम नतिजा";
+ $("counter").textContent="कुल "+nepali(order.length)+" प्रश्न";
+ $("options").replaceChildren();
+ $("feedback").textContent="तपाईंले "+nepali(score)+" / "+nepali(order.length)+" अंक प्राप्त गर्नुभयो।";
+ $("bar").style.width="100%";
+ $("next").disabled=true;
+});
+$("restart").addEventListener("click",start);
+$("theme").addEventListener("click",()=>{
+ document.body.classList.toggle("dark-mode");
+ try{localStorage.setItem("theme",document.body.classList.contains("dark-mode")?"dark":"light")}catch(_){}
+});
+try{if(localStorage.getItem("theme")==="dark")document.body.classList.add("dark-mode")}catch(_){}
+updateToday();start();
+})();
+</script>
 </body>
 </html>
