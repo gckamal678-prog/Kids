@@ -1,164 +1,337 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>रङहरूको नाम - पाठशाला</title>
-    <meta name="theme-color" content="#FF5722">
-    <!-- Child-Friendly Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Mukta', 'Fredoka', sans-serif;
-            background: linear-gradient(180deg, #FFF3E0 0%, #FFE0B2 100%);
-            margin: 0;
-            padding: 15px;
-            text-align: center;
-            min-height: 100vh;
-        }
-
-        /* Header Layout */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto 20px auto;
-            background: #FFFFFF;
-            padding: 10px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        h2 { 
-            color: #E65100; 
-            margin: 0; 
-            font-size: 20px;
-            font-weight: 800;
-        }
-        .home-btn {
-            background-color: #FF5722;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 3px 0 #BF360C;
-            transition: all 0.1s ease;
-        }
-        .home-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-
-        /* Grid Layout */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        /* 3D Color Card */
-        .color-card {
-            border-radius: 20px;
-            padding: 20px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.15), 0 8px 12px rgba(0,0,0,0.1);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s ease;
-            border: 4px solid #FFFFFF;
-        }
-        
-        .color-card:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 rgba(0,0,0,0.15);
-        }
-
-        /* Circle Preview inside Card */
-        .color-circle {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            margin-bottom: 10px;
-        }
-
-        .np-name {
-            font-size: 20px;
-            font-weight: 800;
-            line-height: 1.2;
-        }
-
-        .en-name {
-            font-size: 15px;
-            font-weight: 700;
-            opacity: 0.9;
-            font-family: 'Fredoka', sans-serif;
-        }
-    </style>
-
-    <!-- ElevenLabs को लागि script.js जोडिएको -->
-    <script src="script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F97316">
+<title>रङहरू सिकौँ | बाल पाठशाला</title>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="../script.js"></script>
+<style>
+:root{
+  --bg:#FFF7ED;--card:#FFFFFF;--text:#422006;--muted:#8A6A52;
+  --primary:#F97316;--primaryDark:#C2410C;--soft:#FFEDD5;
+  --border:#FED7AA;--shadow:0 5px 0 #FBD0A3;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:14px;background:var(--bg);color:var(--text);font-family:'Mukta',sans-serif;min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+.page{max-width:900px;margin:auto}
+.header{display:flex;align-items:center;gap:10px;background:var(--card);border:2px solid var(--border);border-radius:18px;padding:11px;box-shadow:0 4px 0 #FDE2C4}
+.home{color:white;background:var(--primary);text-decoration:none;font-weight:800;border-radius:12px;padding:8px 12px;white-space:nowrap;box-shadow:0 3px 0 var(--primaryDark)}
+.headtext{flex:1;text-align:center;min-width:0}
+.headtext h1{font-size:clamp(18px,4vw,26px);margin:0;line-height:1.3}
+.headtext p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.theme{border:0;border-radius:12px;padding:9px;background:var(--soft);color:var(--text);font-size:19px}
+.hero{margin:20px 0;padding:22px 14px;text-align:center;border-radius:24px;color:white;background:linear-gradient(135deg,#F97316,#F43F5E,#A855F7);box-shadow:0 7px 0 #C2410C}
+.hero .emoji{font-size:52px;line-height:1.2}
+.hero h2{font-size:clamp(22px,5vw,30px);margin:8px 0 2px}
+.hero p{margin:0;font-size:15px}
+.tools{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}
+.search{flex:1;min-width:180px;padding:12px 14px;border:2px solid var(--border);border-radius:14px;background:var(--card);color:var(--text);outline:none;font-size:16px}
+.search:focus{border-color:var(--primary)}
+.btn{border:0;border-radius:13px;padding:10px 14px;background:var(--primary);color:white;font-weight:800;box-shadow:0 3px 0 var(--primaryDark)}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.btn.soft{background:var(--soft);color:var(--text);box-shadow:0 3px 0 var(--border)}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:22px 2px 14px}
+.section-head h2{font-size:21px;margin:0}
+.counter{color:var(--muted);font-size:13px;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.color-card{border:3px solid white;border-radius:21px;min-height:164px;padding:15px 8px 13px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 5px 0 #00000016,0 8px 14px #0000000B;transition:transform .15s;position:relative;overflow:hidden}
+.color-card:active{transform:translateY(3px)}
+.swatch{width:65px;height:65px;border-radius:50%;border:3px solid #FFFFFFC9;box-shadow:0 4px 10px #00000025;margin-bottom:9px;flex-shrink:0}
+.np{font-size:20px;font-weight:800;line-height:1.35}
+.en{font-family:'Fredoka',sans-serif;font-size:17px;font-weight:600}
+.listen{font-size:12px;margin-top:4px;opacity:.85}
+.empty{display:none;text-align:center;background:var(--card);border-radius:16px;padding:20px}
+.panel{margin-top:25px;padding:18px;border:2px solid var(--border);border-radius:22px;background:var(--card)}
+.panel h2{font-size:22px;margin:0 0 4px}
+.panel>p{color:var(--muted);margin:3px 0 14px}
+.quizbox{padding:16px;border-radius:18px;background:var(--bg);text-align:center}
+.progress{height:9px;border-radius:20px;background:var(--border);overflow:hidden;margin-bottom:15px}
+.progress div{height:100%;width:0;background:linear-gradient(90deg,#F97316,#EC4899);transition:width .2s}
+.quiz-count{font-size:13px;color:var(--muted);font-weight:700}
+.big-swatch{width:120px;height:120px;border-radius:24px;margin:14px auto;border:4px solid white;box-shadow:0 5px 15px #00000020}
+.question{font-size:21px;font-weight:800;margin:10px 0 15px}
+.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.answer{padding:12px 6px;border:2px solid var(--border);border-radius:13px;background:var(--card);color:var(--text);font-size:16px;font-weight:800}
+.answer:disabled{cursor:default;opacity:.95}
+.answer.correct{background:#DCFCE7;border-color:#22C55E;color:#166534}
+.answer.wrong{background:#FEE2E2;border-color:#EF4444;color:#991B1B}
+.feedback{min-height:30px;font-weight:800;margin:12px 0 4px}
+.good{color:#15803D}.bad{color:#B91C1C}
+.quizactions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.hidden{display:none!important}
+.footer{text-align:center;padding:25px 8px 10px;color:var(--muted);font-size:14px}
+body.dark{--bg:#191522;--card:#282133;--text:#FFF3E5;--muted:#D0BCA8;--primary:#FB923C;--primaryDark:#C2410C;--soft:#413044;--border:#594052;--shadow:0 5px 0 #413044}
+body.dark .hero{background:linear-gradient(135deg,#C2410C,#BE123C,#7E22CE)}
+body.dark .answer.correct{background:#173B29;color:#BBF7D0}
+body.dark .answer.wrong{background:#4B2029;color:#FECACA}
+@media(min-width:560px){body{padding:20px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:800px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
+<main class="page">
+<header class="header">
+<a href="../index.html" class="home">🏠 होम</a>
+<div class="headtext">
+<h1>रङहरूको नाम</h1>
+<p>Learn Colours in English</p>
+</div>
+<button class="theme" id="themeBtn" type="button" aria-label="थिम परिवर्तन">🌙</button>
+</header>
 
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>रङहरूको नाम (Colors)</h2>
-    </div>
+<section class="hero">
+<div class="emoji">🌈🎨🖍️</div>
+<h2>रङ्गीन संसारमा स्वागत छ!</h2>
+<p>रङ हेरौँ, नाम सिकौँ र रमाइलो खेल खेलौँ।</p>
+</section>
 
-    <div class="grid-container" id="colorsGrid"></div>
+<div class="tools">
+<input id="searchInput" class="search" type="search" placeholder="🔎 रङ खोज्नुहोस्..." aria-label="रङ खोज्नुहोस्">
+<button id="languageBtn" class="btn soft" type="button">नेपाली + English</button>
+</div>
 
-    <script>
-        // थपिएका मुख्य रङहरू (नेपाली, अङ्ग्रेजी र Hex Code)
-        const colorsData = [
-            { np: 'रातो', en: 'Red', code: '#FF3B30', text: '#FFFFFF' },
-            { np: 'नीलो', en: 'Blue', code: '#007AFF', text: '#FFFFFF' },
-            { np: 'हरियो', en: 'Green', code: '#34C759', text: '#FFFFFF' },
-            { np: 'पहेँलो', en: 'Yellow', code: '#FFCC00', text: '#333333' },
-            { np: 'सुन्तला', en: 'Orange', code: '#FF9500', text: '#FFFFFF' },
-            { np: 'गुलाबी', en: 'Pink', code: '#FF2D55', text: '#FFFFFF' },
-            { np: 'बैजनी', en: 'Purple', code: '#AF52DE', text: '#FFFFFF' },
-            { np: 'खैरो', en: 'Brown', code: '#A2845E', text: '#FFFFFF' },
-            { np: 'कालो', en: 'Black', code: '#1C1C1E', text: '#FFFFFF' },
-            { np: 'सेतो', en: 'White', code: '#FFFFFF', text: '#333333', border: '#E5E5EA' },
-            { np: 'आकाशी नीलो', en: 'Sky Blue', code: '#5AC8FA', text: '#FFFFFF' },
-            { np: 'सिम्रिक', en: 'Crimson', code: '#DC143C', text: '#FFFFFF' },
-            { np: 'सुनौलो', en: 'Gold', code: '#FFD700', text: '#333333' },
-            { np: 'चाँदी', en: 'Silver', code: '#E5E5EA', text: '#333333' }
-        ];
+<div class="section-head">
+<h2>🎨 रङहरू हेरौँ र सुनौँ</h2>
+<span class="counter" id="counter">१४ रङ</span>
+</div>
+<section class="grid" id="colorsGrid" aria-label="रङहरूको सूची"></section>
+<div id="emptyState" class="empty">😕 रङ भेटिएन। अर्को नाम खोज्नुहोस्।</div>
 
-        const colorsGrid = document.getElementById('colorsGrid');
+<section class="panel">
+<h2>🎮 रङ चिन्ने Quiz</h2>
+<p>रङको नमुना हेरेर सही अङ्ग्रेजी नाम छान्नुहोस्।</p>
+<div class="quizbox">
+<div class="progress"><div id="progressBar"></div></div>
+<div id="quizPlay">
+<div id="quizCount" class="quiz-count">प्रश्न १ / ८</div>
+<div id="quizSwatch" class="big-swatch" aria-label="रङको नमुना"></div>
+<div class="question">यो रङलाई अङ्ग्रेजीमा के भनिन्छ?</div>
+<div id="answers" class="answers"></div>
+<div id="feedback" class="feedback" aria-live="polite"></div>
+<div class="quizactions">
+<button id="nextBtn" class="btn" type="button" disabled>अर्को प्रश्न ➜</button>
+</div>
+</div>
+<div id="quizResult" class="hidden">
+<div style="font-size:55px">🏆</div>
+<h2 id="resultTitle">शाबास!</h2>
+<p id="resultText"></p>
+<div class="quizactions"><button id="restartBtn" class="btn" type="button">🔄 फेरि खेलौँ</button></div>
+</div>
+</div>
+</section>
 
-        colorsData.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'color-card';
-            card.style.backgroundColor = item.code;
-            card.style.color = item.text;
-            if (item.border) card.style.borderColor = item.border;
+<footer class="footer">🌈 बाल पाठशाला — रमाउँदै सिकौँ, अघि बढौँ!</footer>
+</main>
 
-            card.innerHTML = `
-                <div class="color-circle" style="background-color: ${item.code};"></div>
-                <div class="np-name">${item.np}</div>
-                <div class="en-name">${item.en}</div>
-            `;
-            
-            // पुरानो स्पिच हटाएर playAIVoice प्रयोग गरिएको
-            card.addEventListener('click', () => playAIVoice(item.np + ' रङ'));
-            colorsGrid.appendChild(card);
-        });
-    </script>
+<script>
+"use strict";
 
+const colorsData = [
+{np:"रातो",en:"Red",code:"#FF3B30",text:"#FFFFFF"},
+{np:"नीलो",en:"Blue",code:"#007AFF",text:"#FFFFFF"},
+{np:"हरियो",en:"Green",code:"#34C759",text:"#FFFFFF"},
+{np:"पहेँलो",en:"Yellow",code:"#FFCC00",text:"#302600"},
+{np:"सुन्तला",en:"Orange",code:"#FF9500",text:"#382000"},
+{np:"गुलाबी",en:"Pink",code:"#FF2D55",text:"#FFFFFF"},
+{np:"बैजनी",en:"Purple",code:"#AF52DE",text:"#FFFFFF"},
+{np:"खैरो",en:"Brown",code:"#A2845E",text:"#FFFFFF"},
+{np:"कालो",en:"Black",code:"#1C1C1E",text:"#FFFFFF"},
+{np:"सेतो",en:"White",code:"#FFFFFF",text:"#333333"},
+{np:"आकाशी नीलो",en:"Sky Blue",code:"#5AC8FA",text:"#173047"},
+{np:"सिम्रिक",en:"Crimson",code:"#DC143C",text:"#FFFFFF"},
+{np:"सुनौलो",en:"Gold",code:"#FFD700",text:"#302600"},
+{np:"चाँदी",en:"Silver",code:"#C0C0C0",text:"#333333"}
+];
+
+const $ = id => document.getElementById(id);
+let showBoth = true;
+let questions = [];
+let questionIndex = 0;
+let score = 0;
+let answered = false;
+
+function speak(text){
+  // साझा साइट AI voice मात्र; browser/mobile TTS fallback छैन।
+  if(typeof window.playAIVoice === "function"){
+    try{
+      const result = window.playAIVoice(text);
+      if(result && typeof result.catch === "function"){
+        result.catch(err => console.warn("AI voice:",err));
+      }
+    }catch(err){console.warn("AI voice उपलब्ध छैन:",err);}
+  }else{
+    console.warn("AI voice function भेटिएन। ../script.js र voice configuration जाँच्नुहोस्।");
+  }
+}
+
+function renderColors(){
+  const query = $("searchInput").value.trim().toLocaleLowerCase();
+  const filtered = colorsData.filter(item =>
+    item.np.toLocaleLowerCase().includes(query) ||
+    item.en.toLocaleLowerCase().includes(query)
+  );
+  const grid = $("colorsGrid");
+  grid.replaceChildren();
+
+  filtered.forEach(item => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "color-card";
+    card.style.backgroundColor = item.code;
+    card.style.color = item.text;
+    card.setAttribute("aria-label",item.np+", "+item.en+", आवाज सुन्नुहोस्");
+
+    const swatch = document.createElement("span");
+    swatch.className = "swatch";
+    swatch.style.backgroundColor = item.code;
+    if(item.en === "White" || item.en === "Silver"){
+      swatch.style.borderColor = "#9CA3AF";
+    }
+
+    const np = document.createElement("span");
+    np.className = "np";
+    np.textContent = item.np;
+    if(!showBoth) np.classList.add("hidden");
+
+    const en = document.createElement("span");
+    en.className = "en";
+    en.textContent = item.en;
+    if(!showBoth) en.classList.add("hidden");
+
+    const hint = document.createElement("span");
+    hint.className = "listen";
+    hint.textContent = "🔊 सुन्न थिच्नुहोस्";
+
+    card.append(swatch,np,en,hint);
+    card.addEventListener("click",() => speak(item.en));
+    grid.appendChild(card);
+  });
+
+  $("counter").textContent = filtered.length+" / "+colorsData.length+" रङ";
+  $("emptyState").style.display = filtered.length ? "none" : "block";
+}
+
+$("searchInput").addEventListener("input",renderColors);
+
+$("languageBtn").addEventListener("click",() => {
+  showBoth = !showBoth;
+  $("languageBtn").textContent = showBoth ? "नेपाली + English" : "नाम देखाउनुहोस्";
+  renderColors();
+});
+
+$("themeBtn").addEventListener("click",() => {
+  const dark = document.body.classList.toggle("dark");
+  $("themeBtn").textContent = dark ? "☀️" : "🌙";
+  try{localStorage.setItem("theme",dark ? "dark" : "light");}catch(e){}
+});
+
+try{
+  if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark");
+    $("themeBtn").textContent = "☀️";
+  }
+}catch(e){}
+
+function shuffle(items){
+  const copy = [...items];
+  for(let i=copy.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]] = [copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function startQuiz(){
+  questions = shuffle(colorsData).slice(0,8);
+  questionIndex = 0;
+  score = 0;
+  answered = false;
+  $("quizPlay").classList.remove("hidden");
+  $("quizResult").classList.add("hidden");
+  showQuestion();
+}
+
+function showQuestion(){
+  answered = false;
+  const item = questions[questionIndex];
+  $("quizCount").textContent = "प्रश्न "+(questionIndex+1)+" / "+questions.length;
+  $("quizSwatch").style.backgroundColor = item.code;
+  $("quizSwatch").style.borderColor =
+    item.en === "White" || item.en === "Silver" ? "#9CA3AF" : "#FFFFFF";
+  $("progressBar").style.width = (questionIndex/questions.length*100)+"%";
+  $("feedback").textContent = "";
+  $("feedback").className = "feedback";
+  $("nextBtn").disabled = true;
+  $("nextBtn").textContent = questionIndex === questions.length-1 ? "नतिजा हेर्नुहोस् 🏆" : "अर्को प्रश्न ➜";
+
+  const choices = shuffle([item,...shuffle(colorsData.filter(c=>c.en!==item.en)).slice(0,3)]);
+  const answers = $("answers");
+  answers.replaceChildren();
+
+  choices.forEach(choice => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "answer";
+    button.textContent = choice.en;
+    button.addEventListener("click",() => checkAnswer(button,choice,item));
+    answers.appendChild(button);
+  });
+}
+
+function checkAnswer(button,choice,correct){
+  if(answered) return;
+  answered = true;
+  const buttons = [...$("answers").querySelectorAll("button")];
+  buttons.forEach(btn => btn.disabled = true);
+
+  if(choice.en === correct.en){
+    score++;
+    button.classList.add("correct");
+    $("feedback").textContent = "🎉 एकदम सही! शाबास!";
+    $("feedback").className = "feedback good";
+    speak(correct.en);
+  }else{
+    button.classList.add("wrong");
+    const right = buttons.find(btn=>btn.textContent===correct.en);
+    if(right) right.classList.add("correct");
+    $("feedback").textContent = "🙂 सही उत्तर: "+correct.en+" — फेरि प्रयास गरौँ!";
+    $("feedback").className = "feedback bad";
+  }
+
+  $("progressBar").style.width = ((questionIndex+1)/questions.length*100)+"%";
+  $("nextBtn").disabled = false;
+}
+
+function nextQuestion(){
+  if(!answered) return;
+  questionIndex++;
+  if(questionIndex >= questions.length){
+    showResult();
+  }else{
+    showQuestion();
+  }
+}
+
+function showResult(){
+  $("quizPlay").classList.add("hidden");
+  $("quizResult").classList.remove("hidden");
+  $("progressBar").style.width = "100%";
+  $("resultTitle").textContent = score >= 7 ? "वाह! उत्कृष्ट! 🌟" : score >= 5 ? "शाबास! राम्रो गर्नुभयो! 🎉" : "राम्रो प्रयास! 💪";
+  $("resultText").textContent = "तपाईंले "+questions.length+" मध्ये "+score+" प्रश्न सही गर्नुभयो। फेरि खेलेर अझ राम्रो गर्न सक्नुहुन्छ!";
+}
+
+$("nextBtn").addEventListener("click",nextQuestion);
+$("restartBtn").addEventListener("click",startQuiz);
+
+renderColors();
+startQuiz();
+</script>
 </body>
 </html>
