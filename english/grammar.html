@@ -1,32 +1,30 @@
-
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f5f8ff">
-<meta name="description" content="Learn English Grammar with simple lessons, examples and fun quizzes for children.">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="Child-friendly English grammar lessons with examples and practice quizzes.">
 <title>English Grammar | बाल पाठशाला</title>
 
 <style>
-:root{
-  color-scheme:light;
-  --bg:#f5f8ff;
-  --surface:#fff;
-  --text:#19243a;
-  --muted:#64728a;
-  --border:#dfe7f3;
-  --primary:#4169e1;
-  --green:#168453;
+:root {
+  --bg:#f3f7ff;
+  --panel:#fff;
+  --text:#1c2940;
+  --muted:#586980;
+  --border:#dbe5f3;
+  --blue:#4169e1;
+  --green:#14804a;
   --soft:#eaf0ff;
-  --shadow:0 7px 24px #2438580c;
+  --gold:#ffca55;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:16px}
+html{scroll-behavior:smooth;scroll-padding-top:12px}
 body{
   margin:0;background:var(--bg);color:var(--text);
   font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
-  line-height:1.6
+  line-height:1.65
 }
 button,a{font:inherit}
 button{cursor:pointer}
@@ -34,123 +32,126 @@ a{color:inherit}
 button:focus-visible,a:focus-visible{
   outline:3px solid #f0a52b;outline-offset:3px
 }
-.app{width:min(100% - 24px,1000px);margin:auto;padding:14px 0 35px}
-header{
+.app{width:min(100% - 22px,980px);margin:auto;padding:12px 0 30px}
+header,.top-actions,.actions,.quiz-actions{
   display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:12px;margin-bottom:16px
+  flex-wrap:wrap;gap:10px
 }
+header{margin-bottom:16px}
 .brand{display:flex;align-items:center;gap:10px}
 .brand-icon{
   display:grid;place-items:center;width:48px;height:48px;
-  background:#e5edff;border-radius:15px;font-size:27px
+  border-radius:15px;background:var(--soft);font-size:26px
 }
-.brand h1{font-size:clamp(19px,4vw,26px);line-height:1.25;margin:0}
-.brand p{font-size:13px;color:var(--muted);margin:3px 0 0}
+.brand h1{font-size:23px;line-height:1.2;margin:0}
+.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;
-  min-height:43px;padding:9px 13px;border:1px solid var(--border);
-  border-radius:12px;background:var(--surface);color:var(--text);
-  font-weight:750;text-decoration:none
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:43px;padding:9px 13px;border-radius:12px;
+  border:1px solid var(--border);background:var(--panel);
+  color:var(--text);font-weight:750;text-decoration:none
 }
-.btn-primary{background:var(--primary);border-color:var(--primary);color:white}
+.btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
 .hero{
-  padding:25px;border:1px solid #dce6fa;border-radius:24px;
-  background:linear-gradient(125deg,#e7efff,#e3f8ee 70%,#fff3dc);
-  margin-bottom:18px
+  padding:24px;border-radius:22px;margin-bottom:18px;
+  border:1px solid #d5e3fb;
+  background:linear-gradient(125deg,#e5edff,#e2f8ed 70%,#fff2d6)
 }
-.eyebrow{
-  display:inline-block;padding:4px 10px;border-radius:99px;
-  background:white;color:#3453a5;font-size:13px;font-weight:800
+.hero .eyebrow{
+  display:inline-block;padding:4px 10px;border-radius:30px;
+  background:#fff;color:#3453a5;font-weight:800;font-size:13px
 }
-.hero h2{font-size:clamp(26px,5vw,39px);line-height:1.2;margin:12px 0 8px}
-.hero p{color:#465875;margin:0 0 15px;max-width:680px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:9px}
+.hero h2{font-size:clamp(27px,5vw,38px);line-height:1.25;margin:12px 0 7px}
+.hero p{color:#465875;margin:0 0 14px}
 .section-title{font-size:21px;margin:23px 0 10px}
 .lesson-nav{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px
 }
 .lesson-nav a{
-  display:block;padding:11px 12px;background:var(--surface);
-  border:1px solid var(--border);border-radius:13px;
-  text-decoration:none;font-size:14px;font-weight:750
+  padding:10px 12px;border:1px solid var(--border);
+  background:var(--panel);border-radius:12px;
+  text-decoration:none;font-weight:750;font-size:14px
 }
-.lesson-nav a:hover{border-color:var(--primary);background:var(--soft)}
+.lesson-nav a:hover{border-color:var(--blue);background:var(--soft)}
 .lesson{
-  margin:15px 0;padding:20px;border:1px solid var(--border);
-  border-radius:20px;background:var(--surface);box-shadow:var(--shadow)
+  padding:19px;margin:15px 0;border:1px solid var(--border);
+  border-radius:19px;background:var(--panel);
+  box-shadow:0 6px 22px #2038580b
 }
-.lesson-head{display:flex;align-items:flex-start;gap:12px}
+.lesson-head{display:flex;gap:12px;align-items:flex-start}
 .lesson-number{
-  flex:0 0 43px;height:43px;display:grid;place-items:center;
-  border-radius:14px;background:var(--soft);color:var(--primary);
-  font-weight:900;font-size:17px
+  display:grid;place-items:center;flex:0 0 43px;height:43px;
+  border-radius:14px;background:var(--soft);color:var(--blue);
+  font-size:16px;font-weight:900
 }
-.lesson h2{font-size:21px;line-height:1.3;margin:2px 0 5px}
-.lesson-intro{color:var(--muted);margin:0 0 13px}
-.lesson h3{font-size:16px;margin:17px 0 7px}
+.lesson h2{font-size:21px;line-height:1.3;margin:2px 0 4px}
+.lesson-intro{color:var(--muted);margin:0 0 12px}
+.lesson h3{font-size:16px;margin:16px 0 7px}
 .example{
-  padding:12px 14px;margin:9px 0;border-left:4px solid #55a8e9;
-  border-radius:8px;background:#f0f7ff
+  padding:12px 14px;margin:9px 0;border-left:4px solid #69a7eb;
+  border-radius:8px;background:#eff6ff
 }
-.example strong{color:#244fae}
 .example p{margin:3px 0}
+.example strong{color:#244fae}
 .word-grid{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px
 }
 .word-card{
-  padding:12px 8px;text-align:center;border:1px solid var(--border);
-  border-radius:13px;background:var(--bg)
+  padding:11px 8px;text-align:center;border:1px solid var(--border);
+  border-radius:12px;background:var(--bg);overflow-wrap:anywhere
 }
 .word-card .emoji{display:block;font-size:25px}
 .word-card strong{display:block}
 .word-card small{display:block;color:var(--muted)}
 .tip{
-  margin:12px 0;padding:11px 13px;border-radius:12px;
-  background:#eaf8ef;color:#185d38
+  padding:11px 13px;margin:12px 0;border-radius:12px;
+  background:#e7f8ed;color:#185d38
 }
 .practice{
-  margin-top:16px;padding:15px;border:2px dashed #c7d7fa;
+  margin-top:15px;padding:15px;border:2px dashed #c7d7fa;
   border-radius:15px;background:#f8faff
 }
-.practice h3{margin:0 0 6px;font-size:17px}
-.quiz-question{font-weight:750;margin:12px 0 9px}
+.practice h3{font-size:17px;margin:0 0 6px}
+.quiz-question{font-weight:800;margin:12px 0 8px}
 .options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .option{
-  min-height:45px;padding:10px;border:1px solid var(--border);
-  border-radius:11px;background:white;color:var(--text);text-align:left
+  min-height:44px;padding:10px;border:1px solid var(--border);
+  border-radius:11px;background:#fff;color:#1c2940;text-align:left
 }
-.option:hover:not(:disabled){border-color:var(--primary);background:#edf2ff}
-.option:disabled{cursor:default;opacity:1}
-.option.correct{border-color:#168453;background:#e4f7eb;color:#125c36}
-.option.wrong{border-color:#d94d4d;background:#fff0ef;color:#9e2525}
-.feedback{min-height:27px;margin:9px 0 0;font-weight:750}
-.feedback.good{color:#168453}
-.feedback.bad{color:#b83a3a}
-.quiz-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
-.quiz-score{font-size:13px;color:var(--muted);margin-top:5px}
+.option:hover:not(:disabled){border-color:var(--blue);background:#edf2ff}
+.option:disabled{opacity:1;cursor:default}
+.option.correct{border-color:#14804a;background:#e3f7ea;color:#125c36}
+.option.wrong{border-color:#c43e3e;background:#ffeded;color:#9b2424}
+.feedback{min-height:26px;margin:9px 0 0;font-weight:750}
+.feedback.good{color:#14804a}
+.feedback.bad{color:#b52e2e}
+.small-note{font-size:13px;color:var(--muted)}
 footer{text-align:center;color:var(--muted);font-size:13px;padding:20px 0}
-footer a{color:var(--primary);font-weight:700;text-decoration:none}
+footer a{color:var(--blue);font-weight:750;text-decoration:none}
 body.dark-mode{
-  color-scheme:dark;--bg:#111827;--surface:#1c2739;
-  --text:#f2f5fc;--muted:#bac5d8;--border:#35435b;
-  --soft:#273854;--shadow:0 7px 24px #0002
+  color-scheme:dark;
+  --bg:#101827;--panel:#1b2940;--text:#f5f7ff;
+  --muted:#c0cce0;--border:#394b65;--soft:#283954
 }
-body.dark-mode .hero{background:linear-gradient(125deg,#202f4e,#183d3b);border-color:var(--border)}
-body.dark-mode .hero p{color:#d0d9e9}
-body.dark-mode .eyebrow{background:#263752;color:#d8e3ff}
-body.dark-mode .example{background:#202f46;border-color:#5798d8}
-body.dark-mode .example strong{color:#b9d3ff}
-body.dark-mode .tip{background:#183d31;color:#c2f3d5}
+body.dark-mode .hero{
+  background:linear-gradient(125deg,#223352,#173b35,#3c3322);
+  border-color:var(--border)
+}
+body.dark-mode .hero p{color:#d4deee}
+body.dark-mode .hero .eyebrow{background:#263752;color:#dce6ff}
+body.dark-mode .example{background:#202f46}
+body.dark-mode .example strong{color:#c0d7ff}
+body.dark-mode .tip{background:#183d31;color:#c5f1d5}
 body.dark-mode .practice{background:#172236;border-color:#40577d}
 body.dark-mode .option{background:#202c40;color:var(--text)}
-body.dark-mode .option.correct{background:#173b2c;color:#c2f3d5}
+body.dark-mode .option.correct{background:#173b2c;color:#c5f1d5}
 body.dark-mode .option.wrong{background:#462729;color:#ffd0d0}
 body.dark-mode .word-card{background:#172236}
 [hidden]{display:none!important}
-@media(max-width:600px){
-  .app{width:calc(100% - 20px);padding-top:10px}
-  .hero{padding:19px;border-radius:19px}
-  .lesson{padding:15px;border-radius:16px}
+@media(max-width:620px){
+  .app{width:calc(100% - 18px)}
+  .hero{padding:18px;border-radius:18px}
+  .lesson{padding:14px;border-radius:15px}
   .lesson-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
   .word-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .lesson h2{font-size:19px}
@@ -171,7 +172,7 @@ body.dark-mode .word-card{background:#172236}
       <p>Learn little by little. You can do it! 🌟</p>
     </div>
   </div>
-  <div class="hero-actions">
+  <div class="top-actions">
     <button class="btn" id="theme-toggle" type="button">🌙 Dark Mode</button>
     <a class="btn" href="../index.html">🏠 Home</a>
   </div>
@@ -181,18 +182,18 @@ body.dark-mode .word-card{background:#172236}
   <span class="eyebrow">📚 Grammar made easy</span>
   <h2>Learn English with fun!</h2>
   <p>
-    Learn words, sentences and grammar step by step.
-    Read the examples, try the questions and celebrate every improvement.
+    Read simple lessons, learn useful words, study sentence rules and
+    practise with quizzes. मेहनत गर्दै जानुहोस्, तपाईं सक्नुहुन्छ!
   </p>
-  <div class="hero-actions">
+  <div class="actions">
     <a class="btn btn-primary" href="#lesson-1">🚀 Start Learning</a>
-    <a class="btn" href="#practice-all">🧠 Practice</a>
+    <a class="btn" href="#final-quiz">🎯 Final Quiz</a>
   </div>
 </section>
 
 <h2 class="section-title">🗂️ Choose a lesson</h2>
 <nav class="lesson-nav" aria-label="Grammar lessons">
-  <a href="#lesson-1">1. Alphabet Review</a>
+  <a href="#lesson-1">1. Alphabet</a>
   <a href="#lesson-2">2. Words</a>
   <a href="#lesson-3">3. Nouns</a>
   <a href="#lesson-4">4. Pronouns</a>
@@ -204,85 +205,177 @@ body.dark-mode .word-card{background:#172236}
   <a href="#lesson-10">10. Interjections</a>
   <a href="#lesson-11">11. Sentences</a>
   <a href="#lesson-12">12. Tenses</a>
-  <a href="#practice-all">🎯 Quiz Time</a>
+  <a href="#final-quiz">🏆 Final Quiz</a>
 </nav>
 
 <section class="lesson" id="lesson-1">
   <div class="lesson-head">
     <div class="lesson-number">01</div>
     <div>
-      <h2>Alphabet Review</h2>
+      <h2>Alphabets & Basics</h2>
       <p class="lesson-intro">The English alphabet has 26 letters.</p>
     </div>
   </div>
   <h3>Capital letters</h3>
-  <div class="example"><p><strong>A B C D E F G H I J K L M</strong></p><p><strong>N O P Q R S T U V W X Y Z</strong></p></div>
+  <div class="example">
+    <p><strong>A B C D E F G H I J K L M</strong></p>
+    <p><strong>N O P Q R S T U V W X Y Z</strong></p>
+  </div>
   <h3>Small letters</h3>
-  <div class="example"><p>a b c d e f g h i j k l m</p><p>n o p q r s t u v w x y z</p></div>
+  <div class="example">
+    <p>a b c d e f g h i j k l m</p>
+    <p>n o p q r s t u v w x y z</p>
+  </div>
   <h3>Vowels and consonants</h3>
-  <div class="example"><p><strong>Vowels:</strong> A, E, I, O, U</p><p><strong>Consonants:</strong> The other 21 letters.</p></div>
+  <div class="example">
+    <p><strong>Vowels (स्वर):</strong> A, E, I, O, U</p>
+    <p><strong>Consonants (व्यञ्जन):</strong> The other 21 letters.</p>
+  </div>
   <div class="tip">💡 Remember: A, E, I, O and U are the five main vowel letters.</div>
+  <div class="practice" data-quiz="alphabet">
+    <h3>🎯 Alphabet Practice</h3>
+    <p class="quiz-question">How many letters are there in the English alphabet?</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">24 letters</button>
+      <button class="option" data-answer="correct">26 letters</button>
+      <button class="option" data-answer="wrong">28 letters</button>
+      <button class="option" data-answer="wrong">30 letters</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
 <section class="lesson" id="lesson-2">
   <div class="lesson-head">
     <div class="lesson-number">02</div>
     <div>
-      <h2>Letters make words</h2>
-      <p class="lesson-intro">A word is made from letters. Words help us name things and share ideas.</p>
+      <h2>Letters to Words</h2>
+      <p class="lesson-intro">Letters join together to make words. Words help us share ideas.</p>
     </div>
   </div>
   <div class="word-grid">
-    <div class="word-card"><span class="emoji">🍎</span><strong>Apple</strong><small>A is for Apple</small></div>
-    <div class="word-card"><span class="emoji">⚽</span><strong>Ball</strong><small>B is for Ball</small></div>
-    <div class="word-card"><span class="emoji">🐱</span><strong>Cat</strong><small>C is for Cat</small></div>
-    <div class="word-card"><span class="emoji">🐶</span><strong>Dog</strong><small>D is for Dog</small></div>
-    <div class="word-card"><span class="emoji">🐘</span><strong>Elephant</strong><small>E is for Elephant</small></div>
-    <div class="word-card"><span class="emoji">🐟</span><strong>Fish</strong><small>F is for Fish</small></div>
+    <div class="word-card"><span class="emoji">🍎</span><strong>A — Apple</strong><small>स्याउ</small></div>
+    <div class="word-card"><span class="emoji">⚽</span><strong>B — Ball</strong><small>बल</small></div>
+    <div class="word-card"><span class="emoji">🐱</span><strong>C — Cat</strong><small>बिरालो</small></div>
+    <div class="word-card"><span class="emoji">🐕</span><strong>D — Dog</strong><small>कुकुर</small></div>
+    <div class="word-card"><span class="emoji">🐘</span><strong>E — Elephant</strong><small>हात्ती</small></div>
+    <div class="word-card"><span class="emoji">🐟</span><strong>F — Fish</strong><small>माछा</small></div>
   </div>
-  <div class="example"><p><strong>Example:</strong> C + A + T = CAT</p><p>Letters join together to make a word.</p></div>
+  <div class="example">
+    <p><strong>C + A + T = CAT</strong></p>
+    <p>Three letters join together to make the word “cat”.</p>
+  </div>
+  <div class="practice">
+    <h3>🎯 Word Practice</h3>
+    <p class="quiz-question">Which word begins with the letter B?</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">Apple</button>
+      <button class="option" data-answer="correct">Ball</button>
+      <button class="option" data-answer="wrong">Cat</button>
+      <button class="option" data-answer="wrong">Dog</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
 <section class="lesson" id="lesson-3">
   <div class="lesson-head">
     <div class="lesson-number">03</div>
     <div>
-      <h2>Nouns — naming words</h2>
+      <h2>Nouns — Naming Words (नाम)</h2>
       <p class="lesson-intro">A noun names a person, place, animal or thing.</p>
     </div>
   </div>
+  <h3>👥 Persons (व्यक्ति)</h3>
   <div class="word-grid">
-    <div class="word-card"><span class="emoji">👧</span><strong>Girl</strong><small>Person</small></div>
-    <div class="word-card"><span class="emoji">🏫</span><strong>School</strong><small>Place</small></div>
-    <div class="word-card"><span class="emoji">🐄</span><strong>Cow</strong><small>Animal</small></div>
-    <div class="word-card"><span class="emoji">📘</span><strong>Book</strong><small>Thing</small></div>
-    <div class="word-card"><span class="emoji">👩‍🏫</span><strong>Teacher</strong><small>Person</small></div>
-    <div class="word-card"><span class="emoji">🏠</span><strong>Home</strong><small>Place</small></div>
+    <div class="word-card"><span class="emoji">👦</span><strong>Boy</strong><small>केटा</small></div>
+    <div class="word-card"><span class="emoji">👧</span><strong>Girl</strong><small>केटी</small></div>
+    <div class="word-card"><span class="emoji">👩‍🏫</span><strong>Teacher</strong><small>शिक्षक</small></div>
+    <div class="word-card"><span class="emoji">👨‍⚕️</span><strong>Doctor</strong><small>डाक्टर</small></div>
+    <div class="word-card"><span class="emoji">👮</span><strong>Police officer</strong><small>प्रहरी</small></div>
+    <div class="word-card"><span class="emoji">👶</span><strong>Baby</strong><small>शिशु</small></div>
   </div>
-  <div class="example"><p><strong>Example:</strong> The <u>cat</u> is in the <u>house</u>.</p><p>Cat and house are nouns.</p></div>
-  <div class="tip">💡 Ask: “Who?” or “What?” to help find a noun.</div>
+  <h3>🏡 Places (स्थान)</h3>
+  <div class="word-grid">
+    <div class="word-card"><span class="emoji">🏫</span><strong>School</strong><small>विद्यालय</small></div>
+    <div class="word-card"><span class="emoji">🌳</span><strong>Park</strong><small>पार्क</small></div>
+    <div class="word-card"><span class="emoji">🏠</span><strong>Home</strong><small>घर</small></div>
+    <div class="word-card"><span class="emoji">🦁</span><strong>Zoo</strong><small>चिडियाखाना</small></div>
+    <div class="word-card"><span class="emoji">🏥</span><strong>Hospital</strong><small>अस्पताल</small></div>
+    <div class="word-card"><span class="emoji">🏖️</span><strong>Beach</strong><small>समुद्रको किनार</small></div>
+  </div>
+  <h3>🐾 Animals (जनावर)</h3>
+  <div class="word-grid">
+    <div class="word-card"><span class="emoji">🐱</span><strong>Cat</strong><small>बिरालो</small></div>
+    <div class="word-card"><span class="emoji">🐶</span><strong>Dog</strong><small>कुकुर</small></div>
+    <div class="word-card"><span class="emoji">🐄</span><strong>Cow</strong><small>गाई</small></div>
+    <div class="word-card"><span class="emoji">🦜</span><strong>Parrot</strong><small>सुगा</small></div>
+    <div class="word-card"><span class="emoji">🦁</span><strong>Lion</strong><small>सिंह</small></div>
+    <div class="word-card"><span class="emoji">🐘</span><strong>Elephant</strong><small>हात्ती</small></div>
+  </div>
+  <h3>🎁 Things (वस्तु)</h3>
+  <div class="word-grid">
+    <div class="word-card"><span class="emoji">🍎</span><strong>Apple</strong><small>स्याउ</small></div>
+    <div class="word-card"><span class="emoji">⚽</span><strong>Ball</strong><small>बल</small></div>
+    <div class="word-card"><span class="emoji">📖</span><strong>Book</strong><small>किताब</small></div>
+    <div class="word-card"><span class="emoji">✏️</span><strong>Pencil</strong><small>सिसाकलम</small></div>
+    <div class="word-card"><span class="emoji">🚗</span><strong>Car</strong><small>गाडी</small></div>
+    <div class="word-card"><span class="emoji">⏰</span><strong>Clock</strong><small>घडी</small></div>
+  </div>
+  <div class="example">
+    <p>The <strong>cat</strong> is in the <strong>house</strong>.</p>
+    <p>Cat is an animal noun. House is a place noun.</p>
+  </div>
+  <div class="practice">
+    <h3>🎯 Noun Practice</h3>
+    <p class="quiz-question">Which word is a noun?</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">Quickly</button>
+      <button class="option" data-answer="correct">Teacher</button>
+      <button class="option" data-answer="wrong">Under</button>
+      <button class="option" data-answer="wrong">Run</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
 <section class="lesson" id="lesson-4">
   <div class="lesson-head">
     <div class="lesson-number">04</div>
     <div>
-      <h2>Pronouns — words that replace nouns</h2>
-      <p class="lesson-intro">Pronouns help us avoid repeating the same noun again and again.</p>
+      <h2>Pronouns (सर्वनाम)</h2>
+      <p class="lesson-intro">A pronoun is a word used in place of a noun.</p>
     </div>
   </div>
   <div class="example">
-    <p><strong>Rita is happy. Rita is smiling.</strong></p>
-    <p>We can say: <strong>Rita is happy. She is smiling.</strong></p>
+    <p>Rita is happy. Rita is smiling.</p>
+    <p>Better: Rita is happy. <strong>She</strong> is smiling.</p>
+    <p>“She” replaces the name Rita.</p>
   </div>
-  <h3>Common pronouns</h3>
   <div class="word-grid">
-    <div class="word-card"><strong>I</strong><small>I am a student.</small></div>
-    <div class="word-card"><strong>You</strong><small>You are kind.</small></div>
-    <div class="word-card"><strong>He</strong><small>He is my brother.</small></div>
-    <div class="word-card"><strong>She</strong><small>She is my sister.</small></div>
-    <div class="word-card"><strong>It</strong><small>It is a ball.</small></div>
-    <div class="word-card"><strong>We / They</strong><small>We play. They run.</small></div>
+    <div class="word-card"><span class="emoji">🙋</span><strong>I</strong><small>म</small></div>
+    <div class="word-card"><span class="emoji">🫵</span><strong>You</strong><small>तिमी / तपाईं</small></div>
+    <div class="word-card"><span class="emoji">👦</span><strong>He</strong><small>ऊ (पुरुष)</small></div>
+    <div class="word-card"><span class="emoji">👧</span><strong>She</strong><small>ऊ (महिला)</small></div>
+    <div class="word-card"><span class="emoji">📦</span><strong>It</strong><small>यो / त्यो</small></div>
+    <div class="word-card"><span class="emoji">👨‍👩‍👧</span><strong>We</strong><small>हामी</small></div>
+    <div class="word-card"><span class="emoji">👥</span><strong>They</strong><small>उनीहरू / ती</small></div>
+  </div>
+  <div class="example">
+    <p><strong>He</strong> is my brother.</p>
+    <p><strong>We</strong> go to school.</p>
+    <p><strong>They</strong> are playing.</p>
+  </div>
+  <div class="practice">
+    <h3>🎯 Pronoun Practice</h3>
+    <p class="quiz-question">Which pronoun can replace “Mina”?</p>
+    <div class="options">
+      <button class="option" data-answer="correct">She</button>
+      <button class="option" data-answer="wrong">Book</button>
+      <button class="option" data-answer="wrong">Quickly</button>
+      <button class="option" data-answer="wrong">Under</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
   </div>
 </section>
 
@@ -290,67 +383,143 @@ body.dark-mode .word-card{background:#172236}
   <div class="lesson-head">
     <div class="lesson-number">05</div>
     <div>
-      <h2>Verbs — action and being words</h2>
-      <p class="lesson-intro">A verb tells what someone or something does, or what state they are in.</p>
+      <h2>Verbs — Action Words (क्रिया)</h2>
+      <p class="lesson-intro">A verb tells an action or a state of being.</p>
     </div>
   </div>
   <div class="word-grid">
-    <div class="word-card"><span class="emoji">🏃</span><strong>Run</strong><small>I run.</small></div>
-    <div class="word-card"><span class="emoji">🤸</span><strong>Jump</strong><small>I jump.</small></div>
-    <div class="word-card"><span class="emoji">📖</span><strong>Read</strong><small>I read a book.</small></div>
-    <div class="word-card"><span class="emoji">✍️</span><strong>Write</strong><small>I write neatly.</small></div>
-    <div class="word-card"><span class="emoji">🍎</span><strong>Eat</strong><small>I eat an apple.</small></div>
-    <div class="word-card"><span class="emoji">😊</span><strong>Am / Is / Are</strong><small>Being verbs</small></div>
+    <div class="word-card"><span class="emoji">🏃</span><strong>Run</strong><small>दौडनु</small></div>
+    <div class="word-card"><span class="emoji">🤸</span><strong>Jump</strong><small>उफ्रनु</small></div>
+    <div class="word-card"><span class="emoji">📖</span><strong>Read</strong><small>पढ्नु</small></div>
+    <div class="word-card"><span class="emoji">✍️</span><strong>Write</strong><small>लेख्नु</small></div>
+    <div class="word-card"><span class="emoji">🍎</span><strong>Eat</strong><small>खानु</small></div>
+    <div class="word-card"><span class="emoji">🎵</span><strong>Sing</strong><small>गाउनु</small></div>
   </div>
-  <div class="example"><p><strong>Example:</strong> The bird <u>flies</u>.</p><p>“Flies” tells us what the bird does.</p></div>
+  <div class="example">
+    <p>The bird <strong>flies</strong>.</p>
+    <p>I <strong>read</strong> a book.</p>
+    <p>She <strong>is</strong> happy.</p>
+    <p>Am, is and are are forms of the verb “be”.</p>
+  </div>
+  <div class="practice">
+    <h3>🎯 Verb Practice</h3>
+    <p class="quiz-question">Which word tells an action?</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">Blue</button>
+      <button class="option" data-answer="wrong">Small</button>
+      <button class="option" data-answer="correct">Jump</button>
+      <button class="option" data-answer="wrong">Under</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
 <section class="lesson" id="lesson-6">
   <div class="lesson-head">
     <div class="lesson-number">06</div>
     <div>
-      <h2>Adjectives — describing words</h2>
-      <p class="lesson-intro">An adjective tells us more about a noun or pronoun.</p>
+      <h2>Adjectives — Describing Words (विशेषण)</h2>
+      <p class="lesson-intro">An adjective describes a noun or pronoun.</p>
     </div>
   </div>
   <div class="word-grid">
-    <div class="word-card"><span class="emoji">🐘</span><strong>Big</strong><small>A big elephant</small></div>
-    <div class="word-card"><span class="emoji">🐜</span><strong>Small</strong><small>A small ant</small></div>
-    <div class="word-card"><span class="emoji">🌹</span><strong>Red</strong><small>A red flower</small></div>
-    <div class="word-card"><span class="emoji">🍯</span><strong>Sweet</strong><small>Sweet honey</small></div>
-    <div class="word-card"><span class="emoji">🧸</span><strong>Soft</strong><small>A soft toy</small></div>
-    <div class="word-card"><span class="emoji">🌞</span><strong>Bright</strong><small>A bright sun</small></div>
+    <div class="word-card"><span class="emoji">🐘</span><strong>Big</strong><small>ठूलो</small></div>
+    <div class="word-card"><span class="emoji">🐜</span><strong>Small</strong><small>सानो</small></div>
+    <div class="word-card"><span class="emoji">🌹</span><strong>Red</strong><small>रातो</small></div>
+    <div class="word-card"><span class="emoji">🍯</span><strong>Sweet</strong><small>गुलियो</small></div>
+    <div class="word-card"><span class="emoji">🧸</span><strong>Soft</strong><small>नरम</small></div>
+    <div class="word-card"><span class="emoji">🌞</span><strong>Bright</strong><small>उज्यालो</small></div>
+    <div class="word-card"><span class="emoji">🧠</span><strong>Smart</strong><small>बुद्धिमान</small></div>
   </div>
-  <div class="example"><p><strong>Example:</strong> The <u>little</u> puppy is <u>cute</u>.</p><p>Little and cute describe the puppy.</p></div>
+  <div class="example">
+    <p>The <strong>big</strong> elephant is <strong>strong</strong>.</p>
+    <p>The flower is <strong>red</strong>.</p>
+  </div>
+  <div class="practice">
+    <h3>🎯 Adjective Practice</h3>
+    <p class="quiz-question">Which word describes a flower?</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">Run</button>
+      <button class="option" data-answer="correct">Red</button>
+      <button class="option" data-answer="wrong">They</button>
+      <button class="option" data-answer="wrong">Under</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
 <section class="lesson" id="lesson-7">
   <div class="lesson-head">
     <div class="lesson-number">07</div>
     <div>
-      <h2>Adverbs — words that add detail</h2>
-      <p class="lesson-intro">An adverb often tells how, when or where an action happens.</p>
+      <h2>Adverbs (क्रियाविशेषण)</h2>
+      <p class="lesson-intro">An adverb can tell how, when or where an action happens. It can also describe an adjective or another adverb.</p>
     </div>
   </div>
-  <div class="example"><p>The turtle walks <strong>slowly</strong>.</p><p>The rabbit runs <strong>quickly</strong>.</p><p>We will play <strong>tomorrow</strong>.</p></div>
-  <div class="tip">💡 Slowly and quickly tell us how. Tomorrow tells us when.</div>
+  <div class="word-grid">
+    <div class="word-card"><span class="emoji">🏃</span><strong>Quickly</strong><small>छिटो</small></div>
+    <div class="word-card"><span class="emoji">🐢</span><strong>Slowly</strong><small>बिस्तारै</small></div>
+    <div class="word-card"><span class="emoji">⚡</span><strong>Fast</strong><small>छिटो</small></div>
+    <div class="word-card"><span class="emoji">⭐</span><strong>Well</strong><small>राम्रोसँग</small></div>
+    <div class="word-card"><span class="emoji">🔎</span><strong>Very</strong><small>धेरै</small></div>
+    <div class="word-card"><span class="emoji">📢</span><strong>Loudly</strong><small>ठूलो स्वरमा</small></div>
+    <div class="word-card"><span class="emoji">🍃</span><strong>Softly</strong><small>मधुरो गरी</small></div>
+    <div class="word-card"><span class="emoji">🤫</span><strong>Quietly</strong><small>शान्तसँग</small></div>
+  </div>
+  <div class="example">
+    <p>The turtle walks <strong>slowly</strong>. (कछुवा बिस्तारै हिँड्छ।)</p>
+    <p>The child speaks <strong>softly</strong>. (बालक नरम स्वरमा बोल्छ।)</p>
+    <p>She sings <strong>well</strong>. (उनी राम्रोसँग गाउँछिन्।)</p>
+    <p>It is <strong>very</strong> beautiful. (“Very” describes “beautiful”.)</p>
+  </div>
+  <div class="practice">
+    <h3>🎯 Adverb Practice</h3>
+    <p class="quiz-question">In “The rabbit runs quickly”, which word is the adverb?</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">Rabbit</button>
+      <button class="option" data-answer="wrong">Runs</button>
+      <button class="option" data-answer="correct">Quickly</button>
+      <button class="option" data-answer="wrong">The</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
 <section class="lesson" id="lesson-8">
   <div class="lesson-head">
     <div class="lesson-number">08</div>
     <div>
-      <h2>Prepositions — position words</h2>
-      <p class="lesson-intro">Prepositions can tell us where something is or when something happens.</p>
+      <h2>Prepositions (नामयोगी)</h2>
+      <p class="lesson-intro">Prepositions show place, position, time or relationships between words.</p>
     </div>
   </div>
   <div class="word-grid">
-    <div class="word-card"><span class="emoji">📦</span><strong>In</strong><small>The toy is in the box.</small></div>
-    <div class="word-card"><span class="emoji">📚</span><strong>On</strong><small>The book is on the table.</small></div>
-    <div class="word-card"><span class="emoji">🪑</span><strong>Under</strong><small>The cat is under the chair.</small></div>
-    <div class="word-card"><span class="emoji">🚪</span><strong>Behind</strong><small>He is behind the door.</small></div>
-    <div class="word-card"><span class="emoji">➡️</span><strong>Next to</strong><small>Stand next to me.</small></div>
-    <div class="word-card"><span class="emoji">🏫</span><strong>At</strong><small>I am at school.</small></div>
+    <div class="word-card"><span class="emoji">📦</span><strong>In</strong><small>भित्र</small></div>
+    <div class="word-card"><span class="emoji">📘</span><strong>On</strong><small>माथि</small></div>
+    <div class="word-card"><span class="emoji">🪑</span><strong>Under</strong><small>मुनि</small></div>
+    <div class="word-card"><span class="emoji">⏰</span><strong>At</strong><small>मा</small></div>
+    <div class="word-card"><span class="emoji">🚪</span><strong>Behind</strong><small>पछाडि</small></div>
+    <div class="word-card"><span class="emoji">↔️</span><strong>Between</strong><small>बीचमा</small></div>
+    <div class="word-card"><span class="emoji">👀</span><strong>In front of</strong><small>अगाडि</small></div>
+    <div class="word-card"><span class="emoji">☁️</span><strong>Over</strong><small>माथिबाट</small></div>
+    <div class="word-card"><span class="emoji">🏠</span><strong>Near</strong><small>नजिक</small></div>
+  </div>
+  <div class="example">
+    <p>The toy is <strong>in</strong> the box.</p>
+    <p>The book is <strong>on</strong> the table.</p>
+    <p>The cat is <strong>under</strong> the chair.</p>
+    <p>The school is <strong>near</strong> my house.</p>
+  </div>
+  <div class="practice">
+    <h3>🎯 Preposition Practice</h3>
+    <p class="quiz-question">The cat is ___ the table. It is below the table.</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">On</button>
+      <button class="option" data-answer="correct">Under</button>
+      <button class="option" data-answer="wrong">And</button>
+      <button class="option" data-answer="wrong">Wow</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
   </div>
 </section>
 
@@ -358,76 +527,193 @@ body.dark-mode .word-card{background:#172236}
   <div class="lesson-head">
     <div class="lesson-number">09</div>
     <div>
-      <h2>Conjunctions — joining words</h2>
-      <p class="lesson-intro">Conjunctions join words or ideas.</p>
+      <h2>Conjunctions (संयोजक)</h2>
+      <p class="lesson-intro">Conjunctions join words, phrases or ideas together.</p>
     </div>
   </div>
-  <div class="example"><p><strong>And:</strong> I have a pen <u>and</u> a pencil.</p><p><strong>But:</strong> It is small <u>but</u> strong.</p><p><strong>Because:</strong> I smiled <u>because</u> I was happy.</p><p><strong>Or:</strong> Would you like milk <u>or</u> water?</p></div>
+  <div class="word-grid">
+    <div class="word-card"><span class="emoji">➕</span><strong>And</strong><small>र</small></div>
+    <div class="word-card"><span class="emoji">⚡</span><strong>But</strong><small>तर</small></div>
+    <div class="word-card"><span class="emoji">💡</span><strong>Because</strong><small>किनकि</small></div>
+    <div class="word-card"><span class="emoji">🔀</span><strong>Or</strong><small>वा</small></div>
+    <div class="word-card"><span class="emoji">➡️</span><strong>So</strong><small>त्यसैले</small></div>
+    <div class="word-card"><span class="emoji">⛅</span><strong>Although</strong><small>यद्यपि</small></div>
+    <div class="word-card"><span class="emoji">🎛️</span><strong>If</strong><small>यदि</small></div>
+    <div class="word-card"><span class="emoji">⏳</span><strong>While</strong><small>जबकि / गर्दागर्दै</small></div>
+  </div>
+  <div class="example">
+    <p>I have a pen <strong>and</strong> a pencil.</p>
+    <p>It is small <strong>but</strong> strong.</p>
+    <p>I stayed inside <strong>because</strong> it was raining.</p>
+    <p>Would you like tea <strong>or</strong> milk?</p>
+    <p>It was raining, <strong>so</strong> we stayed home.</p>
+    <p><strong>If</strong> you practise, you can improve.</p>
+  </div>
+  <div class="practice">
+    <h3>🎯 Conjunction Practice</h3>
+    <p class="quiz-question">I like apples ___ bananas.</p>
+    <div class="options">
+      <button class="option" data-answer="correct">And</button>
+      <button class="option" data-answer="wrong">Under</button>
+      <button class="option" data-answer="wrong">Quickly</button>
+      <button class="option" data-answer="wrong">Wow</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
 <section class="lesson" id="lesson-10">
   <div class="lesson-head">
     <div class="lesson-number">10</div>
     <div>
-      <h2>Interjections — feeling words</h2>
-      <p class="lesson-intro">Interjections show sudden feelings or reactions.</p>
+      <h2>Interjections (विस्मयादिबोधक)</h2>
+      <p class="lesson-intro">Interjections express sudden feelings or reactions.</p>
     </div>
   </div>
-  <div class="example"><p><strong>Wow!</strong> That rainbow is beautiful!</p><p><strong>Hurray!</strong> We won the game!</p><p><strong>Oh!</strong> I forgot my book.</p><p><strong>Oops!</strong> I dropped my pencil.</p></div>
-  <div class="tip">💡 An exclamation mark (!) often comes after a strong feeling.</div>
+  <div class="word-grid">
+    <div class="word-card"><span class="emoji">🤩</span><strong>Wow!</strong><small>वाः!</small></div>
+    <div class="word-card"><span class="emoji">😲</span><strong>Oh!</strong><small>ओहो!</small></div>
+    <div class="word-card"><span class="emoji">😢</span><strong>Alas!</strong><small>हाय!</small></div>
+    <div class="word-card"><span class="emoji">🎉</span><strong>Hurrah!</strong><small>खुसीको उद्गार</small></div>
+    <div class="word-card"><span class="emoji">😣</span><strong>Ouch!</strong><small>ऐया!</small></div>
+    <div class="word-card"><span class="emoji">👏</span><strong>Bravo!</strong><small>शाबास!</small></div>
+    <div class="word-card"><span class="emoji">👋</span><strong>Hey!</strong><small>ए!</small></div>
+    <div class="word-card"><span class="emoji">🙈</span><strong>Oops!</strong><small>ओहो, गल्ती भयो!</small></div>
+  </div>
+  <div class="example">
+    <p><strong>Wow!</strong> That rainbow is beautiful.</p>
+    <p><strong>Hurrah!</strong> We won the game.</p>
+    <p><strong>Ouch!</strong> That hurt.</p>
+    <p><strong>Bravo!</strong> You did a great job.</p>
+  </div>
+  <div class="tip">💡 Interjections often use an exclamation mark (!).</div>
+  <div class="practice">
+    <h3>🎯 Interjection Practice</h3>
+    <p class="quiz-question">Which word shows excitement?</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">Table</button>
+      <button class="option" data-answer="wrong">Under</button>
+      <button class="option" data-answer="correct">Hurrah!</button>
+      <button class="option" data-answer="wrong">Quietly</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
 <section class="lesson" id="lesson-11">
   <div class="lesson-head">
     <div class="lesson-number">11</div>
     <div>
-      <h2>Sentence structure</h2>
-      <p class="lesson-intro">A sentence expresses a complete idea. It usually begins with a capital letter and ends with suitable punctuation.</p>
+      <h2>Sentence Structure (वाक्य संरचना)</h2>
+      <p class="lesson-intro">A sentence expresses a complete idea. A common English pattern is Subject + Verb + Object.</p>
     </div>
   </div>
-  <h3>Who + action + more information</h3>
-  <div class="example"><p><strong>Rita</strong> <u>reads</u> <strong>a book.</strong></p><p>Who? Rita. Action? Reads. What? A book.</p></div>
-  <div class="example"><p><strong>The dog runs.</strong></p><p><strong>I like mangoes.</strong></p><p><strong>We go to school.</strong></p></div>
+  <div class="example">
+    <p><strong>Subject (कर्ता):</strong> Who does the action? I, he, she, Ram.</p>
+    <p><strong>Verb (क्रिया):</strong> What is the action? Eat, play, read.</p>
+    <p><strong>Object (कर्म):</strong> What receives the action? An apple, football, a book.</p>
+  </div>
+  <h3>🌟 The Golden Formula</h3>
+  <div class="example">
+    <p><strong>I + eat + an apple.</strong></p>
+    <p>म + खान्छु + एउटा स्याउ।</p>
+  </div>
+  <div class="example">
+    <p><strong>He + plays + football.</strong></p>
+    <p>ऊ फुटबल खेल्छ।</p>
+  </div>
+  <div class="example">
+    <p><strong>She + reads + a book.</strong></p>
+    <p>उनी किताब पढ्छिन्।</p>
+  </div>
   <h3>Three common sentence types</h3>
-  <div class="example"><p><strong>Statement:</strong> I am happy.</p><p><strong>Question:</strong> Are you happy?</p><p><strong>Exclamation:</strong> What a lovely day!</p></div>
+  <div class="example">
+    <p><strong>Statement:</strong> I am happy.</p>
+    <p><strong>Question:</strong> Are you happy?</p>
+    <p><strong>Exclamation:</strong> What a lovely day!</p>
+  </div>
+  <div class="tip">💡 Begin a sentence with a capital letter and end it with suitable punctuation.</div>
+  <div class="practice">
+    <h3>🎯 Sentence Practice</h3>
+    <p class="quiz-question">Which is a complete sentence?</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">Under the table</button>
+      <button class="option" data-answer="wrong">The happy</button>
+      <button class="option" data-answer="correct">The dog runs.</button>
+      <button class="option" data-answer="wrong">Very quickly</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
 <section class="lesson" id="lesson-12">
   <div class="lesson-head">
     <div class="lesson-number">12</div>
     <div>
-      <h2>Tenses — when an action happens</h2>
-      <p class="lesson-intro">Tense helps tell whether an action happens now, happened before or will happen later.</p>
+      <h2>Tenses — Time of Actions (काल)</h2>
+      <p class="lesson-intro">Tenses tell us whether an action happens in the present, past or future.</p>
     </div>
   </div>
-  <h3>Present tense</h3>
-  <div class="example"><p><strong>Simple present:</strong> I go to school every day.</p><p><strong>Present continuous:</strong> I am reading a book.</p></div>
-  <h3>Past tense</h3>
-  <div class="example"><p><strong>Simple past:</strong> I went to school yesterday.</p><p><strong>Past continuous:</strong> I was reading a book.</p></div>
-  <h3>Future tense</h3>
-  <div class="example"><p><strong>Simple future:</strong> I will go to school tomorrow.</p></div>
+  <h3>1. Present Tense (वर्तमान काल)</h3>
+  <div class="example">
+    <p><strong>Simple Present:</strong> Subject + base verb (add s/es with he, she, it).</p>
+    <p>I go to school. — म विद्यालय जान्छु।</p>
+    <p>He plays football. — ऊ फुटबल खेल्छ।</p>
+  </div>
+  <div class="example">
+    <p><strong>Present Continuous:</strong> Subject + am/is/are + verb-ing.</p>
+    <p>I am reading a book. — म किताब पढ्दै छु।</p>
+    <p>She is singing a song. — उनी गीत गाउँदै छिन्।</p>
+  </div>
+  <h3>2. Past Tense (भूत काल)</h3>
+  <div class="example">
+    <p><strong>Simple Past:</strong> Subject + past verb (V2).</p>
+    <p>I went to school yesterday. — म हिजो विद्यालय गएँ।</p>
+    <p>He played cricket. — उसले क्रिकेट खेल्यो।</p>
+  </div>
+  <div class="example">
+    <p><strong>Past Continuous:</strong> Subject + was/were + verb-ing.</p>
+    <p>I was eating an apple. — म स्याउ खाँदै थिएँ।</p>
+    <p>They were playing. — उनीहरू खेल्दै थिए।</p>
+  </div>
+  <h3>3. Future Tense (भविष्य काल)</h3>
+  <div class="example">
+    <p><strong>Simple Future:</strong> Subject + will + base verb.</p>
+    <p>I will go to Pokhara tomorrow. — म भोलि पोखरा जानेछु।</p>
+    <p>She will write a letter. — उनी चिठी लेख्नेछिन्।</p>
+  </div>
   <div class="tip">💡 Today: I play. Yesterday: I played. Tomorrow: I will play.</div>
+  <div class="practice">
+    <h3>🎯 Tenses Practice</h3>
+    <p class="quiz-question">Which sentence is in the future tense?</p>
+    <div class="options">
+      <button class="option" data-answer="wrong">I play.</button>
+      <button class="option" data-answer="wrong">I played.</button>
+      <button class="option" data-answer="correct">I will play.</button>
+      <button class="option" data-answer="wrong">I am playing.</button>
+    </div>
+    <p class="feedback" aria-live="polite"></p>
+  </div>
 </section>
 
-<section class="lesson" id="practice-all">
+<section class="lesson" id="final-quiz">
   <div class="lesson-head">
-    <div class="lesson-number">🎯</div>
+    <div class="lesson-number">🏆</div>
     <div>
-      <h2>Grammar Quiz</h2>
-      <p class="lesson-intro">Choose the best answer. Every correct answer is a little win!</p>
+      <h2>Final Grammar Quiz</h2>
+      <p class="lesson-intro">Answer all questions. Keep practising to improve!</p>
     </div>
   </div>
-
   <div class="practice">
-    <div id="quiz-progress" class="quiz-score">Question 1</div>
-    <div id="quiz-question" class="quiz-question" aria-live="polite">Ready to begin?</div>
+    <div id="quiz-progress" class="small-note">Ready to begin?</div>
+    <p id="quiz-question" class="quiz-question">Let's test what you have learned!</p>
     <div id="quiz-options" class="options"></div>
-    <div id="quiz-feedback" class="feedback" aria-live="polite"></div>
+    <p id="quiz-feedback" class="feedback" aria-live="polite"></p>
     <div class="quiz-actions">
-      <button class="btn btn-primary" id="next-question" type="button">Start Quiz 🚀</button>
-      <button class="btn" id="restart-quiz" type="button" hidden>Try Again 🔄</button>
+      <button class="btn btn-primary" id="quiz-next" type="button">Start Quiz 🚀</button>
+      <button class="btn" id="quiz-restart" type="button" hidden>Try Again 🔄</button>
     </div>
-    <div id="quiz-score" class="quiz-score"></div>
+    <p id="quiz-score" class="small-note"></p>
   </div>
 </section>
 
@@ -443,55 +729,104 @@ body.dark-mode .word-card{background:#172236}
 
   const $ = id => document.getElementById(id);
 
-  function safeGet(key, fallback){
-    try{
+  function storageGet(key, fallback){
+    try {
       const value = localStorage.getItem(key);
       return value === null ? fallback : value;
-    }catch(_){
+    } catch (_) {
       return fallback;
     }
   }
 
-  function safeSet(key, value){
-    try{ localStorage.setItem(key, String(value)); }catch(_){}
+  function storageSet(key, value){
+    try {
+      localStorage.setItem(key, String(value));
+    } catch (_) {}
   }
 
+  // Theme
   const themeButton = $("theme-toggle");
 
-  function setTheme(dark){
+  function applyTheme(dark){
     document.body.classList.toggle("dark-mode", dark);
     themeButton.textContent = dark ? "☀️ Light Mode" : "🌙 Dark Mode";
     themeButton.setAttribute("aria-pressed", String(dark));
-    safeSet("theme", dark ? "dark" : "light");
+    storageSet("theme", dark ? "dark" : "light");
   }
 
-  setTheme(safeGet("theme", "light") === "dark");
+  applyTheme(storageGet("theme", "light") === "dark");
 
   themeButton.addEventListener("click", function(){
-    setTheme(!document.body.classList.contains("dark-mode"));
+    applyTheme(!document.body.classList.contains("dark-mode"));
   });
 
+  // Independent practice questions
+  document.querySelectorAll(".practice .options").forEach(function(group){
+    group.querySelectorAll(".option").forEach(function(button){
+      button.addEventListener("click", function(){
+        if(button.disabled) return;
+
+        group.querySelectorAll(".option").forEach(function(option){
+          option.disabled = true;
+          if(option.dataset.answer === "correct"){
+            option.classList.add("correct");
+          }
+        });
+
+        const feedback = group.parentElement.querySelector(".feedback");
+        if(button.dataset.answer === "correct"){
+          feedback.textContent = "🎉 Correct! Excellent work!";
+          feedback.className = "feedback good";
+          addDailyScore();
+        } else {
+          button.classList.add("wrong");
+          feedback.textContent = "Good try! The green answer is correct. Keep learning! 💪";
+          feedback.className = "feedback bad";
+        }
+      });
+    });
+  });
+
+  function addDailyScore(){
+    const now = new Date();
+    const today = [
+      now.getFullYear(),
+      String(now.getMonth()+1).padStart(2,"0"),
+      String(now.getDate()).padStart(2,"0")
+    ].join("-");
+
+    const savedDate = storageGet("quiz_score_date", "");
+    let total = Number(storageGet("quiz_daily_score", "0")) || 0;
+
+    if(savedDate !== today) total = 0;
+    total++;
+
+    storageSet("quiz_score_date", today);
+    storageSet("quiz_daily_score", total);
+  }
+
+  // Final mixed quiz
   const questions = [
     {q:"Which word is a noun?",o:["School","Quickly","Run","Under"],a:"School",why:"School is a place, so it is a noun."},
-    {q:"Which word can replace 'Mina'?",o:["She","Book","Happy","Jump"],a:"She",why:"She is a pronoun."},
+    {q:"Which pronoun can replace Mina?",o:["She","Book","Happy","Jump"],a:"She",why:"She is a pronoun."},
     {q:"Which word is a verb?",o:["Blue","Jump","Small","Under"],a:"Jump",why:"Jump tells us an action."},
-    {q:"Which word describes a flower?",o:["Red","Run","They","Slowly"],a:"Red",why:"Red is an adjective describing the flower."},
-    {q:"Choose the adverb: 'The rabbit runs quickly.'",o:["Rabbit","Runs","Quickly","The"],a:"Quickly",why:"Quickly tells us how the rabbit runs."},
+    {q:"Which word describes a flower?",o:["Red","Run","They","Slowly"],a:"Red",why:"Red is an adjective."},
+    {q:"The rabbit runs ___.",o:["quickly","rabbit","the","runs"],a:"quickly",why:"Quickly tells us how the rabbit runs."},
     {q:"The ball is ___ the box.",o:["in","happy","run","and"],a:"in",why:"In tells us where the ball is."},
-    {q:"I like apples ___ bananas.",o:["and","under","quickly","wow"],a:"and",why:"And joins two ideas or things."},
-    {q:"Which word shows a feeling?",o:["Hurray!","Table","School","Slowly"],a:"Hurray!",why:"Hurray! expresses excitement."},
+    {q:"I like apples ___ bananas.",o:["and","under","quickly","wow"],a:"and",why:"And joins words or ideas."},
+    {q:"Which word expresses excitement?",o:["Hurrah!","Table","School","Slowly"],a:"Hurrah!",why:"Hurrah! expresses a happy feeling."},
     {q:"Which is a complete sentence?",o:["The happy","Runs quickly","The dog runs.","Under the table"],a:"The dog runs.",why:"The dog runs expresses a complete idea."},
-    {q:"Which sentence is in the past tense?",o:["I play.","I played.","I will play.","I am playing."],a:"I played.",why:"Played tells us the action happened in the past."},
-    {q:"Which sentence is in the future tense?",o:["She sings.","She sang.","She will sing.","She is singing."],a:"She will sing.",why:"Will sing tells us about a future action."},
+    {q:"Which sentence is in the past tense?",o:["I play.","I played.","I will play.","I am playing."],a:"I played.",why:"Played describes an action in the past."},
+    {q:"Which sentence is in the future tense?",o:["She sings.","She sang.","She will sing.","She is singing."],a:"She will sing.",why:"Will sing describes a future action."},
     {q:"Which two letters are vowels?",o:["A and E","B and C","K and L","P and T"],a:"A and E",why:"A and E are two of the five main vowels."},
-    {q:"Which word is a pronoun?",o:["They","Teacher","Apple","Green"],a:"They",why:"They can replace the names of people or things."},
-    {q:"Choose the conjunction.",o:["Because","Beautiful","Runs","Chair"],a:"Because",why:"Because joins ideas and gives a reason."},
-    {q:"Choose the preposition.",o:["Behind","Hurray","Quickly","Sing"],a:"Behind",why:"Behind tells us the position of something."}
+    {q:"Which word is a pronoun?",o:["They","Teacher","Apple","Green"],a:"They",why:"They can replace names of people or things."},
+    {q:"Choose the conjunction.",o:["Because","Beautiful","Runs","Chair"],a:"Because",why:"Because connects ideas and gives a reason."},
+    {q:"Choose the preposition.",o:["Behind","Hurray","Quickly","Sing"],a:"Behind",why:"Behind describes a position."}
   ];
 
-  let order = [];
-  let position = 0;
-  let score = 0;
+  let quizOrder = [];
+  let quizPosition = 0;
+  let quizScore = 0;
   let answered = false;
   let finished = false;
 
@@ -505,46 +840,51 @@ body.dark-mode .word-card{background:#172236}
   }
 
   function startQuiz(){
-    order = shuffle(questions);
-    position = 0;
-    score = 0;
+    quizOrder = shuffle(questions);
+    quizPosition = 0;
+    quizScore = 0;
     answered = false;
     finished = false;
-    $("next-question").textContent = "Check Answer ✓";
-    $("next-question").hidden = false;
-    $("restart-quiz").hidden = true;
+
+    $("quiz-next").hidden = false;
+    $("quiz-restart").hidden = true;
     $("quiz-score").textContent = "";
     showQuestion();
   }
 
   function showQuestion(){
-    const item = order[position];
+    const item = quizOrder[quizPosition];
     answered = false;
+
     $("quiz-progress").textContent =
-      "Question " + (position+1) + " of " + order.length;
+      "Question " + (quizPosition+1) + " of " + quizOrder.length;
     $("quiz-question").textContent = item.q;
     $("quiz-feedback").textContent = "";
     $("quiz-feedback").className = "feedback";
-    $("next-question").textContent = "Check Answer ✓";
+    $("quiz-next").textContent = "Check Answer ✓";
 
-    const options = $("quiz-options");
-    options.replaceChildren();
+    const group = $("quiz-options");
+    group.replaceChildren();
 
-    shuffle(item.o).forEach(function(optionText){
+    shuffle(item.o).forEach(function(text){
       const button = document.createElement("button");
       button.type = "button";
       button.className = "option";
-      button.textContent = optionText;
+      button.textContent = text;
+
       button.addEventListener("click", function(){
         if(answered || finished) return;
-        options.querySelectorAll("button").forEach(b => {
-          b.dataset.selected = "false";
-          b.style.outline = "";
+
+        group.querySelectorAll("button").forEach(function(option){
+          option.dataset.selected = "false";
+          option.style.outline = "";
         });
+
         button.dataset.selected = "true";
-        button.style.outline = "2px solid var(--primary)";
+        button.style.outline = "2px solid var(--blue)";
       });
-      options.appendChild(button);
+
+      group.appendChild(button);
     });
   }
 
@@ -552,6 +892,7 @@ body.dark-mode .word-card{background:#172236}
     if(answered) return;
 
     const selected = $("quiz-options").querySelector('[data-selected="true"]');
+
     if(!selected){
       $("quiz-feedback").textContent = "Choose an answer first. You can do it! 😊";
       $("quiz-feedback").className = "feedback bad";
@@ -559,71 +900,69 @@ body.dark-mode .word-card{background:#172236}
     }
 
     answered = true;
-    const item = order[position];
+    const item = quizOrder[quizPosition];
     const correct = selected.textContent === item.a;
 
-    $("quiz-options").querySelectorAll("button").forEach(button => {
+    $("quiz-options").querySelectorAll("button").forEach(function(button){
       button.disabled = true;
       button.style.outline = "";
       if(button.textContent === item.a) button.classList.add("correct");
     });
 
     if(correct){
-      score++;
+      quizScore++;
       $("quiz-feedback").textContent = "🎉 Correct! " + item.why;
       $("quiz-feedback").className = "feedback good";
       addDailyScore();
-    }else{
+    } else {
       selected.classList.add("wrong");
       $("quiz-feedback").textContent = "Good try! " + item.why;
       $("quiz-feedback").className = "feedback bad";
     }
 
-    $("quiz-score").textContent = "Your score: " + score + " / " + order.length;
-    $("next-question").textContent =
-      position === order.length-1 ? "See Results 🏆" : "Next Question →";
-  }
+    $("quiz-score").textContent =
+      "Your score: " + quizScore + " / " + quizOrder.length;
 
-  function addDailyScore(){
-    const today = new Date().toLocaleDateString("en-CA");
-    const savedDate = safeGet("quiz_score_date", "");
-    let current = Number(safeGet("quiz_daily_score", "0")) || 0;
-    if(savedDate !== today) current = 0;
-    current++;
-    safeSet("quiz_score_date", today);
-    safeSet("quiz_daily_score", current);
+    $("quiz-next").textContent =
+      quizPosition === quizOrder.length-1 ? "See Results 🏆" : "Next Question →";
   }
 
   function nextQuestion(){
     if(finished) return;
-    if(!order.length){
+
+    if(quizOrder.length === 0){
       startQuiz();
       return;
     }
+
     if(!answered){
       checkAnswer();
       return;
     }
-    if(position < order.length-1){
-      position++;
+
+    if(quizPosition < quizOrder.length-1){
+      quizPosition++;
       showQuestion();
-    }else{
-      finished = true;
-      $("quiz-progress").textContent = "Quiz complete!";
-      $("quiz-question").textContent =
-        score >= 12 ? "🏆 Amazing work!" : "🌟 Well done for trying!";
-      $("quiz-options").replaceChildren();
-      $("quiz-feedback").textContent =
-        "You scored " + score + " out of " + order.length + ". Keep practising!";
-      $("quiz-feedback").className = "feedback good";
-      $("next-question").hidden = true;
-      $("restart-quiz").hidden = false;
-      $("quiz-score").textContent = "Final score: " + score + " / " + order.length;
+      return;
     }
+
+    finished = true;
+    $("quiz-progress").textContent = "Quiz complete!";
+    $("quiz-question").textContent =
+      quizScore >= 12 ? "🏆 Amazing work!" : "🌟 Well done for trying!";
+    $("quiz-options").replaceChildren();
+    $("quiz-feedback").textContent =
+      "You scored " + quizScore + " out of " + quizOrder.length +
+      ". Keep practising!";
+    $("quiz-feedback").className = "feedback good";
+    $("quiz-next").hidden = true;
+    $("quiz-restart").hidden = false;
+    $("quiz-score").textContent =
+      "Final score: " + quizScore + " / " + quizOrder.length;
   }
 
-  $("next-question").addEventListener("click", nextQuestion);
-  $("restart-quiz").addEventListener("click", startQuiz);
+  $("quiz-next").addEventListener("click", nextQuestion);
+  $("quiz-restart").addEventListener("click", startQuiz);
 })();
 </script>
 </body>
