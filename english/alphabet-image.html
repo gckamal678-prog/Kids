@@ -1,233 +1,131 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>English Alphabet - पाठशाला</title>
-    <meta name="theme-color" content="#00BCD4">
-    <!-- Child-friendly Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Fredoka', 'Mukta', sans-serif;
-            background: linear-gradient(180deg, #E0F7FA 0%, #B2EBF2 100%);
-            margin: 0;
-            padding: 15px;
-            text-align: center;
-            min-height: 100vh;
-        }
-
-        /* Header Layout */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto 15px auto;
-            background: #FFFFFF;
-            padding: 10px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        h2 { 
-            color: #00838F; 
-            margin: 0; 
-            font-size: 20px; 
-            font-weight: 700;
-        }
-        .home-btn {
-            background-color: #00BCD4;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 3px 0 #00838F;
-            transition: all 0.1s ease;
-        }
-        .home-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-
-        /* Tab Buttons */
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .tab-btn {
-            background-color: #FFFFFF;
-            color: #00838F;
-            border: 3px solid #4DD0E1;
-            padding: 8px 18px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #00ACC1;
-            transition: all 0.1s ease;
-        }
-        .tab-btn.active {
-            background-color: #00BCD4;
-            color: white;
-            border-color: #00ACC1;
-            box-shadow: 0 4px 0 #00838F;
-        }
-        .tab-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #00838F;
-        }
-
-        /* Grid Layout */
-        .grid-container {
-            display: none;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            max-width: 600px;
-            margin: auto;
-        }
-        .grid-container.active {
-            display: grid;
-        }
-
-        /* 3D Soft Card Style */
-        .card {
-            background-color: #FFFFFF;
-            color: #00838F;
-            border: 3px solid #4DD0E1;
-            border-radius: 18px;
-            padding: 15px 10px;
-            box-shadow: 0 6px 0 #00ACC1, 0 8px 10px rgba(0,0,0,0.08);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .card:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #00ACC1, 0 3px 6px rgba(0,0,0,0.1);
-            background-color: #E0F7FA;
-        }
-
-        /* Large Emoji Style */
-        .emoji-box {
-            font-size: 55px;
-            line-height: 1.1;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-        }
-
-        .letter-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #006064;
-            line-height: 1.2;
-        }
-
-        .word-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #00838F;
-        }
-    </style>
-
-    <!-- ElevenLabs को लागि script.js जोडिएको -->
-    <script src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#00BCD4">
+  <title>ABCD Alphabet - बाल पाठशाला</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+  <script src="../script.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 15px; min-height: 100vh; text-align: center;
+      font-family: 'Fredoka','Mukta',sans-serif;
+      background: linear-gradient(180deg,#e0f7fa,#b2ebf2); color: #006064;
+    }
+    .header {
+      max-width: 700px; margin: 0 auto 16px; padding: 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: white; border-radius: 16px; box-shadow: 0 4px 12px #0001;
+    }
+    h1 { margin: 0; font-size: clamp(17px,4vw,24px); }
+    .home-btn {
+      padding: 8px 12px; border-radius: 10px; background: #00acc1;
+      color: white; text-decoration: none; font-weight: 700; white-space: nowrap;
+    }
+    .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
+    .tab {
+      padding: 10px 15px; border: 2px solid #4dd0e1; border-radius: 12px;
+      color: #00838f; background: white; font-weight: 700; cursor: pointer;
+    }
+    .tab.active { background: #00acc1; color: white; }
+    .grid {
+      display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 12px; max-width: 700px; margin: auto;
+    }
+    .card {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 4px; min-height: 155px; padding: 12px 8px;
+      border: 3px solid #4dd0e1; border-radius: 18px; background: white;
+      color: #006064; box-shadow: 0 5px 0 #00acc1; cursor: pointer;
+    }
+    .emoji { font-size: 48px; line-height: 1.2; }
+    .letter { font-size: 29px; font-weight: 700; }
+    .word { font-size: 16px; color: #00838f; }
+    .card:active { transform: translateY(3px); box-shadow: 0 2px 0 #00acc1; }
+    .hint { margin: 16px auto; font-size: 14px; }
+    @media (min-width: 520px) { .grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+    @media (min-width: 740px) { .grid { grid-template-columns: repeat(4,minmax(0,1fr)); } }
+  </style>
 </head>
 <body>
+  <header class="header">
+    <a class="home-btn" href="../index.html">🏠 होम</a>
+    <h1>ABCD Alphabet</h1>
+  </header>
 
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>ABCD Alphabet</h2>
-    </div>
+  <div class="tabs">
+    <button class="tab active" data-type="upper" type="button">Capital A–Z</button>
+    <button class="tab" data-type="lower" type="button">Small a–z</button>
+  </div>
 
-    <div class="tab-container">
-        <button class="tab-btn active" onclick="switchTab('upper', event)">Capital (A-Z)</button>
-        <button class="tab-btn" onclick="switchTab('lower', event)">Small (a-z)</button>
-    </div>
+  <main class="grid" id="alphabetGrid"></main>
+  <p class="hint">🔊 अक्षर र शब्द सुन्न कार्ड थिच्नुहोस्।</p>
 
-    <div class="grid-container active" id="upperGrid"></div>
-    <div class="grid-container" id="lowerGrid"></div>
+  <script>
+    (() => {
+      "use strict";
 
-    <script>
-        // Alphabet Data with Emoji
-        const alphabetData = [
-            { letter: 'A', word: 'Apple', emoji: '🍎' },
-            { letter: 'B', word: 'Ball', emoji: '⚽' },
-            { letter: 'C', word: 'Cat', emoji: '🐱' },
-            { letter: 'D', word: 'Dog', emoji: '🐶' },
-            { letter: 'E', word: 'Elephant', emoji: '🐘' },
-            { letter: 'F', word: 'Fish', emoji: '🐟' },
-            { letter: 'G', word: 'Grapes', emoji: '🍇' },
-            { letter: 'H', word: 'Horse', emoji: '🐎' },
-            { letter: 'I', word: 'Ice cream', emoji: '🍦' },
-            { letter: 'J', word: 'Jug', emoji: '🏺' },
-            { letter: 'K', word: 'Kite', emoji: '🪁' },
-            { letter: 'L', word: 'Lion', emoji: '🦁' },
-            { letter: 'M', word: 'Monkey', emoji: '🐒' },
-            { letter: 'N', word: 'Nest', emoji: '🪺' },
-            { letter: 'O', word: 'Owl', emoji: '🦉' },
-            { letter: 'P', word: 'Parrot', emoji: '🦜' },
-            { letter: 'Q', word: 'Queen', emoji: '👑' },
-            { letter: 'R', word: 'Rose', emoji: '🌹' },
-            { letter: 'S', word: 'Sun', emoji: '☀️' },
-            { letter: 'T', word: 'Tree', emoji: '🌳' },
-            { letter: 'U', word: 'Umbrella', emoji: '☂️' },
-            { letter: 'V', word: 'Van', emoji: '🚐' },
-            { letter: 'W', word: 'Watch', emoji: '⌚' },
-            { letter: 'X', word: 'Xylophone', emoji: '🎼' },
-            { letter: 'Y', word: 'Yak', emoji: '🐂' },
-            { letter: 'Z', word: 'Zebra', emoji: '🦓' }
-        ];
+      const data = [
+        ["A","Apple","🍎"],["B","Ball","⚽"],["C","Cat","🐱"],
+        ["D","Dog","🐶"],["E","Elephant","🐘"],["F","Fish","🐟"],
+        ["G","Grapes","🍇"],["H","Horse","🐎"],["I","Ice cream","🍦"],
+        ["J","Jug","🏺"],["K","Kite","🪁"],["L","Lion","🦁"],
+        ["M","Monkey","🐒"],["N","Nest","🪺"],["O","Owl","🦉"],
+        ["P","Parrot","🦜"],["Q","Queen","👑"],["R","Rose","🌹"],
+        ["S","Sun","☀️"],["T","Tree","🌳"],["U","Umbrella","☂️"],
+        ["V","Van","🚐"],["W","Watch","⌚"],["X","Xylophone","🎼"],
+        ["Y","Yak","🐂"],["Z","Zebra","🦓"]
+      ];
 
-        const upperGrid = document.getElementById('upperGrid');
-        const lowerGrid = document.getElementById('lowerGrid');
+      const grid = document.getElementById("alphabetGrid");
+      const tabs = [...document.querySelectorAll(".tab")];
+      let type = "upper";
 
-        alphabetData.forEach(item => {
-            // Capital Card (playAIVoice प्रयोग गरिएको)
-            const upperCard = document.createElement('div');
-            upperCard.className = 'card';
-            upperCard.innerHTML = `
-                <div class="emoji-box">${item.emoji}</div>
-                <div class="letter-title">${item.letter}</div>
-                <div class="word-title">${item.word}</div>
-            `;
-            upperCard.addEventListener('click', () => playAIVoice(`${item.letter} for ${item.word}`));
-            upperGrid.appendChild(upperCard);
-
-            // Small Card (playAIVoice प्रयोग गरिएको)
-            const lowerCard = document.createElement('div');
-            lowerCard.className = 'card';
-            lowerCard.innerHTML = `
-                <div class="emoji-box">${item.emoji}</div>
-                <div class="letter-title">${item.letter.toLowerCase()}</div>
-                <div class="word-title">${item.word}</div>
-            `;
-            lowerCard.addEventListener('click', () => playAIVoice(`${item.letter.toLowerCase()} for ${item.word}`));
-            lowerGrid.appendChild(lowerCard);
-        });
-
-        function switchTab(type, event) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.grid-container').forEach(grid => grid.classList.remove('active'));
-            event.target.classList.add('active');
-            if (type === 'upper') {
-                document.getElementById('upperGrid').classList.add('active');
-            } else {
-                document.getElementById('lowerGrid').classList.add('active');
-            }
+      function speak(text) {
+        if (typeof window.playAIVoice === "function") {
+          window.playAIVoice(text);
         }
-    </script>
+      }
 
+      function render() {
+        grid.replaceChildren();
+
+        data.forEach(([letter, word, emoji]) => {
+          const shown = type === "upper" ? letter : letter.toLowerCase();
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "card";
+          button.innerHTML =
+            '<span class="emoji"></span>' +
+            '<span class="letter"></span>' +
+            '<span class="word"></span>';
+
+          button.querySelector(".emoji").textContent = emoji;
+          button.querySelector(".letter").textContent = shown;
+          button.querySelector(".word").textContent = word;
+          button.setAttribute("aria-label", shown + " for " + word);
+
+          button.addEventListener("click", () => {
+            speak(shown + " for " + word);
+          });
+
+          grid.appendChild(button);
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          type = tab.dataset.type;
+          tabs.forEach(item => item.classList.toggle("active", item === tab));
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
 </body>
 </html>
