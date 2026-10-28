@@ -1,0 +1,251 @@
+HTML
+
+<!doctype html>
+<html lang="ne">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f8ff">
+<meta name="description" content="बाल पाठशालामा जोड, घटाउ, गुणन र भागका रमाइला गणित अभ्यास गरौँ।">
+<title>गणित अभ्यास | बाल पाठशाला</title>
+<style>
+:root{--bg:#f4f7ff;--card:#fff;--text:#19243a;--muted:#68758b;--primary:#4968df;--border:#e0e7f2;--green:#168453;--red:#c24141}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,"Noto Sans Devanagari",sans-serif;line-height:1.6}
+body.dark{--bg:#111827;--card:#1c2739;--text:#f2f5fc;--muted:#bac5d8;--border:#35435b}
+main{max-width:900px;margin:auto;padding:15px}
+header,.panel{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:19px;margin-bottom:15px}
+header{background:linear-gradient(130deg,#e4edff,#e2faee,#fff1db)}
+body.dark header{background:linear-gradient(130deg,#202f4e,#183d3b)}
+h1{font-size:clamp(25px,5vw,36px);line-height:1.3;margin:10px 0}
+h2{font-size:21px;margin:0 0 12px}
+p{margin:7px 0}
+a{color:var(--primary);font-weight:750;text-decoration:none}
+button,select,input{font:inherit}
+button{cursor:pointer;touch-action:manipulation}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #f0ad35;outline-offset:3px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.btn{border:1px solid var(--border);border-radius:12px;background:var(--card);color:var(--text);padding:10px 14px;font-weight:750;min-height:44px}
+.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.muted{color:var(--muted);font-size:14px}
+.ops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.op{border:2px solid var(--border);border-radius:15px;background:var(--card);padding:13px 5px;min-height:92px;color:var(--text);font-weight:800}
+.op span{display:block;font-size:27px}
+.op.active{border-color:var(--primary);background:#e9efff;color:#2446ac}
+body.dark .op.active{background:#293b62;color:#e1eaff}
+.levels{display:flex;flex-wrap:wrap;gap:8px}
+.level{flex:1;min-width:95px}
+.level.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.problem{text-align:center;padding:18px 8px 22px}
+.problem .emoji{font-size:35px}
+#question{font-size:clamp(32px,8vw,54px);font-weight:900;letter-spacing:1px;margin:12px 0}
+.answer-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+input{min-width:0;width:100%;max-width:290px;min-height:50px;border:2px solid var(--border);border-radius:13px;background:var(--card);color:var(--text);padding:10px 14px;font-size:22px;text-align:center}
+#feedback{min-height:30px;font-weight:800;text-align:center;margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{padding:12px 8px;border:1px solid var(--border);border-radius:14px;background:var(--card);text-align:center}
+.stat strong{display:block;font-size:24px}
+.stat span{font-size:13px;color:var(--muted)}
+.bar{height:11px;background:var(--border);border-radius:20px;overflow:hidden;margin-top:12px}
+#progress{height:100%;width:0;background:linear-gradient(90deg,#4a6be3,#20b981);transition:width .2s}
+.help{background:var(--card);border:1px dashed var(--border);border-radius:13px;padding:13px}
+.footer{text-align:center;color:var(--muted);padding:15px}
+[hidden]{display:none!important}
+@media(max-width:500px){main{padding:10px}.panel,header{padding:14px}.ops{grid-template-columns:repeat(2,minmax(0,1fr))}.op{min-height:76px}.stats{gap:6px}.stat strong{font-size:21px}.level{min-width:42%;}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="top">
+<strong>🎒 बाल पाठशाला · गणित</strong>
+<button class="btn" id="theme" type="button">🌙 / ☀️ मोड</button>
+</div>
+<h1>🧮 रमाइलो गणित अभ्यास</h1>
+<p>जोडौँ, घटाऔँ, गुणन गरौँ र भाग सिकौँ!</p>
+<a href="../index.html">← मुख्य पृष्ठमा फर्कनुहोस्</a>
+</header>
+
+<section class="panel">
+<h2>१. कुन अभ्यास गर्ने?</h2>
+<div class="ops" role="group" aria-label="गणितको प्रकार">
+<button class="op active" data-op="add" type="button"><span>➕</span>जोड</button>
+<button class="op" data-op="sub" type="button"><span>➖</span>घटाउ</button>
+<button class="op" data-op="mul" type="button"><span>✖️</span>गुणन</button>
+<button class="op" data-op="div" type="button"><span>➗</span>भाग</button>
+</div>
+</section>
+
+<section class="panel">
+<h2>२. आफ्नो स्तर छान्नुहोस्</h2>
+<div class="levels">
+<button class="btn level active" data-level="1" type="button">🌱 सजिलो</button>
+<button class="btn level" data-level="2" type="button">🌼 मध्यम</button>
+<button class="btn level" data-level="3" type="button">🚀 गाह्रो</button>
+<button class="btn level" data-level="4" type="button">🏆 चुनौती</button>
+</div>
+<p class="muted" id="level-note">० देखि १० सम्मका सजिला प्रश्न।</p>
+</section>
+
+<section class="panel">
+<div class="top">
+<h2>३. उत्तर निकाल्नुहोस्</h2>
+<span class="muted" id="round">प्रश्न १</span>
+</div>
+<div class="problem">
+<div class="emoji" id="problem-emoji">🍎</div>
+<div id="question" aria-live="polite">३ + २ = ?</div>
+<p class="muted" id="hint">दुवै सङ्ख्या जोड्नुहोस्।</p>
+<div class="answer-row">
+<input id="answer" type="number" inputmode="numeric" autocomplete="off" placeholder="उत्तर लेख्नुहोस्" aria-label="आफ्नो उत्तर">
+<button class="btn primary" id="check" type="button">जाँच्नुहोस् ✓</button>
+</div>
+<p id="feedback" aria-live="polite"></p>
+<div class="answer-row">
+<button class="btn" id="next" type="button">अर्को प्रश्न ➜</button>
+<button class="btn" id="show-hint" type="button">💡 सङ्केत</button>
+</div>
+<p class="muted" id="hint-detail" hidden></p>
+</div>
+</section>
+
+<section class="panel">
+<h2>🌟 मेरो प्रगति</h2>
+<div class="stats">
+<div class="stat"><strong id="correct">०</strong><span>सही उत्तर</span></div>
+<div class="stat"><strong id="attempts">०</strong><span>प्रयास</span></div>
+<div class="stat"><strong id="percent">०%</strong><span>सफलता</span></div>
+</div>
+<div class="bar" role="progressbar" aria-label="सही उत्तरको प्रगति" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><div id="progress"></div></div>
+<p id="encourage" class="muted">प्रयास गर्दै जाऔँ, हामी सिक्दै जान्छौँ! 💪</p>
+<div class="answer-row">
+<button class="btn" id="reset" type="button">🔄 अङ्क फेरि सुरु गर्नुहोस्</button>
+</div>
+</section>
+
+<section class="panel help">
+<strong>🧠 सम्झनुहोस्</strong>
+<p>➕ जोड: दुई वा धेरै सङ्ख्या मिलाउनुहोस्।</p>
+<p>➖ घटाउ: ठूलो सङ्ख्याबाट सानो सङ्ख्या घटाउनुहोस्।</p>
+<p>✖️ गुणन: एउटै सङ्ख्या पटक-पटक जोड्नु हो।</p>
+<p>➗ भाग: सङ्ख्यालाई बराबर समूहमा बाँड्नु हो।</p>
+<p class="muted">भागका प्रश्नमा यहाँ पूर्ण भाग लाग्ने प्रश्न दिइन्छ।</p>
+</section>
+<footer class="footer">बाल पाठशाला 💛 · रमाउँदै सिकौँ, आत्मविश्वास बढाऔँ!</footer>
+</main>
+
+<script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id);
+const ne=n=>String(n).replace(/[0-9]/g,d=>"०१२३४५६७८९"[Number(d)]);
+const settings={
+1:{max:10,note:"० देखि १० सम्मका सजिला प्रश्न।"},
+2:{max:30,note:"३० सम्मका सङ्ख्या प्रयोग गरौँ।"},
+3:{max:100,note:"ठूला सङ्ख्यामा अभ्यास गरौँ।"},
+4:{max:500,note:"🏆 चुनौती! ठूला सङ्ख्याले अभ्यास गरौँ।"}
+};
+let operation="add",level=1,a=3,b=2,expected=5,attempts=0,correct=0,questionNo=1,answered=false;
+const icons={add:"🍎",sub:"🍊",mul:"⭐",div:"🍬"};
+const symbols={add:"+",sub:"−",mul:"×",div:"÷"};
+const hints={add:"दुवै सङ्ख्या जोड्नुहोस्।",sub:"पहिलो सङ्ख्याबाट दोस्रो सङ्ख्या घटाउनुहोस्।",mul:"एउटै सङ्ख्यालाई पटक-पटक जोडेर सोच्नुहोस्।",div:"कुल सङ्ख्यालाई बराबर समूहमा बाँड्नुहोस्।"};
+function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+function makeQuestion(){
+ const max=settings[level].max;
+ if(operation==="add"){
+  a=rand(0,max);b=rand(0,max);expected=a+b;
+ }else if(operation==="sub"){
+  a=rand(0,max);b=rand(0,a);expected=a-b;
+ }else if(operation==="mul"){
+  const cap=level===1?5:level===2?10:level===3?12:20;
+  a=rand(1,cap);b=rand(1,cap);expected=a*b;
+ }else{
+  const cap=level===1?5:level===2?10:level===3?12:20;
+  b=rand(1,cap);expected=rand(1,cap);a=b*expected;
+ }
+ answered=false;
+ $("question").textContent=ne(a)+" "+symbols[operation]+" "+ne(b)+" = ?";
+ $("problem-emoji").textContent=icons[operation];
+ $("hint").textContent=hints[operation];
+ $("answer").value="";
+ $("feedback").textContent="";
+ $("feedback").style.color="";
+ $("hint-detail").hidden=true;
+ $("hint-detail").textContent="";
+ $("round").textContent="प्रश्न "+ne(questionNo);
+ $("check").disabled=false;
+ $("answer").disabled=false;
+}
+function updateStats(){
+ $("correct").textContent=ne(correct);
+ $("attempts").textContent=ne(attempts);
+ const pct=attempts?Math.round(correct/attempts*100):0;
+ $("percent").textContent=ne(pct)+"%";
+ $("progress").style.width=pct+"%";
+ $("bar").setAttribute("aria-valuenow",String(pct));
+ $("encourage").textContent=attempts===0?"प्रयास गर्दै जाऔँ, हामी सिक्दै जान्छौँ! 💪":
+ pct===100?"🎉 शानदार! सबै उत्तर सही छन्!":
+ pct>=70?"🌟 धेरै राम्रो! अझै अभ्यास गरौँ।":
+ "💪 राम्रो प्रयास! गल्तीबाट पनि सिकिन्छ।";
+}
+function chooseOperation(op){
+ operation=op;
+ document.querySelectorAll("[data-op]").forEach(btn=>btn.classList.toggle("active",btn.dataset.op===op));
+ questionNo=1;makeQuestion();
+}
+document.querySelectorAll("[data-op]").forEach(btn=>btn.addEventListener("click",()=>chooseOperation(btn.dataset.op)));
+document.querySelectorAll("[data-level]").forEach(btn=>btn.addEventListener("click",()=>{
+ level=Number(btn.dataset.level);
+ document.querySelectorAll("[data-level]").forEach(b=>b.classList.toggle("active",b===btn));
+ $("level-note").textContent=settings[level].note;
+ questionNo=1;makeQuestion();
+}));
+function checkAnswer(){
+ if(answered)return;
+ const value=$("answer").value.trim();
+ if(value===""){
+  $("feedback").textContent="😊 पहिले आफ्नो उत्तर लेख्नुहोस्।";
+  $("feedback").style.color="var(--muted)";
+  $("answer").focus();return;
+ }
+ attempts++;
+ if(Number(value)===expected){
+  correct++;answered=true;
+  $("feedback").textContent="🎉 एकदम सही! तपाईंले राम्रो गर्नुभयो!";
+  $("feedback").style.color="var(--green)";
+  $("check").disabled=true;$("answer").disabled=true;
+ }else{
+  $("feedback").textContent="🙂 उत्तर मिलेन। फेरि सोचेर प्रयास गर्नुहोस्।";
+  $("feedback").style.color="var(--red)";
+ }
+ updateStats();
+}
+$("check").addEventListener("click",checkAnswer);
+$("answer").addEventListener("keydown",e=>{if(e.key==="Enter")checkAnswer()});
+$("next").addEventListener("click",()=>{
+ if(!answered && $("answer").value.trim()!=="")checkAnswer();
+ questionNo++;makeQuestion();$("answer").focus();
+});
+$("show-hint").addEventListener("click",()=>{
+ const box=$("hint-detail");
+ if(operation==="add")box.textContent="एउटा सङ्ख्याबाट सुरु गरेर अर्को सङ्ख्याका वस्तु थपेको कल्पना गर्नुहोस्।";
+ if(operation==="sub")box.textContent="पहिलो सङ्ख्या सम्झनुहोस् र त्यसबाट वस्तु हटाउँदै गन्नुहोस्।";
+ if(operation==="mul")box.textContent="साना समूह बनाएर प्रत्येक समूहमा बराबर वस्तु राख्नुहोस्।";
+ if(operation==="div")box.textContent="हरेक समूहमा बराबर वस्तु राख्दा कति-कति पर्छ भनेर सोच्नुहोस्।";
+ box.hidden=!box.hidden;
+});
+$("reset").addEventListener("click",()=>{
+ if(!confirm("तपाईंको यो अभ्यासको अङ्क फेरि शून्य बनाउने?"))return;
+ attempts=0;correct=0;questionNo=1;updateStats();makeQuestion();
+});
+$("theme").addEventListener("click",()=>{
+ document.body.classList.toggle("dark");
+ try{localStorage.setItem("kids-theme",document.body.classList.contains("dark")?"dark":"light")}catch(e){}
+});
+try{if(localStorage.getItem("kids-theme")==="dark")document.body.classList.add("dark")}catch(e){}
+makeQuestion();updateStats();
+})();
+</script>
+</body>
+</html>
