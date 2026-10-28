@@ -1,235 +1,724 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>जनावर र पन्छीहरू - पाठशाला</title>
-    <meta name="theme-color" content="#4CAF50">
-    <!-- Child-friendly Typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Mukta', 'Fredoka', sans-serif;
-            background: linear-gradient(180deg, #E8F5E9 0%, #C8E6C9 100%);
-            margin: 0;
-            padding: 15px;
-            text-align: center;
-            min-height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15803d">
+  <meta name="description" content="बाल पाठशालामा जनावर र पन्छीका नेपाली तथा अंग्रेजी नाम रमाउँदै सिकौँ।">
+  <title>जनावर र पन्छीहरू | बाल पाठशाला</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="../script.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f1fbf3;
+      --surface: #fff;
+      --text: #173b29;
+      --muted: #617c6b;
+      --primary: #15803d;
+      --border: #d5ead9;
+      --input: #f6fbf7;
+      --shadow: 0 8px 24px rgba(24, 90, 48, .09);
+    }
 
-        /* Header Layout */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto 15px auto;
-            background: #FFFFFF;
-            padding: 10px 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        h2 { 
-            color: #2E7D32; 
-            margin: 0; 
-            font-size: 20px; 
-            font-weight: 800;
-        }
-        .home-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 3px 0 #1B5E20;
-            transition: all 0.1s ease;
-        }
-        .home-btn:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
+    body.dark {
+      color-scheme: dark;
+      --bg: #101c18;
+      --surface: #1b2c24;
+      --text: #ecfff1;
+      --muted: #b0c9b8;
+      --primary: #4ade80;
+      --border: #355343;
+      --input: #14231b;
+      --shadow: 0 8px 24px rgba(0, 0, 0, .2);
+    }
 
-        /* Section Titles */
-        .section-title {
-            color: #1B5E20;
-            background: #FFFFFF;
-            padding: 10px 18px;
-            border-radius: 14px;
-            font-size: 19px;
-            font-weight: 800;
-            margin: 20px auto 15px auto;
-            max-width: 600px;
-            border: 3px solid #81C784;
-            box-shadow: 0 4px 0 #388E3C;
-        }
+    * { box-sizing: border-box; }
 
-        /* Grid Layout */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            max-width: 600px;
-            margin: auto;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 14px;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 5% 4%, rgba(74, 222, 128, .12), transparent 28%),
+        radial-gradient(circle at 95% 20%, rgba(250, 204, 21, .12), transparent 25%),
+        var(--bg);
+      font-family: "Nunito", "Baloo 2", sans-serif;
+      transition: background .2s, color .2s;
+    }
 
-        /* 3D Soft Card Style */
-        .card {
-            background-color: #FFFFFF;
-            color: #2E7D32;
-            border: 3px solid #81C784;
-            border-radius: 18px;
-            padding: 15px 10px;
-            box-shadow: 0 6px 0 #388E3C, 0 8px 10px rgba(0,0,0,0.08);
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.1s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .card:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #388E3C, 0 3px 6px rgba(0,0,0,0.1);
-            background-color: #F1F8E9;
-        }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 3px solid #f59e0b;
+      outline-offset: 3px;
+    }
 
-        /* Large Emoji Style */
-        .emoji-box {
-            font-size: 55px;
-            line-height: 1.1;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-        }
+    .page { width: min(100%, 940px); margin: auto; }
 
-        .np-name {
-            font-size: 20px;
-            font-weight: 800;
-            color: #1B5E20;
-            line-height: 1.2;
-        }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
 
-        .en-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: #558B2F;
-            font-family: 'Fredoka', sans-serif;
-        }
-    </style>
+    .home, .theme-btn {
+      min-height: 43px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .theme-btn { min-width: 44px; }
+
+    .hero {
+      padding: 24px 16px;
+      margin-bottom: 18px;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      color: #fff;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #15803d, #22a06b);
+      box-shadow: 0 12px 28px rgba(21, 128, 61, .2);
+    }
+
+    .hero-icons { font-size: 42px; }
+    .hero h1 {
+      margin: 5px 0;
+      font-family: "Baloo 2", sans-serif;
+      font-size: clamp(27px, 5vw, 37px);
+      line-height: 1.25;
+    }
+    .hero p { margin: 5px 0 0; font-weight: 800; }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-bottom: 13px;
+    }
+
+    .search-wrap { position: relative; }
+    .search-icon {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    #search {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px 12px 42px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    #search::placeholder { color: var(--muted); }
+
+    .english-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 20px;
+    }
+
+    .filter {
+      padding: 9px 15px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .filter.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .section {
+      margin: 20px 0 25px;
+      scroll-margin-top: 12px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 0 2px 12px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: "Baloo 2", sans-serif;
+      font-size: 24px;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      display: flex;
+      min-width: 0;
+      min-height: 165px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 13px 8px;
+      border: 2px solid var(--border);
+      border-radius: 21px;
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: transform .16s, border-color .16s;
+    }
+
+    .card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .card:active { transform: scale(.97); }
+
+    .emoji {
+      display: grid;
+      place-items: center;
+      width: 76px;
+      height: 73px;
+      border-radius: 20px;
+      background: var(--input);
+      font-size: 49px;
+      line-height: 1;
+    }
+
+    .np-name {
+      margin-top: 4px;
+      font-family: "Baloo 2", sans-serif;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .en-name { color: var(--muted); font-size: 14px; font-weight: 900; }
+    .speak-hint { margin-top: 3px; color: var(--primary); font-size: 11px; font-weight: 900; }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 25px 12px;
+      border: 2px dashed var(--border);
+      border-radius: 18px;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .quiz {
+      margin-top: 25px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 23px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .quiz h2 {
+      margin: 0 0 5px;
+      font-family: "Baloo 2", sans-serif;
+      font-size: 25px;
+    }
+
+    .quiz-intro { margin: 0 0 16px; color: var(--muted); font-weight: 700; }
+    #quizContent { text-align: center; }
+    #progress { color: var(--muted); font-size: 13px; font-weight: 900; }
+    #quizEmoji { margin: 10px 0; font-size: 68px; }
+    #question { margin: 8px 0 16px; font-size: 20px; font-weight: 900; }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .option {
+      min-height: 48px;
+      padding: 10px;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      background: var(--input);
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .option:disabled { opacity: 1; cursor: default; }
+    .option.correct { border-color: #16a34a; background: rgba(22, 163, 74, .15); }
+    .option.wrong { border-color: #ef4444; background: rgba(239, 68, 68, .12); }
+
+    #feedback { min-height: 28px; margin: 12px 0 5px; font-weight: 900; }
+
+    .primary-btn {
+      min-height: 45px;
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 14px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .primary-btn:disabled { opacity: .45; cursor: not-allowed; }
+    .quiz-actions { display: flex; justify-content: center; gap: 9px; margin-top: 12px; flex-wrap: wrap; }
+
+    .result { padding: 20px 8px; }
+    .result-emoji { font-size: 58px; }
+    .result h3 { margin: 8px 0; font-size: 25px; }
+    .result p { color: var(--muted); font-weight: 800; }
+
+    footer {
+      padding: 24px 8px 10px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 620px) {
+      body { padding: 11px; }
+      .toolbar { grid-template-columns: 1fr; }
+      .english-toggle { justify-self: start; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .card { min-height: 155px; }
+      .hero { padding: 21px 12px; }
+      .quiz { padding: 16px 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
 </head>
 <body>
+  <main class="page">
+    <nav class="topbar" aria-label="मुख्य नेभिगेसन">
+      <a class="home" href="../index.html">🏠 होम</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="थिम परिवर्तन गर्नुहोस्">🌙</button>
+    </nav>
 
-    <div class="header">
-        <a href="index.html" class="home-btn">🏠 होम</a>
-        <h2>जनावर र पन्छीहरू</h2>
-    </div>
+    <header class="hero">
+      <div class="hero-icons" aria-hidden="true">🐯 🦜 🐘</div>
+      <h1>जनावर र पन्छीहरू</h1>
+      <p>Animals & Birds — हेरौँ, सुनौँ र रमाउँदै सिकौँ!</p>
+    </header>
 
-    <!-- पाल्तु तथा जङ्गली जनावर सेक्सन -->
-    <div class="section-title">🐅 जनावरहरू (Animals)</div>
-    <div class="grid-container" id="animalsGrid"></div>
+    <section aria-label="नाम खोज्नुहोस्">
+      <div class="toolbar">
+        <label class="search-wrap">
+          <span class="search-icon" aria-hidden="true">🔎</span>
+          <input id="search" type="search" placeholder="नेपाली वा English नाम खोज्नुहोस्..." autocomplete="off" aria-label="जनावर वा पन्छीको नाम खोज्नुहोस्">
+        </label>
+        <label class="english-toggle">
+          <input id="showEnglish" type="checkbox" checked>
+          English नाम देखाउने
+        </label>
+      </div>
 
-    <!-- पन्छीहरू सेक्सन -->
-    <div class="section-title">🦅 पन्छीहरू (Birds)</div>
-    <div class="grid-container" id="birdsGrid"></div>
+      <div class="filters" role="group" aria-label="सिकाइको खण्ड">
+        <button class="filter active" type="button" data-filter="all" aria-pressed="true">🌟 सबै</button>
+        <button class="filter" type="button" data-filter="animal" aria-pressed="false">🐾 जनावर</button>
+        <button class="filter" type="button" data-filter="bird" aria-pressed="false">🦜 पन्छी</button>
+      </div>
+    </section>
 
-    <script>
-        let currentAudio = null;
+    <section class="section" id="animalsSection" aria-labelledby="animalsTitle">
+      <div class="section-heading">
+        <h2 id="animalsTitle">🐾 जनावरहरू (Animals)</h2>
+        <span class="count" id="animalCount"></span>
+      </div>
+      <div class="grid" id="animalsGrid"></div>
+    </section>
 
-        // नयाँ र सुरक्षित आवाज बजाउने फङ्सन (Base64 सपोर्ट सहित)
-        async function playAIVoice(textToSpeak) {
-            try {
-                if (currentAudio) {
-                    currentAudio.pause();
-                }
+    <section class="section" id="birdsSection" aria-labelledby="birdsTitle">
+      <div class="section-heading">
+        <h2 id="birdsTitle">🪶 पन्छीहरू (Birds)</h2>
+        <span class="count" id="birdCount"></span>
+      </div>
+      <div class="grid" id="birdsGrid"></div>
+    </section>
 
-                const response = await fetch('/api/tts', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text: textToSpeak })
-                });
+    <section class="quiz" aria-labelledby="quizTitle">
+      <h2 id="quizTitle">🎯 रमाइलो क्विज</h2>
+      <p class="quiz-intro">तस्बिर हेरेर सही English नाम छान्नुहोस्।</p>
+      <div id="quizContent"></div>
+    </section>
 
-                if (!response.ok) {
-                    const errData = await response.json();
-                    throw new Error(errData.error || 'सर्भरबाट रेस्पोन्स आएन');
-                }
+    <footer>🌈 बाल पाठशाला — खेल्दै सिकौँ, सिक्दै रमाऔँ!</footer>
+  </main>
 
-                const data = await response.json();
-                
-                const audioUrl = `data:audio/mpeg;base64,${data.audioData}`;
-                currentAudio = new Audio(audioUrl);
-                
-                await currentAudio.play(); 
-                console.log("अडियो सफलपूर्वक बज्यो!");
-            } catch (error) {
-                console.error("त्रुटि:", error);
-                alert("❌ आवाज बजाउन सकिएन: " + error.message); 
-            }
+  <script>
+    "use strict";
+
+    const animals = [
+      { np: "बाघ", en: "Tiger", emoji: "🐅" },
+      { np: "सिंह", en: "Lion", emoji: "🦁" },
+      { np: "हात्ती", en: "Elephant", emoji: "🐘" },
+      { np: "गाई", en: "Cow", emoji: "🐄" },
+      { np: "भैँसी", en: "Buffalo", emoji: "🐃" },
+      { np: "घोडा", en: "Horse", emoji: "🐎" },
+      { np: "कुकुर", en: "Dog", emoji: "🐕" },
+      { np: "बिरालो", en: "Cat", emoji: "🐈" },
+      { np: "बाख्रा", en: "Goat", emoji: "🐐" },
+      { np: "भेडा", en: "Sheep", emoji: "🐑" },
+      { np: "बाँदर", en: "Monkey", emoji: "🐒" },
+      { np: "भालु", en: "Bear", emoji: "🐻" },
+      { np: "खरायो", en: "Rabbit", emoji: "🐇" },
+      { np: "स्याल", en: "Fox", emoji: "🦊" },
+      { np: "चितुवा", en: "Leopard", emoji: "🐆" },
+      { np: "जिराफ", en: "Giraffe", emoji: "🦒" },
+      { np: "जेब्रा", en: "Zebra", emoji: "🦓" },
+      { np: "पाण्डा", en: "Panda", emoji: "🐼" },
+      { np: "मृग", en: "Deer", emoji: "🦌" },
+      { np: "ऊँट", en: "Camel", emoji: "🐫" }
+    ];
+
+    const birds = [
+      { np: "सुगा", en: "Parrot", emoji: "🦜" },
+      { np: "मयूर", en: "Peacock", emoji: "🦚" },
+      { np: "उल्लु", en: "Owl", emoji: "🦉" },
+      { np: "परेवा", en: "Pigeon", emoji: "🕊️" },
+      { np: "हाँस", en: "Duck", emoji: "🦆" },
+      { np: "भाले", en: "Rooster", emoji: "🐓" },
+      { np: "कुखुरा", en: "Hen", emoji: "🐔" },
+      { np: "भँगेरा", en: "Sparrow", emoji: "🐦" },
+      { np: "चील", en: "Eagle", emoji: "🦅" },
+      { np: "फ्लेमिङ्गो", en: "Flamingo", emoji: "🦩" },
+      { np: "पेन्गुइन", en: "Penguin", emoji: "🐧" },
+      { np: "काग", en: "Crow", emoji: "🐦‍⬛" },
+      { np: "कोइली", en: "Cuckoo", emoji: "🐦" },
+      { np: "सारस", en: "Crane", emoji: "🪿" },
+      { np: "कठफोरवा", en: "Woodpecker", emoji: "🐦" },
+      { np: "शुतुरमुर्ग", en: "Ostrich", emoji: "🪶" }
+    ];
+
+    const search = document.getElementById("search");
+    const showEnglish = document.getElementById("showEnglish");
+    const animalsGrid = document.getElementById("animalsGrid");
+    const birdsGrid = document.getElementById("birdsGrid");
+    const animalCount = document.getElementById("animalCount");
+    const birdCount = document.getElementById("birdCount");
+    const themeBtn = document.getElementById("themeBtn");
+    let activeFilter = "all";
+
+    function speak(text) {
+      if (typeof window.playAIVoice === "function") {
+        try {
+          const result = window.playAIVoice(text);
+          if (result && typeof result.catch === "function") {
+            result.catch(err => console.warn("AI voice:", err));
+          }
+        } catch (err) {
+          console.warn("AI voice उपलब्ध छैन:", err);
         }
+      } else {
+        console.warn("AI voice function भेटिएन। ../script.js र voice configuration जाँच्नुहोस्।");
+      }
+    }
 
-        // जनावरहरूको सूची (Emoji सहित)
-        const animalsData = [
-            { np: 'बाघ', en: 'Tiger', emoji: '🐅' },
-            { np: 'सिंह', en: 'Lion', emoji: '🦁' },
-            { np: 'हात्ती', en: 'Elephant', emoji: '🐘' },
-            { np: 'गाई', en: 'Cow', emoji: '🐄' },
-            { np: 'भैंसी', en: 'Buffalo', emoji: '🐃' },
-            { np: 'घोडा', en: 'Horse', emoji: '🐎' },
-            { np: 'कुकुर', en: 'Dog', emoji: '🐕' },
-            { np: 'बिरालो', en: 'Cat', emoji: '🐈' },
-            { np: 'बाख्रा', en: 'Goat', emoji: '🐐' },
-            { np: 'बाँदर', en: 'Monkey', emoji: '🐒' },
-            { np: 'भालु', en: 'Bear', emoji: '🐻' },
-            { np: 'खरायो', en: 'Rabbit', emoji: '🐇' }
-        ];
+    function makeCard(item) {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "card";
+      card.setAttribute("aria-label", `${item.np}, ${item.en}। आवाज सुन्न थिच्नुहोस्।`);
 
-        // पन्छीहरूको सूची (Emoji सहित)
-        const birdsData = [
-            { np: 'सुगा', en: 'Parrot', emoji: '🦜' },
-            { np: 'मजुर', en: 'Peacock', emoji: '🦚' },
-            { np: 'उल्लु', en: 'Owl', emoji: '🦉' },
-            { np: 'परेवा', en: 'Pigeon', emoji: '🕊️' },
-            { np: 'हाँस', en: 'Duck', emoji: '🦆' },
-            { np: 'कुखुरा', en: 'Rooster', emoji: '🐓' },
-            { np: 'भँगेरा', en: 'Sparrow', emoji: '🐦' },
-            { np: 'चील', en: 'Eagle', emoji: '🦅' },
-            { np: 'फ्लेमिङ्गो', en: 'Flamingo', emoji: '🦩' },
-            { np: 'पेन्गुइन', en: 'Penguin', emoji: '🐧' }
-        ];
+      const emoji = document.createElement("span");
+      emoji.className = "emoji";
+      emoji.setAttribute("aria-hidden", "true");
+      emoji.textContent = item.emoji;
 
-        // जनावर लोड गर्ने
-        const animalsGrid = document.getElementById('animalsGrid');
-        animalsData.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="emoji-box">${item.emoji}</div>
-                <div class="np-name">${item.np}</div>
-                <div class="en-name">${item.en}</div>
-            `;
-            card.addEventListener('click', () => playAIVoice(item.np));
-            animalsGrid.appendChild(card);
+      const np = document.createElement("span");
+      np.className = "np-name";
+      np.textContent = item.np;
+
+      card.append(emoji, np);
+
+      if (showEnglish.checked) {
+        const en = document.createElement("span");
+        en.className = "en-name";
+        en.textContent = item.en;
+        card.appendChild(en);
+      }
+
+      const hint = document.createElement("span");
+      hint.className = "speak-hint";
+      hint.textContent = "🔊 आवाज सुन्नुहोस्";
+      card.appendChild(hint);
+
+      card.addEventListener("click", () => speak(`${item.np}. ${item.en}`));
+      return card;
+    }
+
+    function renderGroup(items, grid, counter, type) {
+      const query = search.value.trim().toLocaleLowerCase();
+      const visible = items.filter(item => {
+        const matchesType = activeFilter === "all" || activeFilter === type;
+        const matchesQuery =
+          item.np.toLocaleLowerCase().includes(query) ||
+          item.en.toLocaleLowerCase().includes(query);
+        return matchesType && matchesQuery;
+      });
+
+      grid.replaceChildren();
+      counter.textContent = `${visible.length} वटा`;
+
+      if (!visible.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty";
+        empty.textContent = "😕 भेटिएन। अर्को नाम खोज्नुहोस्।";
+        grid.appendChild(empty);
+        return;
+      }
+
+      visible.forEach(item => grid.appendChild(makeCard(item)));
+    }
+
+    function renderAll() {
+      renderGroup(animals, animalsGrid, animalCount, "animal");
+      renderGroup(birds, birdsGrid, birdCount, "bird");
+
+      document.getElementById("animalsSection").hidden = activeFilter === "bird";
+      document.getElementById("birdsSection").hidden = activeFilter === "animal";
+    }
+
+    search.addEventListener("input", renderAll);
+    showEnglish.addEventListener("change", renderAll);
+
+    document.querySelectorAll(".filter").forEach(button => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        document.querySelectorAll(".filter").forEach(other => {
+          const selected = other === button;
+          other.classList.toggle("active", selected);
+          other.setAttribute("aria-pressed", String(selected));
         });
+        renderAll();
+      });
+    });
 
-        // पन्छी लोड गर्ने
-        const birdsGrid = document.getElementById('birdsGrid');
-        birdsData.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <div class="emoji-box">${item.emoji}</div>
-                <div class="np-name">${item.np}</div>
-                <div class="en-name">${item.en}</div>
-            `;
-            card.addEventListener('click', () => playAIVoice(item.np));
-            birdsGrid.appendChild(card);
-        });
-    </script>
+    function applyTheme(dark) {
+      document.body.classList.toggle("dark", dark);
+      themeBtn.textContent = dark ? "☀️" : "🌙";
+      themeBtn.setAttribute("aria-label", dark ? "Light Mode खोल्नुहोस्" : "Dark Mode खोल्नुहोस्");
+      document.querySelector('meta[name="theme-color"]').content = dark ? "#101c18" : "#15803d";
+      try {
+        localStorage.setItem("theme", dark ? "dark" : "light");
+      } catch (err) {
+        console.warn("Theme save गर्न सकिएन:", err);
+      }
+    }
 
+    try {
+      applyTheme(localStorage.getItem("theme") === "dark");
+    } catch (err) {
+      applyTheme(false);
+    }
+
+    themeBtn.addEventListener("click", () => {
+      applyTheme(!document.body.classList.contains("dark"));
+    });
+
+    // क्विजमा दुवै समूहका जनावर र पन्छी समावेश छन्।
+    const allItems = [
+      ...animals.map(item => ({ ...item, group: "जनावर" })),
+      ...birds.map(item => ({ ...item, group: "पन्छी" }))
+    ];
+    const QUIZ_LENGTH = 8;
+    let questions = [];
+    let questionIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    const quizContent = document.getElementById("quizContent");
+
+    function shuffle(items) {
+      const result = [...items];
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    function startQuiz() {
+      questions = shuffle(allItems).slice(0, QUIZ_LENGTH);
+      questionIndex = 0;
+      score = 0;
+      answered = false;
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      answered = false;
+      const item = questions[questionIndex];
+      quizContent.replaceChildren();
+
+      const progress = document.createElement("div");
+      progress.id = "progress";
+      progress.textContent = `प्रश्न ${questionIndex + 1} / ${QUIZ_LENGTH} · अङ्क ${score}`;
+
+      const emoji = document.createElement("div");
+      emoji.id = "quizEmoji";
+      emoji.setAttribute("aria-hidden", "true");
+      emoji.textContent = item.emoji;
+
+      const question = document.createElement("div");
+      question.id = "question";
+      question.textContent = `${item.group}को सही English नाम छान्नुहोस्।`;
+
+      const options = document.createElement("div");
+      options.className = "options";
+
+      const feedback = document.createElement("div");
+      feedback.id = "feedback";
+      feedback.setAttribute("role", "status");
+      feedback.setAttribute("aria-live", "polite");
+
+      const actions = document.createElement("div");
+      actions.className = "quiz-actions";
+
+      const next = document.createElement("button");
+      next.type = "button";
+      next.id = "nextBtn";
+      next.className = "primary-btn";
+      next.disabled = true;
+      next.textContent = questionIndex === QUIZ_LENGTH - 1
+        ? "नतिजा हेर्नुहोस् 🏆"
+        : "अर्को प्रश्न ➜";
+      next.addEventListener("click", nextQuestion);
+      actions.appendChild(next);
+
+      const wrongOptions = shuffle(allItems.filter(v => v.en !== item.en)).slice(0, 3);
+      const choices = shuffle([item, ...wrongOptions]);
+
+      choices.forEach(choice => {
+        const option = document.createElement("button");
+        option.type = "button";
+        option.className = "option";
+        option.textContent = choice.en;
+        option.addEventListener("click", () => selectAnswer(option, choice, item));
+        options.appendChild(option);
+      });
+
+      quizContent.append(progress, emoji, question, options, feedback, actions);
+    }
+
+    function selectAnswer(selectedButton, choice, correctItem) {
+      if (answered) return;
+      answered = true;
+
+      document.querySelectorAll("#quizContent .option").forEach(option => {
+        option.disabled = true;
+        if (option.textContent === correctItem.en) {
+          option.classList.add("correct");
+        }
+      });
+
+      const feedback = document.getElementById("feedback");
+
+      if (choice.en === correctItem.en) {
+        score++;
+        feedback.textContent = "🎉 एकदम सही! शाबास!";
+      } else {
+        selectedButton.classList.add("wrong");
+        feedback.textContent = `🙂 सही उत्तर: ${correctItem.en}`;
+      }
+
+      document.getElementById("progress").textContent =
+        `प्रश्न ${questionIndex + 1} / ${QUIZ_LENGTH} · अङ्क ${score}`;
+      document.getElementById("nextBtn").disabled = false;
+    }
+
+    function nextQuestion() {
+      if (!answered) return;
+
+      if (questionIndex < QUIZ_LENGTH - 1) {
+        questionIndex++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      quizContent.replaceChildren();
+
+      const box = document.createElement("div");
+      box.className = "result";
+
+      const emoji = document.createElement("div");
+      emoji.className = "result-emoji";
+      emoji.textContent = score >= 7 ? "🏆" : score >= 5 ? "🌟" : "💪";
+
+      const title = document.createElement("h3");
+      title.textContent = score >= 7 ? "वाह! उत्कृष्ट!" : score >= 5 ? "धेरै राम्रो!" : "राम्रो प्रयास!";
+
+      const result = document.createElement("p");
+      result.textContent = `${QUIZ_LENGTH} मध्ये ${score} अङ्क प्राप्त गर्नुभयो।`;
+
+      const restart = document.createElement("button");
+      restart.type = "button";
+      restart.className = "primary-btn";
+      restart.textContent = "🔄 फेरि खेलौँ";
+      restart.addEventListener("click", startQuiz);
+
+      box.append(emoji, title, result, restart);
+      quizContent.appendChild(box);
+    }
+
+    renderAll();
+    startQuiz();
+  </script>
 </body>
 </html>
