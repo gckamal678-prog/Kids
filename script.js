@@ -1,47 +1,21 @@
 
 /*
- * बाल पाठशाला — सुधारिएको AI Voice Controller
- * पाठका कार्ड थिच्दा आवाज, र दोहोरिएको आवाजका लागि cache।
+ * बाल पाठशाला — AI Voice Controller
+ * सबै पाठमा आवाज, अडियो क्यास र वैकल्पिक ब्राउजर आवाज।
  */
 (() => {
   "use strict";
 
   const VOICE_WORKER =
-    "https://bal-pathshala-voice.gckamal67.workers.dev";
+    "https://bal-pathshala-voice.gckamal67.workers.dev/";
 
-  const ALLOWED_SUFFIXES = [
-    "/nepali/vowels.html",
-    "/nepali/consonants.html",
-    "/nepali/barahakhari.html",
-    "/english/alphabet.html"
-  ];
+  const audioCache = new Map();
+  const MAX_CACHE = 60;
 
   let currentAudio = null;
   let currentAudioUrl = null;
   let activeController = null;
   let requestNumber = 0;
-
-  // हालको पेजको ठेगाना सही तरिकाले जाँच्ने।
-  function isVoiceAllowedHere() {
-    const path = window.location.pathname
-      .replace(/\/+$/, "") || "/";
-
-    if (
-      path === "/" ||
-      path.endsWith("/index.html") ||
-      path.endsWith("/Kids")
-    ) {
-      return true;
-    }
-
-    return ALLOWED_SUFFIXES.some(suffix =>
-      path.endsWith(suffix)
-    );
-  }
-
-  // पहिले तयार भएको आवाज सम्झिराख्ने।
-  const audioCache = new Map();
-  const MAX_CACHE = 60;
 
   function stopBrowserSpeech() {
     if ("speechSynthesis" in window) {
@@ -80,31 +54,45 @@
   }
 
   function rememberAudio(text, blob) {
-    if (audioCache.has(text)) {
-      audioCache.delete(text);
-    }
-
+    audioCache.delete(text);
     audioCache.set(text, blob);
 
     while (audioCache.size > MAX_CACHE) {
-      const oldestKey = audioCache.keys().next().value;
-      audioCache.delete(oldestKey);
+      audioCache.delete(audioCache.keys().next().value);
     }
   }
 
+  // AI आवाज असफल हुँदा ब्राउजरको आवाज प्रयोग गर्ने।
+  function playBrowserSpeech(text) {
+    return new Promise((resolve) => {
+      if (!("speechSynthesis" in window)) {
+        resolve(false);
+        return;
+      }
+
+      try {
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = /[A-Za-z]/.test(text) ? "en-US" : "ne-NP";
+        utterance.rate = 0.85;
+        utterance.pitch = 1;
+
+        utterance.onend = () => resolve(true);
+        utterance.onerror = () => resolve(false);
+
+        window.speechSynthesis.speak(utterance);
+      } catch (_) {
+        resolve(false);
+      }
+    });
+  }
+
   async function playVoice(textToSpeak, callback) {
-    stopBrowserSpeech();
-
-    if (!isVoiceAllowedHere()) {
-      stopVoice();
-      return false;
-    }
-
-    const text = String(textToSpeak ?? "").trim();
+    const text = String(textToSpeak ?? "").trim().slice(0, 500);
     if (!text) return false;
 
-    const safeText = text.slice(0, 500);
-    const id = ++requestNumber;
+    stopBrowserSpeech();
 
     if (activeController) {
       activeController.abort();
@@ -113,45 +101,57 @@
 
     releaseCurrentAudio();
 
-    try {
-      let blob = audioCache.get(safeText);
+    const id = ++requestNumber;
+    let blob = audioCache.get(text);
 
-      // क्यासमा नभए मात्र AI सेवाबाट आवाज ल्याउने।
+    try {
       if (!blob) {
         const controller = new AbortController();
         activeController = controller;
 
-        const response = await fetch(VOICE_WORKER, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ text: safeText }),
-          signal: controller.signal
-        });
+        // अनुरोध धेरै समय अड्किएमा रद्द गर्ने।
+        const timeout = setTimeout(() => controller.abort(), 25000);
+
+        let response;
+
+        try {
+          response = await fetch(VOICE_WORKER, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ text }),
+            signal: controller.signal
+          });
+        } finally {
+          clearTimeout(timeout);
+        }
 
         if (id !== requestNumber) return false;
 
         if (!response.ok) {
-          throw new Error("Voice service error: " + response.status);
+          throw new Error("Worker HTTP " + response.status);
         }
 
         blob = await response.blob();
 
         if (id !== requestNumber) return false;
+
         if (!blob.size) {
-          throw new Error("खाली अडियो प्राप्त भयो।");
+          throw new Error("Worker बाट खाली अडियो आयो।");
         }
+
+        const type = (blob.type || "").toLowerCase();
 
         if (
-          blob.type &&
-          !/^audio\//i.test(blob.type) &&
-          blob.type !== "application/octet-stream"
+          type &&
+          !type.startsWith("audio/") &&
+          !type.includes("octet-stream")
         ) {
-          throw new Error("अडियोको प्रकार मिलेन: " + blob.type);
+          throw new Error("Worker ले अडियोको सट्टा अर्को सामग्री पठायो: " + type);
         }
 
-        rememberAudio(safeText, blob);
+        rememberAudio(text, blob);
       }
 
       if (id !== requestNumber) return false;
@@ -176,76 +176,91 @@
           try {
             callback();
           } catch (error) {
-            console.warn("Voice callback:", error);
+            console.warn("Voice callback error:", error);
           }
         }
       }
 
       audio.onended = finish;
 
-      audio.onerror = () => {
-        if (id === requestNumber) {
-          console.warn("अडियो बजाउन सकिएन।");
-          finish();
-        }
+      audio.onerror = async () => {
+        if (id !== requestNumber || finished) return;
+
+        finished = true;
+        releaseCurrentAudio();
+
+        console.warn("AI अडियो बजेन। ब्राउजर आवाज प्रयास गरिँदैछ।");
+        await playBrowserSpeech(text);
       };
 
-      await audio.play();
-      return true;
+      try {
+        await audio.play();
+        return true;
+      } catch (error) {
+        if (id !== requestNumber) return false;
 
+        releaseCurrentAudio();
+        console.warn("AI अडियो प्ले हुन सकेन:", error);
+
+        return await playBrowserSpeech(text);
+      }
     } catch (error) {
       if (id !== requestNumber) return false;
 
       activeController = null;
+      console.warn("AI आवाज अनुरोध असफल:", error);
 
-      if (error?.name !== "AbortError") {
-        console.error("AI आवाज चलाउन समस्या:", error);
-      }
-
-      return false;
+      // AI सेवा असफल भए वैकल्पिक आवाज।
+      return await playBrowserSpeech(text);
     }
   }
 
   window.playVoice = playVoice;
   window.playAIVoice = playVoice;
   window.stopVoice = stopVoice;
-  window.isGeminiVoiceAllowed = isVoiceAllowedHere;
 
-  // मुख्य पेजका प्रत्येक पाठमा छुट्टै आवाज बटन थप्ने।
+  // मुख्य पेजका सबै पाठमा आवाज बटन थप्ने।
   function addHomeVoiceButtons() {
     const grid = document.getElementById("book-grid");
     if (!grid) return;
 
-    const style = document.createElement("style");
-    style.textContent = `
-      .book-item {
-        display: grid;
-        grid-template-rows: 1fr auto;
-        gap: 6px;
-        min-width: 0;
-      }
-      .book-speak {
-        width: 100%;
-        min-height: 42px;
-        padding: 8px;
-        border: 1px solid #cbd7ee;
-        border-radius: 12px;
-        background: #fff;
-        color: #23458b;
-        font: inherit;
-        font-weight: 750;
-        cursor: pointer;
-      }
-      body.dark-mode .book-speak {
-        background: #1c2739;
-        color: #dce7ff;
-        border-color: #35435b;
-      }
-      .book-item[hidden] {
-        display: none !important;
-      }
-    `;
-    document.head.appendChild(style);
+    if (!document.getElementById("book-voice-style")) {
+      const style = document.createElement("style");
+      style.id = "book-voice-style";
+      style.textContent = `
+        .book-item {
+          display: grid;
+          grid-template-rows: 1fr auto;
+          gap: 6px;
+          min-width: 0;
+        }
+        .book-speak {
+          width: 100%;
+          min-height: 42px;
+          padding: 9px;
+          border: 1px solid #cbd7ee;
+          border-radius: 12px;
+          background: #fff;
+          color: #23458b;
+          font: inherit;
+          font-weight: 700;
+          cursor: pointer;
+        }
+        .book-speak:disabled {
+          opacity: .7;
+          cursor: wait;
+        }
+        body.dark-mode .book-speak {
+          background: #1c2739;
+          color: #dce7ff;
+          border-color: #35435b;
+        }
+        .book-item[hidden] {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
 
     grid.querySelectorAll("a.book[data-category]").forEach(card => {
       if (card.closest(".book-item")) return;
@@ -262,24 +277,26 @@
       button.textContent = "🔊 पाठ सुनौँ";
 
       button.addEventListener("click", async () => {
-        const title = card.querySelector("strong")?.textContent || "";
-        const description = card.querySelector("small")?.textContent || "";
+        const title =
+          card.querySelector("strong")?.textContent?.trim() || "";
+        const description =
+          card.querySelector("small")?.textContent?.trim() || "";
+        const text = [title, description].filter(Boolean).join(". ");
 
         button.disabled = true;
         button.textContent = "⏳ आवाज तयार हुँदैछ…";
 
         try {
-          const ok = await playVoice(`${title}. ${description}`);
-          if (!ok) {
-            button.textContent = "🔁 फेरि प्रयास गर्नुहोस्";
-          } else {
-            button.textContent = "🔊 फेरि सुन्नुहोस्";
-          }
+          const ok = await playVoice(text);
+
+          button.textContent = ok
+            ? "🔊 फेरि सुन्नुहोस्"
+            : "🔁 फेरि प्रयास गर्नुहोस्";
+        } catch (error) {
+          console.error(error);
+          button.textContent = "🔁 फेरि प्रयास गर्नुहोस्";
         } finally {
           button.disabled = false;
-          if (button.textContent === "⏳ आवाज तयार हुँदैछ…") {
-            button.textContent = "🔊 पाठ सुनौँ";
-          }
         }
       });
 
@@ -287,10 +304,40 @@
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", addHomeVoiceButtons);
-  } else {
+  // स्वागत आवाज बटन।
+  function setupWelcomeButton() {
+    const button = document.getElementById("voice-toggle");
+    if (!button || button.dataset.voiceReady === "yes") return;
+
+    button.dataset.voiceReady = "yes";
+
+    button.addEventListener("click", async () => {
+      button.disabled = true;
+      button.textContent = "⏳ आवाज तयार हुँदैछ…";
+
+      try {
+        const ok = await playVoice(
+          "बाल पाठशालामा स्वागत छ। आउनुहोस्, रमाउँदै नयाँ कुरा सिकौँ।"
+        );
+
+        button.textContent = ok
+          ? "🔊 स्वागत आवाज फेरि सुन्नुहोस्"
+          : "🔁 स्वागत आवाज फेरि प्रयास गर्नुहोस्";
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+
+  function initializeVoice() {
     addHomeVoiceButtons();
+    setupWelcomeButton();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeVoice);
+  } else {
+    initializeVoice();
   }
 
   window.addEventListener("pagehide", stopVoice);
