@@ -1,45 +1,23 @@
 
 /*
  * बाल पाठशाला — Gemini AI Voice Controller
- * Gemini TTS through Cloudflare Worker.
- *
- * Voice allowed only on:
- * 1. Home page welcome message
- * 2. Nepali vowels, consonants and barahakhari
- * 3. English alphabet pages
- *
- * No browser speech fallback.
+ * Voice runs only on the home page and approved existing lessons.
+ * Browser speech fallback is disabled.
  */
 
-(function () {
+(() => {
   "use strict";
 
   const VOICE_WORKER =
     "https://bal-pathshala-voice.gckamal67.workers.dev";
 
+  // Relative page paths, independent of the deployment folder.
   const ALLOWED_PAGES = new Set([
-    "/Kids/",
-    "/Kids/index.html",
-    "/",
-    "/index.html",
-
-    "/Kids/nepali/vowels.html",
-    "/Kids/nepali/consonants.html",
-    "/Kids/nepali/barahakhari.html",
-    "/Kids/nepali/imagevowels.html",
-    "/Kids/nepali/imageconsonants.html",
-
-    "/Kids/english/alphabet.html",
-    "/Kids/english/alphabet-image.html",
-
-    "/nepali/vowels.html",
-    "/nepali/consonants.html",
-    "/nepali/barahakhari.html",
-    "/nepali/imagevowels.html",
-    "/nepali/imageconsonants.html",
-
-    "/english/alphabet.html",
-    "/english/alphabet-image.html"
+    "index.html",
+    "nepali/vowels.html",
+    "nepali/consonants.html",
+    "nepali/barahakhari.html",
+    "english/alphabet.html"
   ]);
 
   let currentAudio = null;
@@ -47,9 +25,26 @@
   let activeController = null;
   let requestNumber = 0;
 
+  function getRelativePagePath() {
+    const pathname = window.location.pathname;
+    const scopePath = new URL(
+      "./",
+      window.location.href
+    ).pathname;
+
+    // Strip the current directory prefix where possible.
+    let relative = pathname.startsWith(scopePath)
+      ? pathname.slice(scopePath.length)
+      : pathname.replace(/^\/+/, "");
+
+    relative = relative.replace(/\/+$/, "");
+
+    // A directory URL is treated as its index page.
+    return relative || "index.html";
+  }
+
   function isVoiceAllowedHere() {
-    const path = window.location.pathname;
-    return ALLOWED_PAGES.has(path);
+    return ALLOWED_PAGES.has(getRelativePagePath());
   }
 
   function stopBrowserSpeech() {
@@ -57,7 +52,7 @@
       try {
         window.speechSynthesis.cancel();
       } catch (_) {
-        // Browser voice is deliberately disabled.
+        // Browser speech is intentionally disabled.
       }
     }
   }
@@ -91,10 +86,8 @@
   }
 
   async function playVoice(textToSpeak, callback) {
-    // Stop any legacy phone/browser speech.
     stopBrowserSpeech();
 
-    // Do not permit voice on other learning pages.
     if (!isVoiceAllowedHere()) {
       stopVoice();
       return false;
@@ -109,7 +102,6 @@
       return false;
     }
 
-    // Keep requests manageable and prevent accidental huge requests.
     const safeText = text.slice(0, 500);
     const id = ++requestNumber;
 
@@ -144,11 +136,11 @@
             details = ": " + data.error;
           }
         } catch (_) {
-          // Response may not be JSON.
+          // The error response may not be JSON.
         }
 
         throw new Error(
-          "Gemini Worker failed (" +
+          "Voice service failed (" +
           response.status +
           ")" +
           details
@@ -160,7 +152,7 @@
       if (id !== requestNumber) return false;
 
       if (!blob.size) {
-        throw new Error("Gemini returned an empty audio file.");
+        throw new Error("The voice service returned empty audio.");
       }
 
       if (
@@ -192,10 +184,10 @@
 
       audio.onended = finish;
 
-      audio.onerror = function () {
+      audio.onerror = () => {
         if (id !== requestNumber) return;
 
-        console.error("Gemini audio playback failed.");
+        console.error("Voice audio playback failed.");
         finish();
       };
 
@@ -205,7 +197,7 @@
       } catch (error) {
         if (id !== requestNumber) return false;
 
-        console.error("Gemini audio could not play:", error);
+        console.error("Voice playback failed:", error);
         finish();
         return false;
       }
@@ -219,11 +211,10 @@
       activeController = null;
 
       console.error(
-        "Gemini voice failed. Browser voice fallback is disabled:",
+        "Voice service failed. Browser speech fallback is disabled:",
         error
       );
 
-      // Never fall back to Android or browser speech.
       finishCallback(callback, id);
       return false;
     }
@@ -241,14 +232,11 @@
     stopBrowserSpeech();
   }
 
-  // Compatibility with existing allowed learning pages.
+  // Preserve compatibility with existing lesson pages.
   window.playVoice = playVoice;
   window.playAIVoice = playVoice;
   window.stopVoice = stopVoice;
-
-  // Useful for testing which page is permitted to use Gemini voice.
   window.isGeminiVoiceAllowed = isVoiceAllowedHere;
 
-  // Stop audio when the user leaves the page.
   window.addEventListener("pagehide", stopVoice);
 })();
