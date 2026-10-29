@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#f5f8ff">
   <meta name="description" content="बाल पाठशाला — नेपाली, English, गणित, व्याकरण र रमाइला गतिविधिबाट सिकौँ।">
   <title>बाल पाठशाला | रमाउँदै सिकौँ</title>
-  <link rel="manifest" href="./manifest.json?v=5">
+  <link rel="manifest" href="./manifest.json?v=6">
   <link rel="icon" href="./192.png">
   <link rel="apple-touch-icon" href="./192.png">
 
@@ -25,7 +25,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -98,7 +97,12 @@
       font-weight: 750;
     }
 
-    .btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
     .btn:disabled { opacity: .55; cursor: not-allowed; }
 
     .hero {
@@ -112,6 +116,7 @@
     }
 
     .hero-content { position: relative; z-index: 1; max-width: 730px; }
+
     .eyebrow {
       display: inline-block;
       padding: 5px 12px;
@@ -154,7 +159,13 @@
       font-size: 27px;
     }
 
-    .target-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+    .target-top {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
     .notice { color: var(--muted); font-size: 13px; }
     .progress { height: 10px; margin: 8px 0; overflow: hidden; border-radius: 99px; background: #e7edf7; }
     .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, #4777ed, #28b98b); }
@@ -167,6 +178,7 @@
     }
 
     .search-row { display: flex; gap: 9px; }
+
     .search-row input {
       width: 100%;
       min-width: 0;
@@ -189,7 +201,22 @@
 
     .result-count { color: var(--muted); font-size: 13px; margin: 10px 0 0; }
 
-    .book-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; }
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    /* आवाज बटन जोड्न बनाइएको wrapper */
+    .book-item {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      align-content: stretch;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .book-item[hidden] { display: none !important; }
 
     .book {
       --accent: #4169e1;
@@ -215,6 +242,20 @@
     .book strong { font-size: 17px; }
     .book small { color: var(--muted); font-size: 13px; }
     .open-label { margin-top: auto; color: var(--accent); font-weight: 800; font-size: 13px; }
+
+    .book-speak {
+      width: 100%;
+      min-height: 42px;
+      padding: 8px;
+      border: 1px solid #cbd7ee;
+      border-radius: 12px;
+      background: #fff;
+      color: #23458b;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .book-speak:disabled { opacity: .65; cursor: wait; }
 
     .nepali { --accent: #168453; --tint: #e0f7e9; }
     .english { --accent: #315ac5; --tint: #e5edff; }
@@ -272,6 +313,7 @@
     }
 
     .modal.open { display: flex; }
+
     .modal-panel {
       width: 100%;
       max-width: 520px;
@@ -287,7 +329,16 @@
     .modal-head h2 { margin: 0; font-size: 21px; }
     .modal-close { min-width: 44px; min-height: 44px; border: 0; border-radius: 12px; background: var(--bg); color: var(--text); font-size: 24px; }
     .form-row { display: grid; gap: 7px; margin: 14px 0; }
-    .form-row input, .form-row select { width: 100%; min-height: 44px; padding: 10px; border: 1px solid var(--border); border-radius: 11px; background: var(--surface); color: var(--text); }
+
+    .form-row input, .form-row select {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--surface);
+      color: var(--text);
+    }
 
     body.dark-mode {
       color-scheme: dark;
@@ -306,6 +357,12 @@
     body.dark-mode .eyebrow { background: #263752; color: #d8e3ff; }
     body.dark-mode .progress { background: #344156; }
     body.dark-mode .target-icon { background: #59472a; }
+
+    body.dark-mode .book-speak {
+      background: #1c2739;
+      color: #dce7ff;
+      border-color: #35435b;
+    }
 
     [hidden] { display: none !important; }
 
@@ -442,7 +499,7 @@
 
       <a class="book english" href="english/animals-birds.html" data-category="english" data-search="animals birds जनावर चरा">
         <span class="book-icon" aria-hidden="true">🐦</span>
-        <strong>Animals & Birds</strong><small>जनावर र चराका नाम</small><span class="open-label">पाठ खोल्नुहोस् →</span>
+        <strong>Animals &amp; Birds</strong><small>जनावर र चराका नाम</small><span class="open-label">पाठ खोल्नुहोस् →</span>
       </a>
 
       <a class="book english" href="english/body-parts.html" data-category="english" data-search="body parts शरीरका अंग">
@@ -457,12 +514,12 @@
 
       <a class="book english" href="english/days-months.html" data-category="english" data-search="days months बार महिना calendar">
         <span class="book-icon" aria-hidden="true">📅</span>
-        <strong>Days & Months</strong><small>बार र महिनाहरू</small><span class="open-label">पाठ खोल्नुहोस् →</span>
+        <strong>Days &amp; Months</strong><small>बार र महिनाहरू</small><span class="open-label">पाठ खोल्नुहोस् →</span>
       </a>
 
       <a class="book english" href="english/fruits-vegetables.html" data-category="english" data-search="fruits vegetables फलफूल तरकारी">
         <span class="book-icon" aria-hidden="true">🍎</span>
-        <strong>Fruits & Vegetables</strong><small>फलफूल र तरकारी</small><span class="open-label">पाठ खोल्नुहोस् →</span>
+        <strong>Fruits &amp; Vegetables</strong><small>फलफूल र तरकारी</small><span class="open-label">पाठ खोल्नुहोस् →</span>
       </a>
 
       <a class="book english" href="english/vehicles.html" data-category="english" data-search="vehicles यातायात गाडी">
@@ -551,6 +608,7 @@
       <button class="modal-close" id="parent-close" type="button" aria-label="बन्द गर्नुहोस्">×</button>
     </div>
     <p class="notice">यो साधारण गणितीय जाँच हो, पूर्ण सुरक्षा प्रणाली होइन।</p>
+
     <div id="parent-check">
       <p id="math-question">अभिभावक जाँच</p>
       <label class="form-row" for="math-answer">उत्तर लेख्नुहोस्
@@ -558,6 +616,7 @@
       </label>
       <button class="btn btn-primary" id="verify-parent" type="button">जाँच गर्नुहोस्</button>
     </div>
+
     <div id="parent-settings" hidden>
       <label class="form-row" for="daily-target">दैनिक सही उत्तरको लक्ष्य
         <select id="daily-target">
@@ -573,7 +632,8 @@
   </div>
 </div>
 
-<script src="./script.js?v=5"></script>
+<!-- ?v=6 ले ब्राउजरलाई नयाँ script.js लोड गर्न मद्दत गर्छ -->
+<script src="./script.js?v=6"></script>
 <script>
 (() => {
   "use strict";
@@ -591,14 +651,21 @@
 
     cards.forEach(card => {
       const categoryMatch =
-        activeFilter === "all" || card.dataset.category === activeFilter;
+        activeFilter === "all" ||
+        card.dataset.category === activeFilter;
+
       const searchable = (
         card.innerText + " " + (card.dataset.search || "")
       ).toLocaleLowerCase();
+
       const textMatch = !term || searchable.includes(term);
       const visible = categoryMatch && textMatch;
 
+      // कार्ड र त्यसको आवाज बटन दुवै देखाउने/लुकाउने।
       card.hidden = !visible;
+      const wrapper = card.closest(".book-item");
+      if (wrapper) wrapper.hidden = !visible;
+
       if (visible) shown++;
     });
 
@@ -672,7 +739,7 @@
     applyTheme(!document.body.classList.contains("dark-mode"));
   });
 
-  // Welcome voice: requires the existing script.js voice controller.
+  // स्वागत आवाज
   let voiceEnabled = false;
   const voiceToggle = $("#voice-toggle");
 
@@ -685,23 +752,25 @@
       return;
     }
 
-    voiceEnabled = true;
-    voiceToggle.setAttribute("aria-pressed", "true");
-    voiceToggle.textContent = "🔊 स्वागत आवाज रोक्नुहोस्";
-
     if (typeof window.playAIVoice !== "function") {
       $("#target-message").textContent =
-        "आवाज सुविधा उपलब्ध भएन। इन्टरनेट र script.js जाँच्नुहोस्।";
-      voiceEnabled = false;
-      voiceToggle.setAttribute("aria-pressed", "false");
-      voiceToggle.textContent = "🔊 स्वागत आवाज";
+        "आवाज सुविधा उपलब्ध भएन। script.js लोड भएको छ कि जाँच्नुहोस्।";
       return;
     }
 
+    voiceEnabled = true;
+    voiceToggle.setAttribute("aria-pressed", "true");
+    voiceToggle.textContent = "⏳ आवाज तयार हुँदैछ…";
+
     try {
-      await window.playAIVoice(
+      const success = await window.playAIVoice(
         "बाल पाठशालामा स्वागत छ। रमाउँदै सिकौँ, आत्मविश्वास बढाऔँ। नेपाली, अंग्रेजी, गणित र रमाइला गतिविधि छान्नुहोस्।"
       );
+
+      if (!success) {
+        $("#target-message").textContent =
+          "आवाज चल्न सकेन। इन्टरनेट जडान जाँचेर फेरि प्रयास गर्नुहोस्।";
+      }
     } catch (_) {
       $("#target-message").textContent =
         "आवाज चल्न सकेन। इन्टरनेट जडान जाँचेर फेरि प्रयास गर्नुहोस्।";
@@ -712,7 +781,7 @@
     }
   });
 
-  // National anthem
+  // राष्ट्रिय गान
   const anthem = $("#national-anthem");
   const anthemButton = $("#anthem-toggle");
 
@@ -739,18 +808,18 @@
     $("#anthem-status").textContent = "राष्ट्रिय गान पूरा भयो।";
   });
 
-  // Parent settings
+  // अभिभावक सेटिङ
   let expectedAnswer = 0;
+  const parentModal = $("#parent-modal");
 
   function newParentQuestion() {
     const a = Math.floor(Math.random() * 8) + 2;
     const b = Math.floor(Math.random() * 8) + 2;
     expectedAnswer = a + b;
-    $("#math-question").textContent = "अभिभावक जाँच: " + a + " + " + b + " = ?";
+    $("#math-question").textContent =
+      "अभिभावक जाँच: " + a + " + " + b + " = ?";
     $("#math-answer").value = "";
   }
-
-  const parentModal = $("#parent-modal");
 
   function closeParentModal() {
     parentModal.classList.remove("open");
@@ -781,14 +850,16 @@
     const value = $("#math-answer").value.trim();
 
     if (!value || Number(value) !== expectedAnswer) {
-      $("#parent-notice").textContent = "उत्तर मिलेन। फेरि प्रयास गर्नुहोस्।";
+      $("#parent-notice").textContent =
+        "उत्तर मिलेन। फेरि प्रयास गर्नुहोस्।";
       newParentQuestion();
       return;
     }
 
     $("#parent-check").hidden = true;
     $("#parent-settings").hidden = false;
-    $("#parent-notice").textContent = "जाँच सफल भयो। अब सेटिङ परिवर्तन गर्न सक्नुहुन्छ।";
+    $("#parent-notice").textContent =
+      "जाँच सफल भयो। अब सेटिङ परिवर्तन गर्न सक्नुहुन्छ।";
     $("#daily-target").value = safeGet("daily_target", "10");
   });
 
@@ -799,13 +870,21 @@
   });
 
   function nepaliNumber(value) {
-    return String(value).replace(/[0-9]/g, d => "०१२३४५६७८९"[Number(d)]);
+    return String(value).replace(
+      /[0-9]/g,
+      d => "०१२३४५६७८९"[Number(d)]
+    );
   }
 
   function updateDailyTarget() {
-    const target = Math.max(1, Number(safeGet("daily_target", "10")) || 10);
+    const target = Math.max(
+      1,
+      Number(safeGet("daily_target", "10")) || 10
+    );
+
     const today = new Date().toLocaleDateString("en-CA");
     const savedDate = safeGet("quiz_score_date", "");
+
     const score = savedDate === today
       ? Math.max(0, Number(safeGet("quiz_daily_score", "0")) || 0)
       : 0;
@@ -813,18 +892,24 @@
     const percent = Math.min(100, score / target * 100);
 
     $("#target-count").textContent =
-      nepaliNumber(score) + " / " + nepaliNumber(target) + " सही उत्तर";
+      nepaliNumber(score) + " / " +
+      nepaliNumber(target) + " सही उत्तर";
 
     $("#target-fill").style.width = percent + "%";
-    $("#target-progress").setAttribute("aria-valuenow", String(Math.round(percent)));
+    $("#target-progress").setAttribute(
+      "aria-valuenow",
+      String(Math.round(percent))
+    );
 
     $("#target-message").textContent = score >= target
       ? "🎉 आजको लक्ष्य पूरा भयो! उत्कृष्ट काम!"
       : "सानो प्रयास, ठूलो प्रगति! अझै " +
-        nepaliNumber(Math.max(0, target - score)) + " सही उत्तर बाँकी छन्।";
+        nepaliNumber(Math.max(0, target - score)) +
+        " सही उत्तर बाँकी छन्।";
   }
 
   window.addEventListener("storage", updateDailyTarget);
+
   filterLessons();
   updateDailyTarget();
 })();
