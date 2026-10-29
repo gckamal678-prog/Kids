@@ -1,7 +1,10 @@
 
 /*
- * बाल पाठशाला — सुधारिएको AI Voice Controller
- * पाठका कार्ड थिच्दा आवाज, र दोहोरिएको आवाजका लागि cache।
+ * बाल पाठशाला — Gemini AI Voice Controller
+ * - Browser/mobile TTS fallback छैन
+ * - अनुमति दिइएका पृष्ठमा मात्र AI आवाज
+ * - अनुरोध timeout, cancel र duplicate-request नियन्त्रण
+ * - स्पष्ट error reporting र in-memory audio cache
  */
 (() => {
   "use strict";
@@ -16,15 +19,25 @@
     "/english/alphabet.html"
   ];
 
-  let currentAudio = null;
-  let currentAudioUrl = null;
-  let activeController = null;
-  let requestNumber = 0;
+  const REQUEST_TIMEOUT_MS = 20000;
+  const MAX_TEXT_LENGTH = 500;
+  const MAX_CACHE_ITEMS = 40;
+  const MAX_CACHE_BYTES = 15 * 1024 * 1024;
 
-  // हालको पेजको ठेगाना सही तरिकाले जाँच्ने।
+  let requestId = 0;
+  let activeController = null;
+  let currentAudio = null;
+  let currentObjectUrl = null;
+  let cacheBytes = 0;
+
+  const audioCache = new Map();
+
+  function currentPath() {
+    return window.location.pathname.replace(/\/+$/, "") || "/";
+  }
+
   function isVoiceAllowedHere() {
-    const path = window.location.pathname
-      .replace(/\/+$/, "") || "/";
+    const path = currentPath();
 
     if (
       path === "/" ||
@@ -34,16 +47,11 @@
       return true;
     }
 
-    return ALLOWED_SUFFIXES.some(suffix =>
-      path.endsWith(suffix)
-    );
+    return ALLOWED_SUFFIXES.some(path.endsWith.bind(path));
   }
 
-  // पहिले तयार भएको आवाज सम्झिराख्ने।
-  const audioCache = new Map();
-  const MAX_CACHE = 60;
-
   function stopBrowserSpeech() {
+    // Browser TTS बजाउने छैनौँ। पहिलेबाट चलिरहेको भए रोक्ने मात्र।
     if ("speechSynthesis" in window) {
       try {
         window.speechSynthesis.cancel();
@@ -51,157 +59,391 @@
     }
   }
 
-  function releaseCurrentAudio() {
+  function releaseAudio() {
     if (currentAudio) {
-      currentAudio.pause();
-      currentAudio.onended = null;
-      currentAudio.onerror = null;
-      currentAudio.removeAttribute("src");
-      currentAudio.load();
+      try {
+        currentAudio.pause();
+        currentAudio.onended = null;
+        currentAudio.onerror = null;
+        currentAudio.removeAttribute("src");
+        currentAudio.load();
+      } catch (_) {}
+
       currentAudio = null;
     }
 
-    if (currentAudioUrl) {
-      URL.revokeObjectURL(currentAudioUrl);
-      currentAudioUrl = null;
+    if (currentObjectUrl) {
+      try {
+        URL.revokeObjectURL(currentObjectUrl);
+      } catch (_) {}
+
+      currentObjectUrl = null;
     }
   }
 
   function stopVoice() {
-    requestNumber++;
+    requestId++;
 
     if (activeController) {
       activeController.abort();
       activeController = null;
     }
 
-    releaseCurrentAudio();
+    releaseAudio();
     stopBrowserSpeech();
   }
 
-  function rememberAudio(text, blob) {
-    if (audioCache.has(text)) {
+  function reportVoiceError(code, message, details = {}) {
+    const errorInfo = {
+      code,
+      message,
+      details,
+      timestamp: new Date().toISOString()
+    };
+
+    window.lastBalPathshalaVoiceError = errorInfo;
+
+    console.error("[बाल पाठशाला AI आवाज]", errorInfo);
+
+    window.dispatchEvent(
+      new CustomEvent("balpathshala:voice-error", {
+        detail: errorInfo
+      })
+    );
+
+    return errorInfo;
+  }
+
+  function cacheGet(text) {
+    const entry = audioCache.get(text);
+
+    if (!entry) return null;
+
+    // प्रयोग भएको वस्तुलाई cache को अन्तिम स्थानमा सार्ने।
+    audioCache.delete(text);
+    audioCache.set(text, entry);
+
+    return entry.blob;
+  }
+
+  function cacheSet(text, blob) {
+    const old = audioCache.get(text);
+
+    if (old) {
+      cacheBytes -= old.size;
       audioCache.delete(text);
     }
 
-    audioCache.set(text, blob);
+    // धेरै ठूलो अडियो memory मा नराख्ने।
+    if (blob.size > MAX_CACHE_BYTES) return;
 
-    while (audioCache.size > MAX_CACHE) {
+    while (
+      audioCache.size >= MAX_CACHE_ITEMS ||
+      cacheBytes + blob.size > MAX_CACHE_BYTES
+    ) {
       const oldestKey = audioCache.keys().next().value;
+
+      if (oldestKey === undefined) break;
+
+      const oldest = audioCache.get(oldestKey);
+      cacheBytes -= oldest.size;
       audioCache.delete(oldestKey);
     }
+
+    audioCache.set(text, {
+      blob,
+      size: blob.size
+    });
+
+    cacheBytes += blob.size;
+  }
+
+  async function readServerError(response) {
+    let body = "";
+
+    try {
+      body = (await response.text()).slice(0, 700);
+    } catch (_) {}
+
+    if (body) {
+      try {
+        const json = JSON.parse(body);
+        return String(
+          json.message ||
+          json.error ||
+          json.detail ||
+          body
+        ).slice(0, 400);
+      } catch (_) {
+        return body;
+      }
+    }
+
+    return response.statusText || "सर्भरले अनुरोध स्वीकार गरेन।";
+  }
+
+  function classifyError(error) {
+    if (error && error.name === "AbortError") {
+      return {
+        code: "REQUEST_CANCELLED",
+        message: "आवाज अनुरोध रोकियो।"
+      };
+    }
+
+    if (error && error.name === "VoiceTimeoutError") {
+      return {
+        code: "VOICE_TIMEOUT",
+        message:
+          "AI आवाज तयार हुन धेरै समय लाग्यो। केहीबेरपछि फेरि प्रयास गर्नुहोस्।"
+      };
+    }
+
+    if (error && error.name === "NotAllowedError") {
+      return {
+        code: "AUDIO_PLAYBACK_BLOCKED",
+        message:
+          "ब्राउजरले अडियो बजाउन दिएन। आवाज बटन फेरि थिच्नुहोस्।"
+      };
+    }
+
+    if (error && error.name === "TypeError") {
+      return {
+        code: "NETWORK_OR_CORS_ERROR",
+        message:
+          "AI सेवासँग सम्पर्क हुन सकेन। यो नेटवर्क, CORS वा Worker उपलब्धताको समस्या हुन सक्छ; इन्टरनेट बन्द छ भन्ने निश्चित होइन।"
+      };
+    }
+
+    return {
+      code: "VOICE_ERROR",
+      message:
+        error && error.message
+          ? error.message
+          : "AI आवाज चलाउन सकिएन। फेरि प्रयास गर्नुहोस्।"
+    };
   }
 
   async function playVoice(textToSpeak, callback) {
     stopBrowserSpeech();
 
     if (!isVoiceAllowedHere()) {
-      stopVoice();
+      reportVoiceError(
+        "PAGE_NOT_ALLOWED",
+        "यो पृष्ठमा AI आवाज अनुमति दिइएको छैन।"
+      );
       return false;
     }
 
-    const text = String(textToSpeak ?? "").trim();
+    const text = String(textToSpeak ?? "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, MAX_TEXT_LENGTH);
+
     if (!text) return false;
 
-    const safeText = text.slice(0, 500);
-    const id = ++requestNumber;
+    // नयाँ अनुरोधले पुरानो अनुरोध र अडियो रोक्छ।
+    const id = ++requestId;
 
     if (activeController) {
       activeController.abort();
       activeController = null;
     }
 
-    releaseCurrentAudio();
+    releaseAudio();
+
+    let blob = cacheGet(text);
 
     try {
-      let blob = audioCache.get(safeText);
-
-      // क्यासमा नभए मात्र AI सेवाबाट आवाज ल्याउने।
       if (!blob) {
         const controller = new AbortController();
         activeController = controller;
 
-        const response = await fetch(VOICE_WORKER, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ text: safeText }),
-          signal: controller.signal
-        });
+        const timeout = setTimeout(() => {
+          controller.abort();
 
-        if (id !== requestNumber) return false;
+          const timeoutError = new Error(
+            "AI voice request timed out."
+          );
+          timeoutError.name = "VoiceTimeoutError";
+
+          if (id === requestId) {
+            window.lastBalPathshalaVoiceTimeout = timeoutError;
+          }
+        }, REQUEST_TIMEOUT_MS);
+
+        let response;
+
+        try {
+          response = await fetch(VOICE_WORKER, {
+            method: "POST",
+            mode: "cors",
+            credentials: "omit",
+            cache: "no-store",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "audio/*, application/octet-stream, application/json"
+            },
+            body: JSON.stringify({ text }),
+            signal: controller.signal
+          });
+        } catch (error) {
+          clearTimeout(timeout);
+
+          if (id !== requestId) return false;
+
+          if (
+            controller.signal.aborted &&
+            window.lastBalPathshalaVoiceTimeout
+          ) {
+            const info = reportVoiceError(
+              "VOICE_TIMEOUT",
+              "AI आवाज तयार हुन २० सेकेन्डभन्दा बढी लाग्यो।",
+              { timeoutMs: REQUEST_TIMEOUT_MS }
+            );
+
+            throw Object.assign(new Error(info.message), {
+              name: "VoiceTimeoutError"
+            });
+          }
+
+          throw error;
+        }
+
+        clearTimeout(timeout);
+
+        if (id !== requestId) return false;
 
         if (!response.ok) {
-          throw new Error("Voice service error: " + response.status);
+          const serverMessage = await readServerError(response);
+
+          reportVoiceError(
+            "WORKER_HTTP_ERROR",
+            `AI Worker ले HTTP ${response.status} त्रुटि दियो।`,
+            {
+              status: response.status,
+              serverMessage
+            }
+          );
+
+          throw new Error(
+            `Worker HTTP ${response.status}: ${serverMessage}`
+          );
+        }
+
+        const contentType = (
+          response.headers.get("content-type") || ""
+        ).toLowerCase();
+
+        if (
+          contentType.includes("application/json") ||
+          contentType.includes("text/html")
+        ) {
+          const serverMessage = await readServerError(response);
+
+          reportVoiceError(
+            "WORKER_RETURNED_NON_AUDIO",
+            "Worker बाट अडियोको सट्टा त्रुटि वा टेक्स्ट आयो।",
+            { contentType, serverMessage }
+          );
+
+          throw new Error(serverMessage);
         }
 
         blob = await response.blob();
 
-        if (id !== requestNumber) return false;
-        if (!blob.size) {
-          throw new Error("खाली अडियो प्राप्त भयो।");
+        if (id !== requestId) return false;
+
+        if (!blob || blob.size === 0) {
+          throw new Error("Worker बाट खाली अडियो प्राप्त भयो।");
         }
 
         if (
           blob.type &&
-          !/^audio\//i.test(blob.type) &&
+          !blob.type.startsWith("audio/") &&
           blob.type !== "application/octet-stream"
         ) {
-          throw new Error("अडियोको प्रकार मिलेन: " + blob.type);
+          throw new Error(
+            `प्राप्त अडियोको प्रकार मिलेन: ${blob.type}`
+          );
         }
 
-        rememberAudio(safeText, blob);
+        cacheSet(text, blob);
       }
 
-      if (id !== requestNumber) return false;
+      if (id !== requestId) return false;
 
       activeController = null;
-      currentAudioUrl = URL.createObjectURL(blob);
 
-      const audio = new Audio(currentAudioUrl);
+      currentObjectUrl = URL.createObjectURL(blob);
+
+      const audio = new Audio();
       currentAudio = audio;
       audio.preload = "auto";
+      audio.src = currentObjectUrl;
 
-      let finished = false;
+      await new Promise((resolve, reject) => {
+        let settled = false;
 
-      function finish() {
-        if (finished || id !== requestNumber) return;
-        finished = true;
+        const finish = (error) => {
+          if (settled) return;
+          settled = true;
 
-        releaseCurrentAudio();
-        activeController = null;
+          audio.onended = null;
+          audio.onerror = null;
 
-        if (typeof callback === "function") {
-          try {
-            callback();
-          } catch (error) {
-            console.warn("Voice callback:", error);
+          if (id !== requestId) {
+            resolve(false);
+            return;
+          }
+
+          if (error) reject(error);
+          else resolve(true);
+        };
+
+        audio.onended = () => finish();
+        audio.onerror = () => {
+          const error = new Error(
+            "प्राप्त अडियो बजाउन सकिएन।"
+          );
+          error.name = "AudioPlaybackError";
+          finish(error);
+        };
+
+        audio.play().catch(finish);
+      }).then((played) => {
+        if (played && id === requestId) {
+          releaseAudio();
+
+          if (typeof callback === "function") {
+            try {
+              callback();
+            } catch (error) {
+              console.warn("Voice callback error:", error);
+            }
           }
         }
-      }
+      });
 
-      audio.onended = finish;
-
-      audio.onerror = () => {
-        if (id === requestNumber) {
-          console.warn("अडियो बजाउन सकिएन।");
-          finish();
-        }
-      };
-
-      await audio.play();
       return true;
 
     } catch (error) {
-      if (id !== requestNumber) return false;
+      if (id !== requestId) return false;
 
       activeController = null;
 
-      if (error?.name !== "AbortError") {
-        console.error("AI आवाज चलाउन समस्या:", error);
+      if (error && error.name !== "AbortError") {
+        const classified = classifyError(error);
+
+        reportVoiceError(
+          classified.code,
+          classified.message,
+          {
+            originalError: String(error.message || error)
+          }
+        );
       }
 
+      releaseAudio();
       return false;
     }
   }
@@ -211,87 +453,10 @@
   window.stopVoice = stopVoice;
   window.isGeminiVoiceAllowed = isVoiceAllowedHere;
 
-  // मुख्य पेजका प्रत्येक पाठमा छुट्टै आवाज बटन थप्ने।
-  function addHomeVoiceButtons() {
-    const grid = document.getElementById("book-grid");
-    if (!grid) return;
-
-    const style = document.createElement("style");
-    style.textContent = `
-      .book-item {
-        display: grid;
-        grid-template-rows: 1fr auto;
-        gap: 6px;
-        min-width: 0;
-      }
-      .book-speak {
-        width: 100%;
-        min-height: 42px;
-        padding: 8px;
-        border: 1px solid #cbd7ee;
-        border-radius: 12px;
-        background: #fff;
-        color: #23458b;
-        font: inherit;
-        font-weight: 750;
-        cursor: pointer;
-      }
-      body.dark-mode .book-speak {
-        background: #1c2739;
-        color: #dce7ff;
-        border-color: #35435b;
-      }
-      .book-item[hidden] {
-        display: none !important;
-      }
-    `;
-    document.head.appendChild(style);
-
-    grid.querySelectorAll("a.book[data-category]").forEach(card => {
-      if (card.closest(".book-item")) return;
-
-      const wrapper = document.createElement("div");
-      wrapper.className = "book-item";
-
-      card.parentNode.insertBefore(wrapper, card);
-      wrapper.appendChild(card);
-
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "book-speak";
-      button.textContent = "🔊 पाठ सुनौँ";
-
-      button.addEventListener("click", async () => {
-        const title = card.querySelector("strong")?.textContent || "";
-        const description = card.querySelector("small")?.textContent || "";
-
-        button.disabled = true;
-        button.textContent = "⏳ आवाज तयार हुँदैछ…";
-
-        try {
-          const ok = await playVoice(`${title}. ${description}`);
-          if (!ok) {
-            button.textContent = "🔁 फेरि प्रयास गर्नुहोस्";
-          } else {
-            button.textContent = "🔊 फेरि सुन्नुहोस्";
-          }
-        } finally {
-          button.disabled = false;
-          if (button.textContent === "⏳ आवाज तयार हुँदैछ…") {
-            button.textContent = "🔊 पाठ सुनौँ";
-          }
-        }
-      });
-
-      wrapper.appendChild(button);
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", addHomeVoiceButtons);
-  } else {
-    addHomeVoiceButtons();
-  }
+  window.clearBalPathshalaVoiceCache = () => {
+    audioCache.clear();
+    cacheBytes = 0;
+  };
 
   window.addEventListener("pagehide", stopVoice);
 })();
