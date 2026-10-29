@@ -1,18 +1,24 @@
+
 {
+  "id": "./",
   "name": "बाल पाठशाला",
   "short_name": "पाठशाला",
+  "description": "बालबालिकाका लागि नेपाली, English, गणित र रमाइला शैक्षिक गतिविधि।",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#E0F7FA",
-  "theme_color": "#4A90E2",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f8ff",
+  "theme_color": "#f5f8ff",
+  "lang": "ne",
   "icons": [
     {
-      "src": "192.png",
+      "src": "./192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "512.png",
+      "src": "./512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
