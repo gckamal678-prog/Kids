@@ -30,7 +30,7 @@ body {
 }
 
 .header {
-  padding:25px 16px;
+  padding:24px 16px;
   color:white;
   background:linear-gradient(135deg,#5146c8,#168caa);
 }
@@ -42,20 +42,19 @@ body {
 
 .header h1 {
   margin:0;
-  font-size:25px;
+  font-size:24px;
 }
 
 .header p {
   margin:7px 0 0;
-  font-size:14px;
-  opacity:.9;
+  font-size:13px;
 }
 
 .back {
   display:inline-block;
   color:white;
   text-decoration:none;
-  margin-top:15px;
+  margin-top:14px;
   font-size:13px;
 }
 
@@ -68,8 +67,8 @@ main {
   padding:17px;
   border-radius:17px;
   margin-bottom:17px;
-  box-shadow:0 5px 20px #00000008;
   border:1px solid var(--border);
+  box-shadow:0 5px 20px #00000008;
 }
 
 .welcome h3 {
@@ -83,6 +82,8 @@ main {
   line-height:1.7;
 }
 
+/* LANGUAGE AND SEARCH */
+
 .controls {
   display:flex;
   gap:9px;
@@ -92,187 +93,268 @@ main {
 .search {
   flex:1;
   min-width:0;
-  padding:13px;
+  padding:12px;
   border:1px solid var(--border);
   border-radius:12px;
   background:var(--card);
+  color:var(--text);
   font-size:14px;
   outline:none;
 }
 
 .search:focus {
   border-color:var(--primary);
-  box-shadow:0 0 0 3px #6558df18;
 }
 
 .language {
   border:0;
   border-radius:12px;
-  padding:0 15px;
+  padding:0 14px;
   color:white;
   background:var(--primary);
   font-weight:bold;
   cursor:pointer;
-  flex-shrink:0;
 }
 
-/* 3 x 3 GRID - MOBILE INCLUDED */
+/* MAIN SUBJECT GRID */
 
 #subjects {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
-  align-items:start;
 }
-
-/* SUBJECT CARD */
 
 .subject {
   min-width:0;
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:15px;
+  border-radius:16px;
   overflow:hidden;
-  box-shadow:0 4px 14px #252d5a0b;
+  box-shadow:0 4px 15px #00000008;
+  cursor:pointer;
   transition:transform .2s,box-shadow .2s;
 }
 
 .subject:active {
-  transform:scale(.97);
+  transform:scale(.96);
 }
 
-.subject-title {
+.subject-button {
   width:100%;
   min-height:115px;
   padding:12px 5px;
   border:0;
   background:transparent;
+  color:var(--text);
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:7px;
-  text-align:center;
-  color:var(--text);
+  gap:8px;
   cursor:pointer;
-  position:relative;
 }
 
 .subject-icon {
-  width:43px;
-  height:43px;
+  width:46px;
+  height:46px;
+  border-radius:15px;
   display:grid;
   place-items:center;
-  border-radius:14px;
-  background:linear-gradient(135deg,#eeedff,#e4f3ff);
-  font-size:25px;
-  flex-shrink:0;
+  font-size:26px;
+  background:linear-gradient(135deg,#eeedff,#e2f4ff);
 }
 
 .subject-name {
-  width:100%;
-  font-weight:800;
   font-size:11px;
+  font-weight:800;
   line-height:1.4;
   overflow-wrap:anywhere;
+  text-align:center;
 }
 
-.arrow {
-  color:var(--primary);
-  font-size:16px;
-  line-height:1;
-  transition:transform .2s;
-}
+/* BOOK CONTENT VIEW */
 
-.subject.open .arrow {
-  transform:rotate(180deg);
-}
-
-/* QUESTIONS */
-
-.questions {
+#bookView {
   display:none;
-  padding:0 7px 8px;
 }
 
-.subject.open .questions {
+#bookView.show {
   display:block;
+  animation:bookOpen .25s ease;
+}
+
+@keyframes bookOpen {
+  from {
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to {
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+#homeView.hide {
+  display:none;
+}
+
+.book-header {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:14px;
+  box-shadow:0 4px 15px #00000008;
+}
+
+.book-top {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.back-button {
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:11px;
+  background:#eeedff;
+  color:var(--primary);
+  font-size:21px;
+  cursor:pointer;
+  flex-shrink:0;
+}
+
+.book-title {
+  flex:1;
+  min-width:0;
+}
+
+.book-title h2 {
+  margin:0;
+  font-size:17px;
+}
+
+.book-title p {
+  margin:3px 0 0;
+  font-size:11px;
+  color:var(--muted);
+}
+
+.count {
+  font-size:11px;
+  font-weight:bold;
+  color:var(--primary);
+  background:#eeedff;
+  padding:7px 9px;
+  border-radius:9px;
+  white-space:nowrap;
+}
+
+.book-search {
+  width:100%;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:var(--bg);
+  color:var(--text);
+  font-size:13px;
+  outline:none;
+}
+
+.book-search:focus {
+  border-color:var(--primary);
+}
+
+/* QUESTION LIST */
+
+.question-list {
+  display:flex;
+  flex-direction:column;
+  gap:9px;
 }
 
 .qa {
+  background:var(--card);
   border:1px solid var(--border);
-  border-radius:10px;
+  border-radius:13px;
   overflow:hidden;
-  margin-top:7px;
+  box-shadow:0 3px 10px #00000005;
 }
 
 .question {
   width:100%;
+  padding:13px;
+  border:0;
+  background:transparent;
+  color:var(--text);
   display:flex;
   align-items:flex-start;
-  gap:6px;
-  padding:9px 7px;
-  border:0;
-  background:var(--card);
-  color:var(--text);
+  gap:10px;
   text-align:left;
   cursor:pointer;
-  font-size:12px;
-  line-height:1.5;
+  font-size:13px;
+  line-height:1.6;
 }
 
 .question-number {
-  color:var(--primary);
+  min-width:25px;
+  height:25px;
+  border-radius:8px;
   background:#eeedff;
-  padding:3px 5px;
-  border-radius:6px;
-  font-size:10px;
+  color:var(--primary);
+  display:grid;
+  place-items:center;
+  font-size:11px;
   font-weight:bold;
-  flex-shrink:0;
 }
 
 .question-text {
   flex:1;
-  min-width:0;
   font-weight:650;
   overflow-wrap:anywhere;
 }
 
 .plus {
+  font-size:19px;
   color:var(--primary);
-  font-size:16px;
+  font-weight:bold;
   flex-shrink:0;
 }
 
 .answer {
   display:none;
-  padding:10px;
+  padding:13px 15px;
   background:var(--answer);
   color:#18583a;
-  font-size:12px;
-  line-height:1.7;
   border-top:1px solid #d9f0e4;
-  overflow-wrap:anywhere;
+  font-size:13px;
+  line-height:1.8;
 }
 
 .answer strong {
   display:block;
-  margin-bottom:4px;
   font-size:11px;
+  margin-bottom:5px;
 }
 
 .qa.active .answer {
   display:block;
 }
 
+.qa.active .plus {
+  transform:rotate(45deg);
+}
+
 .no-result {
   display:none;
-  background:var(--card);
-  padding:22px;
-  border-radius:14px;
+  padding:25px 15px;
   text-align:center;
   color:var(--muted);
-  grid-column:1/-1;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
 }
 
 footer {
@@ -289,33 +371,28 @@ footer {
     gap:7px;
   }
 
-  .subject-title {
-    min-height:105px;
-    padding:9px 3px;
+  .subject-button {
+    min-height:100px;
+    padding:8px 3px;
   }
 
   .subject-icon {
-    width:36px;
-    height:36px;
-    font-size:21px;
+    width:37px;
+    height:37px;
+    font-size:22px;
   }
 
   .subject-name {
     font-size:10px;
   }
 
-  .questions {
-    padding:0 4px 6px;
+  .book-title h2 {
+    font-size:14px;
   }
 
-  .question {
-    font-size:11px;
-    padding:7px 5px;
-  }
-
-  .answer {
-    font-size:11px;
-    padding:8px;
+  .count {
+    font-size:10px;
+    padding:6px;
   }
 }
 
@@ -331,16 +408,15 @@ footer {
     --answer:#173b32;
   }
 
-  .subject-icon {
-    background:linear-gradient(135deg,#302e59,#193c55);
+  .subject-icon,
+  .back-button,
+  .question-number,
+  .count {
+    background:#302e59;
   }
 
   .answer {
     color:#b9f2d2;
-  }
-
-  .question-number {
-    background:#302e59;
   }
 }
 </style>
@@ -360,20 +436,24 @@ footer {
 
 <main class="container">
 
+<!-- HOME VIEW -->
+
+<div id="homeView">
+
   <section class="welcome">
     <h3>नमस्कार विद्यार्थी! 👋</h3>
     <p>
-      आफूलाई मन परेको विषय छान्नुहोस्।
-      त्यसपछि प्रश्नमा थिचेर उत्तर पढ्नुहोस्।
+      आफ्नो मनपर्ने किताब छान्नुहोस्।
+      किताब खोलेर प्रश्न र उत्तर पढ्नुहोस्।
     </p>
   </section>
 
   <div class="controls">
     <input
       type="search"
-      id="search"
+      id="homeSearch"
       class="search"
-      placeholder="🔎 प्रश्न खोज्नुहोस्..."
+      placeholder="🔎 विषय खोज्नुहोस्..."
     >
 
     <button id="language" class="language">
@@ -383,9 +463,49 @@ footer {
 
   <div id="subjects"></div>
 
-  <div id="noResult" class="no-result">
+  <div id="homeNoResult" class="no-result">
+    विषय भेटिएन।
+  </div>
+
+</div>
+
+
+<!-- BOOK / QUESTION VIEW -->
+
+<div id="bookView">
+
+  <div class="book-header">
+
+    <div class="book-top">
+
+      <button class="back-button" id="backButton"
+        aria-label="Go back">←</button>
+
+      <div class="book-title">
+        <h2 id="bookTitle">विषय</h2>
+        <p id="bookSubtitle">प्रश्नोत्तर भण्डार</p>
+      </div>
+
+      <span class="count" id="questionCount">० प्रश्न</span>
+
+    </div>
+
+    <input
+      type="search"
+      id="bookSearch"
+      class="book-search"
+      placeholder="🔎 प्रश्न खोज्नुहोस्..."
+    >
+
+  </div>
+
+  <div id="questionList" class="question-list"></div>
+
+  <div id="bookNoResult" class="no-result">
     यो खोजीसँग मिल्ने प्रश्न भेटिएन।
   </div>
+
+</div>
 
 </main>
 
@@ -393,7 +513,27 @@ footer {
   बाल पाठशाला ❤️ पढ्दै सिकौँ, खेल्दै रमाऔँ!
 </footer>
 
+
 <script>
+
+/*
+==================================================
+QUESTION BANK
+
+IMPORTANT:
+यहाँ आफ्नो वास्तविक २०० प्रश्न भएको पुरानो
+knowledgeBank राख्नुहोस्।
+
+प्रत्येक प्रश्नको ढाँचा:
+
+[
+ "नेपाली प्रश्न",
+ "नेपाली उत्तर",
+ "English Question",
+ "English Answer"
+]
+==================================================
+*/
 
 const knowledgeBank = [
 
@@ -440,7 +580,7 @@ const knowledgeBank = [
 },
 
 {
- icon:"🌍",
+ icon:"🇳🇵",
  ne:"नेपाल तथा विश्व सामान्य ज्ञान",
  en:"Nepal & General Knowledge",
  questions:[
@@ -535,155 +675,300 @@ const knowledgeBank = [
    "5 + 5 = 10."
   ]
  ]
-}
+}];
 
-];
+
+/* =========================================
+   APPLICATION LOGIC
+========================================= */
 
 let english = false;
+let currentSubject = null;
+
+const homeView = document.getElementById("homeView");
+const bookView = document.getElementById("bookView");
 
 const subjects = document.getElementById("subjects");
-const search = document.getElementById("search");
-const noResult = document.getElementById("noResult");
+const homeSearch = document.getElementById("homeSearch");
+const bookSearch = document.getElementById("bookSearch");
 
-function render() {
+const questionList = document.getElementById("questionList");
+
+const homeNoResult = document.getElementById("homeNoResult");
+const bookNoResult = document.getElementById("bookNoResult");
+
+
+/* =========================================
+   LANGUAGE HELPERS
+========================================= */
+
+function getSubjectName(subject) {
+  return english ? subject.en : subject.ne;
+}
+
+function getQuestion(q) {
+  return english ? q[2] : q[0];
+}
+
+function getAnswer(q) {
+  return english ? q[3] : q[1];
+}
+
+
+/* =========================================
+   RENDER HOME GRID
+========================================= */
+
+function renderHome() {
 
   subjects.innerHTML = "";
 
-  const term = search.value.trim().toLowerCase();
+  const term = homeSearch.value.trim().toLowerCase();
+
   let found = 0;
 
   knowledgeBank.forEach((subject, index) => {
 
-    const questions = subject.questions
-      .map((q, i) => ({q, i}))
-      .filter(({q}) => {
+    const name = getSubjectName(subject);
 
-        const allText = q.join(" ").toLowerCase()
-          + subject.ne.toLowerCase()
-          + subject.en.toLowerCase();
+    if (term && !name.toLowerCase().includes(term)) {
+      return;
+    }
 
-        return !term || allText.includes(term);
-      });
+    found++;
 
-    if (!questions.length) return;
+    const card = document.createElement("section");
+    card.className = "subject";
 
-    found += questions.length;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "subject-button";
 
-    const section = document.createElement("section");
-    section.className = "subject";
+    const icon = document.createElement("span");
+    icon.className = "subject-icon";
+    icon.textContent = subject.icon;
 
-    const title = document.createElement("button");
-    title.className = "subject-title";
-    title.type = "button";
+    const title = document.createElement("span");
+    title.className = "subject-name";
+    title.textContent = name;
 
-    title.innerHTML = `
-      <span class="subject-icon">${subject.icon}</span>
-      <span class="subject-name"></span>
-      <span class="arrow">⌄</span>
-    `;
+    button.append(icon, title);
 
-    title.querySelector(".subject-name").textContent =
-      english ? subject.en : subject.ne;
+    button.addEventListener("click", () => {
+      openBook(index);
+    });
 
-    const list = document.createElement("div");
-    list.className = "questions";
+    card.append(button);
+    subjects.append(card);
 
-    title.addEventListener("click", () => {
+  });
 
-      const wasOpen = section.classList.contains("open");
+  homeNoResult.style.display = found ? "none" : "block";
 
-      document.querySelectorAll(".subject.open")
-        .forEach(item => item.classList.remove("open"));
+}
 
-      if (!wasOpen) {
-        section.classList.add("open");
+
+/* =========================================
+   OPEN BOOK
+========================================= */
+
+function openBook(index) {
+
+  currentSubject = index;
+
+  homeView.classList.add("hide");
+  bookView.classList.add("show");
+
+  renderBook();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================
+   CLOSE BOOK / BACK TO GRID
+========================================= */
+
+function closeBook() {
+
+  bookView.classList.remove("show");
+  homeView.classList.remove("hide");
+
+  currentSubject = null;
+
+  bookSearch.value = "";
+
+  renderHome();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================
+   RENDER QUESTIONS INSIDE BOOK
+========================================= */
+
+function renderBook() {
+
+  if (currentSubject === null) return;
+
+  const subject = knowledgeBank[currentSubject];
+
+  document.getElementById("bookTitle").textContent =
+    getSubjectName(subject);
+
+  document.getElementById("bookSubtitle").textContent =
+    english
+      ? "Explore and learn!"
+      : "पढौँ, बुझौँ र नयाँ कुरा सिकौँ!";
+
+  const term = bookSearch.value.trim().toLowerCase();
+
+  questionList.innerHTML = "";
+
+  let found = 0;
+
+  subject.questions.forEach((q, index) => {
+
+    const questionText = getQuestion(q);
+    const answerText = getAnswer(q);
+
+    const searchable = (
+      q.join(" ") + subject.ne + subject.en
+    ).toLowerCase();
+
+    if (term && !searchable.includes(term)) {
+      return;
+    }
+
+    found++;
+
+    const qa = document.createElement("div");
+    qa.className = "qa";
+
+    const question = document.createElement("button");
+    question.type = "button";
+    question.className = "question";
+
+    const number = document.createElement("span");
+    number.className = "question-number";
+    number.textContent = index + 1;
+
+    const text = document.createElement("span");
+    text.className = "question-text";
+    text.textContent = questionText;
+
+    const plus = document.createElement("span");
+    plus.className = "plus";
+    plus.textContent = "+";
+
+    question.append(number, text, plus);
+
+    const answer = document.createElement("div");
+    answer.className = "answer";
+
+    const label = document.createElement("strong");
+    label.textContent = english ? "ANSWER" : "उत्तर";
+
+    const answerTextElement = document.createElement("span");
+    answerTextElement.textContent = answerText;
+
+    answer.append(label, answerTextElement);
+
+    question.addEventListener("click", () => {
+
+      const wasActive = qa.classList.contains("active");
+
+      // Close all previously opened answers
+      questionList.querySelectorAll(".qa.active")
+        .forEach(item => {
+          item.classList.remove("active");
+          item.querySelector(".plus").textContent = "+";
+        });
+
+      // Open only the selected answer
+      if (!wasActive) {
+        qa.classList.add("active");
+        plus.textContent = "−";
       }
 
     });
 
-    questions.forEach(({q, i}) => {
+    qa.append(question, answer);
 
-      const qa = document.createElement("div");
-      qa.className = "qa";
-
-      const question = document.createElement("button");
-      question.className = "question";
-      question.type = "button";
-
-      const questionText = english ? q[2] : q[0];
-      const answerText = english ? q[3] : q[1];
-
-      question.innerHTML = `
-        <span class="question-number">${i + 1}</span>
-        <span class="question-text"></span>
-        <span class="plus">＋</span>
-      `;
-
-      question.querySelector(".question-text").textContent =
-        questionText;
-
-      const answer = document.createElement("div");
-      answer.className = "answer";
-
-      const label = document.createElement("strong");
-      label.textContent = english ? "ANSWER" : "उत्तर";
-
-      const text = document.createElement("span");
-      text.textContent = answerText;
-
-      answer.append(label, text);
-
-      question.addEventListener("click", () => {
-
-        const wasActive = qa.classList.contains("active");
-
-        document.querySelectorAll(".qa.active")
-          .forEach(item => {
-            item.classList.remove("active");
-            item.querySelector(".plus").textContent = "＋";
-          });
-
-        if (!wasActive) {
-          qa.classList.add("active");
-          question.querySelector(".plus").textContent = "−";
-        }
-
-      });
-
-      qa.append(question, answer);
-      list.append(qa);
-
-    });
-
-    section.append(title, list);
-    subjects.append(section);
+    questionList.append(qa);
 
   });
 
-  noResult.style.display = found ? "none" : "block";
+  document.getElementById("questionCount").textContent =
+    english ? `${found} Questions` : `${found} प्रश्न`;
+
+  bookNoResult.style.display = found ? "none" : "block";
 
 }
 
-search.addEventListener("input", render);
+
+/* =========================================
+   SEARCH
+========================================= */
+
+homeSearch.addEventListener("input", renderHome);
+
+bookSearch.addEventListener("input", renderBook);
+
+
+/* =========================================
+   LANGUAGE SWITCH
+========================================= */
 
 document.getElementById("language")
-  .addEventListener("click", () => {
+.addEventListener("click", () => {
 
-    english = !english;
+  english = !english;
 
-    document.getElementById("language").textContent =
-      english ? "नेपाली" : "English";
+  document.getElementById("language").textContent =
+    english ? "नेपाली" : "English";
 
-    search.placeholder = english
-      ? "🔎 Search questions..."
-      : "🔎 प्रश्न खोज्नुहोस्...";
+  homeSearch.placeholder = english
+    ? "🔎 Search subjects..."
+    : "🔎 विषय खोज्नुहोस्...";
 
-    render();
+  bookSearch.placeholder = english
+    ? "🔎 Search questions..."
+    : "🔎 प्रश्न खोज्नुहोस्...";
 
-  });
+  if (currentSubject === null) {
+    renderHome();
+  } else {
+    renderBook();
+  }
 
-render();
+});
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+document.getElementById("backButton")
+.addEventListener("click", closeBook);
+
+
+/* =========================================
+   START APPLICATION
+========================================= */
+
+renderHome();
 
 </script>
+
 </body>
 </html>
