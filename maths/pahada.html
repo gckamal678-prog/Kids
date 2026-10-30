@@ -73,14 +73,14 @@ let chosen=1,a=1,b=1,score=0,answered=false;
 function renderTable(){
  $("table-title").textContent=ne(chosen)+" को पहाडा";
  const box=$("table");box.replaceChildren();
- for(let i=1;i<=12;i++){
+ for(let i=1;i<=10;i++){
   const row=document.createElement("div");row.className="fact";
   row.textContent=ne(chosen)+" × "+ne(i)+" = "+ne(chosen*i);box.appendChild(row);
  }
  document.querySelectorAll(".pick").forEach(btn=>btn.classList.toggle("active",Number(btn.dataset.n)===chosen));
 }
 function newQuestion(){
- a=Math.floor(Math.random()*12)+1;b=Math.floor(Math.random()*12)+1;answered=false;
+ a=Math.floor(Math.random()*10)+1;b=Math.floor(Math.random()*10)+1;answered=false;
  $("question").textContent=ne(a)+" × "+ne(b)+" = ?";
  $("answer").value="";$("feedback").textContent="";
 }
