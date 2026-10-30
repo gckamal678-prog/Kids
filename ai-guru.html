@@ -1,19 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="ne">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#101827">
-<title>AI गुरु | बाल पाठशाला (3000+ प्रश्नोत्तर)</title>
+<title>प्रश्नोत्तर भण्डार | बाल पाठशाला</title>
 
 <style>
 :root {
-  --bg:#f3f6ff;
+  --bg:#f3f5ff;
   --card:#ffffff;
-  --text:#172033;
-  --muted:#68758a;
+  --text:#202744;
+  --muted:#788198;
   --primary:#6558df;
-  --border:#e4e9f2;
+  --border:#e7e9f3;
   --answer:#eaf9f0;
 }
 
@@ -35,7 +36,7 @@ body {
 }
 
 .container {
-  max-width:850px;
+  max-width:1000px;
   margin:auto;
 }
 
@@ -47,6 +48,7 @@ body {
 .header p {
   margin:7px 0 0;
   font-size:14px;
+  opacity:.9;
 }
 
 .back {
@@ -67,6 +69,7 @@ main {
   border-radius:17px;
   margin-bottom:17px;
   box-shadow:0 5px 20px #00000008;
+  border:1px solid var(--border);
 }
 
 .welcome h3 {
@@ -78,17 +81,6 @@ main {
   font-size:13px;
   color:var(--muted);
   line-height:1.7;
-}
-
-.stats-badge {
-  display: inline-block;
-  background: var(--primary);
-  color: white;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  margin-top: 8px;
 }
 
 .controls {
@@ -105,7 +97,12 @@ main {
   border-radius:12px;
   background:var(--card);
   font-size:14px;
-  color: var(--text);
+  outline:none;
+}
+
+.search:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px #6558df18;
 }
 
 .language {
@@ -116,29 +113,49 @@ main {
   background:var(--primary);
   font-weight:bold;
   cursor:pointer;
+  flex-shrink:0;
 }
 
+/* 3 x 3 GRID - MOBILE INCLUDED */
+
+#subjects {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  align-items:start;
+}
+
+/* SUBJECT CARD */
+
 .subject {
+  min-width:0;
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:16px;
-  margin-bottom:13px;
+  border-radius:15px;
   overflow:hidden;
-  box-shadow:0 4px 15px #00000006;
+  box-shadow:0 4px 14px #252d5a0b;
+  transition:transform .2s,box-shadow .2s;
+}
+
+.subject:active {
+  transform:scale(.97);
 }
 
 .subject-title {
   width:100%;
-  padding:15px;
+  min-height:115px;
+  padding:12px 5px;
   border:0;
   background:transparent;
   display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:12px;
-  text-align:left;
+  justify-content:center;
+  gap:7px;
+  text-align:center;
   color:var(--text);
   cursor:pointer;
-  font-size:15px;
+  position:relative;
 }
 
 .subject-icon {
@@ -146,32 +163,36 @@ main {
   height:43px;
   display:grid;
   place-items:center;
-  border-radius:13px;
-  background:#eeedff;
-  font-size:23px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#eeedff,#e4f3ff);
+  font-size:25px;
+  flex-shrink:0;
 }
 
 .subject-name {
-  flex:1;
+  width:100%;
   font-weight:800;
-}
-
-.count-tag {
-  font-size: 11px;
-  background: var(--bg);
-  padding: 3px 8px;
-  border-radius: 10px;
-  color: var(--muted);
+  font-size:11px;
+  line-height:1.4;
+  overflow-wrap:anywhere;
 }
 
 .arrow {
   color:var(--primary);
-  font-size:20px;
+  font-size:16px;
+  line-height:1;
+  transition:transform .2s;
 }
+
+.subject.open .arrow {
+  transform:rotate(180deg);
+}
+
+/* QUESTIONS */
 
 .questions {
   display:none;
-  padding:0 12px 12px;
+  padding:0 7px 8px;
 }
 
 .subject.open .questions {
@@ -180,59 +201,64 @@ main {
 
 .qa {
   border:1px solid var(--border);
-  border-radius:12px;
+  border-radius:10px;
   overflow:hidden;
-  margin-top:9px;
+  margin-top:7px;
 }
 
 .question {
   width:100%;
   display:flex;
-  align-items:center;
-  gap:10px;
-  padding:13px;
+  align-items:flex-start;
+  gap:6px;
+  padding:9px 7px;
   border:0;
   background:var(--card);
   color:var(--text);
   text-align:left;
   cursor:pointer;
-  font-size:14px;
-  line-height:1.6;
+  font-size:12px;
+  line-height:1.5;
 }
 
 .question-number {
   color:var(--primary);
   background:#eeedff;
-  padding:4px 7px;
-  border-radius:7px;
-  font-size:11px;
+  padding:3px 5px;
+  border-radius:6px;
+  font-size:10px;
   font-weight:bold;
+  flex-shrink:0;
 }
 
 .question-text {
   flex:1;
+  min-width:0;
   font-weight:650;
+  overflow-wrap:anywhere;
 }
 
 .plus {
   color:var(--primary);
-  font-size:20px;
+  font-size:16px;
+  flex-shrink:0;
 }
 
 .answer {
   display:none;
-  padding:14px;
+  padding:10px;
   background:var(--answer);
   color:#18583a;
-  font-size:14px;
-  line-height:1.8;
+  font-size:12px;
+  line-height:1.7;
   border-top:1px solid #d9f0e4;
+  overflow-wrap:anywhere;
 }
 
 .answer strong {
   display:block;
-  margin-bottom:5px;
-  font-size:12px;
+  margin-bottom:4px;
+  font-size:11px;
 }
 
 .qa.active .answer {
@@ -246,6 +272,7 @@ main {
   border-radius:14px;
   text-align:center;
   color:var(--muted);
+  grid-column:1/-1;
 }
 
 footer {
@@ -254,6 +281,45 @@ footer {
   color:var(--muted);
   font-size:12px;
 }
+
+/* SMALL MOBILE */
+
+@media(max-width:360px) {
+  #subjects {
+    gap:7px;
+  }
+
+  .subject-title {
+    min-height:105px;
+    padding:9px 3px;
+  }
+
+  .subject-icon {
+    width:36px;
+    height:36px;
+    font-size:21px;
+  }
+
+  .subject-name {
+    font-size:10px;
+  }
+
+  .questions {
+    padding:0 4px 6px;
+  }
+
+  .question {
+    font-size:11px;
+    padding:7px 5px;
+  }
+
+  .answer {
+    font-size:11px;
+    padding:8px;
+  }
+}
+
+/* DARK MODE */
 
 @media(prefers-color-scheme:dark) {
   :root {
@@ -265,16 +331,15 @@ footer {
     --answer:#173b32;
   }
 
-  .question {
-    background:var(--card);
-    color:var(--text);
+  .subject-icon {
+    background:linear-gradient(135deg,#302e59,#193c55);
   }
 
   .answer {
     color:#b9f2d2;
   }
 
-  .subject-icon {
+  .question-number {
     background:#302e59;
   }
 }
@@ -285,7 +350,7 @@ footer {
 
 <header class="header">
   <div class="container">
-    <h1>🤖 AI गुरु</h1>
+    <h1>📚 प्रश्नोत्तर भण्डार</h1>
     <p>बाल पाठशाला · पढौँ, बुझौँ र नयाँ कुरा सिकौँ!</p>
     <a class="back" href="./index.html">
       ← मुख्य पृष्ठमा फर्कनुहोस्
@@ -298,9 +363,9 @@ footer {
   <section class="welcome">
     <h3>नमस्कार विद्यार्थी! 👋</h3>
     <p>
-      आफूलाई मन परेको विषय छान्नुहोस्। त्यसपछि प्रश्नमा थिचेर उत्तर पढ्नुहोस्।
+      आफूलाई मन परेको विषय छान्नुहोस्।
+      त्यसपछि प्रश्नमा थिचेर उत्तर पढ्नुहोस्।
     </p>
-    <div class="stats-badge" id="totalStats">कुल ३०००+ प्रश्नोत्तरहरू उपलब्ध छन्</div>
   </section>
 
   <div class="controls">
@@ -308,7 +373,7 @@ footer {
       type="search"
       id="search"
       class="search"
-      placeholder="🔎 प्रश्न वा विषय खोज्नुहोस्..."
+      placeholder="🔎 प्रश्न खोज्नुहोस्..."
     >
 
     <button id="language" class="language">
@@ -329,294 +394,296 @@ footer {
 </footer>
 
 <script>
-/*
-  BAL PATHSHALA - 3000+ KNOWLEDGE BANK ARCHITECTURE
-  - Static Curated Knowledge
-  - Algorithmic Math & Pattern Generators for Scale
-*/
 
-const toDevanagariNum = (num) => {
-  const digits = ['०','१','२','३','४','५','६','७','८','९'];
-  return num.toString().split('').map(d => digits[d] || d).join('');
-};
+const knowledgeBank = [
 
-// --- ALGORITHMIC GENERATORS FOR MATH & PATTERNS (2500+ Combinations) ---
-function generateMathQuestions() {
-  const mathQ = [];
-  
-  // Addition (1 to 50)
-  for (let i = 1; i <= 30; i++) {
-    for (let j = 1; j <= 20; j++) {
-      const sum = i + j;
-      mathQ.push([
-        `${toDevanagariNum(i)} + ${toDevanagariNum(j)} कति हुन्छ?`,
-        `${toDevanagariNum(i)} + ${toDevanagariNum(j)} = ${toDevanagariNum(sum)} हुन्छ।`,
-        `What is ${i} + ${j}?`,
-        `${i} + ${j} = ${sum}.`
-      ]);
-    }
-  }
-
-  // Multiplication Tables (1 to 15)
-  for (let i = 1; i <= 15; i++) {
-    for (let j = 1; j <= 10; j++) {
-      const prod = i * j;
-      mathQ.push([
-        `${toDevanagariNum(i)} × ${toDevanagariNum(j)} कति हुन्छ?`,
-        `${toDevanagariNum(i)} गुणा ${toDevanagariNum(j)} बराबर ${toDevanagariNum(prod)} हुन्छ।`,
-        `What is ${i} times ${j}?`,
-        `${i} × ${j} = ${prod}.`
-      ]);
-    }
-  }
-
-  // Subtraction Practice
-  for (let i = 10; i <= 50; i += 2) {
-    for (let j = 1; j <= i; j += 3) {
-      const diff = i - j;
-      mathQ.push([
-        `${toDevanagariNum(i)} बाट ${toDevanagariNum(j)} घटाउँदा कति बाँकी रहन्छ?`,
-        `${toDevanagariNum(i)} − ${toDevanagariNum(j)} = ${toDevanagariNum(diff)} हुन्छ।`,
-        `What is ${i} minus ${j}?`,
-        `${i} − ${j} = ${diff}.`
-      ]);
-    }
-  }
-
-  return mathQ;
-}
-
-// --- CURATED STATIC KNOWLEDGE BASE ---
-const staticKnowledgeBank = [
 {
  icon:"🔤",
  ne:"नेपाली भाषा र व्याकरण",
  en:"Nepali Language & Grammar",
  questions:[
-  ["नेपाली भाषा कुन लिपिमा लेखिन्छ?", "नेपाली भाषा देवनागरी लिपिमा लेखिन्छ।", "Which script is used to write Nepali?", "Nepali is written in Devanagari script."],
-  ["स्वर वर्ण भनेको के हो?", "अरू वर्णको सहयोगबिना उच्चारण गर्न सकिने वर्ण स्वर वर्ण हुन् (अ देखि अः)।", "What are vowels?", "Vowels are independent sounds from Aah to Aha in Devanagari."],
-  ["व्यञ्जन वर्ण कति वटा हुन्छन्?", "नेपाली देवनागरीमा मुख्य ३६ वटा व्यञ्जन वर्ण (क देखि ज्ञ) हुन्छन्।", "How many consonants are in Nepali?", "There are 36 main consonants in Devanagari."],
-  ["नामका कति प्रकार हुन्छन्?", "नामका मुख्य ५ प्रकार हुन्छन्: व्यक्तिवाचक, जातिवाचक, समूहवाचक, द्रव्यवाचक र भाववाचक।", "How many types of nouns are there?", "There are 5 types of nouns in Nepali grammar."],
-  ["सर्वनाम भनेको के हो?", "नामको सट्टामा प्रयोग हुने शब्दलाई सर्वनाम भनिन्छ (जस्तै: म, ऊ, हामी)।", "What is a pronoun?", "A pronoun is used in place of a noun."],
-  ["विशेषणले के गर्छ?", "विशेषणले नाम वा सर्वनामको गुण, दोष वा संख्या बुझाउँछ।", "What does an adjective do?", "An adjective describes quality or quantity of a noun."],
-  ["'दिन' को उल्टो शब्द के हो?", "'दिन' को उल्टो (विपरीतार्थक) शब्द 'रात' हो।", "What is the antonym of 'Day'?", "The opposite of 'Day' is 'Night'."],
-  ["'आकाश' को पर्यायवाची शब्द के हो?", "आकाशको पर्यायवाची शब्द गगन, नभ वा व्योम हो।", "What is a synonym for 'Sky'?", "Synonyms for sky include 'Gagan' or 'Nabh'."],
-  ["विराम चिह्न किन प्रयोग गरिन्छ?", "वाक्यमा अडकिने र स्पष्ट अर्थ बुझाउन विराम चिह्न प्रयोग गरिन्छ।", "Why are punctuation marks used?", "Punctuation helps clarify meaning and sentence pauses."],
-  ["एकवचन र बहुवचनमा के फरक छ?", "एउटा वस्तु बुझाउने एकवचन र एकभन्दा बढी बुझाउने बहुवचन हो।", "Difference between singular and plural?", "Singular means one item, plural means more than one."]
+  [
+   "नेपाली भाषा कुन लिपिमा लेखिन्छ?",
+   "नेपाली भाषा देवनागरी लिपिमा लेखिन्छ।",
+   "Which script is used to write Nepali?",
+   "Nepali is written in the Devanagari script."
+  ]
  ]
 },
+
 {
- icon:"📘",
- ne:"English Vocabulary & Grammar",
- en:"English Vocabulary & Grammar",
+ icon:"🔠",
+ ne:"English Grammar र Vocabulary",
+ en:"English Grammar & Vocabulary",
  questions:[
-  ["How many letters are in the English Alphabet?", "There are 26 letters (5 Vowels and 21 Consonants).", "How many letters are in the English Alphabet?", "There are 26 letters (5 Vowels and 21 Consonants)."],
-  ["What is the plural of 'Foot'?", "The plural of 'Foot' is 'Feet'.", "What is the plural of 'Foot'?", "The plural of 'Foot' is 'Feet'."],
-  ["What is an Action Word called?", "An action word is called a Verb (e.g., Run, Eat, Sleep).", "What is an Action Word called?", "An action word is called a Verb (e.g., Run, Eat, Sleep)."],
-  ["What is the opposite of 'Hot'?", "The opposite of 'Hot' is 'Cold'.", "What is the opposite of 'Hot'?", "The opposite of 'Hot' is 'Cold'."],
-  ["Which month comes after July?", "August comes after July.", "Which month comes after July?", "August comes after July."],
-  ["What are the days of the week?", "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday.", "What are the days of the week?", "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday."],
-  ["What color is a banana?", "A ripe banana is yellow.", "What color is a banana?", "A ripe banana is yellow."],
-  ["What is the past tense of 'Eat'?", "The past tense of 'Eat' is 'Ate'.", "What is the past tense of 'Eat'?", "The past tense of 'Eat' is 'Ate'."],
-  ["What is the opposite of 'Big'?", "The opposite of 'Big' is 'Small'.", "What is the opposite of 'Big'?", "The opposite of 'Big' is 'Small'."],
-  ["What article is used before 'Apple'?", "The article 'An' is used before 'Apple' (An apple).", "What article is used before 'Apple'?", "The article 'An' is used before 'Apple'."]
+  [
+   "How many letters are there in the English alphabet?",
+   "There are 26 letters in the English alphabet.",
+   "How many letters are there in the English alphabet?",
+   "There are 26 letters in the English alphabet."
+  ]
  ]
 },
+
 {
- icon:"🌱",
- ne:"विज्ञान र हाम्रो वातावरण",
- en:"Science & Environment",
+ icon:"🔬",
+ ne:"विज्ञान तथा प्रकृति",
+ en:"Science & Nature",
  questions:[
-  ["बिरुवाले कसरी खाना बनाउँछन्?", "प्रकाश संश्लेषण (Photosynthesis) प्रक्रियाबाट सूर्यको प्रकाश, पानी र कार्बनडाइअक्साइड प्रयोग गरी खाना बनाउँछन्।", "How do plants make food?", "Plants make food using sunlight, water, and carbon dioxide through Photosynthesis."],
-  ["हामीलाई जीवित रहन कुन ग्यास चाहिन्छ?", "हामीलाई सास फेर्न अक्सिजन (Oxygen) चाहिन्छ।", "Which gas is essential for human life?", "Humans need Oxygen to breathe and survive."],
-  ["पानी जम्दा के बन्छ?", "पानी जम्दा हिउँ वा बरफ (Ice) बन्छ।", "What does water turn into when frozen?", "Water turns into ice when frozen."],
-  ["हाम्रो शरीरको सबैभन्दा ठूलो अङ्ग कुन हो?", "छाल (Skin) हाम्रो शरीरको सबैभन्दा ठूलो अङ्ग हो।", "What is the largest organ in the human body?", "Skin is the largest organ of the human body."],
-  ["पृथ्वीले सूर्यको परिक्रमा गर्न कति समय लगाउँछ?", "पृथ्वीले सूर्यको एक पटक परिक्रमा गर्न ३६५ दिन (१ वर्ष) लगाउँछ।", "How long does Earth take to orbit the Sun?", "Earth takes 365 days (1 year) to complete one orbit around the Sun."],
-  ["बिरुवाको कुन भागले जमिनबाट पानी सोस्छ?", "जरा (Roots) ले जमिनबाट पानी र खनिज सोस्छ।", "Which part of plant absorbs water from soil?", "The roots absorb water and minerals from soil."],
-  ["संसारको सबैभन्दा ठूलो जनावर कुन हो?", "ब्लु ह्वेल (Blue Whale) संसारको सबैभन्दा ठूलो जनावर हो।", "What is the largest animal in the world?", "The Blue Whale is the largest animal in the world."],
-  ["हाम्रो मुटुको मुख्य काम के हो?", "मुटुले शरीरका सबै भागमा रगत पम्प गर्छ।", "What is the main function of the heart?", "The heart pumps blood throughout the entire body."],
-  ["सौर्यमण्डलमा कति वटा ग्रहहरू छन्?", "सौर्यमण्डलमा ८ वटा ग्रहहरू छन्।", "How many planets are in our Solar System?", "There are 8 planets in our Solar System."],
-  ["राति आकाशमा चम्किने ताराहरू के हुन्?", "ताराहरू आफ्नै प्रकाश भएका ठूला ग्यासका डल्लाहरू हुन्।", "What are stars?", "Stars are giant glowing balls of hot gases."]
+  [
+   "हामी सास फेर्दा कुन ग्यास लिन्छौँ?",
+   "हामी सास फेर्दा अक्सिजन लिन्छौँ।",
+   "Which gas do humans breathe in?",
+   "Humans breathe in oxygen."
+  ]
  ]
 },
+
 {
- icon:"🇳🇵",
- ne:"नेपाल र सामान्य ज्ञान",
+ icon:"🌍",
+ ne:"नेपाल तथा विश्व सामान्य ज्ञान",
  en:"Nepal & General Knowledge",
  questions:[
-  ["नेपालको राष्ट्रिय झण्डाको आकार कस्तो छ?", "नेपालको झण्डा दुईवटा त्रिभुज जोडिएको विशिष्ट आकारको छ।", "What is the shape of Nepal's flag?", "Nepal's flag is unique with two stacked triangles."],
-  ["नेपालको सर्वोच्च शिखर कुन हो?", "सगरमाथा (८,८४८.८६ मिटर) नेपाल र विश्वकै सर्वोच्च शिखर हो।", "Which is the highest peak in the world?", "Mount Everest (8,848.86m) in Nepal is the highest peak."],
-  ["नेपालको राष्ट्रिय पोशाक के हो?", "पुरुषका लागि दोहोरा सुरुवाल/दौरा सुरुवाल र महिलाका लागि गुन्यू चोली हो।", "What is Nepal's national dress?", "Daura Suruwal for men and Gunyo Cholo for women."],
-  ["गौतम बुद्धको जन्म कहाँ भएको थियो?", "गौतम बुद्धको जन्म नेपालको लुम्बिनीमा भएको थियो।", "Where was Lord Buddha born?", "Lord Buddha was born in Lumbini, Nepal."],
-  ["नेपालको सबैभन्दा ठूलो ताल कुन हो?", "मुगु जिल्लामा रहेको रारा ताल नेपालको सबैभन्दा ठूलो ताल हो।", "Which is the largest lake in Nepal?", "Rara Lake in Mugu district is the largest lake in Nepal."],
-  ["नेपालको राष्ट्रिय खेल कुन हो?", "भलिबल नेपालको राष्ट्रिय खेल हो।", "What is the national game of Nepal?", "Volleyball is the national game of Nepal."],
-  ["काठमाडौँ उपत्यकामा कति वटा प्रमुख शहर छन्?", "काठमाडौँ, ललितपुर र भक्तपुर गरी ३ वटा प्रमुख शहर छन्।", "How many main cities are in Kathmandu Valley?", "There are 3 main cities: Kathmandu, Lalitpur, and Bhaktapur."],
-  ["नेपालको राष्ट्रिय नदी कुन हो?", "कोशी नदी (सप्तकोशी) लाई नेपालको ठूलो नदी मानिन्छ।", "Which is the largest river in Nepal?", "Saptakoshi is the largest river system in Nepal."],
-  ["नेपालको राष्ट्रिय रंग कुन हो?", "सिम्रिक (Crimson Red) नेपालको राष्ट्रिय रंग हो।", "What is Nepal's national color?", "Crimson Red (Simrik) is Nepal's national color."],
-  ["नेपाली नोटहरू कसले छाप्छ?", "नेपाल राष्ट्र बैंक (Nepal Rastra Bank) ले नोट छाप्छ।", "Which institution prints Nepalese currency?", "Nepal Rastra Bank issues Nepalese currency."]
+  [
+   "नेपालको राजधानी कहाँ हो?",
+   "नेपालको राजधानी काठमाडौं हो।",
+   "What is the capital of Nepal?",
+   "The capital of Nepal is Kathmandu."
+  ]
  ]
 },
+
 {
  icon:"🤝",
- ne:"सामाजिक र नैतिक शिक्षा",
- en:"Social Studies & Moral Ethics",
+ ne:"सामाजिक शिक्षा",
+ en:"Social Studies",
  questions:[
-  ["शिष्ट व्यवहार भनेको के हो?", "अरूलाई सम्मान गर्ने, मीठो बोल्ने र सहयोग गर्ने बानी शिष्ट व्यवहार हो।", "What is polite behavior?", "Polite behavior means showing respect, speaking kindly, and helping others."],
-  ["ज्येष्ठ नागरिकलाई कसरी व्यवहार गर्नुपर्छ?", "उहाँहरूलाई आदर, माया र आवश्यक परेको बेला सहयोग गर्नुपर्छ।", "How should we treat senior citizens?", "We should treat senior citizens with respect, love, and care."],
-  ["फोहोर कहाँ फाल्नुपर्छ?", "फोहोर जताततै नफाली फोहोरदानी (Dustbin) मा फाल्नुपर्छ।", "Where should we throw garbage?", "Garbage should always be thrown into the dustbin."],
-  ["मित्रता भनेको के हो?", "आपसमा विश्वास, सहयोग र भलो चाहने पवित्र सम्बन्ध मित्रता हो।", "What is true friendship?", "Friendship is a relationship based on trust, kindness, and mutual care."],
-  ["समयको पालना (Punctuality) किन आवश्यक छ?", "समयमै काम गर्दा सफलता मिल्छ र अरूको समयको पनि कदर हुन्छ।", "Why is punctuality important?", "Punctuality brings success and shows respect for others' time."]
+  [
+   "समाज भनेको के हो?",
+   "आपसमा सम्बन्ध राख्दै सँगै बस्ने मानिसहरूको समूहलाई समाज भनिन्छ।",
+   "What is a society?",
+   "A society is a group of people who live together."
+  ]
  ]
 },
+
 {
  icon:"💻",
- ne:"कम्प्युटर र प्रविधि",
- en:"Computer & Technology",
+ ne:"कम्प्युटर",
+ en:"Computer Education",
  questions:[
+  [
+   "कम्प्युटर भनेको के हो?",
+   "कम्प्युटर निर्देशनअनुसार तथ्याङ्क प्रशोधन गर्ने इलेक्ट्रोनिक उपकरण हो।",
+   "What is a computer?",
+   "A computer is an electronic device that processes information."
+  ]
+ ]
+},
 
-  ["कम्प्युटरको दिमाग (Brain) कसलाई भनिन्छ?", "CPU (Central Processing Unit) लाई कम्प्युटरको दिमाग भनिन्छ।", "What is called the Brain of Computer?", "CPU (Central Processing Unit) is called the brain of the computer."],
-  ["कम्प्युटरमा डेटा इनपुट गर्ने दुई वटा साधन कुन हुन्?", "किबोर्ड (Keyboard) र माउस (Mouse) इनपुट साधन हुन्।", "Name two input devices.", "Keyboard and Mouse are common input devices."],
-  ["मोनिटरको काम के हो?", "मोनिटरले कम्प्युटरमा भएका नतिजा वा चित्रहरू स्क्रिनमा देखाउँछ।", "What is the function of a Monitor?", "A monitor displays text, images, and video output."],
-  ["इन्टरनेट भनेको के हो?", "संसारभरका कम्प्युटरहरूलाई आपसमा जोड्ने विश्वव्यापी सञ्जाल इन्टरनेट हो।", "What is the Internet?", "The internet is a global network connecting computers worldwide."],
-  ["सफ्टवेयर भनेको के हो?", "कम्प्युटरलाई काम गराउन दिइने निर्देशन र प्रोग्रामहरूको समूह सफ्टवेयर हो।", "What is software?", "Software is a collection of programs that instruct a computer what to do."]
+{
+ icon:"💚",
+ ne:"नैतिक शिक्षा",
+ en:"Moral Education",
+ questions:[
+  [
+   "इमानदार हुनु भनेको के हो?",
+   "सधैँ सत्य बोल्नु र छलकपट नगर्नु इमानदार हुनु हो।",
+   "What does it mean to be honest?",
+   "Being honest means telling the truth."
+  ]
+ ]
+},
+
+{
+ icon:"📖",
+ ne:"कथा, कविता र मनोरञ्जन",
+ en:"Stories & Entertainment",
+ questions:[
+  [
+   "कथाबाट हामी के सिक्न सक्छौँ?",
+   "कथाबाट राम्रो व्यवहार, साहस, मित्रता र जीवनका पाठ सिक्न सक्छौँ।",
+   "What can we learn from stories?",
+   "Stories can teach kindness, courage, and friendship."
+  ]
+ ]
+},
+
+{
+ icon:"🏡",
+ ne:"दैनिक जीवन तथा व्यवहारिक ज्ञान",
+ en:"Daily Life & General Knowledge",
+ questions:[
+  [
+   "खाना खानुअघि हात किन धुनुपर्छ?",
+   "हातमा भएका कीटाणु हटाउन र रोगबाट बच्न हात धुनुपर्छ।",
+   "Why should we wash our hands before eating?",
+   "Washing hands helps remove germs and prevent illness."
+  ]
+ ]
+},
+
+{
+ icon:"➗",
+ ne:"गणित",
+ en:"Mathematics",
+ questions:[
+  [
+   "५ + ५ कति हुन्छ?",
+   "५ + ५ = १० हुन्छ।",
+   "What is 5 + 5?",
+   "5 + 5 = 10."
+  ]
  ]
 }
+
 ];
 
-// Combine Generators and Static Data
-const knowledgeBank = [
-  ...staticKnowledgeBank,
-  {
-    icon: "➗",
-    ne: "गणित र अभ्यास (Mathematics)",
-    en: "Mathematics & Practice",
-    questions: generateMathQuestions()
-  }
-];
-
-// --- RENDER & LOGIC ---
 let english = false;
+
 const subjects = document.getElementById("subjects");
 const search = document.getElementById("search");
 const noResult = document.getElementById("noResult");
-const totalStats = document.getElementById("totalStats");
-
-function calculateTotalQuestions() {
-  return knowledgeBank.reduce((acc, subj) => acc + subj.questions.length, 0);
-}
 
 function render() {
-  subjects.innerHTML = "";
-  const term = search.value.trim().toLowerCase();
-  let totalFound = 0;
 
-  knowledgeBank.forEach((subject) => {
-    const matchedQuestions = subject.questions
-      .map((q, index) => ({ q, index }))
-      .filter(({ q }) => {
-        const fullContent = (q[0] + " " + q[1] + " " + q[2] + " " + q[3] + " " + subject.ne + " " + subject.en).toLowerCase();
-        return !term || fullContent.includes(term);
+  subjects.innerHTML = "";
+
+  const term = search.value.trim().toLowerCase();
+  let found = 0;
+
+  knowledgeBank.forEach((subject, index) => {
+
+    const questions = subject.questions
+      .map((q, i) => ({q, i}))
+      .filter(({q}) => {
+
+        const allText = q.join(" ").toLowerCase()
+          + subject.ne.toLowerCase()
+          + subject.en.toLowerCase();
+
+        return !term || allText.includes(term);
       });
 
-    if (matchedQuestions.length === 0) return;
-    totalFound += matchedQuestions.length;
+    if (!questions.length) return;
+
+    found += questions.length;
 
     const section = document.createElement("section");
     section.className = "subject";
 
-    const titleBtn = document.createElement("button");
-    titleBtn.className = "subject-title";
-    titleBtn.type = "button";
+    const title = document.createElement("button");
+    title.className = "subject-title";
+    title.type = "button";
 
-    titleBtn.innerHTML = `
+    title.innerHTML = `
       <span class="subject-icon">${subject.icon}</span>
-      <span class="subject-name">
-        ${english ? subject.en : subject.ne} 
-        <span class="count-tag">(${toDevanagariNum(matchedQuestions.length)})</span>
-      </span>
+      <span class="subject-name"></span>
       <span class="arrow">⌄</span>
     `;
 
-    const listContainer = document.createElement("div");
-    listContainer.className = "questions";
+    title.querySelector(".subject-name").textContent =
+      english ? subject.en : subject.ne;
 
-    titleBtn.addEventListener("click", () => {
-      const isOpen = section.classList.contains("open");
-      document.querySelectorAll(".subject.open").forEach(el => el.classList.remove("open"));
-      if (!isOpen) section.classList.add("open");
+    const list = document.createElement("div");
+    list.className = "questions";
+
+    title.addEventListener("click", () => {
+
+      const wasOpen = section.classList.contains("open");
+
+      document.querySelectorAll(".subject.open")
+        .forEach(item => item.classList.remove("open"));
+
+      if (!wasOpen) {
+        section.classList.add("open");
+      }
+
     });
 
-    matchedQuestions.forEach(({ q, index }) => {
-      const qaWrapper = document.createElement("div");
-      qaWrapper.className = "qa";
+    questions.forEach(({q, i}) => {
 
-      const qBtn = document.createElement("button");
-      qBtn.className = "question";
-      qBtn.type = "button";
+      const qa = document.createElement("div");
+      qa.className = "qa";
+
+      const question = document.createElement("button");
+      question.className = "question";
+      question.type = "button";
 
       const questionText = english ? q[2] : q[0];
       const answerText = english ? q[3] : q[1];
 
-      qBtn.innerHTML = `
-        <span class="question-number">${english ? index + 1 : toDevanagariNum(index + 1)}</span>
+      question.innerHTML = `
+        <span class="question-number">${i + 1}</span>
         <span class="question-text"></span>
         <span class="plus">＋</span>
       `;
-      qBtn.querySelector(".question-text").textContent = questionText;
 
-      const ansDiv = document.createElement("div");
-      ansDiv.className = "answer";
+      question.querySelector(".question-text").textContent =
+        questionText;
+
+      const answer = document.createElement("div");
+      answer.className = "answer";
 
       const label = document.createElement("strong");
       label.textContent = english ? "ANSWER" : "उत्तर";
 
-      const textSpan = document.createElement("span");
-      textSpan.textContent = answerText;
+      const text = document.createElement("span");
+      text.textContent = answerText;
 
-      ansDiv.append(label, textSpan);
+      answer.append(label, text);
 
-      qBtn.addEventListener("click", () => {
-        const isActive = qaWrapper.classList.contains("active");
-        document.querySelectorAll(".qa.active").forEach(el => {
-          el.classList.remove("active");
-          el.querySelector(".plus").textContent = "＋";
-        });
+      question.addEventListener("click", () => {
 
-        if (!isActive) {
-          qaWrapper.classList.add("active");
-          qBtn.querySelector(".plus").textContent = "−";
+        const wasActive = qa.classList.contains("active");
+
+        document.querySelectorAll(".qa.active")
+          .forEach(item => {
+            item.classList.remove("active");
+            item.querySelector(".plus").textContent = "＋";
+          });
+
+        if (!wasActive) {
+          qa.classList.add("active");
+          question.querySelector(".plus").textContent = "−";
         }
+
       });
 
-      qaWrapper.append(qBtn, ansDiv);
-      listContainer.append(qaWrapper);
+      qa.append(question, answer);
+      list.append(qa);
+
     });
 
-    section.append(titleBtn, listContainer);
+    section.append(title, list);
     subjects.append(section);
+
   });
 
-  noResult.style.display = totalFound ? "none" : "block";
-}
+  noResult.style.display = found ? "none" : "block";
 
-// Update stats badge
-const totalQCount = calculateTotalQuestions();
-totalStats.textContent = `कुल ${toDevanagariNum(totalQCount)}+ बाल-मैत्रीपूर्ण प्रश्नोत्तरहरू उपलब्ध छन्`;
+}
 
 search.addEventListener("input", render);
 
-document.getElementById("language").addEventListener("click", () => {
-  english = !english;
-  document.getElementById("language").textContent = english ? "नेपाली" : "English";
-  search.placeholder = english ? "🔎 Search questions or topics..." : "🔎 प्रश्न वा विषय खोज्नुहोस्...";
-  totalStats.textContent = english 
-    ? `Total ${totalQCount}+ Child-Friendly Q&A Available` 
-    : `कुल ${toDevanagariNum(totalQCount)}+ बाल-मैत्रीपूर्ण प्रश्नोत्तरहरू उपलब्ध छन्`;
-  render();
-});
+document.getElementById("language")
+  .addEventListener("click", () => {
 
-// Initial Render
+    english = !english;
+
+    document.getElementById("language").textContent =
+      english ? "नेपाली" : "English";
+
+    search.placeholder = english
+      ? "🔎 Search questions..."
+      : "🔎 प्रश्न खोज्नुहोस्...";
+
+    render();
+
+  });
+
 render();
+
 </script>
 </body>
 </html>
