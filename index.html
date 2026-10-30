@@ -206,7 +206,6 @@
       gap: 13px;
     }
 
-    /* आवाज बटन जोड्न बनाइएको wrapper */
     .book-item {
       display: grid;
       grid-template-rows: 1fr auto;
@@ -281,65 +280,68 @@
     .quick strong, .quick small { display: block; }
     .quick small { color: var(--muted); font-size: 13px; }
 
-    /* AI Guru Card CSS */
-    .ai-guru-card {
+    /* KNOWLEDGE CARD STYLES (मिलाइएको CSS) */
+    .knowledge-card {
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 17px;
-      margin: 12px 0;
+      padding: 18px;
+      margin: 22px 0;
       text-decoration: none;
       color: inherit;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #e0f2fe, #ede9fe);
-      border: 1px solid rgba(99, 102, 241, .18);
-      box-shadow: 0 5px 16px rgba(0, 0, 0, .07);
-      transition: transform .2s ease, box-shadow .2s ease;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: transform .16s ease, box-shadow .16s ease;
     }
 
-    .ai-guru-card:hover {
+    .knowledge-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 9px 22px rgba(0, 0, 0, .12);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     }
 
-    .ai-guru-icon {
-      width: 55px;
-      height: 55px;
+    .knowledgestore-icon {
+      width: 52px;
+      height: 52px;
       flex-shrink: 0;
       display: grid;
       place-items: center;
-      font-size: 32px;
+      font-size: 26px;
       border-radius: 16px;
-      background: white;
+      background: #eef2ff;
     }
 
-    .ai-guru-content {
+    .knowledge-contents {
       flex: 1;
       min-width: 0;
     }
 
-    .ai-guru-content h3 {
-      margin: 0 0 5px;
-      color: #4338ca;
+    .knowledge-contents h3 {
+      margin: 0 0 4px;
       font-size: 18px;
       font-weight: 800;
+      color: var(--text);
     }
 
-    .ai-guru-content p {
-      margin: 0 0 5px;
-      color: #334155;
+    .knowledge-contents p {
+      margin: 0 0 4px;
+      color: var(--muted);
       font-size: 14px;
     }
 
-    .ai-guru-content span {
-      color: #64748b;
-      font-size: 12px;
+    .knowledge-contents span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .ai-guru-arrow {
-      font-size: 23px;
-      color: #4f46e5;
+    .knowledge-arrow {
+      font-size: 20px;
+      color: var(--primary);
       font-weight: bold;
+      margin-left: auto;
     }
 
     .nepal-card {
@@ -400,6 +402,7 @@
       color: var(--text);
     }
 
+    /* DARK MODE */
     body.dark-mode {
       color-scheme: dark;
       --bg: #111827;
@@ -424,48 +427,8 @@
       border-color: #35435b;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .ai-guru-card {
-        background: linear-gradient(135deg, #1e3a5f, #312e81);
-        border-color: rgba(165, 180, 252, .2);
-      }
-
-      .ai-guru-content h3 {
-        color: #c4b5fd;
-      }
-
-      .ai-guru-content p {
-        color: #e2e8f0;
-      }
-
-      .ai-guru-content span {
-        color: #cbd5e1;
-      }
-
-      .ai-guru-arrow {
-        color: #c4b5fd;
-      }
-    }
-
-    body.dark-mode .ai-guru-card {
-      background: linear-gradient(135deg, #1e3a5f, #312e81);
-      border-color: rgba(165, 180, 252, .2);
-    }
-
-    body.dark-mode .ai-guru-content h3 {
-      color: #c4b5fd;
-    }
-
-    body.dark-mode .ai-guru-content p {
-      color: #e2e8f0;
-    }
-
-    body.dark-mode .ai-guru-content span {
-      color: #cbd5e1;
-    }
-
-    body.dark-mode .ai-guru-arrow {
-      color: #c4b5fd;
+    body.dark-mode .knowledgestore-icon {
+      background: #28364f;
     }
 
     [hidden] { display: none !important; }
@@ -489,6 +452,11 @@
       .nepal-card { grid-template-columns: minmax(0, 1fr) 75px; padding: 13px; }
       .target { padding: 12px; gap: 10px; }
       .target-icon { width: 43px; height: 43px; }
+      
+      .knowledge-card { padding: 14px; gap: 10px; }
+      .knowledgestore-icon { width: 44px; height: 44px; font-size: 22px; }
+      .knowledge-contents h3 { font-size: 16px; }
+      .knowledge-contents p { font-size: 13px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -681,19 +649,18 @@
     </div>
   </section>
 
-  <!-- KNOWLEDGE CARD -->
-  <a href="./knowledge.html" class="knowledge-card">
-    <div class="knowledgestore-icon">📚️</div>
-
-    <div class="knowledge-contents">
-      <h3>प्रश्नात्तर प्रश्न सहितको उत्तर</h3>
-      <p>सोधौँ, बुझौँ र रमाउँदै सिकौँ!</p>
-      <span>नेपाली र English मा प्रश्न सोध्नुहोस्</span>
-    </div>
-
-    <div class="knowledge-arrow">➜</div>
-  </a>
-
+  <!-- KNOWLEDGE CARD SECTION -->
+  <section class="section">
+    <a href="./knowledge.html" class="knowledge-card">
+      <div class="knowledgestore-icon">📚</div>
+      <div class="knowledge-contents">
+        <h3>प्रश्नात्तर (प्रश्न सहितको उत्तर)</h3>
+        <p>सोधौँ, बुझौँ र रमाउँदै सिकौँ!</p>
+        <span>नेपाली र English मा प्रश्न सोध्नुहोस्</span>
+      </div>
+      <div class="knowledge-arrow">➜</div>
+    </a>
+  </section>
 
   <section class="section nepal-card" aria-labelledby="nepal-heading">
     <div>
@@ -750,7 +717,6 @@
   </div>
 </div>
 
-<!-- ?v=6 ले ब्राउजरलाई नयाँ script.js लोड गर्न मद्दत गर्छ -->
 <script src="./script.js?v=6"></script>
 <script>
 (() => {
@@ -779,7 +745,6 @@
       const textMatch = !term || searchable.includes(term);
       const visible = categoryMatch && textMatch;
 
-      // कार्ड र त्यसको आवाज बटन दुवै देखाउने/लुकाउने।
       card.hidden = !visible;
       const wrapper = card.closest(".book-item");
       if (wrapper) wrapper.hidden = !visible;
@@ -841,7 +806,6 @@
     }
   };
 
-  // Dark mode
   const themeToggle = $("#theme-toggle");
 
   function applyTheme(dark) {
@@ -857,7 +821,6 @@
     applyTheme(!document.body.classList.contains("dark-mode"));
   });
 
-  // स्वागत आवाज
   let voiceEnabled = false;
   const voiceToggle = $("#voice-toggle");
 
@@ -899,7 +862,6 @@
     }
   });
 
-  // राष्ट्रिय गान
   const anthem = $("#national-anthem");
   const anthemButton = $("#anthem-toggle");
 
@@ -926,7 +888,6 @@
     $("#anthem-status").textContent = "राष्ट्रिय गान पूरा भयो।";
   });
 
-  // अभिभावक सेटिङ
   let expectedAnswer = 0;
   const parentModal = $("#parent-modal");
 
